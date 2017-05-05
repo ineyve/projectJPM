@@ -71,8 +71,7 @@
         value="{{$request->quantity}}"
         @else
         value=""
-        @endif
-    >
+        @endif">
         <option disabled selected> -- select an option -- </option>
         <option value="0">Color</option>
         <option value="1">Black and White</option>
@@ -88,8 +87,7 @@
         value="{{$request->stapled}}"
         @else
         value=""
-        @endif
-    >
+        @endif">
         <option disabled selected> -- select an option -- </option>
         <option value="0">With Staple</option>
         <option value="1">No Staple</option>
@@ -105,8 +103,7 @@
         value="{{$request->paper_size}}"
         @else
         value=""
-        @endif
-    >
+        @endif">
         <option disabled selected> -- select an option -- </option>
         <option value="0">A4</option>
         <option value="1">A3</option>
@@ -122,8 +119,7 @@
         value="{{$request->paper_type}}"
         @else
         value=""
-        @endif
-    >
+        @endif">
         <option disabled selected> -- select an option -- </option>
         <option value="0">Draft</option>
         <option value="1">Normal</option>

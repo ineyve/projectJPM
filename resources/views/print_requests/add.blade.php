@@ -1,9 +1,6 @@
 @extends('master')
 
-@include ('layouts.app')
-
 @section('title', 'Add Request')
-
 @section('content')
 
 
@@ -12,7 +9,7 @@
 @endif
 
 <form action="{{route('requests.store')}}" method="post" class="form-group">
-    @include('requests.partials.add-edit')
+    @include('print_requests.partials.add-edit')
 
     <div class="form-group">
         <button type="submit" class="btn btn-primary" name="ok">Add</button>

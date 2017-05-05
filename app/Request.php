@@ -3,9 +3,10 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Model;
 
-class PRequest extends Model
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class Request extends Authenticatable
 {
     use Notifiable;
 
