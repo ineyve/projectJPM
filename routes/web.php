@@ -36,12 +36,12 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 Route::get('/home', 'HomeController@index');
 
 // Requests
-Route::get('requests', 'PRequestController@index' )->name('requests.index');
-Route::get('requests/create', 'PrintRequestController@create')->name('requests.create');
-Route::post('requests/create', 'PrintRequestController@store')->name('requests.store');
-Route::get('requests/{requestNumber}/edit', 'PrintRequestController@edit')->name('requests.edit');
-Route::post('requests/{requestNumber}/edit', 'PrintRequestController@update')->name('requests.update');
-Route::delete('requests/{requestNumber}', 'PrintRequestController@destroy')->name('requests.destroy');
+Route::get('requests', 'RequestController@index' )->name('requests.index');
+Route::get('requests/create', 'RequestController@create')->name('requests.create');
+Route::post('requests/create', 'RequestController@store')->name('requests.store');
+Route::get('requests/{requestNumber}/edit', 'RequestController@edit')->name('requests.edit');
+Route::post('requests/{requestNumber}/edit', 'RequestController@update')->name('requests.update');
+Route::delete('requests/{requestNumber}', 'RequestController@destroy')->name('requests.destroy');
 
 // Users
 Route::get('users', 'UserController@index' )->name('users.index');
