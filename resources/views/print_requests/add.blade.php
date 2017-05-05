@@ -1,6 +1,9 @@
 @extends('master')
 
+@include ('layouts.app')
+
 @section('title', 'Add Request')
+
 @section('content')
 
 

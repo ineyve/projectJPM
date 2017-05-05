@@ -11,7 +11,7 @@
     <!-- Set website title -->
     {{config(['app.name' => 'Print It'])}}
     <title>{{ config('app.name') }}</title>
-
+    {{config(['app.dash' => 'Dashboard'])}}
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
@@ -49,6 +49,11 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
+                    @if(Route::currentRouteName() != '')
+                    <a class="navbar-brand" href="{{ url('/home') }}">
+                        {{ config('app.dash') }}
+                    </a>
+                    @endif
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())

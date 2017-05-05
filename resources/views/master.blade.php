@@ -12,15 +12,15 @@
     </head>
     <body>
         <div class="container">
-        <div class="jumbotron">
-          <h1>@yield('title')</h1> 
+        <div class="page-header">
+          <center><h2>@yield('title')</h2> </center>
         </div>
         @if(session('sucess'))
             @include('shared.sucess')
         @endif 
         @yield('content')
     </div>
-    
+
     <script src="//code.jquery.com/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </body>

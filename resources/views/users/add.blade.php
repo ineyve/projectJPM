@@ -1,5 +1,7 @@
 @extends('master')
 
+@include ('layouts.app')
+
 @section('title', 'Add user')
 
 @section('content')
