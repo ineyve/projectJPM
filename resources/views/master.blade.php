@@ -12,9 +12,6 @@
     </head>
     <body>
         <div class="container">
-        <div class="page-header">
-          <center><h2>@yield('title')</h2> </center>
-        </div>
         @if(session('sucess'))
             @include('shared.sucess')
         @endif 

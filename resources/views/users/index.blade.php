@@ -32,10 +32,7 @@
                 <form action="{{route('users.destroy',$user)}}" method="post" class="inline">
                     {{method_field('DELETE')}}
                     {{ csrf_field() }}
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-xs btn-danger">Delete</button>
-                    </div>
-
+                    <button type="submit" class="btn btn-xs btn-danger">Delete</button>
                 </form>
             </td>
         </tr>
