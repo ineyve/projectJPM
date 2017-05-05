@@ -16,3 +16,9 @@ th, td {
 .offset {
     margin-bottom:10px;
 }
+
+body {
+    background-image: url("../wall.jpg");
+    background-position: center top;
+    background-size: 100% auto;
+}
