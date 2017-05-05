@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\User;
 use Hash;
 
@@ -31,29 +32,22 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', 'user added successfully');
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        $user = User::findOrFail($id);
-        $this->validate($request,[
-            'name' => 'required|regex:/^[a-zA-Z ]+$/',
-            'email' => 'required|email|unique:users,email,'.$user->id
-        ]);
-        $user->fill($request->all());
+        $user->fill($request->except('password'));
         $user->admin = 0; //!!!!!!!!
         $user->save();
         return redirect()->route('users.index')->with('success', 'user updated successfully');
     }
 
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $user = User::findOrFail($id);
         $user->delete();
         return redirect()->route('users.index')->with('success', 'user deleted successfully');
     }
 
-    public function edit($id)
+    public function edit(User $user)
     {
-        $user = User::findOrFail($id);
         return view('users.edit', compact('user'));
     }
 }
