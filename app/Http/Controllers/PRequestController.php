@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request; 
 
-use App\Request;
+use App\PRequest;
 
 
-class PrintRequestController extends Controller
+class PRequestController extends Controller
 {
    
     public function index()
     {
-        $requests = Request::all();
+        $requests = PRequest::all();
         return view('print_requests.index', compact('requests'));
     }
 

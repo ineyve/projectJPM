@@ -1,7 +1,4 @@
-.page-header{
-    margin:0 0 20px;
-}
-.navbar-default .navbar-nav > .active{
+.navbar-brand{
     color: #000;
     background: #7da8c3;
 }

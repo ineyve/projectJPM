@@ -54,7 +54,6 @@
                     <ul class="nav navbar-nav navbar-right">
 
                         <li><a href="{{ url('/') }}">Home</a></li>
-                        <li><a href="{{ url('/home') }}">Dashboard</a></li>
 
                         <!-- Authentication Links -->
                         @if (Auth::guest())
@@ -63,6 +62,7 @@
                         @else
                             <li> <a href="{{ url('requests') }}">Requests</a></li>
                             <li> <a href="{{ url('users') }}">Users</a></li>
+                            <li><a href="{{ url('/home') }}">Dashboard</a></li>
                             <li><a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">

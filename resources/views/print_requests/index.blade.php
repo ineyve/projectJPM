@@ -1,8 +1,8 @@
 @extends('master')
-@section('title', 'List Requests')
+
+@include('layouts.app')
+
 @section('content')
-
-
 <div>
     <a class="btn btn-primary" href="{{route('requests.create')}}">Add Request</a>
 </div>
@@ -13,13 +13,15 @@
         <tr>
             <th>Request Number</th>
             <th>Description</th>
+            <th>User ID</th>
         </tr>
     </thead>
     <tbody>
-    @foreach ($requests as $request) {
+    @foreach ($requests as $request)
         <tr>
-            <td>{{$request->requestNumber}}</td>
-            <td>{{$request->description}})</td>
+            <td>{{$request->id}}</td>
+            <td>{{$request->description}}</td>
+            <td>{{$request->owner_id}}</td>
             <td>
                 <a class="btn btn-xs btn-primary" href="{{route('requests.edit', $request->requestNumber)}}">Edit</a>
             </td>
