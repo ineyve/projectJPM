@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreUserRequest;
 use App\User;
 use Hash;
 
@@ -20,19 +21,27 @@ class UserController extends Controller
         return view('users.add', compact('user'));
     }
 
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        $this->validate($request,[
-            'name' => 'required|alpha',
-            'email' => 'required|email',
-            'password' => 'required|min:8|confirmed'
-        ]);
         $user = new User();
         $user->fill($request->all());
-        $user->admin = 1;
+        $user->admin = 1; //!!!!!!!!!
         $user->password = Hash::make($request->password);
         $user->save();
         return redirect()->route('users.index')->with('success', 'user added successfully');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $this->validate($request,[
+            'name' => 'required|regex:/^[a-zA-Z ]+$/',
+            'email' => 'required|email|unique:users,email,'.$user->id
+        ]);
+        $user->fill($request->all());
+        $user->admin = 0; //!!!!!!!!
+        $user->save();
+        return redirect()->route('users.index')->with('success', 'user updated successfully');
     }
 
     public function destroy($id)
@@ -42,8 +51,9 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', 'user deleted successfully');
     }
 
-    public function edit()
+    public function edit($id)
     {
+        $user = User::findOrFail($id);
         return view('users.edit', compact('user'));
     }
 }
