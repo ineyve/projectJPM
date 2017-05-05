@@ -9,7 +9,7 @@ form{
     padding:0px;
 }
 
-th, td {
+th, td, h3{
     text-align: center;
 }
 
@@ -21,4 +21,8 @@ body {
     background-image: url("../wall.jpg");
     background-position: center top;
     background-size: 100% auto;
+}
+
+td a {
+    display: block;
 }

@@ -17,9 +17,9 @@
                             </thead>
                             <tbody>
                             @foreach ($requests as $request)
-                            <tr class='clickable-row' data-href="{{route('requests.edit', $request->id)}}">
-                                <td>{{$request->id}}</td>
-                                <td>{{$request->description}}</td>
+                            <tr>
+                                <td><a href="{{route('requests.edit', $request->id)}}">{{$request->id}}</a></td>
+                                <td><a href="{{route('requests.edit', $request->id)}}">{{$request->description}}</a></td>
                             </tr>
                             </tbody>
                             @endforeach

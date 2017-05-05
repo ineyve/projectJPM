@@ -19,12 +19,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach ($requests as $request) {
+                        @foreach ($requests as $request)
                             <tr>
-                                <td>{{$requests->id}}</td>
-                                <td>{{$requests->description}})</td>
+                                <td>{{$request->id}}</td>
+                                <td>{{$request->description}}</td>
                                 <td>
-                                    <a class="btn btn-xs btn-primary" href="{{route('requests.edit', $requests->id)}}">Edit</a>
+                                    <a class="btn btn-xs btn-primary" href="{{route('requests.edit', $request->id)}}">Edit</a>
                                 </td>
                             </tr>
                         @endforeach
