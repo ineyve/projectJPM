@@ -36,7 +36,7 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 Route::get('/home', 'HomeController@index');
 
 // Requests
-Route::get('requests', 'PrintRequestController@index' )->name('requests.index');
+Route::get('requests', 'PRequestController@index' )->name('requests.index');
 Route::get('requests/create', 'PrintRequestController@create')->name('requests.create');
 Route::post('requests/create', 'PrintRequestController@store')->name('requests.store');
 Route::get('requests/{requestNumber}/edit', 'PrintRequestController@edit')->name('requests.edit');

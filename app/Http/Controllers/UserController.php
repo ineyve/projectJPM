@@ -19,6 +19,7 @@ class UserController extends Controller
     public function create()
     {
         $user = new User;
+        $user->admin = 0; //!!!!!!!!!
         return view('users.add', compact('user'));
     }
 
@@ -26,7 +27,7 @@ class UserController extends Controller
     {
         $user = new User();
         $user->fill($request->all());
-        $user->admin = 1; //!!!!!!!!!
+        $user->admin = 0; //!!!!!!!!!
         $user->password = Hash::make($request->password);
         $user->save();
         return redirect()->route('users.index')->with('success', 'user added successfully');

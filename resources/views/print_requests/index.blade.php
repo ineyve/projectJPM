@@ -7,7 +7,7 @@
     <a class="btn btn-primary" href="{{route('requests.create')}}">Add Request</a>
 </div>
 
-@if(count($print_requests))
+@if(count($requests))
     <table class="table table-striped">
     <thead>
         <tr>
@@ -16,12 +16,12 @@
         </tr>
     </thead>
     <tbody>
-    @foreach ($print_requests as $request) {
+    @foreach ($requests as $request) {
         <tr>
-            <td>{{$print_requests->requestNumber}}</td>
-            <td>{{$print_requests->description}})</td>
+            <td>{{$request->requestNumber}}</td>
+            <td>{{$request->description}})</td>
             <td>
-                <a class="btn btn-xs btn-primary" href="{{route('requests.edit', $print_requests->requestNumber)}}">Edit</a>
+                <a class="btn btn-xs btn-primary" href="{{route('requests.edit', $request->requestNumber)}}">Edit</a>
             </td>
         </tr>
     @endforeach
