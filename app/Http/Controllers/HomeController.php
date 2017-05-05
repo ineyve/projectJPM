@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\PRequest;
+use App\Request;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -20,7 +20,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $requests = PRequest::all();
+        $requests = Request::all();
         $user = Auth::user();
         return view('home', compact('requests', 'user'));
     }

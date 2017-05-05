@@ -54,7 +54,6 @@
                     <ul class="nav navbar-nav navbar-right">
 
                         <li><a href="{{ url('/') }}">Home</a></li>
-
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                             <li><a href="{{ route('login') }}">Login</a></li>

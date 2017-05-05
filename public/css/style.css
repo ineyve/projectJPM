@@ -1,4 +1,4 @@
-.navbar-brand{
+.selected{
     color: #000;
     background: #7da8c3;
 }
@@ -11,4 +11,8 @@ form{
 
 th, td {
     text-align: center;
+}
+
+.offset {
+    margin-bottom:10px;
 }
