@@ -27,7 +27,7 @@ td a {
     display: block;
 }
 
-/* tabelas */
+/* tables */
 .panel {
     background-color: rgba(255, 255, 255, 0.4);
 }
@@ -38,6 +38,10 @@ tr{
 
 .table-striped>tbody>tr:nth-of-type(odd) {
     background-color: rgba(0, 0, 0, 0);
+}
+
+.navbar {
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 @font-face {
