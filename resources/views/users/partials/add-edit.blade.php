@@ -1,10 +1,10 @@
 {{ csrf_field() }}
 <div class="form-group">
-    <label for="inputFullname">Fullname</label>
-    <input
-        type="text" class="form-control"
-        name="fullname" id="inputFullname"
-        placeholder="Fullname" value="{{old('name', $user->name)}}" />
+<label for="inputFullname">Fullname</label>
+<input
+    type="text" class="form-control"
+    name="fullname" id="inputFullname"
+    placeholder="Fullname" value="{{old('name', $user->name)}}" />
 </div>
 <div class="form-group">
     <label for="inputType">Type</label>

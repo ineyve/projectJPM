@@ -30,5 +30,10 @@ class RequestController extends Controller
         $request->save();
         return redirect()->route('request.index')->with('success', 'Request added sucessfuly!');
     }
+
+    public function edit(Request $request)
+    {
+        return view('print_requests.edit', compact('request'));
+    }
     
 }

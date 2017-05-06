@@ -14,20 +14,20 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>Email</th>
                                     <th>Name</th>
-                                    <th>Phone</th>
+                                    <th>Email</th>
                                     <th>Department</th>
+                                    <th>Phone</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                             @foreach ($users as $user)
                                 <tr>
-                                    <td>{{$user->email}}</td>
                                     <td>{{$user->name}}</td>
-                                    <td>{{$user->phone}}</td>
+                                    <td>{{$user->email}}</td>
                                     <td>{{App\Department::find($user->department_id)->name}}</td>
+                                    <td>{{$user->phone}}</td>
                                     <td>
                                         <a class="btn btn-xs btn-primary" href="{{ route('users.edit', $user) }}">Edit</a>
                                         <form action="{{route('users.destroy',$user)}}" method="post" class="inline">

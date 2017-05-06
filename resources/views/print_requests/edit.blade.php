@@ -1,13 +1,27 @@
-<?php
-if (count($errors) > 0) {
-    include 'src/views/partials/errors.view.php';
-}
-?>
-<form action="users-edit.php" method="post" class="form-group">
-    <input type="hidden" name="user_id" value="<?= (int) $user->user_id?>" />
-    <?php require('src/views/users/partials/add-edit.view.php') ?>
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary" name="ok">Save</button>
-        <button type="submit" class="btn btn-default" name="cancel">Cancel</button>
+@extends('master')
+
+@section('content')
+@if (count($errors) > 0)
+    @include('shared.errors')
+@endif
+
+<form action="{{route('requests.update', $request)}}" method="post" class="form-group">
+    {{method_field('PUT')}}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Edit User</div>
+                    <div class="panel-body">
+                        @include('print_requests.partials.add-edit')
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary" name="ok">Save</button>
+                            <button type="submit" class="btn btn-default" name="cancel">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </form>
+@endsection

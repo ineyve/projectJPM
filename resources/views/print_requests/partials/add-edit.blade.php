@@ -1,5 +1,4 @@
 {{csrf_field()}}
-
 <div class="form-group">
     <label for="inputDescription">Description</label>
     <input
@@ -20,7 +19,7 @@
 <label for="inputRequestDate">Request Date</label>
     <input
         type="date" class="form-control"
-        name="request_date" id="inputRequestDate" 
+        name="request_date" id="inputRequestDate"
         @if(Route::currentRouteName()=='requests.store')
         value="{{old('request_date', $request->request_date)}}"
         @elsif(Route::currentRouteName()=='requests.edit')
@@ -61,7 +60,7 @@
         @endif
     />
 </div>
-    
+
 <div class="form-group">
     <label for="inputColored">Colored</label>
     <select name="colored" id="inputColored" class="form-control "
@@ -141,5 +140,4 @@
         @endif
     />
 </div>
-
 
