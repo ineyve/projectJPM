@@ -32,7 +32,7 @@ $factory->define(App\Request::class, function (Faker\Generator $faker) {
     return [
         'description' => $faker->sentence(4),
         'owner_id' => $faker->numberBetween(2,20),
-        'status' => $faker->numberBetween(0,1),
+        'status' => $faker->numberBetween(-1,2),
         'open_date' => $faker->dateTimeThisMonth(),
         'quantity' => $faker->numberBetween(1,100),
         'colored' => $faker->numberBetween(0,1),
