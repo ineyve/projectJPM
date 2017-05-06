@@ -19,6 +19,23 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
+        'admin' => 0,
+        'blocked' => 0,
+        'print_evals' => 0,
+        'print_counts' => 0,
+        'department_id' => 1
+    ];
+});
+
+$factory->define(App\Request::class, function (Faker\Generator $faker) {
+
+    return [
+        'owner_id' => 1,
+        'status' => values(0,1),
+        'admin' => 0,
+        'blocked' => 0,
+        'print_evals' => 0,
+        'print_counts' => 0,
+        'department_id' => 1
     ];
 });
