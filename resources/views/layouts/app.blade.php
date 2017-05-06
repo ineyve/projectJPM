@@ -38,7 +38,7 @@
                     <!-- Branding Image -->
 
                     <a class="navbar-brand">
-                        <img src="logo.png"style="width:20px;height:20px;">
+                        <img src="/logo.png"style="width:20px;height:20px;">
                     </a>
                     <a class="navbar-brand">{{ config('app.name') }}</a>
                 </div>
