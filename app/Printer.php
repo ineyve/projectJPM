@@ -5,8 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
-
-class Request extends Model
+class Printer extends Model
 {
     use Notifiable;
 
@@ -16,8 +15,12 @@ class Request extends Model
      * @var array
      */
     protected $fillable = [
-        'requestNumber', 'description', 'request_date', 'due_date', 'quantity', 'colored', 'stapled', 'paper_size', 'paper_type', 'file'
+        'name'
     ];
 
-
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
 }

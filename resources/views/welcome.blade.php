@@ -1,4 +1,4 @@
-@extends('master')
+@include('master')
 
 <!DOCTYPE html>
 <html lang="{{ config('app.locale') }}">
@@ -11,5 +11,36 @@
 
     </head>
     <body>
+    <div class="home-counter"> *****RASCUNHO*****  </div>
+
+        Total documents printed:
+        <div class="home-counter">
+            6520
+        </div>
+
+        Documents printed today:
+        <div class="home-counter">
+            253
+        </div>
+
+        Average prints per day (this month):
+        <div class="home-counter">
+            253
+        </div>
+
+        Documents printed by department:
+        <div class="home-counter">
+            A --------- </br>
+            B ---- </br>
+            C ------- </br>
+            D ------------------ </br>
+            E ----------- </br>
+            F -- </br>
+        </div>
+
+        Grey scale versus color:
+        <div class="home-counter">
+            (Pie chart)
+        </div>
     </body>
 </html>
