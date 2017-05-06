@@ -19,23 +19,32 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
-        'admin' => 0,
-        'blocked' => 0,
-        'print_evals' => 0,
-        'print_counts' => 0,
-        'department_id' => 1
+        'admin' => $faker->numberBetween(0,1),
+        'blocked' => $faker->numberBetween(0,1),
+        'print_evals' => $faker->numberBetween(0,100),
+        'print_counts' => $faker->numberBetween(0,100),
+        'department_id' => $faker->numberBetween(1,5),
     ];
 });
 
 $factory->define(App\Request::class, function (Faker\Generator $faker) {
 
     return [
-        'owner_id' => 1,
-        'status' => values(0,1),
-        'admin' => 0,
-        'blocked' => 0,
-        'print_evals' => 0,
-        'print_counts' => 0,
-        'department_id' => 1
+        'owner_id' => $faker->numberBetween(2,20),
+        'status' => $faker->numberBetween(0,1),
+        'open_date' => $faker->dateTimeThisMonth(),
+        'quantity' => $faker->numberBetween(1,100),
+        'colored' => $faker->numberBetween(0,1),
+        'stapled' => $faker->numberBetween(0,1),
+        'paper_size' => $faker->numberBetween(3,5),
+        'paper_type' => $faker->numberBetween(0,1),
+        'file' => $faker->name
+    ];
+});
+
+$factory->define(App\Department::class, function (Faker\Generator $faker) {
+
+    return [
+        'name' => $faker->company
     ];
 });
