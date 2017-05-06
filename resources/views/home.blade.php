@@ -5,10 +5,10 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Logged in as {{$user->name}}</div>
+                <div class="panel-heading">{{$user->name}}'s Requests</div>
                 <div class="panel-body">
                     @if (count($requests))
-                        <table class="table table-striped">
+                        <table class="table table-striped table-hover">
                             <thead>
                             <tr>
                                 <th>Request Number</th>
@@ -17,10 +17,10 @@
                             </thead>
                             <tbody>
                             @foreach ($requests as $request)
-                            <tr>
-                                <td><a href="{{route('requests.edit', $request->id)}}">{{$request->id}}</a></td>
-                                <td><a href="{{route('requests.edit', $request->id)}}">{{$request->description}}</a></td>
-                            </tr>
+                                <tr>
+                                    <td><a href="{{route('requests.edit', $request->id)}}">{{$request->id}}</a></td>
+                                    <td><a href="{{route('requests.edit', $request->id)}}">{{$request->description}}</a></td>
+                                </tr>
                             </tbody>
                             @endforeach
                         </table>

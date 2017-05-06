@@ -23,10 +23,6 @@ body {
     background-size: 100% auto;
 }
 
-td a {
-    display: block;
-}
-
 /* tables */
 .panel {
     background-color: rgba(255, 255, 255, 0.4);
@@ -38,6 +34,22 @@ tr{
 
 .table-striped>tbody>tr:nth-of-type(odd) {
     background-color: rgba(0, 0, 0, 0);
+}
+
+td>a {
+    display: block;
+    color: inherit;
+}
+
+td>a:hover, td>a:visited, td>a:link, td>a:active
+{
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Define the hover highlight color for the table row */
+.table-hover>tbody>tr:hover {
+    background-color: rgba(255, 128, 64, 0.25);
 }
 
 .navbar {
