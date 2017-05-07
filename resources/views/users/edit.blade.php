@@ -1,7 +1,6 @@
 @extends('master')
 
 @section('content')
-
 <form action="{{route('users.update', $user)}}" method="post" class="form-group">
     {{method_field('PUT')}}
     <div class="container">
