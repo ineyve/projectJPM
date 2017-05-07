@@ -3,9 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Requests List</div>
+                <div class="panel-heading">Request {{$request->id}}</div>
                 <div class="panel-body">
                     <table class="table table-striped">
                         <thead>
@@ -45,9 +45,14 @@
                         </tbody>
                     </table>
                     @if($request->status == 0)
-                    <div>
-                        <a class="btn btn-danger offset" href="{{route('requests.create')}}">Reject</a>
-                    </div>
+                        <a class="btn btn-danger side-offset" href="{{route('requests.create')}}">Reject</a>
+                        <a class="btn btn-info" href="{{route('requests.edit', $request)}}">Progress</a>
+                    @endif
+                    @if($request->status == 1)
+                        <a class="btn btn-primary" href="{{route('requests.edit', $request)}}">Ready</a>
+                    @endif
+                    @if($request->status == 2)
+                        <a class="btn btn-success" href="{{route('requests.edit', $request)}}">Complete</a>
                     @endif
                 </div>
             </div>

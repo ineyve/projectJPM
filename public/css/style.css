@@ -17,6 +17,10 @@ th, td, h3{
     margin-bottom:10px;
 }
 
+.side-offset {
+    margin-right:15px;
+}
+
 body {
     background-image: url("../wall.png");
     background-position: center top;

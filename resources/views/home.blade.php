@@ -21,8 +21,8 @@
                                 @if($request->owner_id == $user->id)
                                     <?php $count++; ?>
                                     <tr>
-                                        <td><a href="{{route('requests.edit', $request->id)}}">{{$request->id}}</a></td>
-                                        <td><a href="{{route('requests.edit', $request->id)}}">{{$request->description}}</a></td>
+                                        <td><a href="{{route('requests.edit', $request)}}">{{$request->id}}</a></td>
+                                        <td><a href="{{route('requests.edit', $request)}}">{{$request->description}}</a></td>
                                     </tr>
                                 @endif
                             </tbody>
