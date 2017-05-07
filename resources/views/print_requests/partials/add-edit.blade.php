@@ -5,7 +5,6 @@
     <input
         type="text" class="form-control"
         name="description" id="inputDescription"
-        placeholder="description"
         @if(Route::currentRouteName()=='requests.store')
             value="{{old('description', $request->description)}}"
         @else(Route::currentRouteName()=='requests.edit')
@@ -65,6 +64,7 @@
         <option disabled selected> -- select an option -- </option>
         <option value="0">Color</option>
         <option value="1">Black and White</option>
+    </select>
 </div>
 
 <div class="form-group">
@@ -78,7 +78,9 @@
         <option disabled selected> -- select an option -- </option>
         <option value="0">With Staple</option>
         <option value="1">No Staple</option>
+    </select>
 </div>
+
 
 <div class="form-group">
     <label for="inputPaperSize">Paper Size</label>
@@ -91,6 +93,7 @@
         <option disabled selected> -- select an option -- </option>
         <option value="0">A4</option>
         <option value="1">A3</option>
+    </select>
 </div>
 
 <div class="form-group">
@@ -105,6 +108,7 @@
         <option value="0">Draft</option>
         <option value="1">Normal</option>
         <option value="1">Photographic</option>
+    </select>
 </div>
 
 <div class="form-group">
