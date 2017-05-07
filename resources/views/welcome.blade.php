@@ -1,5 +1,6 @@
-@include('master')
+@extends('master')
 
+@section('content')
 <!DOCTYPE html>
 <html lang="{{ config('app.locale') }}">
     <head>
@@ -44,3 +45,4 @@
         </div>
     </body>
 </html>
+@endsection
