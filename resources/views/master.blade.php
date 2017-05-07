@@ -17,6 +17,9 @@
         @if(session('sucess'))
             @include('shared.sucess')
         @endif 
+        @if(session('errors'))
+            @include('shared.errors')
+        @endif 
         @yield('content')
     </div>
 

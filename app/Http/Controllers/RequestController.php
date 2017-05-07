@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 
-use App\Requests\StoreRequestPostRequest;
+use App\Http\Requests\StoreRequestPostRequest;
 
 use App\Request;
 

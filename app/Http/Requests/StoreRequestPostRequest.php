@@ -25,7 +25,7 @@ class StoreRequestPostRequest extends FormRequest
     {
         return [
             'description'=>'required|alpha', //alpha??
-            'request_date'=>'required|date',  //date??
+            'open_date'=>'required|date',  //date??
             'due_date'=>'date',
             'quantity'=>'required',
             'colored'=>'required',
