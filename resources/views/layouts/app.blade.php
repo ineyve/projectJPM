@@ -59,8 +59,10 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
-                            <li> <a href="{{ url('requests') }}">Requests</a></li>
-                            <li> <a href="{{ url('users') }}">Users</a></li>
+                            @if(Auth::user()->admin == 1)
+                                <li> <a href="{{ url('requests') }}">Requests</a></li>
+                                <li> <a href="{{ url('users') }}">Users</a></li>
+                            @endif
                             <li><a href="{{ url('/home') }}">Dashboard</a></li>
                             <li><a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
