@@ -11,7 +11,7 @@
                 <div class="panel-heading">Requests List</div>
                 <div class="panel-body">
                     @if(count($requests))
-                        <table class="table table-striped">
+                        <table class="table table-striped table-hover">
                         <thead>
                             <tr>
                                 <th>Request Number</th>
@@ -23,24 +23,30 @@
                         <tbody>
                         @foreach ($requests as $request)
                             <tr>
-                                <td>{{$request->id}}</td>
-                                <td>{{$request->description}}</td>
+                                <td><a href="{{route('requests.details', $request->id)}}">{{$request->id}}</a></td>
+                                <td><a href="{{route('requests.details', $request->id)}}">{{$request->description}}</a></td>
                                 @if($request->status == -1)
-                                    <td>Rejected</td>
+                                    <td><a href="{{route('requests.details', $request->id)}}">Rejected</a></td>
                                     <td></td>
                                 @endif
                                 @if($request->status == 0)
-                                        <td>Waiting</td>
-                                        <td><a class="btn btn-xs btn-success" href="{{route('requests.edit', $request->id)}}">Start</a></td>
+                                    <td><a href="{{route('requests.details', $request->id)}}">Waiting</a></td>
+                                        <td><a class="btn btn-xs btn-info" href="{{route('requests.edit', $request->id)}}">Progress</a></td>
                                 @endif
                                 @if($request->status == 1)
-                                    <td>In progress</td>
+                                    <td><a href="{{route('requests.details', $request->id)}}">In progress</a></td>
                                     <td>
-                                        <a class="btn btn-xs btn-warning" href="{{route('requests.edit', $request->id)}}">Finish</a>
+                                        <a class="btn btn-xs btn-primary" href="{{route('requests.edit', $request->id)}}">Ready</a>
                                     </td>
                                 @endif
                                 @if($request->status == 2)
-                                    <td>Complete</td>
+                                    <td><a href="{{route('requests.details', $request->id)}}">Ready</a></td>
+                                    <td>
+                                        <a class="btn btn-xs btn-success" href="{{route('requests.edit', $request->id)}}">Complete</a>
+                                    </td>
+                                @endif
+                                @if($request->status == 3)
+                                    <td><a href="{{route('requests.details', $request->id)}}">Complete</a></td>
                                     <td></td>
                                 @endif
                             </tr>

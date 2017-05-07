@@ -7,6 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">{{$user->name}}'s Requests</div>
                 <div class="panel-body">
+                    <?php $count = 0; ?>
                     @if (count($requests))
                         <table class="table table-striped table-hover">
                             <thead>
@@ -17,14 +18,18 @@
                             </thead>
                             <tbody>
                             @foreach ($requests as $request)
-                                <tr>
-                                    <td><a href="{{route('requests.edit', $request->id)}}">{{$request->id}}</a></td>
-                                    <td><a href="{{route('requests.edit', $request->id)}}">{{$request->description}}</a></td>
-                                </tr>
+                                @if($request->owner_id == $user->id)
+                                    <?php $count++; ?>
+                                    <tr>
+                                        <td><a href="{{route('requests.edit', $request->id)}}">{{$request->id}}</a></td>
+                                        <td><a href="{{route('requests.edit', $request->id)}}">{{$request->description}}</a></td>
+                                    </tr>
+                                @endif
                             </tbody>
                             @endforeach
                         </table>
-                    @else
+                    @endif
+                    @if($count == 0)
                         <h3>You have no active requests</h3>
                     @endif
                 </div>
