@@ -37,12 +37,12 @@ Route::get('/home', 'HomeController@index');
 
 // Requests
 Route::get('requests', 'RequestController@index' )->name('requests.index');
-Route::get('requests/{requestNumber}/details', 'RequestController@details' )->name('requests.details');
+Route::get('requests/{request}/details', 'RequestController@details' )->name('requests.details');
 Route::get('requests/create', 'RequestController@create')->name('requests.create');
 Route::post('requests/create', 'RequestController@store')->name('requests.store');
-Route::get('requests/{requestNumber}/edit', 'RequestController@edit')->name('requests.edit');
-Route::post('requests/{requestNumber}/edit', 'RequestController@update')->name('requests.update');
-Route::delete('requests/{requestNumber}', 'RequestController@destroy')->name('requests.destroy');
+Route::get('requests/{request}/edit', 'RequestController@edit')->name('requests.edit');
+Route::post('requests/{request}/edit', 'RequestController@update')->name('requests.update');
+Route::delete('requests/{request}', 'RequestController@destroy')->name('requests.destroy');
 
 // Users
 Route::get('users', 'UserController@index' )->name('users.index');

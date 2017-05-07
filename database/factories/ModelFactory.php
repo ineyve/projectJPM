@@ -49,3 +49,10 @@ $factory->define(App\Department::class, function (Faker\Generator $faker) {
         'name' => $faker->company
     ];
 });
+
+$factory->define(App\Printer::class, function (Faker\Generator $faker) {
+
+    return [
+        'name' => $faker->company
+    ];
+});
