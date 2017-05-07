@@ -16,7 +16,8 @@
         <div class="container">
         @if(session('sucess'))
             @include('shared.sucess')
-        @endif 
+        @endif
+
         @if(session('errors'))
             @include('shared.errors')
         @endif 

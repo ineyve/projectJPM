@@ -1,9 +1,6 @@
 @extends('master')
 
 @section('content')
-@if (count($errors) > 0)
-    @include('shared.errors')
-@endif
 
 <form action="{{route('requests.update', $request)}}" method="post" class="form-group">
     {{method_field('PUT')}}

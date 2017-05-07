@@ -1,9 +1,6 @@
 @extends('master')
 
 @section('content')
-    @if (count($errors) > 0)
-        @include ('shared.errors')
-    @endif
     <form action="{{route('users.store')}}" method="post" class="form-group">
         <div class="container">
             <div class="row">
