@@ -156,7 +156,7 @@
                         </tbody>
                     </table>
                     @if($request->status == 0)
-                        <a class="btn btn-danger side-offset" href="{{route('requests.create')}}">Reject</a>
+                        <a class="btn btn-danger side-offset" href="{{route('requests.status', ['request' => $request, 'status' => 1, 'from' => -1])}}">Reject</a>
                         <a class="btn btn-info" href="{{route('requests.status', ['request' => $request, 'status' => 1, 'from' => 1])}}">Progress</a>
                     @endif
                     @if($request->status == 1)
