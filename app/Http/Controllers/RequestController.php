@@ -45,7 +45,7 @@ class RequestController extends Controller
     {
         $request->status = $status;
         $request->save();
-        return redirect()->route('request.index')->with('success', 'Status changed sucessfuly!');
+        return redirect()->route('requests.index')->with('success', 'Status changed sucessfuly!');
     }
     
 }

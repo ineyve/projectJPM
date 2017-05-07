@@ -32,15 +32,15 @@
                                 @endif
                                 @if($request->status == 0)
                                         <a href="{{route('requests.details', $request)}}">Waiting</a></td>
-                                    <td><a class="btn btn-xs btn-info" href="{{route('requests.status', $request, $status=1)}}">Progress</a>
+                                    <td><a class="btn btn-xs btn-info" href="{{route('requests.status', ['request' => $request, 'status' => 1])}}">Progress</a>
                                 @endif
                                 @if($request->status == 1)
                                         <a href="{{route('requests.details', $request)}}">In progress</a></td>
-                                    <td><a class="btn btn-xs btn-primary" href="{{route('requests.status', $request, $status=2)}}">Ready</a>
+                                    <td><a class="btn btn-xs btn-primary" href="{{route('requests.status', ['request' => $request, 'status' => 2])}}">Ready</a>
                                 @endif
                                 @if($request->status == 2)
                                         <a href="{{route('requests.details', $request)}}">Ready</a></td>
-                                    <td><a class="btn btn-xs btn-success" href="{{route('requests.status', $request, $status=3)}}">Complete</a>
+                                    <td><a class="btn btn-xs btn-success" href="{{route('requests.status', ['request' => $request, 'status' => 3])}}">Complete</a>
                                 @endif
                                 @if($request->status == 3)
                                         <a href="{{route('requests.details', $request)}}">Complete</a></td>
