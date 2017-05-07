@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\CreateUserPostRequest;
+use App\Http\Requests\UpdateUserPostRequest;
 use App\User;
 use Hash;
 
@@ -22,7 +22,7 @@ class UserController extends Controller
         return view('users.add', compact('user'));
     }
 
-    public function store(StoreUserRequest $request)
+    public function store(CreateUserPostRequest $request)
     {
         $user = new User();
         $user->fill($request->all());
@@ -32,7 +32,7 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', 'user added successfully');
     }
 
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(UpdateUserPostRequest $request, User $user)
     {
         $user->fill($request->except('password'));
         $user->admin = 0; //!!!!!!!!
