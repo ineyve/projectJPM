@@ -136,7 +136,7 @@
                                     <td>Satisfaction Grade</td>
                                     <td>
                                         @for($i=0; $i < $request->satisfaction_grade; $i++)
-                                            <img src="/star.png"style="width:15px;height:15px;">
+                                            <img src="/star.png" style="width:15px;height:15px;">
                                         @endfor
                                     </td>
                                 </tr>
@@ -157,13 +157,13 @@
                     </table>
                     @if($request->status == 0)
                         <a class="btn btn-danger side-offset" href="{{route('requests.create')}}">Reject</a>
-                        <a class="btn btn-info" href="{{route('requests.edit', $request)}}">Progress</a>
+                        <a class="btn btn-info" href="{{route('requests.status', ['request' => $request, 'status' => 1, 'from' => 1])}}">Progress</a>
                     @endif
                     @if($request->status == 1)
-                        <a class="btn btn-primary" href="{{route('requests.edit', $request)}}">Ready</a>
+                        <a class="btn btn-primary" href="{{route('requests.status', ['request' => $request, 'status' => 2, 'from' => 1])}}">Ready</a>
                     @endif
                     @if($request->status == 2)
-                        <a class="btn btn-success" href="{{route('requests.edit', $request)}}">Complete</a>
+                        <a class="btn btn-success" href="{{route('requests.status', ['request' => $request, 'status' => 3, 'from' => 1])}}">Complete</a>
                     @endif
                 </div>
             </div>

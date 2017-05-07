@@ -11,6 +11,9 @@
 |
 */
 
+
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
     return view('welcome');
     });
@@ -43,7 +46,7 @@ Route::post('requests/create', 'RequestController@store')->name('requests.store'
 Route::get('requests/{request}/edit', 'RequestController@edit')->name('requests.edit');
 Route::post('requests/{request}/edit', 'RequestController@update')->name('requests.update');
 Route::delete('requests/{request}', 'RequestController@destroy')->name('requests.destroy');
-Route::get('requests/{request}/{status}', 'RequestController@status')->name('requests.status');
+Route::get('requests/{request}/{status}/{from}', 'RequestController@status')->name('requests.status');
 
 // Users
 Route::get('users', 'UserController@index' )->name('users.index');

@@ -33,10 +33,11 @@ $factory->define(App\Request::class, function (Faker\Generator $faker) {
         'description' => $faker->sentence(4),
         'owner_id' => $faker->numberBetween(2,20),
         'status' => $faker->numberBetween(-1,3),
-        'open_date' => $faker->dateTimeThisMonth(),
+        'open_date' => $faker->dateTimeThisMonth,
         'quantity' => $faker->numberBetween(1,100),
         'colored' => $faker->numberBetween(0,1),
         'stapled' => $faker->numberBetween(0,1),
+        'satisfaction_grade' => $faker->numberBetween(1,5),
         'paper_size' => $faker->numberBetween(3,5),
         'paper_type' => $faker->numberBetween(0,1),
         'file' => $faker->name

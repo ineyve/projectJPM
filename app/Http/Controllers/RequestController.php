@@ -41,11 +41,14 @@ class RequestController extends Controller
         return view('print_requests.details', compact('request'));
     }
 
-    public function status(Request $request, $status)
+    public function status(Request $request, $status, $from)
     {
         $request->status = $status;
         $request->save();
-        return redirect()->route('requests.index')->with('success', 'Status changed sucessfuly!');
+        if($from == 0)
+            return redirect()->route('requests.index')->with('success', 'Status changed sucessfuly!');
+        else
+            return redirect()->route('requests.details', $request)->with('success', 'Status changed sucessfuly!');
     }
     
 }
