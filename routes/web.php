@@ -37,6 +37,7 @@ Route::get('/home', 'HomeController@index');
 
 // Requests
 Route::get('requests', 'RequestController@index' )->name('requests.index');
+Route::get('requests/{requestNumber}/details', 'RequestController@details' )->name('requests.details');
 Route::get('requests/create', 'RequestController@create')->name('requests.create');
 Route::post('requests/create', 'RequestController@store')->name('requests.store');
 Route::get('requests/{requestNumber}/edit', 'RequestController@edit')->name('requests.edit');

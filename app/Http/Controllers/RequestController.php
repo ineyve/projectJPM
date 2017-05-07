@@ -35,5 +35,10 @@ class RequestController extends Controller
     {
         return view('print_requests.edit', compact('request'));
     }
+
+    public function details(Request $request)
+    {
+        return view('print_requests.details', compact('request'));
+    }
     
 }
