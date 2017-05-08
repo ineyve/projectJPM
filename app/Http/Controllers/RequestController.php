@@ -60,7 +60,7 @@ class RequestController extends Controller
         return view('print_requests.rejection', compact('request'));
     }
 
-    public function reject(StoreRequestPostRequest $req, Request $request)
+    public function reject(StoreRequestPostRequest $req)
     {
         $request->fill($req->all());
         $request->save();
