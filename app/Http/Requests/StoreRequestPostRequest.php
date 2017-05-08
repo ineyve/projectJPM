@@ -24,6 +24,7 @@ class StoreRequestPostRequest extends FormRequest
     public function rules()
     {
         return [
+            'id'=>'unique',
             'description'=>'required|alpha', //alpha??
             'open_date'=>'required|date',  //date??
             'due_date'=>'date',

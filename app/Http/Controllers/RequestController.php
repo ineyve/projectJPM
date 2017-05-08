@@ -7,6 +7,8 @@ use App\Http\Requests\StoreRequestPostRequest;
 
 use App\Request;
 
+use Illuminate\Support\Facades\Auth;
+
 
 class RequestController extends Controller
 {
@@ -26,9 +28,11 @@ class RequestController extends Controller
     public function store(StoreRequestPostRequest $req)
     {
         $request = new Request();
+        $request->owner_id = Auth::user()->id;
+        $request->status = 0;
         $request->fill($req->all()); // o metodo fill preeenche todos os campos logo
         $request->save();
-        return redirect()->route('request.index')->with('success', 'Request added sucessfuly!');
+        return redirect()->route('requests.index')->with('success', 'Request added sucessfuly!');
     }
 
     public function edit(Request $request)
