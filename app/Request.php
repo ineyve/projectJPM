@@ -16,7 +16,7 @@ class Request extends Model
      * @var array
      */
     protected $fillable = [
-        'requestNumber', 'description', 'open_date', 'due_date', 'quantity', 'colored', 'stapled', 'paper_size', 'paper_type', 'file'
+        'id', 'owner_id', 'description', 'open_date', 'due_date', 'quantity', 'colored', 'stapled', 'paper_size', 'paper_type', 'file', 'status'
     ];
 
 
