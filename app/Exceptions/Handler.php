@@ -55,9 +55,13 @@ class Handler extends ExceptionHandler
         if ($exception instanceof AuthorizationException) {
             return redirect('/home');
         }
-        /**end of modified part**/
 
-        return redirect()->guest('/');
+        if ($exception instanceof NotFoundHttpException || $exception instanceof MethodNotAllowedHttpException){
+            return redirect('/');
+        }
+
+        return parent::render($request, $exception);
+        //return redirect()->guest('/');
     }
 
     /**

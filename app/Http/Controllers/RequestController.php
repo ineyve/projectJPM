@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Requests\StoreRejectPostReject;
 use App\Http\Requests\StoreRequestPostRequest;
 
 use App\Request;
@@ -55,16 +56,16 @@ class RequestController extends Controller
             return redirect()->route('requests.details', $request)->with('success', 'Status changed sucessfuly!');
     }
 
-    public function reject(Request $request)
+    public function reject(StoreRejectPostReject $req, Request $request)
     {
         $request->status = -1;
+        $request->refused_reason = $req->refused_reason;
         $request->save();
-        return view('print_requests.rejection', compact('request'));
+        return view('print_requests.details', compact('request'));
     }
 
     public function rejectIndex(Request $request)
     {
-        $this->request = $request;
         return view('print_requests.rejection', compact('request'));
     }
     
