@@ -50,14 +50,14 @@
         <script>
             var ctx = document.getElementById("barChart");
             var barChart = new Chart(ctx, {
-                type: 'bar',
+                type: 'horizontalBar',
                 data: {
-                    labels: <?= $statistics['departments'] ?>,
+                    labels: {!! $statistics['departments'] !!},
                     datasets: [{
                         label: '# of Requests',
-                        data: <?=$statistics['departmentscount']?>,
-                        backgroundColor: <?=$statistics['departmentscolor']?>,
-                        borderColor: <?=$statistics['departmentscolor']?>,
+                        data: {!! $statistics['departmentscount'] !!},
+                        backgroundColor: {!! $statistics['departmentscolor'] !!},
+                        borderColor: {!! $statistics['departmentscolor'] !!},
                         borderWidth: 1
                     }]
                 },

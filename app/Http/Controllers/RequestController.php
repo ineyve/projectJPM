@@ -55,17 +55,17 @@ class RequestController extends Controller
             return redirect()->route('requests.details', $request)->with('success', 'Status changed sucessfuly!');
     }
 
-    public function rejectIndex(Request $request)
+    public function reject(Request $request)
     {
+        $request->status = -1;
+        $request->save();
         return view('print_requests.rejection', compact('request'));
     }
 
-    public function reject(StoreRequestPostRequest $req)
+    public function rejectIndex(Request $request)
     {
-        $request->fill($req->all());
-        $request->save();
-
-        $this->status($request, -1, 1);
+        $this->request = $request;
+        return view('print_requests.rejection', compact('request'));
     }
     
 }

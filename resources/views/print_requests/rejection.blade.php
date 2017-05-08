@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('content')
-<form action="{{route('requests.reject')}}" method="post" class="form-group">
+<form action="{{route('requests.reject',$request)}}" method="post" class="form-group">
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">

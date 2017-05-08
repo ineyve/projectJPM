@@ -15,10 +15,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-/*Route::get('/', function () {
-    return view('welcome');
-    });*/
-Route::get('/', 'StatisticsController@index');
+Route::get('/', 'StatisticsController@homeGraph');
 
 //*********Laravel Auth Routes****************
 // Authentication Routes
@@ -28,6 +25,7 @@ Route::get('register/verify/{confirmationCode}', [
     'as' => 'confirmation_path',
     'uses' => 'RegisterController@confirm'
 ]);
+
 /*
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
@@ -57,7 +55,7 @@ Route::get('requests/{request}/edit', 'RequestController@edit')->name('requests.
 Route::post('requests/{request}/edit', 'RequestController@update')->name('requests.update')->middleware('can:admin');
 Route::delete('requests/{request}', 'RequestController@destroy')->name('requests.destroy')->middleware('can:admin');
 Route::get('requests/{request}/{status}/{from}', 'RequestController@status')->name('requests.status')->middleware('can:admin');
-Route::get('requests/{request}/rejection', 'RequestController@rejectIndex')->name('requests.rejectIndex')->middleware('can:admin');
+Route::get('requests/{request}/rejection', 'RequestController@rejectIndex')->name('requests.index')->middleware('can:admin');
 Route::post('requests/{request}/rejection', 'RequestController@reject')->name('requests.reject')->middleware('can:admin');
 
 // Users
