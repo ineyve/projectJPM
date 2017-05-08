@@ -14,14 +14,14 @@
 </div>
 
 <div class="form-group">
-<label for="inputRequestDate">Request Date</label>
+<label for="inputOpenDate">Open Date</label>
     <input
         type="date" class="form-control"
-        name="request_date" id="inputRequestDate" 
+        name="open_date" id="inputOpenDate" 
         @if(Route::currentRouteName()=='requests.store')
-            value="{{old('request_date', $request->request_date)}}"
+            value="{{old('open_date', $request->open_date)}}"
         @else(Route::currentRouteName()=='requests.edit')
-            value="{{$request->request_date}}"
+            value="{{$request->open_date}}"
         @endif
     />
 </div>

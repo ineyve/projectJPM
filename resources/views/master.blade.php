@@ -18,10 +18,12 @@
             @include('shared.sucess')
         @endif
 
-        @if(session('errors'))
+        @if(count($errors) > 0)
             @include('shared.errors')
         @endif 
         @yield('content')
+
+
     </div>
 
     <script src="//code.jquery.com/jquery.js"></script>
