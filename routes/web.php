@@ -23,20 +23,25 @@ Route::get('/', 'StatisticsController@index');
 //*********Laravel Auth Routes****************
 // Authentication Routes
 Auth::routes();
+
+Route::get('register/verify/{confirmationCode}', [
+    'as' => 'confirmation_path',
+    'uses' => 'RegisterController@confirm'
+]);
 /*
-Route::get('login', 'Auth\LoginController@showLoginForm')->name('login')->middleware('can:guest');
-Route::post('login', 'Auth\LoginController@login')->middleware('can:guest');
-Route::post('logout', 'Auth\LoginController@logout')->name('logout')->middleware('guest');
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 // Registration Routes
-Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register')->middleware('guest');
-Route::post('register', 'Auth\RegisterController@register')->middleware('guest');
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('register', 'Auth\RegisterController@register');
 
 // Password Reset Routes
-Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request')->middleware('guest');
-Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email')->middleware('guest');
-Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset')->middleware('guest');
-Route::post('password/reset', 'Auth\ResetPasswordController@reset')->middleware('guest');
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 //*********************************************
 */
 
@@ -52,6 +57,8 @@ Route::get('requests/{request}/edit', 'RequestController@edit')->name('requests.
 Route::post('requests/{request}/edit', 'RequestController@update')->name('requests.update')->middleware('can:admin');
 Route::delete('requests/{request}', 'RequestController@destroy')->name('requests.destroy')->middleware('can:admin');
 Route::get('requests/{request}/{status}/{from}', 'RequestController@status')->name('requests.status')->middleware('can:admin');
+Route::get('requests/{request}/rejection', 'RequestController@rejectIndex')->name('requests.rejectIndex')->middleware('can:admin');
+Route::post('requests/{request}/rejection', 'RequestController@reject')->name('requests.reject')->middleware('can:admin');
 
 // Users
 Route::get('users', 'UserController@index' )->name('users.index')->middleware('can:admin');

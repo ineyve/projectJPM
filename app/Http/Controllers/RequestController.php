@@ -16,7 +16,7 @@ class RequestController extends Controller
     public function index()
     {
         $requests = Request::all();
-        return view('print_requests.index', compact('requests')); 
+        return view('print_requests.index', compact('requests'));
     }
 
     public function create()
@@ -53,6 +53,19 @@ class RequestController extends Controller
             return redirect()->route('requests.index')->with('success', 'Status changed sucessfuly!');
         else
             return redirect()->route('requests.details', $request)->with('success', 'Status changed sucessfuly!');
+    }
+
+    public function rejectIndex(Request $request)
+    {
+        return view('print_requests.rejection', compact('request'));
+    }
+
+    public function reject(Request $request, $message)
+    {
+        $request->refused_reason = $message;
+        $request->save();
+
+        $this->status($request, -1, 1);
     }
     
 }

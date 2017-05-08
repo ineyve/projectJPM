@@ -156,14 +156,14 @@
                         </tbody>
                     </table>
                     @if($request->status == 0)
-                        <a class="btn btn-danger side-offset" href="{{route('requests.status', ['request' => $request, 'status' => 1, 'from' => -1])}}">Reject</a>
-                        <a class="btn btn-info" href="{{route('requests.status', ['request' => $request, 'status' => 1, 'from' => 1])}}">Progress</a>
+                        <a class="btn btn-danger side-offset" href="{{redirect()->route('requests.rejectIndex', ['request' => $request])}}">Reject</a>
+                        <a class="btn btn-success" href="{{route('requests.status', ['request' => $request, 'status' => 1, 'from' => 1])}}">Progress</a>
                     @endif
                     @if($request->status == 1)
-                        <a class="btn btn-primary" href="{{route('requests.status', ['request' => $request, 'status' => 2, 'from' => 1])}}">Ready</a>
+                        <a class="btn btn-warning" href="{{route('requests.status', ['request' => $request, 'status' => 2, 'from' => 1])}}">Ready</a>
                     @endif
                     @if($request->status == 2)
-                        <a class="btn btn-success" href="{{route('requests.status', ['request' => $request, 'status' => 3, 'from' => 1])}}">Complete</a>
+                        <a class="btn btn-primary" href="{{route('requests.status', ['request' => $request, 'status' => 3, 'from' => 1])}}">Complete</a>
                     @endif
                 </div>
             </div>
