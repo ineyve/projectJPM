@@ -5,8 +5,8 @@
 
 form{
     display:inline;
-    margin:0px;
-    padding:0px;
+    margin:0;
+    padding:0;
 }
 
 th, td, h3{
@@ -15,6 +15,7 @@ th, td, h3{
 
 .offset {
     margin-bottom:10px;
+    margin-left:30px;
 }
 
 .side-offset {
@@ -62,10 +63,10 @@ td>a:hover, td>a:visited, td>a:link, td>a:active
 
 @font-face {
     font-family: 'typo-sketch';
-    src: url("/fonts/typo_sketch.otf") format("opentype");
+    src: url("../fonts/typo_sketch.otf") format("opentype");
 }
 
 .home-counter {
-    font-family: 'typo-sketch';
+    font-family: 'typo-sketch', serif; /*serif (default)*/
     font-size: 48px;
 }
