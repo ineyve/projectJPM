@@ -53,7 +53,7 @@
                                     @else
                                         <td>{{$request->id}}</td>
                                         <td>{{$request->description}}</td>
-                                        <td>{{$request->file}}/td>
+                                        <td>{{$request->file}}</td>
                                         <td>
                                             @if($request->status == -1)
                                                 Rejected

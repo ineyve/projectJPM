@@ -12,46 +12,51 @@
 */
 
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
     });
 
+
 //*********Laravel Auth Routes****************
 // Authentication Routes
-Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('login', 'Auth\LoginController@login');
-Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+Auth::routes();
+/*
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login')->middleware('can:guest');
+Route::post('login', 'Auth\LoginController@login')->middleware('can:guest');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout')->middleware('guest');
 
 // Registration Routes
-Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-Route::post('register', 'Auth\RegisterController@register');
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register')->middleware('guest');
+Route::post('register', 'Auth\RegisterController@register')->middleware('guest');
 
 // Password Reset Routes
-Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request')->middleware('guest');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email')->middleware('guest');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset')->middleware('guest');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset')->middleware('guest');
 //*********************************************
+*/
 
 // Home Page
-Route::get('/home', 'HomeController@index');
+Route::get('/home', 'HomeController@index')->middleware('can:user');
 
 // Requests
-Route::get('requests', 'RequestController@index' )->name('requests.index');
-Route::get('requests/{request}/details', 'RequestController@details' )->name('requests.details');
-Route::get('requests/create', 'RequestController@create')->name('requests.create');
-Route::post('requests/create', 'RequestController@store')->name('requests.store');
-Route::get('requests/{request}/edit', 'RequestController@edit')->name('requests.edit');
-Route::post('requests/{request}/edit', 'RequestController@update')->name('requests.update');
-Route::delete('requests/{request}', 'RequestController@destroy')->name('requests.destroy');
-Route::get('requests/{request}/{status}/{from}', 'RequestController@status')->name('requests.status');
+Route::get('requests', 'RequestController@index' )->name('requests.index')->middleware('can:admin');
+Route::get('requests/{request}/details', 'RequestController@details' )->name('requests.details')->middleware('can:admin');
+Route::get('requests/create', 'RequestController@create')->name('requests.create')->middleware('can:admin');
+Route::post('requests/create', 'RequestController@store')->name('requests.store')->middleware('can:admin');
+Route::get('requests/{request}/edit', 'RequestController@edit')->name('requests.edit')->middleware('can:admin');
+Route::post('requests/{request}/edit', 'RequestController@update')->name('requests.update')->middleware('can:admin');
+Route::delete('requests/{request}', 'RequestController@destroy')->name('requests.destroy')->middleware('can:admin');
+Route::get('requests/{request}/{status}/{from}', 'RequestController@status')->name('requests.status')->middleware('can:admin');
 
 // Users
-Route::get('users', 'UserController@index' )->name('users.index');
-Route::get('users/create', 'UserController@create')->name('users.create');
-Route::post('users/create', 'UserController@store')->name('users.store');
-Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit');
-Route::put('users/{user}/edit', 'UserController@update')->name('users.update');
-Route::delete('users/{user}', 'UserController@destroy')->name('users.destroy');
+Route::get('users', 'UserController@index' )->name('users.index')->middleware('can:admin');
+Route::get('users/create', 'UserController@create')->name('users.create')->middleware('can:admin');
+Route::post('users/create', 'UserController@store')->name('users.store')->middleware('can:admin');
+Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit')->middleware('can:admin');
+Route::put('users/{user}/edit', 'UserController@update')->name('users.update')->middleware('can:admin');
+Route::delete('users/{user}', 'UserController@destroy')->name('users.destroy')->middleware('can:admin');
