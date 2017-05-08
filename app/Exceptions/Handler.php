@@ -57,7 +57,7 @@ class Handler extends ExceptionHandler
         }
         /**end of modified part**/
 
-        return parent::render($request, $exception);
+        return redirect()->guest('/');
     }
 
     /**
