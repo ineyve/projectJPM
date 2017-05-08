@@ -4,9 +4,9 @@
     <label for="inputDescription">Description</label>
     <input
         type="text" class="form-control"
-        name="description" id="inputDescription"
-        @if(Route::currentRouteName()=='requests.store')
-            value="{{old('description', $request->description)}}"
+        name="description" id="inputDescription" 
+        @if(Route::currentRouteName()=='requests.create')
+            value="{{old('description')}}"
         @else(Route::currentRouteName()=='requests.edit')
             value="{{$request->description}}"
         @endif
@@ -18,8 +18,8 @@
     <input
         type="date" class="form-control"
         name="open_date" id="inputOpenDate" 
-        @if(Route::currentRouteName()=='requests.store')
-            value="{{old('open_date', $request->open_date)}}"
+        @if(Route::currentRouteName()=='requests.create')
+            value="{{old('open_date')}}"
         @else(Route::currentRouteName()=='requests.edit')
             value="{{$request->open_date}}"
         @endif
@@ -31,8 +31,8 @@
     <input
         type="date" class="form-control"
         name="due_date" id="inputDueDate"
-        @if(Route::currentRouteName()=='requests.store')
-            value="{{old('due_date', $request->due_date)}}"
+        @if(Route::currentRouteName()=='requests.create')
+            value="{{old('due_date')}}"
         @else(Route::currentRouteName()=='requests.edit')
             value="{{$request->due_date}}"
         @endif
@@ -45,8 +45,8 @@
         type="number" class="form-control"
         name="quantity" id="inputQuantity"
         placeholder="quantity" min="1" 
-        @if(Route::currentRouteName()=='requests.store')
-            value="{{old('quantity', $request->quantity)}}"
+        @if(Route::currentRouteName()=='requests.create')
+            value="{{old('quantity')}}"
         @else(Route::currentRouteName()=='requests.edit')
             value="{{$request->quantity}}"
         @endif
@@ -56,8 +56,8 @@
 <div class="form-group">
     <label for="inputColored">Colored</label>
     <select name="colored" id="inputColored" class="form-control"
-        @if(Route::currentRouteName()=='requests.store')
-            value="{{old('colored', $request->colored)}}"
+        @if(Route::currentRouteName()=='requests.create')
+            value="{{old('colored')}}"
         @elseif(Route::currentRouteName()=='requests.edit')
             value="{{$request->colored}}"
         @endif">
@@ -70,8 +70,8 @@
 <div class="form-group">
     <label for="inputStapled">Stapled</label>
     <select name="stapled" id="inputStapled" class="form-control"
-        @if(Route::currentRouteName()=='requests.store')
-            value="{{old('stapled', $request->stapled)}}"
+        @if(Route::currentRouteName()=='requests.create')
+            value="{{old('stapled')}}"
         @elseif(Route::currentRouteName()=='requests.edit')
             value="{{$request->stapled}}"
         @endif">
@@ -85,8 +85,8 @@
 <div class="form-group">
     <label for="inputPaperSize">Paper Size</label>
     <select name="paper_size" id="inputPaperSize" class="form-control"
-        @if(Route::currentRouteName()=='requests.store')
-            value="{{old('paper_size', $request->paper_size)}}"
+        @if(Route::currentRouteName()=='requests.create')
+            value="{{old('paper_size')}}"
         @elseif(Route::currentRouteName()=='requests.edit')
             value="{{$request->paper_size}}"
         @endif">
@@ -99,8 +99,8 @@
 <div class="form-group">
     <label for="inputPaperType">Paper Type</label>
     <select name="paper_type" id="inputPaperType" class="form-control"
-    @if(Route::currentRouteName()=='requests.store')
-        value="{{old('paper_type', $request->paper_type)}}"
+    @if(Route::currentRouteName()=='requests.create')
+        value="{{old('paper_type')}}"
         @else(Route::currentRouteName()=='requests.edit')
         value="{{$request->paper_type}}"
         @endif">
@@ -108,6 +108,7 @@
         <option value="0">Draft</option>
         <option value="1">Normal</option>
         <option value="1">Photographic</option>
+        
     </select>
 </div>
 
@@ -118,8 +119,8 @@
         name="file" id="inputFile" accept="image/*, application/pdf, application/msword,
         application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.ms-excel,
         application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, .csv"
-        @if(Route::currentRouteName()=='requests.store')
-        value="{{old('file', $request->file)}}"
+        @if(Route::currentRouteName()=='requests.create')
+        value="{{old('file')}}"
         @else(Route::currentRouteName()=='requests.edit')
         value="{{$request->file}}"
         @endif
