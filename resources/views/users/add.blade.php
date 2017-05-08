@@ -23,7 +23,7 @@
                                         name="password_confirmation" id="inputPasswordConfirmation"/>
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary" name="ok">Add</button>
+                                <button type="submit" class="btn btn-primary side-offset" name="ok">Add</button>
                                 <a type="submit" class="btn btn-default" href="{{route('users.index')}}">Cancel</a>
                             </div>
                         </div>

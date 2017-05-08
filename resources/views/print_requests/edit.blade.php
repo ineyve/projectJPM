@@ -12,7 +12,7 @@
                     <div class="panel-body">
                         @include('print_requests.partials.add-edit')
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary" name="ok">Save</button>
+                            <button type="submit" class="btn btn-primary side-offset" name="ok">Save</button>
                             <button type="submit" class="btn btn-default" name="cancel">Cancel</button>
                         </div>
                     </div>

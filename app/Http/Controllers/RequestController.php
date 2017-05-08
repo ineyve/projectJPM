@@ -60,9 +60,9 @@ class RequestController extends Controller
         return view('print_requests.rejection', compact('request'));
     }
 
-    public function reject(Request $request, $message)
+    public function reject(StoreRequestPostRequest $req, Request $request)
     {
-        $request->refused_reason = $message;
+        $request->fill($req->all());
         $request->save();
 
         $this->status($request, -1, 1);
