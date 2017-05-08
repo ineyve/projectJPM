@@ -26,6 +26,7 @@ class CreateUserPostRequest extends FormRequest
         return [
                 'name' => 'required|regex:/^[a-zA-Z ]+$/',
                 'email' => 'required|email|unique:users',
+                'phone' => 'required|numeric|size:9',
                 'password' => 'required|min:8|confirmed'
         ];
     }
