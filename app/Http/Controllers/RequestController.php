@@ -8,6 +8,7 @@ use App\Http\Requests\StoreRequestPostRequest;
 
 use App\Request;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -49,6 +50,10 @@ class RequestController extends Controller
     public function status(Request $request, $status, $from)
     {
         $request->status = $status;
+        if($status == -1 || $status == 3){
+            $request->closed_date = Carbon::now();
+            $request->closed_user_id = Auth::user()->id;
+        }
         $request->save();
         if($from == 0)
             return redirect()->route('requests.index')->with('success', 'Status changed sucessfuly!');

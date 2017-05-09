@@ -30,5 +30,6 @@
 
     <script src="//code.jquery.com/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-</body>
+        <div id="footer"><marquee scrollamount="2">Aplicações Para a Internet 2016/17&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspJosé Carreira - 2130162&nbsp&nbsp&nbsp&nbspMarcelo Carvalho - 2150718&nbsp&nbsp&nbsp&nbspPedro Ferreira - 2151163</marquee></div>
+    </body>
 </html>
