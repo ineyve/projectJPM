@@ -19,6 +19,10 @@
                                 <td>Owner ID</td>
                                 <td>{{$request->owner_id}}</td>
                             </tr>
+                            <tr>
+                                <td>Owner Name</td>
+                                <td>{{$request->user->name}}</td>
+                            </tr>
                             @if($request->description != null)
                                 <tr>
                                     <td>Description</td>
@@ -45,23 +49,11 @@
                             </tr>
                             <tr>
                                 <td>Colored</td>
-                                <td>
-                                    @if($request->colored == 0)
-                                        True
-                                    @else
-                                        False
-                                    @endif
-                                </td>
+                                <td>{{$request->coloredToStr()}}</td>
                             </tr>
                                 <tr>
                                     <td>Stapled</td>
-                                    <td>
-                                        @if($request->stapled == 0)
-                                            True
-                                        @else
-                                            False
-                                        @endif
-                                    </td>
+                                    <td>{{$request->stapledToStr()}}</td>
                                 </tr>
                             <tr>
                                 <td>Paper Size</td>
@@ -69,23 +61,7 @@
                             </tr>
                             <tr>
                                 <td>Paper Type</td>
-                                <td>
-                                    @if($request->paper_type == 0)
-                                        Normal
-                                    @endif
-                                    @if($request->paper_type == 1)
-                                        Journal
-                                    @endif
-                                    @if($request->paper_type == 2)
-                                        Colored
-                                    @endif
-                                    @if($request->paper_type == 3)
-                                        Photographic
-                                    @endif
-                                    @if($request->paper_type == 4)
-                                        Postcard
-                                    @endif
-                                </td>
+                                <td>{{$request->typeToStr()}}</td>
                             </tr>
                             <tr>
                                 <td>File</td>

@@ -28,7 +28,7 @@
                                 <td><a href="{{route('requests.details', $request)}}">{{$request->id}}</a></td>
                                 <td><a href="{{route('requests.details', $request)}}">{{$request->owner_id}}</a></td>
                                 <td><a href="{{route('requests.details', $request)}}">{{$request->user->name}}</a></td>
-                                <td><a href="{{route('requests.details', $request)}}">{{$request->dateOnlyDay()}}</a></td>
+                                <td><a href="{{route('requests.details', $request)}}">{{$request->date()}}</a></td>
                                 <td><a href="{{route('requests.details', $request)}}">{{$request->statusToStr()}}</a></td>
                                 <td>
                                     @if($request->status == 0)

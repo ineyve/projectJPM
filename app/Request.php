@@ -37,8 +37,36 @@ class Request extends Model
         return 'Complete';
     }
 
-    public function dateOnlyDay(){
-        $date = Carbon::create($this->date);
+    public function coloredToStr(){
+        if($this->colored == 1)
+            return 'True';
+        else
+            return 'False';
+    }
+
+    public function stapledToStr(){
+        if($this->stapled == 1)
+            return 'True';
+        else
+            return 'False';
+    }
+
+    public function typeToStr(){
+        switch($this->paper_type){
+            case 0: return 'Normal';
+                break;
+            case 1: return 'Journal';
+                break;
+            case 2: return 'Colored';
+                break;
+            case 3: return 'Photographic';
+                break;
+        }
+        return 'Postcard';
+    }
+
+    public function date(){
+        $date = new Carbon($this->open_date);
         return $date->toDateString();
     }
 
