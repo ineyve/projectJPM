@@ -29,8 +29,8 @@ class HomeController extends Controller
         $statistics['departments'] = $dpnames.']'; //Departments' names
         $statistics['departmentscount'] = $dpcounts.']'; //Print number per department
         $statistics['departmentscolor'] = $dcolors.']'; //Bar colors
-        $statistics['grayscale'] = Request::where('colored','=','0')->count(); //Amount of grayscale prints
-        $statistics['colored'] = Request::where('colored','=','1')->count(); //Amount of colored prints
+        $statistics['grayscale'] = Request::where('colored','=','0')->whereIn('status', [2,3])->count(); //Amount of grayscale prints
+        $statistics['colored'] = Request::where('colored','=','1')->whereIn('status', [2,3])->count(); //Amount of colored prints
         $statistics['requestscount'] = Request::All()->count(); //Amount of requests
 
         return view('welcome', compact('statistics'));

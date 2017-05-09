@@ -54,7 +54,7 @@
                 data: {
                     labels: {!! $statistics['departments'] !!},
                     datasets: [{
-                        label: '# of Requests',
+                        label: '# prints',
                         data: {!! $statistics['departmentscount'] !!},
                         backgroundColor: {!! $statistics['departmentscolor'] !!},
                         borderColor: {!! $statistics['departmentscolor'] !!},
@@ -77,11 +77,6 @@
     <!--
     <div class="home-counter"> *****RASCUNHO*****  </div>
 
-        Total documents printed:
-        <div class="home-counter">
-            6520
-        </div>
-
         Documents printed today:
         <div class="home-counter">
             253
@@ -90,16 +85,6 @@
         Average prints per day (this month):
         <div class="home-counter">
             253
-        </div>
-
-        Documents printed by department:
-        <div class="home-counter">
-            A --------- </br>
-            B ---- </br>
-            C ------- </br>
-            D ------------------ </br>
-            E ----------- </br>
-            F -- </br>
         </div>
         -->
     </body>
