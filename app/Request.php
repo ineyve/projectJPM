@@ -38,14 +38,14 @@ class Request extends Model
     }
 
     public function coloredToStr(){
-        if($this->colored == 1)
+        if($this->colored)
             return 'True';
         else
             return 'False';
     }
 
     public function stapledToStr(){
-        if($this->stapled == 1)
+        if($this->stapled)
             return 'True';
         else
             return 'False';
