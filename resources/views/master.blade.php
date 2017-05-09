@@ -18,9 +18,11 @@
             @include('shared.sucess')
         @endif
 
-        @if(count($errors) > 0)
-            @include('shared.errors')
-        @endif
+        @isset($errors)
+            @if(count($errors) > 0)
+                @include('shared.errors')
+            @endif
+        @endisset
         @yield('content')
 
 
