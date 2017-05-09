@@ -21,8 +21,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $requests = DB::select(DB::raw("SELECT * FROM requests WHERE owner_id = " . Auth::user()->id));
         $user = Auth::user();
+        $requests = Request::where('owner_id','=', $user->id)->get();
         return view('home', compact('requests', 'user'));
     }
 }

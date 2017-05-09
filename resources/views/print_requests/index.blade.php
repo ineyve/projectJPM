@@ -25,6 +25,7 @@
                         <tbody>
                         @foreach ($requests as $request)
                             <tr>
+                                {{var_dump($request)}}
                                 <td><a href="{{route('requests.details', $request)}}">{{$request->id}}</a></td>
                                 <td><a href="{{route('requests.details', $request)}}">{{$request->owner_id}}</a></td>
                                 <td><a href="{{route('requests.details', $request)}}">{{$request->user->name}}</a></td>

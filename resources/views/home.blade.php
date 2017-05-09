@@ -17,13 +17,13 @@
                     @if (count($requests))
                         <table class="table table-striped">
                             <thead>
-                                <tr>
-                                    <th>Request Number</th>
-                                    <th>Description</th>
-                                    <th>File</th>
-                                    <th>Status</th>
-                                    <th></th>
-                                </tr>
+                            <tr>
+                                <th>Request Number</th>
+                                <th>Description</th>
+                                <th>File</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
                             </thead>
                             <tbody>
                             @foreach ($requests as $request)
