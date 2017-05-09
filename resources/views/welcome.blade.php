@@ -70,7 +70,7 @@
                 });
             </script>
             <div class="home-counter">
-                <br><h1 class="h-h1">Prints per department.</h1>
+                <br><h1 class="h-h1">Prints per department</h1>
             </div>
             <div class="barchart"><canvas id="barChart" width="200%" height="100%"></canvas></div>
             <script>
