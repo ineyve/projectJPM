@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRejectPostReject extends FormRequest
+class StoreRefusePostRefuse extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class StoreRejectPostReject extends FormRequest
     public function rules()
     {
         return [
-            'refused_reason'=>'optional|regex:/^[a-zA-Z ]+$/',
+            'refused_reason'=>'regex:/^[a-zA-Z ]+$/',
         ];
     }
 }

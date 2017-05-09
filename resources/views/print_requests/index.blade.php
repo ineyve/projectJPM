@@ -15,7 +15,9 @@
                         <thead>
                             <tr>
                                 <th>Request Number</th>
-                                <th>Description</th>
+                                <th>Owner ID</th>
+                                <th>Owner Name</th>
+                                <th>Open Date</th>
                                 <th>Status</th>
                                 <th></th>
                             </tr>
@@ -24,28 +26,23 @@
                         @foreach ($requests as $request)
                             <tr>
                                 <td><a href="{{route('requests.details', $request)}}">{{$request->id}}</a></td>
-                                <td><a href="{{route('requests.details', $request)}}">{{$request->description}}</a></td>
+                                <td><a href="{{route('requests.details', $request)}}">{{$request->owner_id}}</a></td>
+                                <td><a href="{{route('requests.details', $request)}}">{{$request->user->name}}</a></td>
+                                <td><a href="{{route('requests.details', $request)}}">{{$request->dateOnlyDay()}}</a></td>
+                                <td><a href="{{route('requests.details', $request)}}">{{$request->statusToStr()}}</a></td>
                                 <td>
-                                @if($request->status == -1)
-                                        <a href="{{route('requests.details', $request)}}">Rejected</a></td>
-                                    <td>
-                                @endif
-                                @if($request->status == 0)
-                                        <a href="{{route('requests.details', $request)}}">Waiting</a></td>
-                                    <td><a class="btn btn-xs btn-success" href="{{route('requests.status', ['request' => $request, 'status' => 1, 'from' => 0])}}">Progress</a>
-                                @endif
-                                @if($request->status == 1)
-                                        <a href="{{route('requests.details', $request)}}">In progress</a></td>
-                                    <td><a class="btn btn-xs btn-warning" href="{{route('requests.status', ['request' => $request, 'status' => 2, 'from' => 0])}}">Ready</a>
-                                @endif
-                                @if($request->status == 2)
-                                        <a href="{{route('requests.details', $request)}}">Ready</a></td>
-                                    <td><a class="btn btn-xs btn-primary" href="{{route('requests.status', ['request' => $request, 'status' => 3, 'from' => 0])}}">Complete</a>
-                                @endif
-                                @if($request->status == 3)
-                                        <a href="{{route('requests.details', $request)}}">Complete</a></td>
-                                    <td>
-                                @endif
+                                    @if($request->status == 0)
+                                        <a class="btn btn-xs btn-success" href="{{route('requests.status', ['request' => $request, 'status' => 1, 'from' => 0])}}">Accept</a>
+                                    @endif
+                                    @if($request->status == 1)
+                                        <a class="btn btn-xs btn-warning" href="{{route('requests.status', ['request' => $request, 'status' => 2, 'from' => 0])}}">Progress</a>
+                                    @endif
+                                    @if($request->status == 2)
+                                        <a class="btn btn-xs btn-primary" href="{{route('requests.status', ['request' => $request, 'status' => 3, 'from' => 0])}}">Ready</a>
+                                    @endif
+                                    @if($request->status == 3)
+                                        <a class="btn btn-xs btn-info" href="{{route('requests.status', ['request' => $request, 'status' => 4, 'from' => 0])}}">Complete</a>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

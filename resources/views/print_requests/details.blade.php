@@ -27,23 +27,7 @@
                             @endif
                             <tr>
                                 <td>Status</td>
-                                <td>
-                                @if($request->status == -1)
-                                    Rejected
-                                @endif
-                                @if($request->status == 0)
-                                    Waiting
-                                @endif
-                                @if($request->status == 1)
-                                    In progress
-                                @endif
-                                @if($request->status == 2)
-                                    Ready
-                                @endif
-                                @if($request->status == 3)
-                                    Complete
-                                @endif
-                                </td>
+                                <td>{{$request->statusToStr()}}</td>
                             </tr>
                             <tr>
                                 <td>Open Date</td>
@@ -156,7 +140,7 @@
                         </tbody>
                     </table>
                     @if($request->status == 0)
-                        <a class="btn btn-danger side-offset" href="{{route('requests.index', $request)}}">Reject</a>
+                        <a class="btn btn-danger side-offset" href="{{route('requests.refuseForm', $request)}}">Reject</a>
                         <a class="btn btn-success" href="{{route('requests.status', ['request' => $request, 'status' => 1, 'from' => 1])}}">Progress</a>
                     @endif
                     @if($request->status == 1)

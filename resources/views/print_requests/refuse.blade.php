@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('content')
-<form action="{{route('requests.reject', $request)}}" method="post" class="form-group">
+<form action="{{route('requests.refuse', $request)}}" method="post" class="form-group">
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
@@ -11,7 +11,7 @@
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="inputReason">Reason</label>
-                            <input type="text" class="form-control" name="fullname" id="inputReason"/>
+                            <input type="text" class="form-control" name="refused_reason" id="inputReason"/>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-danger side-offset" name="ok">Reject</button>
