@@ -13,7 +13,6 @@
         <script src="/js/Chart.js"></script>
 
     </head>
-    <body>
     <div class="home-box">
         <div class="home-counter">{{$statistics['requestscount']}} <h1 class="h-h1">documents printed so far</h1></div>
     <div style="width: 25%; height: 25%;"><canvas id="colorChart" width="100%" height="100%"></canvas></div>
@@ -30,23 +29,26 @@
                     {
                         data: [{{$statistics['grayscale']}}, {{$statistics['colored']}}],
                         backgroundColor: [
-                            "rgba(103, 109, 108, 0.6)",
-                            "rgba(54, 162, 235, 0.5)"
+                            "rgb(128, 128, 128)",
+                            "rgb(30, 144, 255)"
                         ],
                         hoverBackgroundColor: [
-                            "rgba(173, 181, 179, 0.8)",
-                            "rgba(122, 198, 249, 0.8)"
+                            "rgb(155, 155, 155)",
+                            "rgb(100, 149, 237)"
                         ]
                     }]
             },
             options: {
+                labels: [{
+                    fontSize: 18
+                }],
                 animation:{
                     animateScale:true
                 }
             }
         });
     </script>
-    <div style="width: 25%; height: 25%;"><canvas id="barChart" width="100%" height="100%"></canvas></div>
+        <div style="width: 40%; height: 25%;"><canvas id="barChart" width="200%" height="100%"></canvas></div>
         <script>
             var ctx = document.getElementById("barChart");
             var barChart = new Chart(ctx, {
@@ -62,12 +64,22 @@
                     }]
                 },
                 options: {
+                    defaultFontFamily: Chart.defaults.global.defaultFontFamily = "'Lobster'",
                     scales: {
                         xAxes: [{
                             ticks: {
-                                beginAtZero:true
+                                beginAtZero:true,
+                                fontSize: 18
+                            }
+                        }],
+                        yAxes: [{
+                            ticks: {
+                                fontSize: 18
                             }
                         }]
+                    },
+                    legend: {
+                        display: false
                     }
                 }
             });
@@ -87,6 +99,5 @@
             253
         </div>
         -->
-    </body>
 </html>
 @endsection

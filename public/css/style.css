@@ -1,8 +1,3 @@
-.selected{
-    color: #000;
-    background: #7da8c3;
-}
-
 form{
     display:inline;
     margin:0;
@@ -69,23 +64,30 @@ td>a:hover, td>a:visited, td>a:link, td>a:active
 
 /* Welcome page styles */
 @font-face {
-    font-family: 'typo-sketch';
-    src: url("../fonts/typo_sketch.otf") format("opentype");
+    font-family: 'Lobster';
+    src: url("../fonts/lobster.otf") format("opentype");
 }
 
 .home-counter {
-    font-family: 'typo-sketch', serif; /*serif (default)*/
-    font-size: 72px;
+    font-family: 'Lobster', serif; /*serif (default)*/
+    font-size: 60px;
+    color: #555555;
+    text-align: center;
 }
 
 .home-box {
     width: 100%;
     padding: 25px;
-    border-top-right-radius: 25px;
-    border-top-left-radius: 25px;
-    background: rgba(255,255,255,0.7);
+    padding-bottom: 40px;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    background: rgba(255,255,255,0.5);
 }
 
 .h-h1 {
     display: inline;
+    color: #555555;
+    text-align: center;
 }

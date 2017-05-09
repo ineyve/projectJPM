@@ -23,7 +23,7 @@ class HomeController extends Controller
             $counter = $stat->cnt; //Amount of finished prints
             $dpcounts = $dpcounts.$counter.', ';
 
-            $dcolors = $dcolors.'\'rgba('.rand(0,255).', '.rand(0,255).', '.rand(0,255).', 0.6)\', '; //Color of each bar
+            $dcolors = $dcolors.'\'rgba('.rand(0,255).', '.rand(0,255).', '.rand(0,255).', 0.75)\', '; //Color of each bar
         }
 
         $statistics['departments'] = $dpnames.']'; //Departments' names
