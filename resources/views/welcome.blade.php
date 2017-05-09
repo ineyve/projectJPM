@@ -16,10 +16,24 @@
     <body>
         <div class="home-box">
             <div class="home-counter">
-                {{$statistics['printsTotalCount']}} <h1 class="h-h1">documents printed so far.</h1>
-                <br>{{$statistics['printsToday']}} <h1 class="h-h1">documents printed today.</h1>
-                <br><h1 class="h-h1">About </h1>{{$statistics['printsMonthlyAverage']}} <h1 class="h-h1"> documents printed per day this month.</h1>
-                <br><br><h1 class="h-h1">Color vs Greyscale</h1>
+                @if($statistics['printsTotalCount'] == 1)
+                    1<h1 class="h-h1"> document printed so far</h1>
+                @else
+                    {{$statistics['printsTotalCount']}} <h1 class="h-h1">documents printed so far</h1>
+                @endif
+                <br>
+                @if($statistics['printsToday'] == 1)
+                    1<h1 class="h-h1"> document printed today</h1>
+                @else
+                    {{$statistics['printsToday']}} <h1 class="h-h1">documents printed today</h1>
+                @endif
+                <br>
+                @if($statistics['printsMonthlyAverage'] == 1)
+                    1<h1 class="h-h1">document printed per day this month</h1>
+                @else
+                    <h1 class="h-h1">About </h1>{{round($statistics['printsMonthlyAverage'], 2)}} <h1 class="h-h1"> documents printed per day this month</h1>
+                @endif
+                <br><br><h1 class="h-h1">Greyscale vs <h1 class="blue-h1">Color</h1></h1>
             </div>
             <div class="piechart"><canvas id="colorChart" width="100%" height="100%"></canvas></div>
             <script>
@@ -28,28 +42,26 @@
                     type: 'pie',
                     data: {
                         labels: [
-                            "Grayscale",
-                            "Color"
+                            "Color",
+                            "Grayscale"
                         ],
                         datasets: [
                             {
-                                data: [{{$statistics['grayScale']}}, {{$statistics['colored']}}],
+                                data: [{{$statistics['colored']}}, {{$statistics['grayScale']}}],
                                 backgroundColor: [
-                                    "rgb(128, 128, 128)",
-                                    "rgb(30, 144, 255)"
+                                    "rgb(30, 144, 255)",
+                                    "rgb(128, 128, 128)"
                                 ],
                                 hoverBackgroundColor: [
-                                    "rgb(155, 155, 155)",
-                                    "rgb(100, 149, 237)"
+                                    "rgb(100, 149, 237)",
+                                    "rgb(155, 155, 155)"
                                 ]
                             }]
                     },
                     options: {
                         defaultFontFamily: Chart.defaults.global.defaultFontFamily = "'Sansation_Bold'",
                         legend: {
-                            labels: {
-                                fontSize: 18
-                            }
+                            display: false
                         },
                         animation:{
                             animateScale:true

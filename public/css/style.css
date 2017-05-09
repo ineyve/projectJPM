@@ -100,6 +100,11 @@ td>a:hover, td>a:visited, td>a:link, td>a:active
     text-align: center;
 }
 
+.blue-h1 {
+    display: inline;
+    color: rgb(30, 144, 255);
+}
+
 #footer{
     position: fixed;
     bottom: 0;
