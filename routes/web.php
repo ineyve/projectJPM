@@ -43,8 +43,8 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 //*********************************************
 */
 
-// Home Page
-Route::get('/dashboard', 'DashboardController@index')->middleware('can:user');
+// Dashboard
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard')->middleware('can:user');
 
 // Requests
 Route::get('requests', 'RequestController@index' )->name('requests.index')->middleware('can:admin');

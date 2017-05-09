@@ -20,7 +20,7 @@
 
         @if(count($errors) > 0)
             @include('shared.errors')
-        @endif 
+        @endif
         @yield('content')
 
 

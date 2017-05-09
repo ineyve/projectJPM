@@ -6,6 +6,8 @@ use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -50,14 +52,6 @@ class Handler extends ExceptionHandler
                 'success' => false,
                 'message' => $exception->getMessage()
             ], 404);
-        }
-
-        if ($exception instanceof AuthorizationException) {
-            return redirect('/home');
-        }
-
-        if ($exception instanceof NotFoundHttpException || $exception instanceof MethodNotAllowedHttpException){
-            return redirect('/');
         }
 
         return parent::render($request, $exception);
