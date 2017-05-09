@@ -15,7 +15,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', 'StatisticsController@homeGraph');
+Route::get('/', 'HomeController@homeGraph');
 
 //*********Laravel Auth Routes****************
 // Authentication Routes
@@ -44,7 +44,7 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 */
 
 // Home Page
-Route::get('/home', 'HomeController@index')->middleware('can:user');
+Route::get('/dashboard', 'DashboardController@index')->middleware('can:user');
 
 // Requests
 Route::get('requests', 'RequestController@index' )->name('requests.index')->middleware('can:admin');

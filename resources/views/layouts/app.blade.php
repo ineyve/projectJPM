@@ -63,7 +63,7 @@
                                 <li> <a href="{{ url('requests') }}">Requests</a></li>
                                 <li> <a href="{{ url('users') }}">Users</a></li>
                             @endif
-                            <li><a href="{{ url('/home') }}">Dashboard</a></li>
+                            <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
                             <li><a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
