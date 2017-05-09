@@ -27,11 +27,13 @@ class HomeController extends Controller
         }
 
         $statistics['departments'] = $dpnames.']'; //Departments' names
-        $statistics['departmentscount'] = $dpcounts.']'; //Print number per department
-        $statistics['departmentscolor'] = $dcolors.']'; //Bar colors
-        $statistics['grayscale'] = Request::where('colored','=','0')->whereIn('status', [2,3])->count(); //Amount of grayscale prints
-        $statistics['colored'] = Request::where('colored','=','1')->whereIn('status', [2,3])->count(); //Amount of colored prints
-        $statistics['requestscount'] = Request::All()->count(); //Amount of requests
+        $statistics['departmentsCount'] = $dpcounts.']'; //Print number per department
+        $statistics['departmentsColor'] = $dcolors.']'; //Bar colors
+        $statistics['grayScale'] = Request::where('colored','=','0')->whereIn('status', [2,3,4])->count(); //Amount of grayscale prints
+        $statistics['colored'] = Request::where('colored','=','1')->whereIn('status', [2,3,4])->count(); //Amount of colored prints
+        $statistics['printsTotalCount'] = Request::whereIn('status', [2,3,4])->count(); //Amount of completed prints from all time
+        $statistics['printsToday']= Request::whereDate('closed_date', '=', date('Y-m-d'))->whereIn('status', [2,3,4])->count(); //Prints today
+        $statistics['printsMonthlyAverage']= Request::whereMonth('closed_date', '=', date('m'))->whereIn('status', [2,3,4])->count() / date('d'); //Prints today
 
         return view('welcome', compact('statistics'));
     }

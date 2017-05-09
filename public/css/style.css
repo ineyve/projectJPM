@@ -64,12 +64,12 @@ td>a:hover, td>a:visited, td>a:link, td>a:active
 
 /* Welcome page styles */
 @font-face {
-    font-family: 'Lobster';
-    src: url("../fonts/lobster.otf") format("opentype");
+    font-family: 'Sansation_Bold';
+    src: url("../fonts/Sansation_Bold.ttf") format("opentype");
 }
 
 .home-counter {
-    font-family: 'Lobster', serif; /*serif (default)*/
+    font-family: 'Sansation_Bold';
     font-size: 60px;
     color: #555555;
     text-align: center;
@@ -81,9 +81,17 @@ td>a:hover, td>a:visited, td>a:link, td>a:active
     padding-bottom: 40px;
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-    border-bottom-left-radius: 15px;
     background: rgba(255,255,255,0.5);
+}
+
+.piechart {
+    width: 33%;
+    margin: 0 auto;
+}
+
+.barchart {
+    width: 50%;
+    margin: 0 auto;
 }
 
 .h-h1 {
