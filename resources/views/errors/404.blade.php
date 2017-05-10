@@ -7,8 +7,14 @@
             <div class="panel panel-default">
                 <div class="panel-heading">404 - Not Found</div>
                 <div class="panel-body">
-                    <h2><center>This page does not exist</center></h2>
+                    <div class="home-counter">
+                        <h2>This page does not exist.</h2>
+                        <br><br><br><br><br><br>
+                        <header class="header"><h1 class="glitched">404</h1></header>
+                    </div>
                 </div>
+                <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+                <script src="/glitched_text/js/index.js"></script>
             </div>
         </div>
     </div>

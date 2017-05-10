@@ -17,21 +17,21 @@
         <div class="home-box">
             <div class="home-counter">
                 @if($statistics['printsTotalCount'] == 1)
-                    1<h1 class="h-h1"> document printed so far</h1>
+                    1<h1 class="h-h1"> document printed so far.</h1>
                 @else
-                    {{$statistics['printsTotalCount']}} <h1 class="h-h1">documents printed so far</h1>
+                    {{$statistics['printsTotalCount']}} <h1 class="h-h1">documents printed so far.</h1>
                 @endif
                 <br>
                 @if($statistics['printsToday'] == 1)
-                    1<h1 class="h-h1"> document printed today</h1>
+                    1<h1 class="h-h1"> document printed today.</h1>
                 @else
-                    {{$statistics['printsToday']}} <h1 class="h-h1">documents printed today</h1>
+                    {{$statistics['printsToday']}} <h1 class="h-h1">documents printed today.</h1>
                 @endif
                 <br>
                 @if($statistics['printsMonthlyAverage'] == 1)
-                    1<h1 class="h-h1">document printed per day this month</h1>
+                    1<h1 class="h-h1">document printed per day this month.</h1>
                 @else
-                    <h1 class="h-h1">About </h1>{{round($statistics['printsMonthlyAverage'], 2)}} <h1 class="h-h1"> documents printed per day this month</h1>
+                    <h1 class="h-h1">About </h1>{{round($statistics['printsMonthlyAverage'], 2)}} <h1 class="h-h1"> documents printed per day this month.</h1>
                 @endif
                 <br><br><h1 class="h-h1">Greyscale vs <h1 class="blue-h1">Color</h1></h1>
             </div>
