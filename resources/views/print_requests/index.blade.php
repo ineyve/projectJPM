@@ -1,5 +1,5 @@
 @extends('master')
-
+<script src="/js/sorttable.js"></script>
 @section('content')
 <div>
     <a class="btn btn-primary offset" href="{{route('requests.create')}}">Add Request</a>
@@ -12,20 +12,20 @@
                 <div class="panel-body">
                     @if(count($requests))
                         {{ $requests->links() }}
-                        <table class="table table-striped">
+                        <table class="table table-striped table-hover sortable" id="myTable">
                         <thead>
                             <tr>
-                                <th>Request Number</th>
+                                <th class=" sorttable_sorted">Request Number<span id="sorttable_sortfwdind">&nbsp;▾</span></th>
                                 <th>Owner ID</th>
                                 <th>Owner Name</th>
                                 <th>Open Date</th>
                                 <th>Status</th>
-                                <th></th>
+                                <th class="sorttable_nosort"></th>
                             </tr>
                         </thead>
                         <tbody>
                         @foreach ($requests as $request)
-                            <tr id="hover-row">
+                            <tr>
                                 <td><a href="{{route('requests.details', $request)}}">{{$request->id}}</a></td>
                                 <td><a href="{{route('requests.details', $request)}}">{{$request->owner_id}}</a></td>
                                 <td><a href="{{route('requests.details', $request)}}">{{$request->user->name}}</a></td>

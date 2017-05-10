@@ -49,11 +49,7 @@ td>a:hover, td>a:visited, td>a:link, td>a:active
     color: inherit;
 }
 
-#hover-row:hover{
-    background-color: rgba(255, 128, 64, 0.25);
-}
-
-.hover>tr:hover {
+.table-hover>tbody>tr:hover{
     background-color: rgba(255, 128, 64, 0.25);
 }
 
@@ -160,4 +156,8 @@ html {
 
 a:focus {
     outline: 0;
+}
+
+table.sortable thead{
+    cursor: pointer;
 }

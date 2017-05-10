@@ -15,7 +15,7 @@
                 @endif
                 <div class="panel-body">
                     @if (count($requests))
-                        <table class="table table-striped">
+                        <table class="table table-striped table-hover">
                             <thead>
                             <tr>
                                 <th>Request Number</th>
@@ -27,25 +27,29 @@
                             </thead>
                             <tbody>
                             @foreach ($requests as $request)
-
+                                <tr>
                                     @if($request->status == 0)
-                                        <tr id="hover-row">
                                         <td><a href="{{route('requests.edit', $request)}}">{{$request->id}}</a></td>
                                         <td><a href="{{route('requests.edit', $request)}}">{{$request->description}}</a></td>
                                         <td><a href="{{route('requests.edit', $request)}}">{{$request->file}}</a></td>
                                         <td><a href="{{route('requests.edit', $request)}}">{{$request->statusToStr()}}</a></td>
                                     @else
-                                        <tr>
-                                        <td>{{$request->id}}</td>
-                                        <td>{{$request->description}}</td>
-                                        <td>{{$request->file}}</td>
-                                        <td>{{$request->statusToStr()}}</td>
+                                        <td href="{{route('requests.details', $request)}}">{{$request->id}}</td>
+                                        <td href="{{route('requests.details', $request)}}">{{$request->description}}</td>
+                                        <td href="{{route('requests.details', $request)}}">{{$request->file}}</td>
+                                        <td href="{{route('requests.details', $request)}}">{{$request->statusToStr()}}</td>
                                     @endif
-                                    @if($request->status == 4)
-                                        <td><img src="/5star.png" style="width:80px;height:15px;"></td>
-                                    @else
-                                        <td></td>
-                                    @endif
+                                        @if($request->status == 4)
+                                            <td><img src="/5star.png" style="width:80px;height:15px;"></td>
+                                        @elseif($request->status == -1)
+                                            <td><form action="{{route('requests.destroy',$request)}}" method="post" class="inline">
+                                                    {{method_field('DELETE')}}
+                                                    {{ csrf_field() }}
+                                                    <button type="submit" class="btn btn-xs btn-danger">Delete</button>
+                                                </form></td>
+                                        @else
+                                            <td></td>
+                                        @endif
                                 </tr>
                             @endforeach
                             </tbody>

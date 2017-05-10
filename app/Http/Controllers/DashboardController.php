@@ -21,7 +21,8 @@ class DashboardController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $requests = Request::where('owner_id', '=', $user->id)->get();
+        $requests = Request::where('owner_id', '=', $user->id)->orderBy('status')->orderBy('open_date')->get();
         return view('dashboard', compact('requests', 'user'));
     }
+
 }

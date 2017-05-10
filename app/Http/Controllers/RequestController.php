@@ -73,5 +73,11 @@ class RequestController extends Controller
     {
         return view('print_requests.refuse', compact('request'));
     }
+
+    public function destroy(Request $request)
+    {
+        $request->delete();
+        return redirect()->route('dashboard')->with('success', 'request deleted successfully');
+    }
     
 }

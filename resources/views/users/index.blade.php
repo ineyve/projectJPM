@@ -1,5 +1,7 @@
 @extends('master')
 
+<script src="/js/sorttable.js"></script>
+
 @section('content')
 <div>
     <a class="btn btn-primary offset" href="{{ route('users.create') }}">Add user</a>
@@ -12,19 +14,21 @@
                 <div class="panel-body">
                     @if (count($users))
                         {{ $users->links() }}
-                        <table class="table table-striped">
+                        <table class="table table-striped sortable">
                             <thead>
                                 <tr>
+                                    <th class=" sorttable_sorted">ID<span id="sorttable_sortfwdind">&nbsp;▾</span></th>
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Department</th>
                                     <th>Phone</th>
-                                    <th>Actions</th>
+                                    <th class="sorttable_nosort">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                             @foreach ($users as $user)
                                 <tr>
+                                    <td>{{$user->id}}</td>
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->email}}</td>
                                     <td>{{App\Department::find($user->department_id)->name}}</td>
