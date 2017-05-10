@@ -27,13 +27,15 @@
                             </thead>
                             <tbody>
                             @foreach ($requests as $request)
-                                <tr>
+
                                     @if($request->status == 0)
+                                        <tr id="hover-row">
                                         <td><a href="{{route('requests.edit', $request)}}">{{$request->id}}</a></td>
                                         <td><a href="{{route('requests.edit', $request)}}">{{$request->description}}</a></td>
                                         <td><a href="{{route('requests.edit', $request)}}">{{$request->file}}</a></td>
                                         <td><a href="{{route('requests.edit', $request)}}">{{$request->statusToStr()}}</a></td>
                                     @else
+                                        <tr>
                                         <td>{{$request->id}}</td>
                                         <td>{{$request->description}}</td>
                                         <td>{{$request->file}}</td>

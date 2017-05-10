@@ -33,82 +33,94 @@
                 @else
                     <h1 class="h-h1">About </h1>{{round($statistics['printsMonthlyAverage'], 2)}} <h1 class="h-h1"> documents printed per day this month.</h1>
                 @endif
-                <br><br><h1 class="h-h1">Greyscale vs <h1 class="blue-h1">Color</h1></h1>
+                <br>
             </div>
-            <div class="piechart"><canvas id="colorChart" width="100%" height="100%"></canvas></div>
-            <script>
-                var colorctx = document.getElementById("colorChart");
-                var colorChart = new Chart(colorctx, {
-                    type: 'pie',
-                    data: {
-                        labels: [
-                            "% Color",
-                            "% Grayscale"
-                        ],
-                        datasets: [
-                            {
-                                data: [{{$statistics['colored']}}, {{$statistics['grayScale']}}],
-                                backgroundColor: [
-                                    "rgb(30, 144, 255)",
-                                    "rgb(128, 128, 128)"
-                                ],
-                                hoverBackgroundColor: [
-                                    "rgb(100, 149, 237)",
-                                    "rgb(155, 155, 155)"
-                                ]
-                            }]
-                    },
-                    options: {
-                        defaultFontFamily: Chart.defaults.global.defaultFontFamily = "'Sansation_Bold'",
-                        legend: {
-                            display: false
+            <div class="row">
+            <div class="col-xs-6">
+                <div class="home-counter">
+                <h1 class="h-h1">Greyscale vs <h1 class="blue-h1">Color</h1></h1>
+                </div>
+                <div class="piechart"><canvas id="colorChart" width="100%" height="100%"></canvas></div>
+                <script>
+                    var colorctx = document.getElementById("colorChart");
+                    var colorChart = new Chart(colorctx, {
+                        type: 'pie',
+                        data: {
+                            labels: [
+                                "% Color",
+                                "% Grayscale"
+                            ],
+                            datasets: [
+                                {
+                                    data: [{{$statistics['colored']}}, {{$statistics['grayScale']}}],
+                                    backgroundColor: [
+                                        "rgb(30, 144, 255)",
+                                        "rgb(128, 128, 128)"
+                                    ],
+                                    hoverBackgroundColor: [
+                                        "rgb(100, 149, 237)",
+                                        "rgb(155, 155, 155)"
+                                    ]
+                                }]
                         },
-                        animation:{
-                            animateScale:true
+                        options: {
+                            defaultFontFamily: Chart.defaults.global.defaultFontFamily = "'Sansation_Bold'",
+                            legend: {
+                                display: false
+                            },
+                            animation:{
+                                animateScale:true
+                            }
                         }
-                    }
-                });
-            </script>
-            <div class="home-counter">
-                <br><h1 class="h-h1">Prints per department</h1>
+                    });
+                </script>
             </div>
-            <div class="barchart"><canvas id="barChart" width="100%" height="25%"></canvas></div>
-            <script>
-                var ctx = document.getElementById("barChart");
-                var barChart = new Chart(ctx, {
-                    type: 'horizontalBar',
-                    data: {
-                        labels: {!! $statistics['departments'] !!},
-                        datasets: [{
-                            label: '# prints',
-                            data: {!! $statistics['departmentsCount'] !!},
-                            backgroundColor: {!! $statistics['departmentsColor'] !!},
-                            borderColor: {!! $statistics['departmentsColor'] !!},
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        defaultFontFamily: Chart.defaults.global.defaultFontFamily = "'Sansation_Bold'",
-                        scales: {
-                            xAxes: [{
-                                ticks: {
-                                    beginAtZero:true,
-                                    fontSize: 18
-                                }
-                            }],
-                            yAxes: [{
-                                ticks: {
-                                    fontSize: 18
-                                }
+            <div class="col-xs-6">
+                <div class="home-counter">
+                    <h1 class="h-h1">Prints per department</h1>
+                </div>
+                <div class="barchart"><canvas id="barChart" width="100%" height="45%"></canvas></div>
+                <script>
+                    var ctx = document.getElementById("barChart");
+                    var barChart = new Chart(ctx, {
+                        type: 'horizontalBar',
+                        data: {
+                            labels: {!! $statistics['departments'] !!},
+                            datasets: [{
+                                label: '# prints',
+                                data: {!! $statistics['departmentsCount'] !!},
+                                backgroundColor: {!! $statistics['departmentsColor'] !!},
+                                borderColor: {!! $statistics['departmentsColor'] !!},
+                                borderWidth: 1
                             }]
                         },
-                        legend: {
-                            display: false
+                        options: {
+                            defaultFontFamily: Chart.defaults.global.defaultFontFamily = "'Sansation_Bold'",
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        beginAtZero:true,
+                                        fontSize: 18
+                                    }
+                                }],
+                                yAxes: [{
+                                    ticks: {
+                                        fontSize: 18
+                                    }
+                                }]
+                            },
+                            legend: {
+                                display: false
+                            }
                         }
-                    }
-                });
-            </script>
+                    });
+                </script>
+            </div>
+            </div>
+
+
         </div>
+    <br>
     </body>
 </html>
 @endsection

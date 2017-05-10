@@ -12,7 +12,7 @@
                 <div class="panel-body">
                     @if(count($requests))
                         {{ $requests->links() }}
-                        <table class="table table-striped table-hover">
+                        <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th>Request Number</th>
@@ -25,7 +25,7 @@
                         </thead>
                         <tbody>
                         @foreach ($requests as $request)
-                            <tr>
+                            <tr id="hover-row">
                                 <td><a href="{{route('requests.details', $request)}}">{{$request->id}}</a></td>
                                 <td><a href="{{route('requests.details', $request)}}">{{$request->owner_id}}</a></td>
                                 <td><a href="{{route('requests.details', $request)}}">{{$request->user->name}}</a></td>
