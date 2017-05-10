@@ -63,15 +63,7 @@ class DatabaseSeeder extends Seeder
 
         //Requests
         for ($i = 0; $i < $rnum; $i++) {
-            //25% of the requests will be complete
-            if (mt_rand(0, 4) === 0) {
-                //factory where the request was complete
-            } elseif (mt_rand(0, 4) === 0) {
-                //factory where the request is being processed
-            } else {
-                //factory where the request is untouched
-                factory(App\Request::class, 1)->create();
-            }
+
         }
 
         //Comments

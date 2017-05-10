@@ -11,6 +11,7 @@
                 <div class="panel-heading">Users List</div>
                 <div class="panel-body">
                     @if (count($users))
+                        {{ $users->links() }}
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -39,6 +40,7 @@
                                 </tr>
                             @endforeach
                         </table>
+                        {{ $users->links() }}
                     @else
                         <h3>No users found</h3>
                     @endif

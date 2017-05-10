@@ -11,6 +11,7 @@
                 <div class="panel-heading">Requests List</div>
                 <div class="panel-body">
                     @if(count($requests))
+                        {{ $requests->links() }}
                         <table class="table table-striped table-hover">
                         <thead>
                             <tr>
@@ -47,6 +48,7 @@
                             </tr>
                         @endforeach
                         </table>
+                        {{ $requests->links() }}
                     @else
                         <h3>No requests found</h3>
                     @endif

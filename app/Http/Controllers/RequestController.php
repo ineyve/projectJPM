@@ -17,7 +17,7 @@ class RequestController extends Controller
    
     public function index()
     {
-        $requests = Request::all();
+        $requests = Request::paginate(20);
         return view('print_requests.index', compact('requests'));
     }
 
