@@ -21,7 +21,7 @@ class HomeController extends Controller
             $counter = $stat->cnt; //Amount of finished prints
             $dpcounts .=$counter.', ';
 
-            $dpcolors .='\'rgba('.rand(0,255).', '.rand(0,255).', '.rand(0,255).', 0.75)\', '; //Color of each bar
+            $dpcolors .='\'rgba('.rand(50,200).', '.rand(50,200).', '.rand(50,200).', 1)\', '; //Color of each bar
         }
         $statistics['departments'] = $dpnames.']'; //Departments' names
         $statistics['departmentsCount'] = $dpcounts.']'; //Print number per department

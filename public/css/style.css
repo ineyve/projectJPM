@@ -78,11 +78,18 @@ td>a:hover, td>a:visited, td>a:link, td>a:active
 .home-box {
     width: 100%;
     padding: 25px;
-    border-top-right-radius: 15px;
-    border-top-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-    border-bottom-left-radius: 15px;
+    border-radius: 10px;
     background: rgba(255,255,255,0.5);
+    border: 1px solid #ddd;
+}
+
+.panel{
+    border-radius: 10px;
+}
+
+.panel-heading{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .piechart {
@@ -149,4 +156,8 @@ html {
 .pagination>li>a:focus{
     background: rgba(51,122,183, 0.5);
     border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+a:focus {
+    outline: 0;
 }
