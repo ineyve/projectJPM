@@ -34,10 +34,10 @@
                                         <td><a href="{{route('requests.edit', $request)}}">{{$request->file}}</a></td>
                                         <td><a href="{{route('requests.edit', $request)}}">{{$request->statusToStr()}}</a></td>
                                     @else
-                                        <td href="{{route('requests.details', $request)}}">{{$request->id}}</td>
-                                        <td href="{{route('requests.details', $request)}}">{{$request->description}}</td>
-                                        <td href="{{route('requests.details', $request)}}">{{$request->file}}</td>
-                                        <td href="{{route('requests.details', $request)}}">{{$request->statusToStr()}}</td>
+                                        <td><a href="{{route('requests.details', $request)}}">{{$request->id}}</a></td>
+                                        <td><a href="{{route('requests.details', $request)}}">{{$request->description}}</a></td>
+                                        <td><a href="{{route('requests.details', $request)}}">{{$request->file}}</a></td>
+                                        <td><a href="{{route('requests.details', $request)}}">{{$request->statusToStr()}}</a></td>
                                     @endif
                                         @if($request->status == 4)
                                             <td><img src="/5star.png" style="width:80px;height:15px;"></td>

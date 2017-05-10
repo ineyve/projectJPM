@@ -48,7 +48,7 @@ Route::get('/dashboard', 'DashboardController@index')->name('dashboard')->middle
 
 // Requests
 Route::get('requests', 'RequestController@index' )->name('requests.index')->middleware('can:admin');
-Route::get('requests/{request}/details', 'RequestController@details' )->name('requests.details')->middleware('can:admin');
+Route::get('requests/{request}/details', 'RequestController@details' )->name('requests.details')->middleware('can:user');
 Route::get('requests/create', 'RequestController@create')->name('requests.create')->middleware('can:admin');
 Route::post('requests/create', 'RequestController@store')->name('requests.store')->middleware('can:admin');
 Route::get('requests/{request}/edit', 'RequestController@edit')->name('requests.edit')->middleware('can:admin');

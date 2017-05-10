@@ -7,14 +7,19 @@
             <div class="panel panel-default">
                 <div class="panel-heading">403 - Forbidden</div>
                 <div class="panel-body">
-                    <div class="home-counter"><h2>You are not allowed in this page.</h2></div>
-                    <br><br><br><br><br><br>
-                    <header class="header"><h3 class="glitched">403</h3></header>
+                    <div class="home-counter">
+                        <h2>You are not allowed in this page</h2></div>
+                        <br><br><br><br><br><br>
+                        <header class="header"><h1 class="glitched">403</h1></header>
+                    </div>
                 </div>
+                <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+                <script src="/glitched_text/js/index.js"></script>
             </div>
         </div>
     </div>
 </div>
+    <br>
 @endsection
 @push('styles')
     <link rel="stylesheet" href="/glitched_text/css/style.css">

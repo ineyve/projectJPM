@@ -44,7 +44,10 @@ class RequestController extends Controller
 
     public function details(Request $request)
     {
-        return view('print_requests.details', compact('request'));
+        if($request->owner_id == Auth::user()->id || Auth::user()->admin)
+            return view('print_requests.details', compact('request'));
+        else
+            abort(403);
     }
 
     public function status(Request $request, $status, $from)
@@ -78,6 +81,7 @@ class RequestController extends Controller
     {
         $request->delete();
         return redirect()->route('dashboard')->with('success', 'request deleted successfully');
+
     }
     
 }

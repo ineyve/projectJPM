@@ -1,4 +1,5 @@
 @extends('master')
+
 @section('content')
 <div class="container">
     <div class="row">
@@ -7,7 +8,7 @@
                 <div class="panel-heading">404 - Not Found</div>
                 <div class="panel-body">
                     <div class="home-counter">
-                        <h2>This page does not exist.</h2>
+                        <h2>This page does not exist</h2>
                         <br><br><br><br><br><br>
                         <header class="header"><h1 class="glitched">404</h1></header>
                     </div>
@@ -18,6 +19,7 @@
         </div>
     </div>
 </div>
+    <br>
 @endsection
 @push('styles')
     <link rel="stylesheet" href="/glitched_text/css/style.css">
