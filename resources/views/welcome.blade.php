@@ -42,8 +42,8 @@
                     type: 'pie',
                     data: {
                         labels: [
-                            "Color",
-                            "Grayscale"
+                            "% Color",
+                            "% Grayscale"
                         ],
                         datasets: [
                             {
@@ -72,7 +72,7 @@
             <div class="home-counter">
                 <br><h1 class="h-h1">Prints per department</h1>
             </div>
-            <div class="barchart"><canvas id="barChart" width="200%" height="100%"></canvas></div>
+            <div class="barchart"><canvas id="barChart" width="100%" height="25%"></canvas></div>
             <script>
                 var ctx = document.getElementById("barChart");
                 var barChart = new Chart(ctx, {

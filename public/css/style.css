@@ -90,8 +90,9 @@ td>a:hover, td>a:visited, td>a:link, td>a:active
 }
 
 .barchart {
-    width: 50%;
+    width: 60%;
     margin: 0 auto;
+    white-space: normal;
 }
 
 .h-h1 {

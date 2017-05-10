@@ -9,32 +9,52 @@ class HomeController extends Controller
 {
     public function homeGraph()
     {
-
+        /* CODE TO GENERATE BAR GRAPH'S DATA */
+        $prints_per_department = $this->getPrintsPerDepartment();
         $dpnames = "["; //Array with departments' names
         $dpcounts = "["; //Array with amount of requests per department
-        $dcolors = "["; //Array with colors
-
-        $prints_per_department = DB::select(DB::raw("SELECT d.name AS depname, u.department_id AS dep_id, count(department_id) AS cnt FROM (SELECT * FROM requests WHERE status = 2 OR status = 3) r JOIN users u ON r.owner_id = u.id JOIN departments d ON d.id = u.department_id GROUP BY u.department_id"));
-
+        $dpcolors = "["; //Array with colors
         foreach ($prints_per_department as $stat)
         {
-            $dpnames = $dpnames.'"'.$stat->depname.'", '; //Department's name
+            $dpnames .='"'.$this->autoLabelSpaces($stat->depname).'", '; //Department's name
 
             $counter = $stat->cnt; //Amount of finished prints
-            $dpcounts = $dpcounts.$counter.', ';
+            $dpcounts .=$counter.', ';
 
-            $dcolors = $dcolors.'\'rgba('.rand(0,255).', '.rand(0,255).', '.rand(0,255).', 0.75)\', '; //Color of each bar
+            $dpcolors .='\'rgba('.rand(0,255).', '.rand(0,255).', '.rand(0,255).', 0.75)\', '; //Color of each bar
         }
-
         $statistics['departments'] = $dpnames.']'; //Departments' names
         $statistics['departmentsCount'] = $dpcounts.']'; //Print number per department
-        $statistics['departmentsColor'] = $dcolors.']'; //Bar colors
-        $statistics['grayScale'] = Request::where('colored','=','0')->whereIn('status', [2,3,4])->count(); //Amount of grayscale prints
-        $statistics['colored'] = Request::where('colored','=','1')->whereIn('status', [2,3,4])->count(); //Amount of colored prints
-        $statistics['printsTotalCount'] = Request::whereIn('status', [2,3,4])->count(); //Amount of completed prints from all time
+        $statistics['departmentsColor'] = $dpcolors.']'; //Bar colors
+        /* END */
+
+
+        $grayScale = Request::where('colored','=','0')->whereIn('status', [2,3,4])->count(); //Amount of grayscale prints
+        $colored = Request::where('colored','=','1')->whereIn('status', [2,3,4])->count(); //Amount of colored prints
+        $total = $colored + $grayScale;
+
+        $statistics['grayScale'] = round(100*$grayScale/$total); //% of grayscale prints
+        $statistics['colored'] = round(100*$colored/$total); //% of colored prints
+        $statistics['printsTotalCount'] = $total; //Amount of completed prints from all time
         $statistics['printsToday']= Request::whereDate('closed_date', '=', date('Y-m-d'))->whereIn('status', [2,3,4])->count(); //Prints today
         $statistics['printsMonthlyAverage']= Request::whereMonth('closed_date', '=', date('m'))->whereIn('status', [2,3,4])->count() / date('d'); //Prints today
 
         return view('welcome', compact('statistics'));
+    }
+
+    public function getPrintsPerDepartment()
+    {
+        return DB::select(DB::raw("SELECT d.name AS depname, u.department_id AS dep_id, count(department_id) AS cnt FROM (SELECT * FROM requests WHERE status = 2 OR status = 3) r JOIN users u ON r.owner_id = u.id JOIN departments d ON d.id = u.department_id GROUP BY u.department_id"));
+    }
+
+    public function autoLabelSpaces($string) //Prevents bar graph's labels from being cut off
+    {
+        $amount = round(strlen($string)/3);
+        $spaces = '';
+        for($i = 0; $i < $amount; $i++)
+        {
+            $spaces .= ' ';
+        }
+        return $spaces.$string;
     }
 }
