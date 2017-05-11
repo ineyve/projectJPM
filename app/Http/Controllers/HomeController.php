@@ -33,8 +33,14 @@ class HomeController extends Controller
         $colored = Request::where('colored','=','1')->whereIn('status', [2,3,4])->count(); //Amount of colored prints
         $total = $colored + $grayScale;
 
-        $statistics['grayScale'] = round(100*$grayScale/$total); //% of grayscale prints
-        $statistics['colored'] = round(100*$colored/$total); //% of colored prints
+        if($total != 0) {
+            $statistics['grayScale'] = round(100 * $grayScale / $total); //% of grayscale prints
+            $statistics['colored'] = round(100 * $colored / $total); //% of colored prints
+        }
+        else {
+            $statistics['grayScale'] = 50;
+            $statistics['colored'] = 50;
+        }
         $statistics['printsTotalCount'] = $total; //Amount of completed prints from all time
         $statistics['printsToday']= Request::whereDate('closed_date', '=', date('Y-m-d'))->whereIn('status', [2,3,4])->count(); //Prints today
         $statistics['printsMonthlyAverage']= Request::whereMonth('closed_date', '=', date('m'))->whereIn('status', [2,3,4])->count() / date('d'); //Prints today

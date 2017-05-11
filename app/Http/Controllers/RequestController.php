@@ -57,7 +57,7 @@ class RequestController extends Controller
     public function status(Request $request, $status, $from)
     {
         $request->status = $status;
-        if($status == -1 || $status == 3){
+        if($status == -1 || $status == 4){
             $request->closed_date = Carbon::now();
             $request->closed_user_id = Auth::user()->id;
         }

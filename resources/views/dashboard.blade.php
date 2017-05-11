@@ -26,6 +26,7 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @php($i=0)
                             @foreach ($requests as $request)
                                 <tr>
                                     @if($request->status == 0)
@@ -40,7 +41,10 @@
                                         <td><a href="{{route('requests.details', $request)}}">{{$request->statusToStr()}}</a></td>
                                     @endif
                                         @if($request->status == 4)
-                                            <td><div id="star" class="c-rating"></div></td>
+                                            @if($request->satisfaction_grade == '')
+                                                @php($request->satisfaction_grade = 0)
+                                            @endif
+                                            <td><div id="star{{++$i}}" class="c-rating"></div></td>
                                         @elseif($request->status == -1)
                                             <td><form action="{{route('requests.destroy',$request)}}" method="post" class="inline">
                                                     {{method_field('DELETE')}}
@@ -51,6 +55,31 @@
                                             <td></td>
                                         @endif
                                 </tr>
+                                <script src="/js/rating.js"></script>
+                                <script>
+                                    var el = document.querySelector('#star{{$i}}');
+                                    var currentRating={{$request->satisfaction_grade}}
+                                    var maxRating= 5;
+                                    var callback = function(rating) {
+                                        switch(rating) {
+                                            case 1:
+                                                window.location="{{ route('requests.rating', [$request, 'rating' => 1])}}";
+                                                break;
+                                            case 2:
+                                                window.location="{{ route('requests.rating', [$request, 'rating' => 2])}}";
+                                                break;
+                                            case 3:
+                                                window.location="{{ route('requests.rating', [$request, 'rating' => 3])}}";
+                                                break;
+                                            case 4:
+                                                window.location="{{ route('requests.rating', [$request, 'rating' => 4])}}";
+                                                break;
+                                            default:
+                                                window.location="{{ route('requests.rating', [$request, 'rating' => 5])}}";
+                                        }
+                                    };
+                                    var myRating = rating(el, currentRating, maxRating, callback);
+                                </script>
                             @endforeach
                             </tbody>
                         </table>
@@ -62,30 +91,4 @@
         </div>
     </div>
 </div>
-@if(count($requests))
-    <script src="/js/rating.js"></script>
-    <script>
-        var el = document.querySelector('#star');
-        var currentRating = {{$request->satisfaction_grade}}
-        var maxRating= 5;
-        var callback = function(rating) {
-            switch(rating) {
-                case 1:
-                    window.location="{{ route('requests.rating', [$request, 'rating' => 1])}}";
-                    break;
-                case 2:
-                    window.location="{{ route('requests.rating', [$request, 'rating' => 2])}}";
-                    break;
-                case 3:
-                    window.location="{{ route('requests.rating', [$request, 'rating' => 3])}}";
-                    break;
-                case 4:
-                    window.location="{{ route('requests.rating', [$request, 'rating' => 4])}}";
-                    break;
-                    window.location="{{ route('requests.rating', [$request, 'rating' => 5])}}";
-            }
-        };
-        var myRating = rating(el, currentRating, maxRating, callback);
-    </script>
-@endif
 @endsection
