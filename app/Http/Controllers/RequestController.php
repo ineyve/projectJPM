@@ -44,8 +44,12 @@ class RequestController extends Controller
 
     public function details(Request $request)
     {
-        if($request->owner_id == Auth::user()->id || Auth::user()->admin)
-            return view('print_requests.details', compact('request'));
+        $admin=0;
+        if (Auth::user()->admin)
+            $admin = 1;
+        if($request->owner_id == Auth::user()->id || $admin) {
+            return view('print_requests.details', compact('request', 'admin'));
+        }
         else
             abort(403);
     }
@@ -62,6 +66,14 @@ class RequestController extends Controller
             return redirect()->route('requests.index')->with('success', 'Status changed sucessfuly!');
         else
             return redirect()->route('requests.details', $request)->with('success', 'Status changed sucessfuly!');
+    }
+
+    public function rating(Request $request, $rating)
+    {
+        $request->satisfaction_grade = $rating;
+        $request->save();
+
+        return redirect()->route('dashboard')->with('success', 'Rating changed sucessfuly!');
     }
 
     public function refuse(StoreRefusePostRefuse $req, Request $request)

@@ -40,7 +40,7 @@
                                         <td><a href="{{route('requests.details', $request)}}">{{$request->statusToStr()}}</a></td>
                                     @endif
                                         @if($request->status == 4)
-                                            <td><img src="/5star.png" style="width:80px;height:15px;"></td>
+                                            <td><div id="star" class="c-rating"></div></td>
                                         @elseif($request->status == -1)
                                             <td><form action="{{route('requests.destroy',$request)}}" method="post" class="inline">
                                                     {{method_field('DELETE')}}
@@ -62,4 +62,29 @@
         </div>
     </div>
 </div>
+
+<script src="/js/rating.js"></script>
+<script>
+    var el = document.querySelector('#star');
+    var currentRating = {{$request->satisfaction_grade }}
+    var maxRating= 5;
+    var callback = function(rating) {
+        switch(rating) {
+            case 1:
+                window.location="{{ route('requests.rating', [$request, 'rating' => 1])}}";
+                break;
+            case 2:
+                window.location="{{ route('requests.rating', [$request, 'rating' => 2])}}";
+                break;
+            case 3:
+                window.location="{{ route('requests.rating', [$request, 'rating' => 3])}}";
+                break;
+            case 4:
+                window.location="{{ route('requests.rating', [$request, 'rating' => 4])}}";
+                break;
+                window.location="{{ route('requests.rating', [$request, 'rating' => 5])}}";
+        }
+    };
+    var myRating = rating(el, currentRating, maxRating, callback);
+</script>
 @endsection
