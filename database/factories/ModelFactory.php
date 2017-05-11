@@ -24,6 +24,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'print_evals' => $faker->numberBetween(0,100),
         'print_counts' => $faker->numberBetween(0,100),
         'department_id' => $faker->numberBetween(1,5),
+        'phone' => $faker->phoneNumber,
     ];
 });
 

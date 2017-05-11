@@ -21,11 +21,6 @@ Route::get('/', 'HomeController@homeGraph');
 // Authentication Routes
 Auth::routes();
 
-Route::get('register/verify/{confirmationCode}', [
-    'as' => 'confirmation_path',
-    'uses' => 'RegisterController@confirm'
-]);
-
 /*
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');

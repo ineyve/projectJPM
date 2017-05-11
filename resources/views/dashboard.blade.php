@@ -62,29 +62,30 @@
         </div>
     </div>
 </div>
-
-<script src="/js/rating.js"></script>
-<script>
-    var el = document.querySelector('#star');
-    var currentRating = {{$request->satisfaction_grade }}
-    var maxRating= 5;
-    var callback = function(rating) {
-        switch(rating) {
-            case 1:
-                window.location="{{ route('requests.rating', [$request, 'rating' => 1])}}";
-                break;
-            case 2:
-                window.location="{{ route('requests.rating', [$request, 'rating' => 2])}}";
-                break;
-            case 3:
-                window.location="{{ route('requests.rating', [$request, 'rating' => 3])}}";
-                break;
-            case 4:
-                window.location="{{ route('requests.rating', [$request, 'rating' => 4])}}";
-                break;
-                window.location="{{ route('requests.rating', [$request, 'rating' => 5])}}";
-        }
-    };
-    var myRating = rating(el, currentRating, maxRating, callback);
-</script>
+@if(count($requests))
+    <script src="/js/rating.js"></script>
+    <script>
+        var el = document.querySelector('#star');
+        var currentRating = {{$request->satisfaction_grade}}
+        var maxRating= 5;
+        var callback = function(rating) {
+            switch(rating) {
+                case 1:
+                    window.location="{{ route('requests.rating', [$request, 'rating' => 1])}}";
+                    break;
+                case 2:
+                    window.location="{{ route('requests.rating', [$request, 'rating' => 2])}}";
+                    break;
+                case 3:
+                    window.location="{{ route('requests.rating', [$request, 'rating' => 3])}}";
+                    break;
+                case 4:
+                    window.location="{{ route('requests.rating', [$request, 'rating' => 4])}}";
+                    break;
+                    window.location="{{ route('requests.rating', [$request, 'rating' => 5])}}";
+            }
+        };
+        var myRating = rating(el, currentRating, maxRating, callback);
+    </script>
+@endif
 @endsection
