@@ -16,33 +16,30 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Owner ID</td>
-                                <td>{{$request->owner_id}}</td>
+                                <td>Description</td>
+                                <td>{{$request->description}}</td>
                             </tr>
+                        
                             <tr>
                                 <td>Owner Name</td>
                                 <td>{{$request->user->name}}</td>
                             </tr>
-                            @if($request->description != null)
-                                <tr>
-                                    <td>Description</td>
-                                    <td>{{$request->description}}</td>
-                                </tr>
-                            @endif
                             <tr>
-                                <td>Status</td>
-                                <td>{{$request->statusToStr()}}</td>
+                                <td>Owner Department</td>
+                                <td>{{$request->user->department}}</td>
+                            </tr>
+                            <tr>
+                                <td>Owner Email</td>
+                                <td>{{$request->user->email}}</td>
+                            </tr>
+                            <tr>
+                                <td>Owner Phone</td>
+                                <td>{{$request->user->phone}}</td>
                             </tr>
                             <tr>
                                 <td>Open Date</td>
                                 <td>{{$request->open_date}}</td>
                             </tr>
-                            @if($request->due_date != null)
-                                <tr>
-                                    <td>Due Date</td>
-                                    <td>{{$request->due_date}}</td>
-                                </tr>
-                            @endif
                             <tr>
                                 <td>Quantity</td>
                                 <td>{{$request->quantity}}</td>
@@ -51,10 +48,10 @@
                                 <td>Colored</td>
                                 <td>{{$request->coloredToStr()}}</td>
                             </tr>
-                                <tr>
-                                    <td>Stapled</td>
-                                    <td>{{$request->stapledToStr()}}</td>
-                                </tr>
+                            <tr>
+                                <td>Stapled</td>
+                                <td>{{$request->stapledToStr()}}</td>
+                            </tr>
                             <tr>
                                 <td>Paper Size</td>
                                 <td>A{{$request->paper_size}}</td>
@@ -67,6 +64,19 @@
                                 <td>File</td>
                                 <td>{{$request->file}}</td>
                             </tr>
+                            <tr>
+                                <td>Status</td>
+                                <td>{{$request->statusToStr()}}</td>
+                            </tr>
+
+                            @if($request->due_date != null)
+                                <tr>
+                                    <td>Due Date</td>
+                                    <td>{{$request->due_date}}</td>
+                                </tr>
+                            @endif
+                            
+                            
                             @if($request->printer_id != null)
                                 <tr>
                                     <td>Printer ID</td>

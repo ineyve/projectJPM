@@ -91,8 +91,8 @@
             value="{{$request->paper_size}}"
         @endif">
         <option disabled selected> -- select an option -- </option>
-        <option value="0">A4</option>
-        <option value="1">A3</option>
+        <option value="4">A4</option>
+        <option value="3">A3</option>
     </select>
 </div>
 

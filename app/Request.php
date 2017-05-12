@@ -38,31 +38,35 @@ class Request extends Model
     }
 
     public function coloredToStr(){
-        if($this->colored)
-            return 'True';
-        else
-            return 'False';
+       // if($this->colored)
+        //    return 'True';
+       // else
+        //    return 'False';
+
+        if($this->colored == 1){
+            return 'Color';
+        }
+        else{
+            return 'Black and White';
+        }
     }
 
     public function stapledToStr(){
-        if($this->stapled)
-            return 'True';
+        if($this->stapled == 0)
+            return 'With Staple';
         else
-            return 'False';
+            return 'No Staple';
     }
 
     public function typeToStr(){
         switch($this->paper_type){
-            case 0: return 'Normal';
+            case 0: return 'Draft';
                 break;
-            case 1: return 'Journal';
+            case 1: return 'Normal';
                 break;
-            case 2: return 'Colored';
-                break;
-            case 3: return 'Photographic';
+            case 2: return 'Photographic';
                 break;
         }
-        return 'Postcard';
     }
 
     public function date(){
