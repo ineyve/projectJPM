@@ -136,18 +136,19 @@
                     </table>
                     @if($admin)
                         @if($request->status == 0)
-                            <a class="btn btn-danger side-offset" href='javascript:showRefuse()' id="buttonRefuse">Refuse</a>
+                            <a class="btn btn-success side-offset" href="{{route('requests.status', ['request' => $request, 'status' => 1, 'from' => 1])}}" id="buttonAccept">Accept</a>
+                            <a class="btn btn-danger" href='javascript:showRefuse()' id="buttonRefuse">Refuse</a>
                             <form action="{{route('requests.refuse', $request)}}" method="post" class="form-group">
                                 {{ csrf_field() }}
                                 <div class="form-group" id="refuse" style="display:none">
                                     <label for="inputReason">Refuse Reason</label>
                                     <input type="text" class="form-control" name="refused_reason" id="inputReason"/>
                                 </div>
-                                <div class="form-group" id="submitRefuse" style="display:none">
-                                    <button type="submit" class="btn btn-danger">Refuse</button>
+                                <div class="form-group" id="submitRefuse" style="display:none;">
+                                    <button type="submit" class="btn btn-danger side-offset">Refuse</button>
+                                    <a class="btn btn-default" href='javascript:hideRefuse()' id="cancelRefuse">Cancel</a>
                                 </div>
                             </form>
-                            <a class="btn btn-success" href="{{route('requests.status', ['request' => $request, 'status' => 1, 'from' => 1])}}" id="buttonAccept">Accept</a>
                         @endif
                         @if($request->status == 1)
                             <a class="btn btn-warning" href="{{route('requests.status', ['request' => $request, 'status' => 2, 'from' => 1])}}">Progress</a>
@@ -167,7 +168,8 @@
                                         <input type="text" class="form-control" name="comment" id="inputComment"/>
                                     </div>
                                     <div class="form-group" id="submitComment" style="display:none">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="submit" class="btn btn-primary side-offset">Comment</button>
+                                        <a class="btn btn-default" href='javascript:hideComment()' id="cancelComment">Cancel</a>
                                     </div>
                                 </form>
                         @endif
@@ -181,6 +183,7 @@
 <script>function showRefuse(){
         $('#refuse').show();
         $('#submitRefuse').show();
+        $('#cancelRefuse').show();
         $('#buttonRefuse').hide();
         $('#buttonAccept').hide();
     }
@@ -188,6 +191,22 @@
 <script>function showComment(){
         $('#comment').show();
         $('#submitComment').show();
+        $('#cancelComment').show();
         $('#buttonComment').hide();
+    }
+</script>
+<script>function hideRefuse(){
+        $('#refuse').hide();
+        $('#submitRefuse').hide();
+        $('#cancelRefuse').hide();
+        $('#buttonRefuse').show();
+        $('#buttonAccept').show();
+    }
+</script>
+<script>function hideComment(){
+        $('#comment').hide();
+        $('#submitComment').hide();
+        $('#cancelComment').hide();
+        $('#buttonComment').show();
     }
 </script>
