@@ -210,6 +210,21 @@ table.sortable thead{
     height: 35px;
 }
 
+#navSearch {
+    background-image: url('../search.png'); /* Add a search icon to input */
+    background-size: 30px 30px;
+    background-position: 4px 1px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    width: 160px; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    padding-left: 40px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    background-color: rgba(255,255,255,0.5);
+    margin-top: 7px;
+    height: 35px;
+    float: left;
+}
+
 /* Profile */
 .profile{
     margin-bottom: 20px;

@@ -4,9 +4,6 @@
 <script src="/js/filter.js"></script>
 
 @section('content')
-<div>
-    <a class="btn btn-primary offset" href="{{ route('users.create') }}">Add user</a>
-</div>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -15,6 +12,9 @@
                 <div class="panel-body">
                     @if (count($users))
                         <input type="text" id="myInput" onkeyup="filter()" placeholder="Search any column...">
+                        <div style="float: right;">
+                            <a class="btn btn-primary side-offset" href="{{ route('users.create') }}">Add user</a>
+                        </div>
                         <table class="table table-striped sortable" id="myTable">
                             <thead>
                                 <tr>

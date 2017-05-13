@@ -4,9 +4,6 @@
 <script src="/js/filter.js"></script>
 
 @section('content')
-<div>
-    <a class="btn btn-primary offset" href="{{route('requests.create')}}">Add Request</a>
-</div>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -22,6 +19,9 @@
                                 <input type="text" id="myInput" onkeyup="filter()" placeholder="Search any column...">
                         {{--</div>
                         </div>--}}
+                        <div style="float:right;">
+                            <a class="btn btn-primary offset" href="{{route('requests.create')}}">Add Request</a>
+                        </div>
                     <table class="table table-striped table-hover sortable" id="myTable">
                     <thead>
                         <tr>

@@ -45,19 +45,19 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-
                     <ul class="nav navbar-nav navbar-right">
-
+                        <input type="text" id="navSearch" onkeyup="search()" placeholder="Search Profiles">
                         <li><a href="{{ url('/') }}">Home</a></li>
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
+
                             @if(Auth::user()->admin == 1)
                                 <li> <a href="{{ url('requests') }}">Requests</a></li>
                                 <li> <a href="{{ url('users') }}">Users</a></li>
