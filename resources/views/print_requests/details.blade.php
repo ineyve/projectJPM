@@ -24,18 +24,21 @@
                                 <td>Owner Name</td>
                                 <td>{{$request->user->name}}</td>
                             </tr>
+
                             <tr>
                                 <td>Owner Department</td>
-                                <td>{{$request->user->department}}</td>
+                                <td>{{$request->user->department->name}}</td>
                             </tr>
                             <tr>
                                 <td>Owner Email</td>
                                 <td>{{$request->user->email}}</td>
                             </tr>
+
                             <tr>
                                 <td>Owner Phone</td>
                                 <td>{{$request->user->phone}}</td>
                             </tr>
+
                             <tr>
                                 <td>Open Date</td>
                                 <td>{{$request->open_date}}</td>
@@ -75,32 +78,35 @@
                                     <td>{{$request->due_date}}</td>
                                 </tr>
                             @endif
-                            
-                            
+
                             @if($request->printer_id != null)
                                 <tr>
                                     <td>Printer ID</td>
                                     <td>{{$request->printer_id}}</td>
                                 </tr>
                             @endif
+
                             @if($request->closed_date != null)
                                 <tr>
                                     <td>Closed Date</td>
                                     <td>{{$request->closed_date}}</td>
                                 </tr>
                             @endif
+
                             @if($request->closed_user_id != null)
                                 <tr>
                                     <td>Closed By User</td>
                                     <td>{{$request->closed_user_id}}</td>
                                 </tr>
                             @endif
+
                             @if($request->refused_reason != null)
                                 <tr>
                                     <td>Refused Reason</td>
                                     <td>{{$request->refused_reason}}</td>
                                 </tr>
                             @endif
+
                             @if($request->satisfaction_grade != null)
                                 <tr>
                                     <td>Satisfaction Grade</td>
@@ -110,19 +116,22 @@
                                         @endfor
                                     </td>
                                 </tr>
-                                @endif
+                            @endif
+
                             @if($request->created_at != null)
                                 <tr>
                                     <td>Created</td>
                                     <td>{{$request->created_at}}</td>
                                 </tr>
                             @endif
+
                             @if($request->updated_at != null)
                                 <tr>
                                     <td>Last Update</td>
                                     <td>{{$request->updated_at}}</td>
                                 </tr>
                             @endif
+
                         </tbody>
                     </table>
                     @if($admin)
