@@ -136,8 +136,18 @@
                     </table>
                     @if($admin)
                         @if($request->status == 0)
-                            <a class="btn btn-danger side-offset" href="{{route('requests.refuseForm', $request)}}">Reject</a>
-                            <a class="btn btn-success" href="{{route('requests.status', ['request' => $request, 'status' => 1, 'from' => 1])}}">Accept</a>
+                            <a class="btn btn-danger side-offset" href='javascript:showRefuse()' id="buttonRefuse">Refuse</a>
+                            <form action="{{route('requests.refuse', $request)}}" method="post" class="form-group">
+                                {{ csrf_field() }}
+                                <div class="form-group" id="refuse" style="display:none">
+                                    <label for="inputReason">Refuse Reason</label>
+                                    <input type="text" class="form-control" name="refused_reason" id="inputReason"/>
+                                </div>
+                                <div class="form-group" id="submitRefuse" style="display:none">
+                                    <button type="submit" class="btn btn-danger">Refuse</button>
+                                </div>
+                            </form>
+                            <a class="btn btn-success" href="{{route('requests.status', ['request' => $request, 'status' => 1, 'from' => 1])}}" id="buttonAccept">Accept</a>
                         @endif
                         @if($request->status == 1)
                             <a class="btn btn-warning" href="{{route('requests.status', ['request' => $request, 'status' => 2, 'from' => 1])}}">Progress</a>
@@ -148,6 +158,19 @@
                         @if($request->status == 3)
                             <a class="btn btn-info" href="{{route('requests.status', ['request' => $request, 'status' => 4, 'from' => 1])}}">Complete</a>
                         @endif
+                        @if($request->status == 4)
+                            <a class="btn btn-primary" href='javascript:showComment()' id="buttonComment">Comment</a>
+                                <form action="{{route('requests.comment', $request)}}" method="post" class="form-group">
+                                    {{ csrf_field() }}
+                                    <div class="form-group" id="comment" style="display:none">
+                                        <label for="inputComment">Comment</label>
+                                        <input type="text" class="form-control" name="comment" id="inputComment"/>
+                                    </div>
+                                    <div class="form-group" id="submitComment" style="display:none">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </form>
+                        @endif
                     @endif
                 </div>
             </div>
@@ -155,3 +178,16 @@
     </div>
 </div>
 @endsection
+<script>function showRefuse(){
+        $('#refuse').show();
+        $('#submitRefuse').show();
+        $('#buttonRefuse').hide();
+        $('#buttonAccept').hide();
+    }
+</script>
+<script>function showComment(){
+        $('#comment').show();
+        $('#submitComment').show();
+        $('#buttonComment').hide();
+    }
+</script>

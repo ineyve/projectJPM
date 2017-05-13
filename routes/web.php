@@ -51,8 +51,8 @@ Route::get('requests/{request}/edit', 'RequestController@edit')->name('requests.
 Route::post('requests/{request}/edit', 'RequestController@update')->name('requests.update')->middleware('can:admin');
 Route::delete('requests/{request}', 'RequestController@destroy')->name('requests.destroy')->middleware('can:admin');
 Route::get('requests/{request}/{status}/{from}', 'RequestController@status')->name('requests.status')->middleware('can:admin');
-Route::get('requests/{request}/refuse', 'RequestController@refuseForm')->name('requests.refuseForm')->middleware('can:admin');
 Route::post('requests/{request}/refuse', 'RequestController@refuse')->name('requests.refuse')->middleware('can:admin');
+Route::post('requests/{request}/comment', 'RequestController@comment')->name('requests.comment')->middleware('can:user');
 
 // Users
 Route::get('users', 'UserController@index' )->name('users.index')->middleware('can:admin');
