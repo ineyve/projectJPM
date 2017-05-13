@@ -33,10 +33,10 @@
                         <table class="table table-striped sortable table-hover" id="myTable">
                             <thead>
                             <tr>
-                                <th class=" sorttable_sorted">Request Number<span id="sorttable_sortfwdind">&nbsp;▾</span></th>
+                                <th>Request Number</th>
                                 <th>Description</th>
                                 <th>File</th>
-                                <th>Status</th>
+                                <th class=" sorttable_sorted">Status<span id="sorttable_sortfwdind">&nbsp;▾</span></th>
                                 <th class="sorttable_nosort"></th>
                             </tr>
                             </thead>
