@@ -126,6 +126,10 @@ html {
 }
 
 /*Pagination*/
+.pagination{
+    margin-top: 0px;
+}
+
 .pagination>.disabled>span{
     background-color: rgba(255, 255, 255, 0.4);
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -189,4 +193,19 @@ table.sortable thead{
 .c-rating__item:hover,
 .c-rating__item.is-active {
     background-position: -24px 0;
+}
+
+/* Search */
+#myInput {
+    background-image: url('../search.png'); /* Add a search icon to input */
+    background-size: 30px 30px;
+    background-position: 4px 1px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    width: 30%; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    padding-left: 40px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-bottom: 12px; /* Add some space below the input */
+    background-color: rgba(255,255,255,0.5);
+    height: 35px;
 }

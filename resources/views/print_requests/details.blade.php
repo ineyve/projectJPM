@@ -142,7 +142,7 @@
                                 {{ csrf_field() }}
                                 <div class="form-group" id="refuse" style="display:none">
                                     <label for="inputReason">Refuse Reason</label>
-                                    <input type="text" class="form-control" name="refused_reason" id="inputReason"/>
+                                    <textarea class="form-control" name="refused_reason" id="inputReason"></textarea>
                                 </div>
                                 <div class="form-group" id="submitRefuse" style="display:none;">
                                     <button type="submit" class="btn btn-danger side-offset">Refuse</button>
@@ -165,7 +165,7 @@
                                     {{ csrf_field() }}
                                     <div class="form-group" id="comment" style="display:none">
                                         <label for="inputComment">Comment</label>
-                                        <input type="text" class="form-control" name="comment" id="inputComment"/>
+                                        <textarea class="form-control" name="comment" id="inputComment"></textarea>
                                     </div>
                                     <div class="form-group" id="submitComment" style="display:none">
                                         <button type="submit" class="btn btn-primary side-offset">Comment</button>

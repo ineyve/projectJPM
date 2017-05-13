@@ -13,8 +13,8 @@
                 <div class="panel-heading">Users List</div>
                 <div class="panel-body">
                     @if (count($users))
-                        {{ $users->links() }}
-                        <table class="table table-striped sortable">
+                        <input type="text" id="myInput" onkeyup="filter()" placeholder="Search any column...">
+                        <table class="table table-striped sortable" id="myTable">
                             <thead>
                                 <tr>
                                     <th class=" sorttable_sorted">ID<span id="sorttable_sortfwdind">&nbsp;▾</span></th>
@@ -44,7 +44,6 @@
                                 </tr>
                             @endforeach
                         </table>
-                        {{ $users->links() }}
                     @else
                         <h3>No users found</h3>
                     @endif
@@ -54,3 +53,4 @@
     </div>
 </div>
 @endsection
+<script type="text/javascript" src="/js/filter.js"></script>
