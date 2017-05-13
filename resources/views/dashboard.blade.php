@@ -16,12 +16,13 @@
                 @endif
                 <div class="panel-body">
                     <div class="profile">
-                        <h1 style="float: right;">foto</h1>
+                        <img class="profile-picture" src="/profile.jpg">
                         <p>Telefone</p>
                         <p>e-mail</p>
                         <p>Total Requests</p>
                         <p>Member for 3 years</p>
                         <p>Average Satisfaction Grade?</p>
+                        <br><br><br><br>
                     </div>
                     <div style="float: right;">
                         <a class="btn btn-success side-offset" href="{{route('requests.create')}}">Edit Profile</a>

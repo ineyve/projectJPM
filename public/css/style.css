@@ -215,5 +215,15 @@ table.sortable thead{
     margin-bottom: 20px;
     border-bottom: #777777 dotted;
     padding-left: 30px;
-    padding-right: 100px;
+    padding-right: 80px;
+}
+
+.profile-picture{
+    width:200px;
+    height:200px;
+    float:right;
+    border:3px solid gray;
+    padding:3px;
+    background: lightgray;
+    margin-top: 8px;
 }
