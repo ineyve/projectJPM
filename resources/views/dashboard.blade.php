@@ -1,5 +1,8 @@
 @extends('master')
 
+<script src="/js/sorttable.js"></script>
+<script src="/js/filter.js"></script>
+
 @section('content')
 <div>
     <a class="btn btn-primary offset" href="{{route('requests.create')}}">Add Request</a>
@@ -15,14 +18,15 @@
                 @endif
                 <div class="panel-body">
                     @if (count($requests))
-                        <table class="table table-striped table-hover">
+                        <input type="text" id="myInput" onkeyup="filter()" placeholder="Search any column...">
+                        <table class="table table-striped sortable table-hover" id="myTable">
                             <thead>
                             <tr>
-                                <th>Request Number</th>
+                                <th class=" sorttable_sorted">Request Number<span id="sorttable_sortfwdind">&nbsp;▾</span></th>
                                 <th>Description</th>
                                 <th>File</th>
                                 <th>Status</th>
-                                <th></th>
+                                <th class="sorttable_nosort"></th>
                             </tr>
                             </thead>
                             <tbody>

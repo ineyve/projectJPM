@@ -1,5 +1,8 @@
 @extends('master')
+
 <script src="/js/sorttable.js"></script>
+<script src="/js/filter.js"></script>
+
 @section('content')
 <div>
     <a class="btn btn-primary offset" href="{{route('requests.create')}}">Add Request</a>
@@ -65,4 +68,3 @@
     </div>
 </div>
 @endsection
-<script type="text/javascript" src="/js/filter.js"></script>

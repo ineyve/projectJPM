@@ -1,6 +1,7 @@
 @extends('master')
 
 <script src="/js/sorttable.js"></script>
+<script src="/js/filter.js"></script>
 
 @section('content')
 <div>
@@ -53,4 +54,3 @@
     </div>
 </div>
 @endsection
-<script type="text/javascript" src="/js/filter.js"></script>
