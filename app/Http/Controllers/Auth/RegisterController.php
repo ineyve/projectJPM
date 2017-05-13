@@ -120,6 +120,6 @@ class RegisterController extends Controller
         // The verified method has been added to the user model and chained here
         // for better readability
         User::where('email_token',$token)->firstOrFail()->verified();
-        return redirect('login');
+        return redirect()->route('login')->with('success', 'email verified successfully');
     }
 }
