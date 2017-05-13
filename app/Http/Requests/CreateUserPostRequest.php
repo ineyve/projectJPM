@@ -27,7 +27,8 @@ class CreateUserPostRequest extends FormRequest
                 'name' => 'required|regex:/^[a-zA-Z ]+$/',
                 'email' => 'required|email|unique:users',
                 'phone' => 'required|numeric|size:9',
-                'password' => 'required|min:8|confirmed'
+                'password' => 'required|min:8|confirmed',
+                'department_id' => 'required'
         ];
     }
 }

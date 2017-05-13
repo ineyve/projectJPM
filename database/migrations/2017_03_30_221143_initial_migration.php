@@ -17,7 +17,7 @@ class InitialMigration extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->tinyInteger('verified')->default(0);
-            $table->string('email_verification')->nullable();
+            $table->string('email_token')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->boolean('admin')->default(0);
