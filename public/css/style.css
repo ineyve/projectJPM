@@ -209,3 +209,11 @@ table.sortable thead{
     background-color: rgba(255,255,255,0.5);
     height: 35px;
 }
+
+/* Profile */
+.profile{
+    margin-bottom: 20px;
+    border-bottom: #777777 dotted;
+    padding-left: 30px;
+    padding-right: 100px;
+}

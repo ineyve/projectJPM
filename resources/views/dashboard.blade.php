@@ -4,19 +4,29 @@
 <script src="/js/filter.js"></script>
 
 @section('content')
-<div>
-    <a class="btn btn-primary offset" href="{{route('requests.create')}}">Add Request</a>
-</div>
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
                 @if(substr($user->name, -1) == 's')
-                    <div class="panel-heading">{{$user->name}}' Requests</div>
+                    <div class="panel-heading">{{$user->name}}' Profile</div>
                 @else
-                    <div class="panel-heading">{{$user->name}}'s Requests</div>
+                    <div class="panel-heading">{{$user->name}}'s Profile</div>
                 @endif
                 <div class="panel-body">
+                    <div class="profile">
+                        <h1 style="float: right;">foto</h1>
+                        <p>Telefone</p>
+                        <p>e-mail</p>
+                        <p>Total Requests</p>
+                        <p>Member for 3 years</p>
+                        <p>Average Satisfaction Grade?</p>
+                    </div>
+                    <div style="float: right;">
+                        <a class="btn btn-success side-offset" href="{{route('requests.create')}}">Edit Profile</a>
+                        <a class="btn btn-primary" href="{{route('requests.create')}}">Add Request</a>
+                    </div>
                     @if (count($requests))
                         <input type="text" id="myInput" onkeyup="filter()" placeholder="Search any column...">
                         <table class="table table-striped sortable table-hover" id="myTable">
