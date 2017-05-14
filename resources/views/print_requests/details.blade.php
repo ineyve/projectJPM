@@ -29,6 +29,7 @@
                                 <td>Owner Department</td>
                                 <td>{{$request->user->department->name}}</td>
                             </tr>
+
                             <tr>
                                 <td>Owner Email</td>
                                 <td>{{$request->user->email}}</td>
@@ -43,34 +44,49 @@
                                 <td>Open Date</td>
                                 <td>{{$request->open_date}}</td>
                             </tr>
+
                             <tr>
                                 <td>Quantity</td>
                                 <td>{{$request->quantity}}</td>
                             </tr>
+
                             <tr>
                                 <td>Colored</td>
                                 <td>{{$request->coloredToStr()}}</td>
                             </tr>
+
                             <tr>
                                 <td>Stapled</td>
                                 <td>{{$request->stapledToStr()}}</td>
                             </tr>
+                            
                             <tr>
                                 <td>Paper Size</td>
                                 <td>A{{$request->paper_size}}</td>
                             </tr>
+                            
                             <tr>
                                 <td>Paper Type</td>
                                 <td>{{$request->typeToStr()}}</td>
                             </tr>
+                            
                             <tr>
                                 <td>File</td>
                                 <td>{{$request->file}}</td>
                             </tr>
+                            
                             <tr>
                                 <td>Status</td>
                                 <td>{{$request->statusToStr()}}</td>
                             </tr>
+
+                           
+
+                            <tr>
+                                <td>Comment</td>
+                                <td>{{$comment->findComment($request)}}</td>
+                            </tr>
+                                       
 
                             @if($request->due_date != null)
                                 <tr>
@@ -134,6 +150,7 @@
 
                         </tbody>
                     </table>
+                    
                     @if($admin)
                         @if($request->status == 0)
                             <a class="btn btn-success side-offset" href="{{route('requests.status', ['request' => $request, 'status' => 1, 'from' => 1])}}" id="buttonAccept">Accept</a>
@@ -161,7 +178,7 @@
                         @endif
                         @if($request->status == 4)
                             <a class="btn btn-primary" href='javascript:showComment()' id="buttonComment">Comment</a>
-                                <form action="{{route('requests.comment', $request)}}" method="post" class="form-group">
+                                <form action="{{route('requests.comment', $request, $comment)}}" method="post" class="form-group">
                                     {{ csrf_field() }}
                                     <div class="form-group" id="comment" style="display:none">
                                         <label for="inputComment">Comment</label>

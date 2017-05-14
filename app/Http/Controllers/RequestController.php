@@ -44,13 +44,13 @@ class RequestController extends Controller
         return view('print_requests.edit', compact('request'));
     }
 
-    public function details(Request $request)
+    public function details(Request $request, Comment $comment)
     {
         $admin=0;
         if (Auth::user()->admin)
             $admin = 1;
         if($request->owner_id == Auth::user()->id || $admin) {
-            return view('print_requests.details', compact('request', 'admin'));
+            return view('print_requests.details', compact('request', 'admin', 'comment'));
         }
         else
             abort(403);
@@ -96,5 +96,7 @@ class RequestController extends Controller
         return redirect()->route('dashboard')->with('success', 'request deleted successfully');
 
     }
+
+
     
 }
