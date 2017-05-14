@@ -257,16 +257,16 @@ table.sortable thead{
     height:60px;
     border:1px solid gray;
     padding: 2px;
-    margin-top: 5px;
+    margin-top: 8px;
     margin-left: 5px;
     background: lightgray;
     float:left;
 }
 
 .comment{
-    height: 70px;
+    margin-top: 10px;
     background-color: rgba(255,255,255,0.5);
-    margin-bottom: 10px;
+    padding-bottom: 1px;
 }
 
 .comment>p{
