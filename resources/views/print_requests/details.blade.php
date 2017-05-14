@@ -80,13 +80,19 @@
                                 <td>{{$request->statusToStr()}}</td>
                             </tr>
 
-                           
-
                             <tr>
-                                <td>Comment</td>
-                                <td>{{$comment->findComment($request)}}</td>
+                                <td>Comments</td>
+                                <td>
+                                @php($count=count($comments))
+                                @foreach($comments as $comment)
+                                        @if (--$count > 0)
+                                            {{$comment->comment}},
+                                        @else
+                                            {{$comment->comment}}
+                                        @endif
+                                @endforeach
+                                </td>
                             </tr>
-                                       
 
                             @if($request->due_date != null)
                                 <tr>

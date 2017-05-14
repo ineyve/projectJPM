@@ -44,13 +44,14 @@ class RequestController extends Controller
         return view('print_requests.edit', compact('request'));
     }
 
-    public function details(Request $request, Comment $comment)
+    public function details(Request $request)
     {
         $admin=0;
+        $comments = Comment::where('request_id', '=', $request->id)->get();
         if (Auth::user()->admin)
             $admin = 1;
         if($request->owner_id == Auth::user()->id || $admin) {
-            return view('print_requests.details', compact('request', 'admin', 'comment'));
+            return view('print_requests.details', compact('request', 'admin', 'comments'));
         }
         else
             abort(403);

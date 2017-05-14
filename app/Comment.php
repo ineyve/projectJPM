@@ -26,22 +26,4 @@ class Comment extends Model
      *
      * @var array
      */
-
-    public function findComment(Request $request){
-        
-        
-       // $comments = Comment::All('comment');
-        $comments = Comment::where('request_id', '=', $request->id)->get();
-
-        foreach ($comments as $comment) {
-            
-            if ($this->request_id == $request->id) {
-                $comments = $comment;           
-            }  
-        }
-        return $comments;
-           
-    }
-
-
 }
