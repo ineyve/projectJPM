@@ -11,14 +11,14 @@
                 <div class="panel-heading">Requests List</div>
                 <div class="panel-body">
                     @if(count($requests))
-                    {{--<div class="row">
+                        <div class="row">
                             <div class="col-xs-6">
                                 {{ $requests->links() }}
                             </div>
-                            <div class="col-xs-6">--}}
+                            <div class="col-xs-6">
                                 <input type="text" id="myInput" onkeyup="filter()" placeholder="Search any column...">
-                        {{--</div>
-                        </div>--}}
+                            </div>
+                        </div>
                         <div style="float:right;">
                             <a class="btn btn-primary offset" href="{{route('requests.create')}}">Add Request</a>
                         </div>
@@ -58,7 +58,7 @@
                         </tr>
                     @endforeach
                     </table>
-                    {{-- $requests->links() --}}
+                    {{$requests->links()}}
                     @else
                         <h3>No requests found</h3>
                     @endif

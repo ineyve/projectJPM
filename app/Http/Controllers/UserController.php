@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateUserPostRequest;
 use App\Http\Requests\UpdateUserPostRequest;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -16,8 +17,9 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::All();//paginate(20);
-        return view('users.index', compact('users'));
+        $auth = Auth::user();
+        $users = User::paginate(20);
+        return view('users.index', compact('users', 'auth'));
     }
 
     public function create()
@@ -59,6 +61,16 @@ class UserController extends Controller
     public function profile(User $user)
     {
         return view('users.profile', compact('user'));
+    }
+
+    public function block(User $user, $block)
+    {
+        $user->blocked=$block;
+        $user->save();
+        if($block)
+            return redirect()->route('users.index')->with('success', 'user blocked successfully');
+        else
+            return redirect()->route('users.index')->with('success', 'user unblocked successfully');
     }
 
 }

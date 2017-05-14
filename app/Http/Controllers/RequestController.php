@@ -19,7 +19,7 @@ class RequestController extends Controller
    
     public function index()
     {
-        $requests = Request::All();
+        $requests = Request::paginate(20);
         return view('print_requests.index', compact('requests'));
     }
 
@@ -47,7 +47,7 @@ class RequestController extends Controller
     public function details(Request $request)
     {
         $admin=0;
-        $comments = Comment::where('request_id', '=', $request->id)->get();
+        $comments = Comment::where('request_id', '=', $request->id)->orderBy('created_at')->get();
         if (Auth::user()->admin)
             $admin = 1;
         if($request->owner_id == Auth::user()->id || $admin) {

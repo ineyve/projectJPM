@@ -11,7 +11,12 @@
                 <div class="panel-heading">Users List</div>
                 <div class="panel-body">
                     @if (count($users))
-                        <input type="text" id="myInput" onkeyup="filter()" placeholder="Search any column...">
+                        <div class="col-xs-6">
+                            {{ $users->links() }}
+                        </div>
+                        <div class="col-xs-6">
+                            <input type="text" id="myInput" onkeyup="filter()" placeholder="Search any column...">
+                        </div>
                         <div style="float: right;">
                             <a class="btn btn-primary side-offset" href="{{ route('users.create') }}">Add user</a>
                         </div>
@@ -36,15 +41,23 @@
                                     <td>{{$user->phone}}</td>
                                     <td>
                                         <a class="btn btn-xs btn-primary" href="{{ route('users.edit', $user) }}">Edit</a>
+                                        @if($user != $auth)
+                                            @if(!$user->blocked)
+                                                <a class="btn btn-xs btn-warning" href="{{ route('users.block', ['user' => $user, 'block' => 1]) }}">Block</a>
+                                            @else
+                                                <a class="btn btn-xs btn-success" href="{{ route('users.block', ['user' => $user, 'block' => 0]) }}">Unblock</a>
+                                            @endif
                                         <form action="{{route('users.destroy',$user)}}" method="post" class="inline">
                                             {{method_field('DELETE')}}
                                             {{ csrf_field() }}
                                             <button type="submit" class="btn btn-xs btn-danger">Delete</button>
                                         </form>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
                         </table>
+                        {{ $users->links() }}
                     @else
                         <h3>No users found</h3>
                     @endif

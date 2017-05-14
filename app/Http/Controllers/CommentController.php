@@ -25,7 +25,7 @@ class CommentController extends Controller
         $comment->request_id = $request->id;
         $comment->user_id = Auth::user()->id;
         $comment->save();
-        $comments = Comment::where('request_id', '=', $request->id)->get();
+        $comments = Comment::where('request_id', '=', $request->id)->orderBy('created_at')->get();
 
         $admin=0;
         if (Auth::user()->admin)
