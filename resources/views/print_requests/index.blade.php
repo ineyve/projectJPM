@@ -17,10 +17,8 @@
                             </div>
                             <div class="col-xs-6">
                                 <input type="text" id="myInput" onkeyup="filter()" placeholder="Search any column...">
+                                <a class="btn btn-primary offset" href="{{route('requests.create')}}" style="float:right;">Add Request</a>
                             </div>
-                        </div>
-                        <div style="float:right;">
-                            <a class="btn btn-primary offset" href="{{route('requests.create')}}">Add Request</a>
                         </div>
                     <table class="table table-striped table-hover sortable" id="myTable">
                     <thead>

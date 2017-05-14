@@ -16,9 +16,7 @@
                         </div>
                         <div class="col-xs-6">
                             <input type="text" id="myInput" onkeyup="filter()" placeholder="Search any column...">
-                        </div>
-                        <div style="float: right;">
-                            <a class="btn btn-primary side-offset" href="{{ route('users.create') }}">Add user</a>
+                            <a class="btn btn-primary side-offset" href="{{ route('users.create') }}" style="float: right;">Add user</a>
                         </div>
                         <table class="table table-striped sortable" id="myTable">
                             <thead>
