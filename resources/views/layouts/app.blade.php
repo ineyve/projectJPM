@@ -35,7 +35,6 @@
                     </button>
 
                     <!-- Branding Image -->
-
                     <a class="navbar-brand">
                         <img src="/logo.png"style="width:20px;height:20px;">
                     </a>
@@ -45,12 +44,15 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-
                     </ul>
-
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
-                        <input type="text" id="navSearch" onkeyup="search()" placeholder="Search Profiles">
+                        <input type="text" list="users" id="navSearch" oninput='onInput()' placeholder="Search Profiles">
+                        <datalist id="users">
+                            @foreach($users as $user)
+                                <option value="{{$user->name}}" href="{{ route('users.profile', $user) }}">
+                            @endforeach
+                        </datalist>
                         <li><a href="{{ url('/') }}">Home</a></li>
                         <!-- Authentication Links -->
                         @if (Auth::guest())
@@ -77,10 +79,23 @@
                 </div>
             </div>
         </nav>
-
     </div>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+        function onInput() {
+            var link;
+            var val = document.getElementById("navSearch").value;
+            var opts = document.getElementById('users').childNodes;
+            for (var i = 0; i < opts.length; i++) {
+                if (opts[i].value === val) {
+                    link=opts[i].outerHTML.split('href="')[1].split('">');;
+                    window.location = link[0];
+                    break;
+                }
+            }
+        }
+    </script>
 </body>
 </html>

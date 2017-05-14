@@ -229,8 +229,17 @@ table.sortable thead{
 .profile{
     margin-bottom: 20px;
     border-bottom: #777777 dotted;
-    padding-left: 30px;
+    padding-left: 80px;
     padding-right: 80px;
+}
+
+#profile-user{
+    margin-bottom: 0;
+    border-bottom: none;
+}
+
+.profile>li{
+    font-size: 16px;
 }
 
 .profile-picture{

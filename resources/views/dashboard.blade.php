@@ -9,20 +9,29 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
+                <div class="panel-heading">
                 @if(substr($user->name, -1) == 's')
-                    <div class="panel-heading">{{$user->name}}' Profile</div>
+                    {{$user->name}}'
                 @else
-                    <div class="panel-heading">{{$user->name}}'s Profile</div>
+                    {{$user->name}}'s
                 @endif
+                Profile (User {{$user->id}})</div>
                 <div class="panel-body">
                     <div class="profile">
                         <img class="profile-picture" src="/profile.jpg">
-                        <p>Telefone</p>
-                        <p>e-mail</p>
-                        <p>Total Requests</p>
-                        <p>Member for 3 years</p>
-                        <p>Average Satisfaction Grade?</p>
-                        <br><br><br><br>
+                        <li>Phone Number: {{$user->phone}}</li>
+                        <li>E-mail address: {{$user->email}}</li>
+                        <li>Department: {{App\Department::find($user->department_id)->name}}</li>
+                        <li>Total Requests: {{$user->print_counts}}</li>
+                        <li>Member for: {{$user->memberFor()}}</li>
+                        <li>Average Satisfaction Grade:
+                            @for($i=0; $i < $user->averageRating()-0.5; $i++)
+                                <img src="/star.png" style="width:24px;height:24px;">
+                            @endfor
+                        </li>
+                        <li>Admin: {{$user->adminToStr()}}</li>
+                        <li>Blocked: {{$user->blockedToStr()}}</li>
+                        <br><br>
                     </div>
                     <div style="float: right;">
                         <a class="btn btn-success side-offset" href="{{route('requests.create')}}">Edit Profile</a>
@@ -36,7 +45,7 @@
                                 <th>Request Number</th>
                                 <th>Description</th>
                                 <th>File</th>
-                                <th class=" sorttable_sorted">Status<span id="sorttable_sortfwdind">&nbsp;▾</span></th>
+                                <th>Status<span id="sorttable_sortfwdind">&nbsp;▾</span></th>
                                 <th class="sorttable_nosort"></th>
                             </tr>
                             </thead>
