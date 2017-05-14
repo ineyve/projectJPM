@@ -47,19 +47,20 @@
                     </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
+                        @if (!Auth::guest())
                         <input type="text" list="users" id="navSearch" oninput='onInput()' placeholder="Search Profiles">
                         <datalist id="users">
                             @foreach($users as $user)
                                 <option value="{{$user->name}}" href="{{ route('users.profile', $user) }}">
                             @endforeach
                         </datalist>
+                        @endif
                         <li><a href="{{ url('/') }}">Home</a></li>
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
-
                             @if(Auth::user()->admin == 1)
                                 <li> <a href="{{ url('requests') }}">Requests</a></li>
                                 <li> <a href="{{ url('users') }}">Users</a></li>
