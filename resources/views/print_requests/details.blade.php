@@ -171,7 +171,7 @@
                     @foreach($comments as $comment)
                     <div class="comment">
                         <a href="{{ route('users.profile', $comment->user_id) }}"><img class="comment-picture" src="/profile.jpg"></a>
-                        <p><a href="{{ route('users.profile', $comment->user_id) }}">{{$comment->user_id}}</a> &nbsp&nbsp&nbsp&nbsp{{ $comment->created_at }}</p>
+                        <p><a href="{{ route('users.profile', $comment->user_id) }}">{{$comment->user->name}}</a> &nbsp&nbsp&nbsp&nbsp{{ $comment->created_at }}</p>
                         <p>{{$comment->comment}}</p>
                     </div>
                     @endforeach
