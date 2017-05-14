@@ -79,21 +79,6 @@
                                 <td>Status</td>
                                 <td>{{$request->statusToStr()}}</td>
                             </tr>
-
-                            <tr>
-                                <td>Comments</td>
-                                <td>
-                                @php($count=count($comments))
-                                @foreach($comments as $comment)
-                                        @if (--$count > 0)
-                                            {{$comment->comment}},
-                                        @else
-                                            {{$comment->comment}}
-                                        @endif
-                                @endforeach
-                                </td>
-                            </tr>
-
                             @if($request->due_date != null)
                                 <tr>
                                     <td>Due Date</td>
@@ -182,20 +167,28 @@
                         @if($request->status == 3)
                             <a class="btn btn-info" href="{{route('requests.status', ['request' => $request, 'status' => 4, 'from' => 1])}}">Complete</a>
                         @endif
-                        @if($request->status == 4)
-                            <a class="btn btn-primary" href='javascript:showComment()' id="buttonComment">Comment</a>
-                                <form action="{{route('requests.comment', $request, $comment)}}" method="post" class="form-group">
-                                    {{ csrf_field() }}
-                                    <div class="form-group" id="comment" style="display:none">
-                                        <label for="inputComment">Comment</label>
-                                        <textarea class="form-control" name="comment" id="inputComment"></textarea>
-                                    </div>
-                                    <div class="form-group" id="submitComment" style="display:none">
-                                        <button type="submit" class="btn btn-primary side-offset">Comment</button>
-                                        <a class="btn btn-default" href='javascript:hideComment()' id="cancelComment">Cancel</a>
-                                    </div>
-                                </form>
-                        @endif
+                    @endif
+                    @foreach($comments as $comment)
+                    <div class="comment">
+                        <a href="{{ route('users.profile', $comment->user_id) }}"><img class="comment-picture" src="/profile.jpg"></a>
+                        <p><a href="{{ route('users.profile', $comment->user_id) }}">{{$comment->user_id}}</a> &nbsp&nbsp&nbsp&nbsp{{ $comment->created_at }}</p>
+                        <p>{{$comment->comment}}</p>
+                    </div>
+                    @endforeach
+
+                    @if($request->status == 4)
+                        <a class="btn btn-primary" href='javascript:showComment()' id="buttonComment">Comment</a>
+                        <form action="{{route('requests.comment', $request)}}" method="post" class="form-group">
+                            {{ csrf_field() }}
+                            <div class="form-group" id="comment" style="display:none">
+                                <label for="inputComment">Comment</label>
+                                <textarea class="form-control" name="comment" id="inputComment"></textarea>
+                            </div>
+                            <div class="form-group" id="submitComment" style="display:none">
+                                <button type="submit" class="btn btn-primary side-offset">Comment</button>
+                                <a class="btn btn-default" href='javascript:hideComment()' id="cancelComment">Cancel</a>
+                            </div>
+                        </form>
                     @endif
                 </div>
             </div>
