@@ -104,7 +104,7 @@ class RequestController extends Controller
 
     public function download(Request $request)
     {
-        return Response::download($request->file);
+        return Response::download('../storage/app/' . $request->file);
     }
 
 
