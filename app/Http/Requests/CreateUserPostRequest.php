@@ -28,7 +28,7 @@ class CreateUserPostRequest extends FormRequest
                 'email' => 'required|email|unique:users',
                 'phone' => 'required|numeric|size:9',
                 'password' => 'required|min:8|confirmed',
-                'department_id' => 'required'
+                'department_id' => 'required|exists:departments'
         ];
     }
 }

@@ -76,7 +76,7 @@ class RegisterController extends Controller
             'department_id' => $data['department_id'],
             'email_token' => str_random(10),
             'admin' => 0,
-            'blocked' => 1,
+            'blocked' => 0,
             'print_evals' => 0,
             'print_counts' => 0,
         ]);

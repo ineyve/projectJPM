@@ -17,6 +17,7 @@
                             </div>
                             <div class="col-xs-6">
                                 <input type="text" id="myInput" onkeyup="filter()" placeholder="Search any column...">
+                                <a class="btn "
                                 <a class="btn btn-primary offset" href="{{route('requests.create')}}" style="float:right;">Add Request</a>
                             </div>
                         </div>
