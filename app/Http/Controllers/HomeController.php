@@ -29,8 +29,8 @@ class HomeController extends Controller
         /* END */
 
 
-        $grayScale = Request::where('colored','=','0')->whereIn('status', [2,3,4])->count(); //Amount of grayscale prints
-        $colored = Request::where('colored','=','1')->whereIn('status', [2,3,4])->count(); //Amount of colored prints
+        $grayScale = Request::where('colored','=','0')->where('status', 0)->where('closed_date', '!=', null)->sum('quantity'); //Amount of grayscale prints
+        $colored = Request::where('colored','=','1')->where('status', 0)->where('closed_date', '!=', null)->sum('quantity'); //Amount of colored prints
         $total = $colored + $grayScale;
 
         if($total != 0) {
@@ -50,7 +50,7 @@ class HomeController extends Controller
 
     public function getPrintsPerDepartment()
     {
-        return DB::select(DB::raw("SELECT d.name AS depname, u.department_id AS dep_id, count(department_id) AS cnt FROM (SELECT * FROM requests WHERE status = 2 OR status = 3) r JOIN users u ON r.owner_id = u.id JOIN departments d ON d.id = u.department_id GROUP BY u.department_id"));
+        return DB::select(DB::raw("SELECT d.name AS depname, u.department_id AS dep_id, sum(quantity) AS cnt FROM (SELECT * FROM requests WHERE status = 0 AND closed_date IS NOT NULL) r JOIN users u ON r.owner_id = u.id JOIN departments d ON d.id = u.department_id GROUP BY u.department_id"));
     }
 
     public function autoLabelSpaces($string) //Prevents bar graph's labels from being cut off
