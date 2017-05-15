@@ -7,6 +7,7 @@ use App\Comment;
 use App\Http\Requests\StoreCommentPostRequest;
 use App\Http\Requests\StoreRefusePostRequest;
 use App\Http\Requests\StoreRequestPostRequest;
+use Illuminate\Http\UploadedFile;
 
 use App\Request;
 
@@ -34,7 +35,12 @@ class RequestController extends Controller
         $request = new Request();
         $request->owner_id = Auth::user()->id;
         $request->status = 0;
+        $request->open_date = Carbon::now();
         $request->fill($req->all()); // o metodo fill preeenche todos os campos logo
+        $file = $req->file('file');
+        dd($file);
+        $path = $file->store('files');
+        $request->file=$path;
         $request->save();
         return redirect()->route('requests.index')->with('success', 'Request added sucessfuly!');
     }

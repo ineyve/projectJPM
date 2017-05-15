@@ -56,6 +56,7 @@ Route::post('requests/{request}/refuse', 'RequestController@refuse')->name('requ
 
 //Comment
 Route::post('requests/{request}/details/comment', 'CommentController@create')->name('requests.comment')->middleware('can:user');
+Route::post('requests/{request}/details/comment/{comment}/reply', 'CommentController@reply')->name('requests.reply')->middleware('can:user');
 
 
 // Users

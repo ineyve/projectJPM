@@ -264,6 +264,7 @@ table.sortable thead{
 }
 
 .comment{
+    position: relative;
     margin-top: 10px;
     background-color: rgba(255,255,255,0.5);
     padding-bottom: 1px;
@@ -278,6 +279,34 @@ table.sortable thead{
     padding-top: 10px;
 }
 
-#date{
-    text-align:right;
+.reply{
+    margin-left: 75px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    background-color: rgba(255,255,255,0.5);
+    padding-bottom: 1px;
+}
+
+.reply>p{
+    margin-left: 80px;
+    font-size: 16px;
+}
+
+.reply>p.first{
+    padding-top: 10px;
+}
+
+
+#buttonReply{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+#submitReply{
+    margin-left: 15px;
+}
+
+textarea {
+    resize: vertical;
 }

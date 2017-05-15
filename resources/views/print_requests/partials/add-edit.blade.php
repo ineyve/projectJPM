@@ -14,19 +14,6 @@
 </div>
 
 <div class="form-group">
-<label for="inputOpenDate">Open Date</label>
-    <input
-        type="date" class="form-control"
-        name="open_date" id="inputOpenDate" 
-        @if(Route::currentRouteName()=='requests.create')
-            value="{{old('open_date')}}"
-        @else(Route::currentRouteName()=='requests.edit')
-            value="{{$request->open_date}}"
-        @endif
-    />
-</div>
-
-<div class="form-group">
 <label for="inputDueDate">Due Date</label>
     <input
         type="date" class="form-control"
@@ -126,4 +113,3 @@
         @endif
     />
 </div>
-

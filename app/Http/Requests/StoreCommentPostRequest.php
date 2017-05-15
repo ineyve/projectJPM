@@ -25,6 +25,7 @@ class StoreCommentPostRequest extends FormRequest
     {
         return [
             'comment'=>'regex:/^[a-zA-Z0-9 ]+$/',
+            'reply'=>'regex:/^[a-zA-Z0-9 ]+$/',
         ];
     }
 }

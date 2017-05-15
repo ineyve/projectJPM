@@ -25,15 +25,13 @@ class StoreRequestPostRequest extends FormRequest
     {
         return [
             'id'=>'unique',
-            'description'=>'required|regex:/^[a-zA-Z ]+$/', 
-            'open_date'=>'required|date',  
+            'description'=>'required|regex:/^[a-zA-Z ]+$/',
             'quantity'=>'required|alpha_num',
             'colored'=>'required',
             'stapled'=>'required',
             'paper_size'=>'required',
             'paper_type'=>'required',
             'file'=>'required',
-            
         ];
     }
 }

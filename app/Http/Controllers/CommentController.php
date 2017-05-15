@@ -25,8 +25,25 @@ class CommentController extends Controller
         $comment->request_id = $request->id;
         $comment->user_id = Auth::user()->id;
         $comment->save();
-        $comments = Comment::where('request_id', '=', $request->id)->orderBy('created_at')->get();
 
+        $comments = Comment::where('request_id', '=', $request->id)->orderBy('created_at')->get();
+        $admin=0;
+        if (Auth::user()->admin)
+            $admin = 1;
+        return view('print_requests.details', compact('request', 'admin', 'comments'));
+    }
+
+    public function reply(StoreCommentPostRequest $req, Request $request, Comment $comment)
+    {
+        $reply = new Comment();
+        $reply->comment = $req->reply;
+        $reply->blocked = 0;
+        $reply->request_id = $request->id;
+        $reply->user_id = Auth::user()->id;
+        $reply->parent_id = $comment->id;
+        $reply->save();
+
+        $comments = Comment::where('request_id', '=', $request->id)->orderBy('created_at')->get();
         $admin=0;
         if (Auth::user()->admin)
             $admin = 1;

@@ -2,7 +2,7 @@
 
 @section('content')
 
-<form action="{{route('requests.store')}}" method="post" class="form-group">
+<form action="{{route('requests.store')}}" method="post" class="form-group" enctype="multipart/from-data">
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">

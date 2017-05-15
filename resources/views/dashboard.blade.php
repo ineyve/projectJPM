@@ -68,7 +68,7 @@
                                             @if($request->satisfaction_grade == '')
                                                 @php($request->satisfaction_grade = 0)
                                             @endif
-                                            <td><div id="star{{++$i}}" class="c-rating"></div></td>
+                                            <td><div id="star{{++$i}}" class="c-rating" style="width: 100px;"></div></td>
                                         @elseif($request->status == -1)
                                             <td><form action="{{route('requests.destroy',$request)}}" method="post" class="inline">
                                                     {{method_field('DELETE')}}
