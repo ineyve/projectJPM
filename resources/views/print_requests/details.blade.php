@@ -72,7 +72,7 @@
                             
                             <tr>
                                 <td>File</td>
-                                <td>{{$request->file}}</td>
+                                <td><a class="btn btn-sm btn-success" href="{{route('requests.download', $request)}}">Download</a></td>
                             </tr>
                             
                             <tr>
