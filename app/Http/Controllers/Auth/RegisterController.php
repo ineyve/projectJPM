@@ -75,7 +75,7 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
             'department_id' => $data['department_id'],
             'admin' => 0,
-            'blocked' => 0,
+            'blocked' => 2,
             'print_evals' => 0,
             'print_counts' => 0,
         ]);

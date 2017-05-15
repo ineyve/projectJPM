@@ -21,7 +21,7 @@
                         <li>Total Requests: {{$user->print_counts}}</li>
                         <li>Member for: {{$user->memberFor()}}</li>
                         <li>Average Satisfaction Grade:
-                            @for($i=0; $i < $user->averageRating()-0.5; $i++)
+                            @for($i=0; $i < $user->averageRating(); $i++)
                                 <img src="/star.png" style="width:24px;height:24px;">
                             @endfor
                         </li>

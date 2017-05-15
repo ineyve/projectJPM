@@ -25,7 +25,7 @@
                         <li>Total Requests: {{$user->print_counts}}</li>
                         <li>Member for: {{$user->memberFor()}}</li>
                         <li>Average Satisfaction Grade:
-                            @for($i=0; $i < $user->averageRating()-0.5; $i++)
+                            @for($i=0; $i < $user->averageRating(); ++$i)
                                 <img src="/star.png" style="width:24px;height:24px;">
                             @endfor
                         </li>
@@ -68,7 +68,7 @@
                                             @if($request->satisfaction_grade == '')
                                                 @php($request->satisfaction_grade = 0)
                                             @endif
-                                            <td><div id="star{{++$i}}" class="c-rating" style="width: 100px;"></div></td>
+                                            <td><div id="star{{++$i}}" class="c-rating" style="width: 120px;"></div></td>
                                         @elseif($request->status == -1)
                                             <td><form action="{{route('requests.destroy',$request)}}" method="post" class="inline">
                                                     {{method_field('DELETE')}}

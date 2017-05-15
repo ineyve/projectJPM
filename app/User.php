@@ -72,18 +72,12 @@ class User extends Authenticatable
     }
 
     public function averageRating(){
-        $average=0;
-        $count=0;
-        foreach($this->requests()->get() as $request){
-            if($request->satisfaction_grade != '') {
-                $average += $request->satisfaction_grade;
-                ++$count;
-            }
-        }
+        $average = $this->requests()->where('satisfaction_grade', '!=', '')->sum('satisfaction_grade');
+        $count = $this->requests()->where('satisfaction_grade', '!=', '')->count();
         if($count == 0)
-            return $count;
+            return 0;
         else
-            return $average/$count;
+            return round($average/$count);
     }
 
     public function adminToStr(){
