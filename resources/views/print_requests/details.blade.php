@@ -190,7 +190,7 @@
                     @endif
                     @if($user == $request->owner_id || $admin)
                         @foreach($comments as $comment)
-                            @if($comment->parent_id == '')
+                            @if($comment->parent_id == '' && $comment->blocked == 0)
                                 <div class="comment">
                                     <a href="{{ route('users.profile', $comment->user_id) }}"><img class="comment-picture" src="/profile.jpg"></a>
                                     <p class="first"><a href="{{route('users.profile', $comment->user_id)}}">{{$comment->user->name}}</a> &nbsp&nbsp&nbsp&nbsp{{$comment->created_at}}</p>
