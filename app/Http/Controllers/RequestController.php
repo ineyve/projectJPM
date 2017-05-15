@@ -51,11 +51,12 @@ class RequestController extends Controller
     public function details(Request $request)
     {
         $admin = 0;
+        $user = Auth::user()->id;
         $comments = Comment::where('request_id', '=', $request->id)->orderBy('created_at')->get();
         if (Auth::user()->admin)
             $admin = 1;
-        if ($request->owner_id == Auth::user()->id || $admin) {
-            return view('print_requests.details', compact('request', 'admin', 'comments'));
+        if ($request->owner_id == $user || $admin) {
+            return view('print_requests.details', compact('request', 'admin', 'comments', 'user'));
         } else
             abort(403);
     }
@@ -97,7 +98,6 @@ class RequestController extends Controller
         Storage::delete($request->file);
         $request->delete();
         return redirect()->route('dashboard')->with('success', 'request deleted successfully');
-
     }
 
     public function download(Request $request)

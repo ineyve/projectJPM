@@ -113,17 +113,46 @@
                                     <td>{{$request->refused_reason}}</td>
                                 </tr>
                             @endif
-
-                            @if($request->satisfaction_grade != null)
-                                <tr>
-                                    <td>Satisfaction Grade</td>
-                                    <td>
-                                        @for($i=0; $i < $request->satisfaction_grade; $i++)
-                                            <img src="/star.png" style="width:24px;height:24px;">
-                                        @endfor
-                                    </td>
-                                </tr>
-                            @endif
+                            <tr>
+                                <td>Satisfaction Grade</td>
+                                <td>
+                                @if($request->status == 0 && !is_null($request->closed_date) && $user == $request->owner_id)
+                                    @if($request->satisfaction_grade == '')
+                                        @php($request->satisfaction_grade = 0)
+                                    @endif
+                                    <center><div id="star" class="c-rating" style="width: 100px;"></div></center>
+                                @else
+                                    @for($i=0; $i < $request->satisfaction_grade; $i++)
+                                        <img src="/star.png" style="width:24px;height:24px;">
+                                    @endfor
+                                @endif
+                                </td>
+                            </tr>
+                            <script src="/js/rating.js"></script>
+                            <script>
+                                var el = document.querySelector('#star');
+                                var currentRating={{$request->satisfaction_grade}}
+                                var maxRating= 5;
+                                var callback = function(rating) {
+                                    switch(rating) {
+                                        case 1:
+                                            window.location="{{ route('requests.rating', [$request, 'rating' => 1])}}";
+                                            break;
+                                        case 2:
+                                            window.location="{{ route('requests.rating', [$request, 'rating' => 2])}}";
+                                            break;
+                                        case 3:
+                                            window.location="{{ route('requests.rating', [$request, 'rating' => 3])}}";
+                                            break;
+                                        case 4:
+                                            window.location="{{ route('requests.rating', [$request, 'rating' => 4])}}";
+                                            break;
+                                        default:
+                                            window.location="{{ route('requests.rating', [$request, 'rating' => 5])}}";
+                                    }
+                                };
+                                var myRating = rating(el, currentRating, maxRating, callback);
+                            </script>
 
                             @if($request->created_at != null)
                                 <tr>
@@ -159,37 +188,37 @@
                             </form>
                         @endif
                     @endif
-                    @foreach($comments as $comment)
-                        @if($comment->parent_id == '')
-                            <div class="comment">
-                                <a href="{{ route('users.profile', $comment->user_id) }}"><img class="comment-picture" src="/profile.jpg"></a>
-                                <p class="first"><a href="{{route('users.profile', $comment->user_id)}}">{{$comment->user->name}}</a> &nbsp&nbsp&nbsp&nbsp{{$comment->created_at}}</p>
-                                <p>{{$comment->comment}}</p>
-                                <a class="btn btn-xs btn-primary" href='javascript:showReply()' id="buttonReply">Reply</a>
-                                <form action="{{route('requests.reply', ['request' => $request, 'comment' => $comment])}}" method="post" class="form-group">
-                                    {{ csrf_field() }}
-                                    <div class="form-group" id="reply" style="display:none; margin-left: 10px; margin-right: 10px;">
-                                        <label for="inputReply">Reply</label>
-                                        <textarea class="form-control" name="reply" id="inputReply"></textarea>
-                                    </div>
-                                    <div class="form-group" id="submitReply" style="display:none">
-                                        <button type="submit" class="btn btn-xs btn-primary side-offset">Reply</button>
-                                        <a class="btn btn-xs btn-default" href='javascript:hideReply()' id="cancelReply">Cancel</a>
-                                    </div>
-                                </form>
-                            @foreach($comments as $reply)
-                                @if($reply->parent_id == $comment->id)
-                                        <div class="reply">
-                                            <a href="{{ route('users.profile', $reply->user_id) }}"><img class="comment-picture" src="/profile.jpg"></a>
-                                            <p class="first"><a href="{{route('users.profile', $reply->user_id)}}">{{$reply->user->name}}</a> &nbsp&nbsp&nbsp&nbsp{{$reply->created_at}}</p>
-                                            <p>{{$reply->comment}}</p>
+                    @if($user == $request->owner_id || $admin)
+                        @foreach($comments as $comment)
+                            @if($comment->parent_id == '')
+                                <div class="comment">
+                                    <a href="{{ route('users.profile', $comment->user_id) }}"><img class="comment-picture" src="/profile.jpg"></a>
+                                    <p class="first"><a href="{{route('users.profile', $comment->user_id)}}">{{$comment->user->name}}</a> &nbsp&nbsp&nbsp&nbsp{{$comment->created_at}}</p>
+                                    <p>{{$comment->comment}}</p>
+                                    <a class="btn btn-xs btn-primary" href='javascript:showReply()' id="buttonReply">Reply</a>
+                                    <form action="{{route('requests.reply', ['request' => $request, 'comment' => $comment])}}" method="post" class="form-group">
+                                        {{ csrf_field() }}
+                                        <div class="form-group" id="reply" style="display:none; margin-left: 10px; margin-right: 10px;">
+                                            <label for="inputReply">Reply</label>
+                                            <textarea class="form-control" name="reply" id="inputReply"></textarea>
                                         </div>
-                                @endif
-                            @endforeach
-                            </div>
-                        @endif
-                    @endforeach
-                    @if($request->status == 0 && !is_null($request->closed_date))
+                                        <div class="form-group" id="submitReply" style="display:none">
+                                            <button type="submit" class="btn btn-xs btn-primary side-offset">Reply</button>
+                                            <a class="btn btn-xs btn-default" href='javascript:hideReply()' id="cancelReply">Cancel</a>
+                                        </div>
+                                    </form>
+                                @foreach($comments as $reply)
+                                    @if($reply->parent_id == $comment->id)
+                                            <div class="reply">
+                                                <a href="{{ route('users.profile', $reply->user_id) }}"><img class="comment-picture" src="/profile.jpg"></a>
+                                                <p class="first"><a href="{{route('users.profile', $reply->user_id)}}">{{$reply->user->name}}</a> &nbsp&nbsp&nbsp&nbsp{{$reply->created_at}}</p>
+                                                <p>{{$reply->comment}}</p>
+                                            </div>
+                                    @endif
+                                @endforeach
+                                </div>
+                            @endif
+                        @endforeach
                         <br>
                         <a class="btn btn-primary" href='javascript:showComment()' id="buttonComment">Comment</a>
                         <form action="{{route('requests.comment', $request)}}" method="post" class="form-group">
