@@ -36,8 +36,9 @@ class RequestController extends Controller
         $request->owner_id = Auth::user()->id;
         $request->status = 0;
         $request->fill($req->all()); // o metodo fill preeenche todos os campos logo
-        $path = $req->file('file')->store('files');
-        $request->file = $path;
+        $path = $req->file('file')->store('print-jobs/'.$request->owner_id);
+        $parts = explode('/', $path);
+        $request->file = $parts[2];
         $request->save();
         return redirect()->route('requests.index')->with('success', 'Request added sucessfuly!');
     }
@@ -101,6 +102,6 @@ class RequestController extends Controller
 
     public function download(Request $request)
     {
-        return Response::download('../storage/app/'.$request->file);
+        return Response::download('../storage/app/print-jobs/'.$request->owner_id.'/'.$request->file);
     }
 }
