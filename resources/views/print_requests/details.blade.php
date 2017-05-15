@@ -143,8 +143,8 @@
                     </table>
                     
                     @if($admin)
-                        @if($request->status == 0)
-                            <a class="btn btn-success side-offset" href="{{route('requests.status', ['request' => $request, 'status' => 1, 'from' => 1])}}" id="buttonAccept">Accept</a>
+                        @if($request->status == 0 && is_null($request->closed_date))
+                            <a class="btn btn-success side-offset" href="{{route('requests.complete', ['request' => $request, 'from' => 0])}}" id="buttonAccept">Complete</a>
                             <a class="btn btn-danger" href='javascript:showRefuse()' id="buttonRefuse">Refuse</a>
                             <form action="{{route('requests.refuse', $request)}}" method="post" class="form-group">
                                 {{ csrf_field() }}
@@ -157,15 +157,6 @@
                                     <a class="btn btn-default" href='javascript:hideRefuse()' id="cancelRefuse">Cancel</a>
                                 </div>
                             </form>
-                        @endif
-                        @if($request->status == 1)
-                            <a class="btn btn-warning" href="{{route('requests.status', ['request' => $request, 'status' => 2, 'from' => 1])}}">Progress</a>
-                        @endif
-                        @if($request->status == 2)
-                            <a class="btn btn-primary" href="{{route('requests.status', ['request' => $request, 'status' => 3, 'from' => 1])}}">Ready</a>
-                        @endif
-                        @if($request->status == 3)
-                            <a class="btn btn-info" href="{{route('requests.status', ['request' => $request, 'status' => 4, 'from' => 1])}}">Complete</a>
                         @endif
                     @endif
                     @foreach($comments as $comment)
@@ -198,7 +189,7 @@
                             </div>
                         @endif
                     @endforeach
-                    @if($request->status == 4)
+                    @if($request->status == 0 && !is_null($request->closed_date))
                         <br>
                         <a class="btn btn-primary" href='javascript:showComment()' id="buttonComment">Comment</a>
                         <form action="{{route('requests.comment', $request)}}" method="post" class="form-group">

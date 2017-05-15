@@ -35,7 +35,6 @@ class RequestController extends Controller
         $request = new Request();
         $request->owner_id = Auth::user()->id;
         $request->status = 0;
-        $request->open_date = Carbon::now();
         $request->fill($req->all()); // o metodo fill preeenche todos os campos logo
         $path = $req->file('file')->store('files');
         $request->file = $path;
@@ -60,14 +59,12 @@ class RequestController extends Controller
             abort(403);
     }
 
-    public function status(Request $request, $status, $from)
+    public function complete(Request $request, $from)
     {
-        $request->status = $status;
-        if ($status == -1 || $status == 4) {
-            $request->closed_date = Carbon::now();
-            $request->closed_user_id = Auth::user()->id;
-        }
+        $request->closed_date = Carbon::now();
+        $request->closed_user_id = Auth::user()->id;
         $request->save();
+
         if ($from == 0)
             return redirect()->route('requests.index')->with('success', 'Status changed sucessfuly!');
         else
@@ -84,13 +81,13 @@ class RequestController extends Controller
 
     public function refuse(StoreRefusePostRequest $req, Request $request)
     {
-        $request->status = -1;
+        $request->status = 1;
+        $request->closed_date = Carbon::now();
+        $request->closed_user_id = Auth::user()->id;
         $request->refused_reason = $req->refused_reason;
         $request->save();
 
-        $admin = 0;
-        if (Auth::user()->admin)
-            $admin = 1;
+        $admin = 1;
         return view('print_requests.details', compact('request', 'admin'));
     }
 
@@ -104,9 +101,6 @@ class RequestController extends Controller
 
     public function download(Request $request)
     {
-        return Response::download('../storage/app/' . $request->file);
+        return Response::download('../storage/app/print-jobs/' . $request->file);
     }
-
-
-    
 }

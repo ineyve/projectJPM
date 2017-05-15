@@ -21,28 +21,15 @@ class Request extends Model
     ];
 
     public function statusToStr(){
-        switch($this->status){
-            case -1: return 'Rejected';
-                break;
-            case 0: return 'Pending';
-                break;
-            case 1: return 'Accepted';
-                break;
-            case 2: return 'In Progress';
-                break;
-            case 3: return 'Ready';
-                break;
-
-        }
-        return 'Complete';
+        if($this->status)
+            return 'Rejected';
+        if($this->closed_date != '')
+            return 'Complete';
+        else
+            return 'In Progress';
     }
 
     public function coloredToStr(){
-       // if($this->colored)
-        //    return 'True';
-       // else
-        //    return 'False';
-
         if($this->colored == 1){
             return 'Color';
         }

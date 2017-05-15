@@ -35,7 +35,7 @@ class User extends Authenticatable
 
     public function verified()
     {
-        $this->blocked = 0;
+        $this->activated = 1;
         $this->save();
     }
 

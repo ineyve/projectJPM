@@ -25,7 +25,7 @@ class UserController extends Controller
     public function create()
     {
         $user = new User;
-        $user->admin = 0; //!!!!!!!!!
+        $user->admin = 0;
         return view('users.add', compact('user'));
     }
 

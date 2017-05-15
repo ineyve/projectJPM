@@ -53,7 +53,7 @@
                             @php($i=0)
                             @foreach ($requests as $request)
                                 <tr>
-                                    @if($request->status == 0)
+                                    @if($request->status == 0 && is_null($request->closed_date))
                                         <td><a href="{{route('requests.edit', $request)}}">{{$request->id}}</a></td>
                                         <td><a href="{{route('requests.edit', $request)}}">{{$request->description}}</a></td>
                                         <td><a href="{{route('requests.edit', $request)}}">{{$request->file}}</a></td>

@@ -50,7 +50,7 @@ Route::post('requests/create', 'RequestController@store')->name('requests.store'
 Route::get('requests/{request}/edit', 'RequestController@edit')->name('requests.edit')->middleware('can:admin');
 Route::post('requests/{request}/edit', 'RequestController@update')->name('requests.update')->middleware('can:admin');
 Route::delete('requests/{request}', 'RequestController@destroy')->name('requests.destroy')->middleware('can:admin');
-Route::get('requests/{request}/{status}/{from}', 'RequestController@status')->name('requests.status')->middleware('can:admin');
+Route::get('requests/{request}/{from}', 'RequestController@complete')->name('requests.complete')->middleware('can:admin');
 Route::post('requests/{request}/refuse', 'RequestController@refuse')->name('requests.refuse')->middleware('can:admin');
 Route::get('requests/{request}/download', 'RequestController@download')->name('requests.download')->middleware('can:user');
 

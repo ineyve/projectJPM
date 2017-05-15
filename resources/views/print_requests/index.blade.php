@@ -17,7 +17,6 @@
                             </div>
                             <div class="col-xs-6">
                                 <input type="text" id="myInput" onkeyup="filter()" placeholder="Search any column...">
-                                <a class="btn "
                                 <a class="btn btn-primary offset" href="{{route('requests.create')}}" style="float:right;">Add Request</a>
                             </div>
                         </div>
@@ -41,17 +40,8 @@
                             <td><a href="{{route('requests.details', $request)}}">{{$request->date()}}</a></td>
                             <td><a href="{{route('requests.details', $request)}}">{{$request->statusToStr()}}</a></td>
                             <td>
-                                @if($request->status == 0)
-                                    <a class="btn btn-xs btn-success" href="{{route('requests.status', ['request' => $request, 'status' => 1, 'from' => 0])}}">Accept</a>
-                                @endif
-                                @if($request->status == 1)
-                                    <a class="btn btn-xs btn-warning" href="{{route('requests.status', ['request' => $request, 'status' => 2, 'from' => 0])}}">Progress</a>
-                                @endif
-                                @if($request->status == 2)
-                                    <a class="btn btn-xs btn-primary" href="{{route('requests.status', ['request' => $request, 'status' => 3, 'from' => 0])}}">Ready</a>
-                                @endif
-                                @if($request->status == 3)
-                                    <a class="btn btn-xs btn-info" href="{{route('requests.status', ['request' => $request, 'status' => 4, 'from' => 0])}}">Complete</a>
+                                @if($request->status == 0 && is_null($request->closed_date))
+                                    <a class="btn btn-xs btn-success" href="{{route('requests.complete', ['request' => $request, 'from' => 0])}}">Complete</a>
                                 @endif
                             </td>
                         </tr>
