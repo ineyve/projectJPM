@@ -101,6 +101,6 @@ class RequestController extends Controller
 
     public function download(Request $request)
     {
-        return Response::download('../storage/app/print-jobs/' . $request->file);
+        return Response::download('../storage/app/'.$request->file);
     }
 }
