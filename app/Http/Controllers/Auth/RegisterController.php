@@ -74,7 +74,6 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'department_id' => $data['department_id'],
-            'email_token' => str_random(10),
             'admin' => 0,
             'blocked' => 0,
             'print_evals' => 0,
@@ -103,7 +102,7 @@ class RegisterController extends Controller
         {
             $user = $this->create($request->all());
             // After creating the user send an email with the random token generated in the create method above
-            $email = new EmailVerification(new User(['email_token' => $user->email_token, 'name' => $user->name]));
+            $email = new EmailVerification($user);
             Mail::to($user->email)->send($email);
             DB::commit();
             return redirect()->route('home')->with('success', 'user created successfully');
@@ -115,11 +114,13 @@ class RegisterController extends Controller
         }
     }
 
-    public function verify($token)
+    public function verify($userid, $token)
     {
         // The verified method has been added to the user model and chained here
         // for better readability
-        User::where('email_token',$token)->firstOrFail()->verified();
+        $user = User::where('id', $userid)->first();
+        if(hash('md5', $user->created_at) == $token)
+            $user->verified();
         return redirect()->route('login')->with('success', 'email verified successfully');
     }
 }

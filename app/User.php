@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'phone', 'department_id', 'email_token', 'verified', 'password', 'admin', 'blocked', 'print_evals', 'print_counts'
+        'name', 'email', 'phone', 'department_id', 'password', 'admin', 'blocked', 'print_evals', 'print_counts'
     ];
 
     /**
@@ -35,8 +35,7 @@ class User extends Authenticatable
 
     public function verified()
     {
-        $this->verified = 1;
-        $this->email_token = null;
+        $this->blocked = 0;
         $this->save();
     }
 

@@ -20,7 +20,7 @@ Route::get('/', 'HomeController@homeGraph')->name('home');
 //*********Laravel Auth Routes****************
 // Authentication Routes
 Auth::routes();
-Route::get('register/verify/{token}', 'Auth\RegisterController@verify');
+Route::get('register/{userid}/verify/{token}', 'Auth\RegisterController@verify');
 /*
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
