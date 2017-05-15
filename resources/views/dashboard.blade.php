@@ -64,11 +64,11 @@
                                         <td><a href="{{route('requests.details', $request)}}">{{$request->file}}</a></td>
                                         <td><a href="{{route('requests.details', $request)}}">{{$request->statusToStr()}}</a></td>
                                     @endif
-                                        @if($request->status == 4)
+                                        @if($request->status == 0 && !is_null($request->closed_date))
                                             @if($request->satisfaction_grade == '')
                                                 @php($request->satisfaction_grade = 0)
                                             @endif
-                                            <td><div id="star{{++$i}}" class="c-rating" style="width: 120px;"></div></td>
+                                            <td><div id="star{{++$i}}" class="c-rating" style="width: 100px;"></div></td>
                                         @elseif($request->status == -1)
                                             <td><form action="{{route('requests.destroy',$request)}}" method="post" class="inline">
                                                     {{method_field('DELETE')}}
