@@ -18,9 +18,25 @@ use Illuminate\Support\Facades\Storage;
 class RequestController extends Controller
 {
 
-    public function index()
+    public function index(\Illuminate\Http\Request $req)
     {
-        $requests = Request::paginate(20);
+        if ($req->has('search')) {
+            $srch = $req->search;
+            $requests = Request::leftJoin('users', 'users.id', '=', 'requests.owner_id')
+                ->where('name','like','%'.$srch.'%')->orWhere('requests.id','=',$srch)
+                ->orWhere('owner_id','=',$srch)->orWhereDate('open_date','=',$srch)
+                ->select('requests.id')->addSelect('owner_id')
+                ->addSelect('name')->addSelect('open_date')->addSelect('status')->paginate(5);
+
+            //OU owner name
+        } else {
+            $requests = Request::paginate(5);
+        }
+
+        if ($req->has('order')) {
+            $order = $req->order;
+
+        }
         return view('print_requests.index', compact('requests'));
     }
 

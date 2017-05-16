@@ -16,8 +16,12 @@
                                 {{ $requests->links() }}
                             </div>
                             <div class="col-xs-6">
-                                <input type="text" id="myInput" onkeyup="filter()" placeholder="Search any column...">
-                                <a class="btn btn-primary offset" href="{{route('requests.create')}}" style="float:right;">Add Request</a>
+                                <form>
+                                    <input  type="text" class="form-control"
+                                            name="search" id="myInput"
+                                            placeholder="Search any column..."/>
+                                    <button type="submit" class="btn btn-primary side-offset">Search</button>
+                                </form>
                             </div>
                         </div>
                     <table class="table table-striped table-hover sortable" id="myTable">

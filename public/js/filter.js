@@ -1,4 +1,4 @@
-function filter() {
+/*function filter() {
     // Declare variables
     var input, filter, table, found;
     input = document.getElementById("myInput");
