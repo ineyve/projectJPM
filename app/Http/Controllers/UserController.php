@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateUserPostRequest;
 use App\Http\Requests\UpdateUserPostRequest;
 use App\User;
+use App\Department;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -41,8 +42,8 @@ class UserController extends Controller
 
     public function update(UpdateUserPostRequest $request, User $user)
     {
+        //falta verificar questao email ser igual
         $user->fill($request->except('password'));
-        $user->admin = 0; //!!!!!!!!
         $user->save();
         return redirect()->route('users.index')->with('success', 'user updated successfully');
     }
@@ -55,7 +56,8 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        return view('users.edit', compact('user'));
+        $departments= Department::All();
+        return view('users.edit', compact('user', 'departments'));
     }
 
     public function profile(User $user)

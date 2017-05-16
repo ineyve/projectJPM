@@ -38,7 +38,7 @@
                         <br><br>
                     </div>
                     <div style="float: right;">
-                        <a class="btn btn-success side-offset" href="{{route('requests.create')}}">Edit Profile</a>
+                        <a class="btn btn-success side-offset" href="{{route('users.edit', Auth::user())}}">Edit Profile</a>
                         <a class="btn btn-primary" href="{{route('requests.create')}}">Add Request</a>
                     </div>
                     @if (count($requests))
@@ -68,11 +68,11 @@
                                         <td><a href="{{route('requests.details', $request)}}">{{$request->created_at}}</a></td>
                                         <td><a href="{{route('requests.details', $request)}}">{{$request->statusToStr()}}</a></td>
                                     @endif
-                                        @if($request->status == 0 && !is_null($request->closed_date))
+                                        @if($request->status == 4)
                                             @if($request->satisfaction_grade == '')
                                                 @php($request->satisfaction_grade = 0)
                                             @endif
-                                            <td><div id="star{{++$i}}" class="c-rating" style="width: 100px;"></div></td>
+                                            <td><div id="star{{++$i}}" class="c-rating" style="width: 120px;"></div></td>
                                         @elseif($request->status == -1)
                                             <td><form action="{{route('requests.destroy',$request)}}" method="post" class="inline">
                                                     {{method_field('DELETE')}}
