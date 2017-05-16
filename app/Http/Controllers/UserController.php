@@ -40,14 +40,6 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', 'user added successfully');
     }
 
-    public function update(UpdateUserPostRequest $request, User $user)
-    {
-        //falta verificar questao email ser igual
-        $user->fill($request->except('password'));
-        $user->save();
-        return redirect()->route('users.index')->with('success', 'user updated successfully');
-    }
-
     public function destroy(User $user)
     {
         $user->delete();
@@ -58,6 +50,28 @@ class UserController extends Controller
     {
         $departments= Department::All();
         return view('users.edit', compact('user', 'departments'));
+    }
+
+    public function update(UpdateUserPostRequest $request, User $user)
+    {
+        $user->fill($request->except('password'));
+        $user->save();
+        return redirect()->route('users.index')->with('success', 'user updated successfully');
+    }
+
+    public function editProfile(User $user)
+    {
+        if($user == Auth::user())
+            return view('users.editProfile', compact('user'));
+        else
+            abort(403);
+    }
+
+    public function updateProfile(UpdateUserPostRequest $request, User $user)
+    {
+        $user->fill($request->except('password'));
+        $user->save();
+        return redirect()->route('users.dashboard')->with('success', 'profile updated successfully');
     }
 
     public function profile(User $user)

@@ -65,6 +65,8 @@ Route::get('users/create', 'UserController@create')->name('users.create')->middl
 Route::post('users/create', 'UserController@store')->name('users.store')->middleware('can:admin');
 Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit')->middleware('can:admin');
 Route::put('users/{user}/edit', 'UserController@update')->name('users.update')->middleware('can:admin');
+Route::get('users/{user}/editProfile', 'UserController@editProfile')->name('users.editProfile')->middleware('can:user');
+Route::put('users/{user}/editProfile', 'UserController@updateProfile')->name('users.updateProfile')->middleware('can:user');
 Route::get('users/{user}/block/{block}', 'UserController@block')->name('users.block')->middleware('can:admin');
 Route::get('users/{user}/profile', 'UserController@profile')->name('users.profile')->middleware('can:user');
 Route::delete('users/{user}', 'UserController@destroy')->name('users.destroy')->middleware('can:admin');
