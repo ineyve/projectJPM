@@ -9,17 +9,20 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">Users List</div>
-                <div class="panel-body">
+                <form class="panel-body">
                     @if (count($users))
-                        <div class="col-xs-6">
-                            {{ $users->links() }}
-                        </div>
-                        <div class="col-xs-6">
-                            <input type="text" id="myInput" onkeyup="filter()" placeholder="Search any column...">
-                            @if($auth->admin)
-                                <a class="btn btn-primary side-offset" href="{{ route('users.create') }}" style="float: right;">Add user</a>
-                            @endif
-                        </div>
+                        <form>
+                            <div class="col-xs-6">
+                                {{ $users->links() }}
+                                <button type="submit" class="btn btn-success" style="float:right;">Search</button>
+                            </div>
+                            <div class="col-xs-6">
+                                <input type="text" name="search" id="myInput" placeholder="Search any column..."/>
+                                @if($auth->admin)
+                                    <a class="btn btn-primary side-offset" href="{{ route('users.create') }}" style="float: right;">Add user</a>
+                                @endif
+                            </div>
+                        </form>
                         <table class="table table-striped table-hover sortable" id="myTable">
                             <thead>
                                 <tr>
