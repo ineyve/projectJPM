@@ -24,19 +24,18 @@ class RequestController extends Controller
             $srch = $req->search;
             $requests = Request::leftJoin('users', 'users.id', '=', 'requests.owner_id')
                 ->where('name','like','%'.$srch.'%')->orWhere('requests.id','=',$srch)
-                ->orWhere('owner_id','=',$srch)->orWhereDate('open_date','=',$srch)
+                ->orWhere('owner_id','=',$srch)->orWhereDate('due_date','=',$srch)
                 ->select('requests.id')->addSelect('owner_id')
-                ->addSelect('name')->addSelect('open_date')->addSelect('status')->paginate(5);
-
-            //OU owner name
+                ->addSelect('name')->addSelect('due_date')->addSelect('status')->paginate(20);
         } else {
-            $requests = Request::paginate(5);
+            $requests = Request::paginate(20);
         }
 
         if ($req->has('order')) {
             $order = $req->order;
 
         }
+        $requests->appends($req->input())->links();
         return view('print_requests.index', compact('requests'));
     }
 

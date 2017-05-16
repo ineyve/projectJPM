@@ -17,8 +17,7 @@
                             </div>
                             <div class="col-xs-6">
                                 <form>
-                                    <input  type="text" class="form-control"
-                                            name="search" id="myInput"
+                                    <input  type="text" name="search" id="myInput"
                                             placeholder="Search any column..."/>
                                     <button type="submit" class="btn btn-primary side-offset">Search</button>
                                 </form>
