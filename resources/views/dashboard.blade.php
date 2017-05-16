@@ -24,9 +24,10 @@
                             <img class="profile-picture" src="/storage/profiles/{{$user->profile_photo}}">
                         @endif
                         <li>About me: {{$user->presentation}}</li>
+                        <li>Department: {{App\Department::find($user->department_id)->name}}</li>
                         <li>Phone Number: {{$user->phone}}</li>
                         <li>E-mail address: {{$user->email}}</li>
-                        <li>Department: {{App\Department::find($user->department_id)->name}}</li>
+                        <li>Personal URL: {{$user->profile_url}}</li>
                         <li>Total Requests: {{$user->print_counts}}</li>
                         <li>Member for: {{$user->memberFor()}}</li>
                         <li>Average Satisfaction Grade:

@@ -249,6 +249,7 @@ table.sortable thead{
     padding:3px;
     background: lightgray;
     margin-top: 8px;
+    margin-left: 10px;
 }
 
 .comment-picture{

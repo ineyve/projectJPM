@@ -81,7 +81,9 @@ class RequestController extends Controller
         $request->status = 2;
         $request->closed_date = Carbon::now();
         $request->closed_user_id = Auth::user()->id;
+        $request->user->print_counts += $request->quantity;
         $request->save();
+        $request->user->save();
 
         return back()->with('success', 'Status changed sucessfuly!');
     }
