@@ -59,12 +59,9 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', 'user updated successfully');
     }
 
-    public function editProfile(User $user)
+    public function editProfile()
     {
-        if($user == Auth::user())
-            return view('users.editProfile', compact('user'));
-        else
-            abort(403);
+        return view('users.editProfile');
     }
 
     public function updateProfile(UpdateUserPostRequest $request, User $user)

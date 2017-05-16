@@ -227,8 +227,6 @@ table.sortable thead{
 
 /* Profile */
 .profile{
-    margin-bottom: 20px;
-    border-bottom: #777777 dotted;
     padding-left: 80px;
     padding-right: 80px;
 }

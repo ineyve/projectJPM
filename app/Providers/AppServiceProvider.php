@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +20,18 @@ class AppServiceProvider extends ServiceProvider
         {
             $users = User::All();
             $view->with('users', $users);
+        });
+
+        view()->composer('users.index', function($view)
+        {
+            $user = Auth::user();
+            $view->with('currentUser', $user);
+        });
+
+        view()->composer('users.editProfile', function($view)
+        {
+            $user = Auth::user();
+            $view->with('currentUser', $user);
         });
     }
 

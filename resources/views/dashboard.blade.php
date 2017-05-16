@@ -23,7 +23,8 @@
                         @else
                             <img class="profile-picture" src="http://ainet.project/storage/profiles/{{$user->profile_picture}}">
                         @endif
-                            <li>Phone Number: {{$user->phone}}</li>
+                        <li>About me: {{$user->presentation}}</li>
+                        <li>Phone Number: {{$user->phone}}</li>
                         <li>E-mail address: {{$user->email}}</li>
                         <li>Department: {{App\Department::find($user->department_id)->name}}</li>
                         <li>Total Requests: {{$user->print_counts}}</li>
@@ -38,7 +39,7 @@
                         <br><br>
                     </div>
                     <div style="float: right;">
-                        <a class="btn btn-success side-offset" href="{{route('users.editProfile', Auth::user())}}">Edit Profile</a>
+                        <a class="btn btn-success side-offset" href="{{route('users.editProfile')}}">Edit Profile</a>
                         <a class="btn btn-primary" href="{{route('requests.create')}}">Add Request</a>
                     </div>
                     @if (count($requests))

@@ -62,10 +62,10 @@
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
                             @if(Auth::user()->admin == 1)
-                                <li> <a href="{{ url('requests') }}">Requests</a></li>
-                                <li> <a href="{{ url('users') }}">Users</a></li>
+                                <li> <a href="{{ route('requests.index') }}">Requests</a></li>
                             @endif
-                            <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
+                            <li> <a href="{{ route('users.index') }}">Users</a></li>
+                            <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
                             <li><a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
