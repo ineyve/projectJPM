@@ -69,10 +69,17 @@ class UserController extends Controller
 
     public function updateProfile(UpdateProfilePostRequest $request)
     {
+        dd($request);
         $user = Auth::user();
-        $user->fill($request->except('password'));
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->presentation = $request->presentation;
+        $path = $request->file('profile_photo')->store('public/profiles/');
+        $parts = explode('/', $path);
+        $user->profile_photo = $parts[2];
         $user->save();
-        return redirect()->route('users.dashboard')->with('success', 'profile updated successfully');
+        return redirect()->route('dashboard')->with('success', 'profile updated successfully');
     }
 
     public function updatePassword(UpdatePasswordPostRequest $request)

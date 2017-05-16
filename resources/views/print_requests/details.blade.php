@@ -79,6 +79,7 @@
                                 <td>Status</td>
                                 <td>{{$request->statusToStr()}}</td>
                             </tr>
+
                             @if($request->due_date != null)
                                 <tr>
                                     <td>Due Date</td>
@@ -116,7 +117,7 @@
                             <tr>
                                 <td>Satisfaction Grade</td>
                                 <td>
-                                @if($request->status == 0 && !is_null($request->closed_date) && $user == $request->owner_id)
+                                @if($request->status == 2 && $user == $request->owner_id)
                                     @if($request->satisfaction_grade == '')
                                         @php($request->satisfaction_grade = 0)
                                     @endif
@@ -154,43 +155,38 @@
                                 var myRating = rating(el, currentRating, maxRating, callback);
                             </script>
 
-                            @if($request->created_at != null)
-                                <tr>
-                                    <td>Created</td>
-                                    <td>{{$request->created_at}}</td>
-                                </tr>
-                            @endif
+                            <tr>
+                                <td>Created</td>
+                                <td>{{$request->created_at}}</td>
+                            </tr>
 
-                            @if($request->updated_at != null)
-                                <tr>
-                                    <td>Last Update</td>
-                                    <td>{{$request->updated_at}}</td>
-                                </tr>
-                            @endif
-
+                            <tr>
+                                <td>Last Update</td>
+                                <td>{{$request->updated_at}}</td>
+                            </tr>
                         </tbody>
                     </table>
                     
-                    @if($admin)
-                        @if($request->status == 0 && is_null($request->closed_date))
-                            <a class="btn btn-success side-offset" href="{{route('requests.complete', ['request' => $request, 'from' => 0])}}" id="buttonAccept">Complete</a>
-                            <a class="btn btn-danger" href='javascript:showRefuse()' id="buttonRefuse">Refuse</a>
-                            <form action="{{route('requests.refuse', $request)}}" method="post" class="form-group">
-                                {{ csrf_field() }}
-                                <div class="form-group" id="refuse" style="display:none">
-                                    <label for="inputReason">Refuse Reason</label>
-                                    <textarea class="form-control" name="refused_reason" id="inputReason"></textarea>
-                                </div>
-                                <div class="form-group" id="submitRefuse" style="display:none;">
-                                    <button type="submit" class="btn btn-danger side-offset">Refuse</button>
-                                    <a class="btn btn-default" href='javascript:hideRefuse()' id="cancelRefuse">Cancel</a>
-                                </div>
-                            </form>
-                        @endif
+                    @if($admin && $request->status == 0)
+                        <a class="btn btn-success side-offset" href="{{route('requests.complete', ['request' => $request, 'from' => 0])}}" id="buttonAccept">Complete</a>
+                        <a class="btn btn-danger side-offset" href='javascript:showRefuse()' id="buttonRefuse">Refuse</a>
+                        <form action="{{route('requests.refuse', $request)}}" method="post" class="form-group">
+                            {{ csrf_field() }}
+                            <div class="form-group" id="refuse" style="display:none">
+                                <label for="inputReason">Refuse Reason</label>
+                                <textarea class="form-control" name="refused_reason" id="inputReason"></textarea>
+                            </div>
+                            <div class="form-group" id="submitRefuse" style="display:none;">
+                                <button type="submit" class="btn btn-danger side-offset">Refuse</button>
+                                <a class="btn btn-default" href='javascript:hideRefuse()' id="cancelRefuse">Cancel</a>
+                            </div>
+                        </form>
                     @endif
                     @if($user == $request->owner_id || $admin)
+                        @php($count=0)
                         @foreach($comments as $comment)
-                            @if($comment->parent_id == '' && $comment->blocked == 0)
+                            @if($comment->parent_id == '' && !$comment->blocked)
+                                @php(++$count)
                                 <div class="comment">
                                     <a href="{{ route('users.profile', $comment->user_id) }}"><img class="comment-picture" src="/profile.jpg"></a>
                                     <p class="first"><a href="{{route('users.profile', $comment->user_id)}}">{{$comment->user->name}}</a> &nbsp&nbsp&nbsp&nbsp{{$comment->created_at}}</p>
@@ -219,7 +215,9 @@
                                 </div>
                             @endif
                         @endforeach
-                        <br>
+                        @if($admin && $count)
+                            <br>
+                        @endif
                         <a class="btn btn-primary" href='javascript:showComment()' id="buttonComment">Comment</a>
                         <form action="{{route('requests.comment', $request)}}" method="post" class="form-group">
                             {{ csrf_field() }}

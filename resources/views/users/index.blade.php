@@ -16,7 +16,9 @@
                         </div>
                         <div class="col-xs-6">
                             <input type="text" id="myInput" onkeyup="filter()" placeholder="Search any column...">
-                            <a class="btn btn-primary side-offset" href="{{ route('users.create') }}" style="float: right;">Add user</a>
+                            @if($auth->admin)
+                                <a class="btn btn-primary side-offset" href="{{ route('users.create') }}" style="float: right;">Add user</a>
+                            @endif
                         </div>
                         <table class="table table-striped table-hover sortable" id="myTable">
                             <thead>

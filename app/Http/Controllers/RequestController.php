@@ -61,16 +61,14 @@ class RequestController extends Controller
             abort(403);
     }
 
-    public function complete(Request $request, $from)
+    public function complete(Request $request)
     {
+        $request->status = 2;
         $request->closed_date = Carbon::now();
         $request->closed_user_id = Auth::user()->id;
         $request->save();
 
-        if ($from == 0)
-            return redirect()->route('requests.index')->with('success', 'Status changed sucessfuly!');
-        else
-            return redirect()->route('requests.details', $request)->with('success', 'Status changed sucessfuly!');
+        return back()->with('success', 'Status changed sucessfuly!');
     }
 
     public function rating(Request $request, $rating)

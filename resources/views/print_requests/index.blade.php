@@ -40,8 +40,8 @@
                             <td><a href="{{route('requests.details', $request)}}">{{$request->date()}}</a></td>
                             <td><a href="{{route('requests.details', $request)}}">{{$request->statusToStr()}}</a></td>
                             <td>
-                                @if($request->status == 0 && is_null($request->closed_date))
-                                    <a class="btn btn-xs btn-success" href="{{route('requests.complete', ['request' => $request, 'from' => 0])}}">Complete</a>
+                                @if(!$request->status)
+                                    <a class="btn btn-xs btn-success" href="{{route('requests.complete', $request)}}">Complete</a>
                                 @endif
                             </td>
                         </tr>

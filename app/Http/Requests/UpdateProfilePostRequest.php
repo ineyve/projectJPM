@@ -25,6 +25,8 @@ class UpdateProfilePostRequest extends FormRequest
     public function rules()
     {
         return [
+            'name' => 'regex:/^[a-zA-Z ]+$/',
+            'presentation'=>'regex:/^[a-zA-Z ]+$/',
         ];
     }
 }

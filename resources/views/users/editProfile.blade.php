@@ -7,8 +7,7 @@
             <div class="panel panel-default">
             <div class="panel-heading">Edit User</div>
                 <div class="panel-body">
-                    <form action="{{route('users.editProfile')}}" method="post" class="form-group" enctype="multipart/form-data">
-                        {{method_field('PUT')}}
+                    <form action="{{route('users.updateProfile')}}" method="post" class="form-group" enctype="multipart/form-data">
                     <div class="form-group">
                         {{ csrf_field() }}
                         <div class="form-group" id="name">
@@ -33,8 +32,8 @@
                                     placeholder="Phone" value="{{old('phone', $user->phone)}}" />
                         </div>
                         <div class="form-group" id="photo">
-                            <label for="inputPhoto">Profile Photo</label>
-                            <input type="file" class="form-control" name="photo" id="inputFile" accept="image/*"/>
+                            <label for="inputProfile_photo">Profile Photo</label>
+                            <input type="file" class="form-control" name="profile_photo" id="inputProfile_photo" accept="image/*" value="{{old('profile_photo')}}"/>
                         </div>
                         <div class="form-group" id="about">
                             <label for="inputPresentation">About Me</label>
@@ -45,7 +44,7 @@
                         <a class="btn btn-warning" href='javascript:showPassword()' id="buttonComment" style="float:right;">Change Password</a>
                     </div>
                     </form>
-                    <form action="{{route('users.updatePassword'), $user}}" method="post" class="form-group">
+                    <form action="{{route('users.updatePassword')}}" method="post" class="form-group">
                         {{method_field('PUT')}}
                         <div class="form-group">
                             {{ csrf_field() }}
