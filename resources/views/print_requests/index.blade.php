@@ -14,15 +14,14 @@
                         <div class="row">
                             <div class="col-xs-6">
                                 {{ $requests->links() }}
+                                <button type="submit" class="btn btn-success" style="float:right;">Search</button>
                             </div>
                             <div class="col-xs-6">
                                 <form>
-                                    <input  type="text" name="search" id="myInput"
-                                            placeholder="Search any column..."/>
-                                    <button type="submit" class="btn btn-success side-offset">Search</button>
+                                    <input type="text" name="search" id="myInput" placeholder="Search any column..."/>
                                 </form>
+                                <a class="btn btn-primary side-offset" href="{{ route('requests.create') }}" style="float: right;">Add request</a>
                             </div>
-                            <a class="btn btn-primary side-offset" href="{{ route('requests.create') }}" style="float: right;">Add request</a>
                         </div>
                     <table class="table table-striped table-hover sortable" id="myTable">
                     <thead>

@@ -17,7 +17,7 @@ class Request extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'owner_id', 'description', 'open_date', 'due_date', 'quantity', 'colored', 'stapled', 'paper_size', 'paper_type', 'file', 'status'
+        'id', 'owner_id', 'description', 'created_at', 'due_date', 'quantity', 'colored', 'stapled', 'paper_size', 'paper_type', 'file', 'status'
     ];
 
     public function statusToStr(){
@@ -59,7 +59,7 @@ class Request extends Model
     }
 
     public function date(){
-        $date = new Carbon($this->open_date);
+        $date = new Carbon($this->created_at);
         return $date->toDateString();
     }
 

@@ -170,13 +170,13 @@
                     @if($admin && $request->status == 0)
                         <a class="btn btn-success side-offset" href="{{route('requests.complete', ['request' => $request, 'from' => 0])}}" id="buttonAccept">Complete</a>
                         <a class="btn btn-danger side-offset" href='javascript:showRefuse()' id="buttonRefuse">Refuse</a>
-                        <form action="{{route('requests.refuse', $request)}}" method="post" class="form-group">
+                        <form action="{{route('requests.refuse', $request)}}" method="post" class="form-group" id="refuse-form" style="display:none">
                             {{ csrf_field() }}
-                            <div class="form-group" id="refuse" style="display:none">
+                            <div class="form-group" id="refuse">
                                 <label for="inputReason">Refuse Reason</label>
                                 <textarea class="form-control" name="refused_reason" id="inputReason"></textarea>
                             </div>
-                            <div class="form-group" id="submitRefuse" style="display:none;">
+                            <div class="form-group" id="submitRefuse">
                                 <button type="submit" class="btn btn-danger side-offset">Refuse</button>
                                 <a class="btn btn-default" href='javascript:hideRefuse()' id="cancelRefuse">Cancel</a>
                             </div>
@@ -192,13 +192,13 @@
                                     <p class="first"><a href="{{route('users.profile', $comment->user_id)}}">{{$comment->user->name}}</a> &nbsp&nbsp&nbsp&nbsp{{$comment->created_at}}</p>
                                     <p>{{$comment->comment}}</p>
                                     <a class="btn btn-xs btn-primary" href='javascript:showReply()' id="buttonReply">Reply</a>
-                                    <form action="{{route('requests.reply', ['request' => $request, 'comment' => $comment])}}" method="post" class="form-group">
+                                    <form action="{{route('requests.reply', ['request' => $request, 'comment' => $comment])}}" method="post" class="form-group" id="reply-form" style="display:none;">
                                         {{ csrf_field() }}
-                                        <div class="form-group" id="reply" style="display:none; margin-left: 10px; margin-right: 10px;">
+                                        <div class="form-group" id="reply" style="margin-left: 10px; margin-right: 10px;">
                                             <label for="inputReply">Reply</label>
                                             <textarea class="form-control" name="reply" id="inputReply"></textarea>
                                         </div>
-                                        <div class="form-group" id="submitReply" style="display:none">
+                                        <div class="form-group" id="submitReply">
                                             <button type="submit" class="btn btn-xs btn-primary side-offset">Reply</button>
                                             <a class="btn btn-xs btn-default" href='javascript:hideReply()' id="cancelReply">Cancel</a>
                                         </div>
@@ -219,13 +219,13 @@
                             <br>
                         @endif
                         <a class="btn btn-primary" href='javascript:showComment()' id="buttonComment">Comment</a>
-                        <form action="{{route('requests.comment', $request)}}" method="post" class="form-group">
+                        <form action="{{route('requests.comment', $request)}}" method="post" class="form-group" id="comment-form" style="display:none">
                             {{ csrf_field() }}
-                            <div class="form-group" id="comment" style="display:none">
+                            <div class="form-group" id="comment">
                                 <label for="inputComment">Comment</label>
                                 <textarea class="form-control" name="comment" id="inputComment"></textarea>
                             </div>
-                            <div class="form-group" id="submitComment" style="display:none">
+                            <div class="form-group" id="submitComment">
                                 <button type="submit" class="btn btn-primary side-offset">Comment</button>
                                 <a class="btn btn-default" href='javascript:hideComment()' id="cancelComment">Cancel</a>
                             </div>
@@ -238,46 +238,34 @@
 </div>
 @endsection
 <script>function showRefuse(){
-        $('#refuse').show();
-        $('#submitRefuse').show();
-        $('#cancelRefuse').show();
+        $('#refuse-form').show();
         $('#buttonRefuse').hide();
         $('#buttonAccept').hide();
     }
 </script>
 <script>function hideRefuse(){
-        $('#refuse').hide();
-        $('#submitRefuse').hide();
-        $('#cancelRefuse').hide();
+        $('#refuse-form').hide();
         $('#buttonRefuse').show();
         $('#buttonAccept').show();
     }
 </script>
 <script>function showComment(){
-        $('#comment').show();
-        $('#submitComment').show();
-        $('#cancelComment').show();
+        $('#comment-form').show();
         $('#buttonComment').hide();
     }
 </script>
 <script>function hideComment(){
-        $('#comment').hide();
-        $('#submitComment').hide();
-        $('#cancelComment').hide();
+        $('#comment-form').hide();
         $('#buttonComment').show();
     }
 </script>
 <script>function showReply(){
-        $('#reply').show();
-        $('#submitReply').show();
-        $('#cancelReply').show();
+        $('#reply-form').show();
         $('#buttonReply').hide();
     }
 </script>
 <script>function hideReply(){
-        $('#reply').hide();
-        $('#submitReply').hide();
-        $('#cancelReply').hide();
+        $('#reply-form').hide();
         $('#buttonReply').show();
     }
 </script>
