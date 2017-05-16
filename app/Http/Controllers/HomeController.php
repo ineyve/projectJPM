@@ -42,8 +42,8 @@ class HomeController extends Controller
             $statistics['colored'] = 50;
         }
         $statistics['printsTotalCount'] = $total; //Amount of completed prints from all time
-        $statistics['printsToday']= Request::whereDate('closed_date', '=', date('Y-m-d'))->whereIn('status', [2,3,4])->count(); //Prints today
-        $statistics['printsMonthlyAverage']= Request::whereMonth('closed_date', '=', date('m'))->whereIn('status', [2,3,4])->count() / date('d'); //Prints today
+        $statistics['printsToday']= Request::whereDate('closed_date', '=', date('Y-m-d'))->where('status', 0)->where('closed_date', '!=', null)->sum('quantity'); //Prints today
+        $statistics['printsMonthlyAverage']= Request::whereMonth('closed_date', '=', date('m'))->where('status', 0)->where('closed_date', '!=', null)->sum('quantity') / date('d'); //Prints today
 
         return view('welcome', compact('statistics'));
     }

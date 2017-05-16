@@ -18,7 +18,7 @@
                             <input type="text" id="myInput" onkeyup="filter()" placeholder="Search any column...">
                             <a class="btn btn-primary side-offset" href="{{ route('users.create') }}" style="float: right;">Add user</a>
                         </div>
-                        <table class="table table-striped sortable" id="myTable">
+                        <table class="table table-striped table-hover sortable" id="myTable">
                             <thead>
                                 <tr>
                                     <th class=" sorttable_sorted">ID<span id="sorttable_sortfwdind">&nbsp;▾</span></th>
@@ -32,12 +32,12 @@
                             <tbody>
                             @foreach ($users as $user)
                                 <tr>
-                                    <td>{{$user->id}}</td>
-                                    <td>{{$user->name}}</td>
-                                    <td>{{$user->email}}</td>
-                                    <td>{{App\Department::find($user->department_id)->name}}</td>
-                                    <td>{{$user->phone}}</td>
-                                    <td>
+                                    <td><a href="{{route('users.profile', $user)}}">{{$user->id}}</a></td>
+                                    <td><a href="{{route('users.profile', $user)}}">{{$user->name}}</a></td>
+                                    <td><a href="{{route('users.profile', $user)}}">{{$user->email}}</a></td>
+                                    <td><a href="{{route('users.profile', $user)}}">{{$user->department->name}}</a></td>
+                                    <td><a href="{{route('users.profile', $user)}}">{{$user->phone}}</a></td>
+                                    <td><a href="{{route('users.profile', $user)}}">
                                         <a class="btn btn-xs btn-primary" href="{{ route('users.edit', $user) }}">Edit</a>
                                         @if($user != $auth)
                                             @if(!$user->blocked)
@@ -51,7 +51,7 @@
                                             <button type="submit" class="btn btn-xs btn-danger">Delete</button>
                                         </form>
                                         @endif
-                                    </td>
+                                    </a></td>
                                 </tr>
                             @endforeach
                         </table>

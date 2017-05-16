@@ -42,7 +42,7 @@
 
                             <tr>
                                 <td>Open Date</td>
-                                <td>{{$request->open_date}}</td>
+                                <td>{{$request->created_at}}</td>
                             </tr>
 
                             <tr>

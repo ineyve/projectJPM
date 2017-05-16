@@ -14,7 +14,11 @@
                 Profile (User {{$user->id}})</div>
                 <div class="panel-body">
                     <div class="profile" id="profile-user">
-                        <img class="profile-picture" src="/profile.jpg">
+                        @if(is_null($user->profile_photo))
+                            <img class="profile-picture" src="/profile.jpg">
+                        @else
+                            <img class="profile-picture" src="{{"http://ainet.project/storage/profiles/$user->profile_photo"}}">
+                        @endif
                         <li>Phone Number: {{$user->phone}}</li>
                         <li>E-mail address: {{$user->email}}</li>
                         <li>Department: {{App\Department::find($user->department_id)->name}}</li>

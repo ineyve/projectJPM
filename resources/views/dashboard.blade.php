@@ -18,8 +18,12 @@
                 Profile (User {{$user->id}})</div>
                 <div class="panel-body">
                     <div class="profile">
-                        <img class="profile-picture" src="/profile.jpg">
-                        <li>Phone Number: {{$user->phone}}</li>
+                        @if($user->profile-picture == '')
+                            <img class="profile-picture" src="/profile.jpg">
+                        @else
+                            <img class="profile-picture" src="../storage/app/public/profiles/{{$user->profile_picture}}">
+                        @endif
+                            <li>Phone Number: {{$user->phone}}</li>
                         <li>E-mail address: {{$user->email}}</li>
                         <li>Department: {{App\Department::find($user->department_id)->name}}</li>
                         <li>Total Requests: {{$user->print_counts}}</li>
@@ -44,7 +48,7 @@
                             <tr>
                                 <th>Request Number</th>
                                 <th>Description</th>
-                                <th>File</th>
+                                <th>Open Date</th>
                                 <th>Status<span id="sorttable_sortfwdind">&nbsp;▾</span></th>
                                 <th class="sorttable_nosort"></th>
                             </tr>
@@ -53,15 +57,15 @@
                             @php($i=0)
                             @foreach ($requests as $request)
                                 <tr>
-                                    @if($request->status == 0 && is_null($request->closed_date))
+                                    @if(is_null($request->closed_date))
                                         <td><a href="{{route('requests.edit', $request)}}">{{$request->id}}</a></td>
                                         <td><a href="{{route('requests.edit', $request)}}">{{$request->description}}</a></td>
-                                        <td><a href="{{route('requests.edit', $request)}}">{{$request->file}}</a></td>
+                                        <td><a href="{{route('requests.edit', $request)}}">{{$request->created_at}}</a></td>
                                         <td><a href="{{route('requests.edit', $request)}}">{{$request->statusToStr()}}</a></td>
                                     @else
                                         <td><a href="{{route('requests.details', $request)}}">{{$request->id}}</a></td>
                                         <td><a href="{{route('requests.details', $request)}}">{{$request->description}}</a></td>
-                                        <td><a href="{{route('requests.details', $request)}}">{{$request->file}}</a></td>
+                                        <td><a href="{{route('requests.details', $request)}}">{{$request->created_at}}</a></td>
                                         <td><a href="{{route('requests.details', $request)}}">{{$request->statusToStr()}}</a></td>
                                     @endif
                                         @if($request->status == 0 && !is_null($request->closed_date))
