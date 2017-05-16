@@ -18,10 +18,25 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(\Illuminate\Http\Request $req)
     {
         $auth = Auth::user();
-        $users = User::paginate(20);
+        if ($req->has('search')) {
+            $srch = $req->search;
+            $users = User::leftJoin('departments', 'users.department_id', '=', 'departments.id')
+                ->where('users.name','like','%'.$srch.'%')->orWhere('users.id','=',$srch)->orWhere('users.phone','=',$srch)
+                ->orWhere('users.email','like','%'.$srch.'%')->orWhere('departments.name','like','%'.$srch.'%')
+                ->select('users.id')->addSelect('users.name')
+                ->addSelect('users.email')->addSelect('departments.name')->addSelect('phone')->paginate(20);
+        } else {
+            $users = User::paginate(20);
+        }
+
+        if ($req->has('order')) {
+            $order = $req->order;
+
+        }
+        $users->appends($req->input())->links();
         return view('users.index', compact('users', 'auth'));
     }
 
