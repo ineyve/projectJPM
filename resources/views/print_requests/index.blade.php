@@ -19,9 +19,10 @@
                                 <form>
                                     <input  type="text" name="search" id="myInput"
                                             placeholder="Search any column..."/>
-                                    <button type="submit" class="btn btn-primary side-offset">Search</button>
+                                    <button type="submit" class="btn btn-success side-offset">Search</button>
                                 </form>
                             </div>
+                            <a class="btn btn-primary side-offset" href="{{ route('requests.create') }}" style="float: right;">Add request</a>
                         </div>
                     <table class="table table-striped table-hover sortable" id="myTable">
                     <thead>
