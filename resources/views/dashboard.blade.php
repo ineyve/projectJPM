@@ -69,7 +69,7 @@
                                         <td><a href="{{route('requests.details', $request)}}">{{$request->created_at}}</a></td>
                                         <td><a href="{{route('requests.details', $request)}}">{{$request->statusToStr()}}</a></td>
                                     @endif
-                                        @if($request->status == 0 && !is_null($request->closed_date))
+                                        @if($request->status == 2)
                                             @if($request->satisfaction_grade == '')
                                                 @php($request->satisfaction_grade = 0)
                                             @endif
@@ -79,7 +79,7 @@
                                                     {{method_field('DELETE')}}
                                                     {{ csrf_field() }}
                                                     <button type="submit" class="btn btn-xs btn-danger">Delete</button>
-                                                </form></td>
+                                            </form></td>
                                         @else
                                             <td></td>
                                         @endif

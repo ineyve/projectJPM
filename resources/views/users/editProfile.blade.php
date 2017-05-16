@@ -7,70 +7,58 @@
             <div class="panel panel-default">
             <div class="panel-heading">Edit User</div>
                 <div class="panel-body">
-                    <form action="{{route('users.updateProfile')}}" method="post" class="form-group" enctype="multipart/form-data">
+                    <form action="{{route('users.updateProfile')}}" method="post" class="form-group" enctype="multipart/form-data" id="profile-form">
                     <div class="form-group">
                         {{ csrf_field() }}
-                        <div class="form-group" id="name">
+                        <div class="form-group">
                             <label for="inputName">Name</label>
                             <input
                                     type="text" class="form-control"
                                     name="name" id="inputName"
                                     placeholder="Name" value="{{old('name', $user->name)}}" />
                         </div>
-                        <div class="form-group" id="email">
+                        <div class="form-group">
                             <label for="inputEmail">Email</label>
                             <input
                                     type="email" class="form-control"
                                     name="email" id="inputEmail"
                                     placeholder="Email address" value="{{old('email', $user->email)}}"/>
                         </div>
-                        <div class="form-group" id="phone">
+                        <div class="form-group">
                             <label for="inputPhone">Phone</label>
-                            <input
-                                    type="tel" class="form-control"
-                                    name="phone" id="inputPhone"
-                                    placeholder="Phone" value="{{old('phone', $user->phone)}}" />
+                            <input type="tel" class="form-control" name="phone" placeholder="Phone" value="{{old('phone', $user->phone)}}"/>
                         </div>
-                        <div class="form-group" id="photo">
+                        <div class="form-group">
                             <label for="inputProfile_photo">Profile Photo</label>
-                            <input type="file" class="form-control" name="profile_photo" id="inputProfile_photo" accept="image/*" value="{{old('profile_photo')}}"/>
+                            <input type="file" class="form-control" name="profile_photo" accept="image/*" value="{{old('profile_photo')}}"/>
                         </div>
-                        <div class="form-group" id="about">
+                        <div class="form-group">
                             <label for="inputPresentation">About Me</label>
-                            <textarea class="form-control" name="presentation" id="inputPresentation">{{old('presentation', $user->presentation)}}</textarea>
+                            <textarea class="form-control" name="presentation">{{old('presentation', $user->presentation)}}</textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary side-offset" id="buttonSave">Save</button>
-                        <a type="submit" class="btn btn-default" href="{{route('dashboard')}}" id="buttonCancel">Cancel</a>
-                        <a class="btn btn-warning" href='javascript:showPassword()' id="buttonComment" style="float:right;">Change Password</a>
+                        <button type="submit" class="btn btn-primary side-offset">Save</button>
+                        <a type="submit" class="btn btn-default" href="{{route('dashboard')}}">Cancel</a>
+                        <a class="btn btn-warning" href='javascript:showPassword()' style="float:right;">Change Password</a>
                     </div>
                     </form>
-                    <form action="{{route('users.updatePassword')}}" method="post" class="form-group">
+                    <form action="{{route('users.updatePassword')}}" method="post" class="form-group" id="password-form" style="display:none">
                         {{method_field('PUT')}}
                         <div class="form-group">
                             {{ csrf_field() }}
-                            <div class="form-group" id="original" style="display:none">
+                            <div class="form-group">
                                 <label for="inputPassword">Original Password</label>
-                                <input
-                                        type="password" class="form-control"
-                                        name="oldPassword" id="inputPassword"
-                                        placeholder="Password"/>
+                                <input type="password" class="form-control" name="oldPassword" id="inputPassword" placeholder="Password"/>
                             </div>
-                            <div class="form-group" id="first" style="display:none">
+                            <div class="form-group">
                                 <label for="inputPassword">New Password</label>
-                                <input
-                                        type="password" class="form-control"
-                                        name="newPassword" id="inputPassword"
-                                        placeholder="Password"/>
+                                <input type="password" class="form-control" name="newPassword" id="inputPassword" placeholder="Password"/>
                             </div>
-                            <div class="form-group" id="confirm" style="display:none">
-                                <label for="inputPasswordConfirmation">New Password Confirmation</label>
-                                <input
-                                        type="password" class="form-control"
-                                        name="newPasswordConfirmation" id="inputPasswordConfirmation"
-                                        placeholder="Password Confirmation"/>
+                            <div class="form-group">
+                                <label for="input">New Password Confirmation</label>
+                                <input type="password" class="form-control" name="newPasswordConfirmation" id="inputPasswordConfirmation" placeholder="Password Confirmation"/>
                             </div>
-                            <button type="submit" class="btn btn-primary side-offset" name="ok" id="submit" style="display:none">Save Password</button>
-                            <a class="btn btn-default" href='javascript:hidePassword()' id="buttonHide" style="display:none">Cancel</a>
+                            <button type="submit" class="btn btn-primary side-offset">Save Password</button>
+                            <a class="btn btn-default" href='javascript:hidePassword()'>Cancel</a>
                         </div>
                     </form>
                 </div>
@@ -85,34 +73,12 @@
 @endif
 @endsection
 <script>function showPassword(){
-        $('#original').show();
-        $('#first').show();
-        $('#confirm').show();
-        $('#submit').show();
-        $('#buttonHide').show();
-        $('#buttonComment').hide();
-        $('#buttonSave').hide();
-        $('#buttonCancel').hide();
-        $('#name').hide();
-        $('#email').hide();
-        $('#phone').hide();
-        $('#photo').hide();
-        $('#about').hide();
+        $('#password-form').show();
+        $('#profile-form').hide();
     }
 </script>
 <script>function hidePassword(){
-        $('#original').hide();
-        $('#first').hide();
-        $('#confirm').hide();
-        $('#submit').hide();
-        $('#buttonHide').hide();
-        $('#buttonComment').show();
-        $('#buttonSave').show();
-        $('#buttonCancel').show();
-        $('#name').show();
-        $('#email').show();
-        $('#phone').show();
-        $('#photo').show();
-        $('#about').show();
+        $('#password-form').hide();
+        $('#profile-form').show();
     }
 </script>
