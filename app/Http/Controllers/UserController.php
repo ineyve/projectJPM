@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserPostRequest;
 use App\Http\Requests\UpdateUserPostRequest;
+use App\Http\Requests\UpdateProfilePostRequest;
+use App\Http\Requests\UpdatePasswordPostRequest;
 use App\User;
 use App\Department;
 use Illuminate\Support\Facades\Auth;
@@ -61,14 +63,27 @@ class UserController extends Controller
 
     public function editProfile()
     {
-        return view('users.editProfile');
+        $user=Auth::user();
+        return view('users.editProfile', compact('user'));
     }
 
-    public function updateProfile(UpdateUserPostRequest $request, User $user)
+    public function updateProfile(UpdateProfilePostRequest $request)
     {
+        $user = Auth::user();
         $user->fill($request->except('password'));
         $user->save();
         return redirect()->route('users.dashboard')->with('success', 'profile updated successfully');
+    }
+
+    public function updatePassword(UpdatePasswordPostRequest $request)
+    {
+        $user = Auth::user();
+        if(Hash::check($request->oldPassword, $user->password)){
+            $user->password = bcrypt($request->newPassword);
+            $user->save();
+            return redirect()->route('dashboard')->with('success', 'password updated successfully');
+        }
+        return redirect()->route('users.editProfile');
     }
 
     public function profile(User $user)

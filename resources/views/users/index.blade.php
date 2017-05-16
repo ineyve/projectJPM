@@ -26,7 +26,7 @@
                                     <th>Email</th>
                                     <th>Department</th>
                                     <th>Phone</th>
-                                    @if($currentUser->admin)
+                                    @if($auth->admin)
                                         <th class="sorttable_nosort">Actions</th>
                                     @endif
                                 </tr>
@@ -39,7 +39,7 @@
                                     <td><a href="{{route('users.profile', $user)}}">{{$user->email}}</a></td>
                                     <td><a href="{{route('users.profile', $user)}}">{{$user->department->name}}</a></td>
                                     <td><a href="{{route('users.profile', $user)}}">{{$user->phone}}</a></td>
-                                    @if($currentUser->admin)
+                                    @if($auth->admin)
                                     <td><a href="{{route('users.profile', $user)}}">
                                         <a class="btn btn-xs btn-primary" href="{{ route('users.edit', $user) }}">Edit</a>
                                         @if($user != $auth)
