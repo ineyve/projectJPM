@@ -17,7 +17,7 @@
                         @if(is_null($user->profile_photo))
                             <img class="profile-picture" src="/profile.jpg">
                         @else
-                            <img class="profile-picture" src="{{"http://ainet.project/storage/profiles/$user->profile_photo"}}">
+                            <img class="profile-picture" src="/storage/profiles/{{$user->profile_photo}}">
                         @endif
                         <li>Phone Number: {{$user->phone}}</li>
                         <li>E-mail address: {{$user->email}}</li>

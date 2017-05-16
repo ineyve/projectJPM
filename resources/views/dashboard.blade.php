@@ -18,10 +18,10 @@
                 Profile (User {{$user->id}})</div>
                 <div class="panel-body">
                     <div class="profile">
-                        @if($user->profile_picture == '')
+                        @if(is_null($user->profile_photo))
                             <img class="profile-picture" src="/profile.jpg">
                         @else
-                            <img class="profile-picture" src="http://ainet.project/storage/profiles/{{$user->profile_picture}}">
+                            <img class="profile-picture" src="/storage/profiles/{{$user->profile_photo}}">
                         @endif
                         <li>About me: {{$user->presentation}}</li>
                         <li>Phone Number: {{$user->phone}}</li>

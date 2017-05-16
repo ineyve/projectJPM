@@ -76,7 +76,7 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->phone = $request->phone;
         $user->presentation = $request->presentation;
-        $path = $request->file('file')->store('public/profiles/');
+        $path = $request->file('profile_photo')->store('public/profiles');
         $parts = explode('/', $path);
         $user->profile_photo = $parts[2];
         $user->save();
