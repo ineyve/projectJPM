@@ -324,3 +324,8 @@ textarea {
     font-family:inherit;
     font-size:inherit;
 }
+
+.btn-link:hover {
+    color: inherit;
+    text-decoration: inherit;
+}

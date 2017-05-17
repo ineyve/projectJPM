@@ -19,6 +19,8 @@
                                 </div>
                                 <div class="col-xs-6">
                                     <input type="text" name="search" id="myInput" placeholder="Search any column..."/>
+                                    <input type="hidden" name="field" value="{{$sort['field']}}"/>
+                                    <input type="hidden" name="order" value="{{$sort['order']}}"/>
                                     <a class="btn btn-primary side-offset" href="{{ route('requests.create') }}" style="float: right;">Add request</a>
                                 </div>
                             </form>
@@ -28,6 +30,9 @@
                         <tr>
                             <th class="sorttable_sorted">
                                 <form>
+                                    @if(isset($sort['search']))
+                                        <input type="hidden" name="search" value="{{$sort['search']}}"/>
+                                    @endif
                                     <input type="hidden" name="field" value="requests.id"/> <!-- table column name -->
                                     @if($sort['field']=='requests.id') <!-- table column name -->
                                         @if($sort['order']=='ASC')
@@ -42,6 +47,9 @@
                             </th>
                             <th>
                                 <form>
+                                    @if(isset($sort['search']))
+                                        <input type="hidden" name="search" value="{{$sort['search']}}"/>
+                                    @endif
                                     <input type="hidden" name="field" value="users.id"/> <!-- table column name -->
                                     @if($sort['field']=='users.id') <!-- table column name -->
                                         @if($sort['order']=='ASC')
@@ -56,6 +64,9 @@
                             </th>
                             <th>
                                 <form>
+                                    @if(isset($sort['search']))
+                                        <input type="hidden" name="search" value="{{$sort['search']}}"/>
+                                    @endif
                                     <input type="hidden" name="field" value="users.name"/> <!-- table column name -->
                                     @if($sort['field']=='users.name') <!-- table column name -->
                                         @if($sort['order']=='ASC')
@@ -70,6 +81,9 @@
                             </th>
                             <th>
                                 <form>
+                                    @if(isset($sort['search']))
+                                        <input type="hidden" name="search" value="{{$sort['search']}}"/>
+                                    @endif
                                     <input type="hidden" name="field" value="due_date"/> <!-- table column name -->
                                     @if($sort['field']=='due_date') <!-- table column name -->
                                         @if($sort['order']=='ASC')
@@ -84,6 +98,9 @@
                             </th>
                             <th>
                                 <form>
+                                    @if(isset($sort['search']))
+                                        <input type="hidden" name="search" value="{{$sort['search']}}"/>
+                                    @endif
                                     <input type="hidden" name="field" value="requests.status"/> <!-- table column name -->
                                     @if($sort['field']=='requests.status') <!-- table column name -->
                                         @if($sort['order']=='ASC')

@@ -32,14 +32,18 @@ class RequestController extends Controller
         }
 
         if ($req->has('search')) { //With or without search
-            $srch = $req->search;
-            $requests = Request::select('requests.*')->leftJoin('users', 'users.id', '=', 'requests.owner_id')
-                ->where('name','like','%'.$srch.'%')->orWhere('requests.id','=',$srch)
-                ->orWhere('owner_id','=',$srch)->orWhereDate('due_date','=',$srch)
-                ->orderBy($sort['field'], $sort['order'])->paginate(20);
+            $sort['search'] = $req->search;
+            $requests = Request::leftJoin('users', 'users.id', '=', 'requests.owner_id')
+                ->where('name','like','%'.$sort['search'].'%')->orWhere('requests.id','=',$sort['search'])
+                ->orWhere('owner_id','=',$sort['search'])->orWhereDate('due_date','=',$sort['search'])
+                ->orderBy($sort['field'], $sort['order']) //order/sort
+                ->select('requests.id')->addSelect('owner_id')
+                ->addSelect('name')->addSelect('due_date')->addSelect('status')->paginate(20);
         } else {
-            $requests = Request::select('requests.*')->leftJoin('users', 'users.id', '=', 'requests.owner_id')
-                ->orderBy($sort['field'], $sort['order'])->paginate(20);
+            $requests = Request::leftJoin('users', 'users.id', '=', 'requests.owner_id')
+                ->orderBy($sort['field'], $sort['order']) //order/sort
+                ->select('requests.id')->addSelect('owner_id')
+                ->addSelect('name')->addSelect('due_date')->addSelect('status')->paginate(20);
         }
 
         $requests->appends($req->input())->links();
