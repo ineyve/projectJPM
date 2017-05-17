@@ -118,7 +118,7 @@
                                 <td>Satisfaction Grade</td>
                                 <td>
                                 @if($request->status == 2 && $user == $request->owner_id)
-                                    @if($request->satisfaction_grade == '')
+                                    @if(is_null($request->satisfaction_grade))
                                         @php($request->satisfaction_grade = 0)
                                     @endif
                                     <center><div id="star" class="c-rating" style="width: 100px;"></div></center>

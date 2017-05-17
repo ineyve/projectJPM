@@ -90,6 +90,11 @@ class RequestController extends Controller
 
     public function rating(Request $request, $rating)
     {
+        if(is_null($request->satisfaction_grade)) {
+            $user = Auth::user();
+            $user->print_evals++;
+            $user->save();
+        }
         $request->satisfaction_grade = $rating;
         $request->save();
 

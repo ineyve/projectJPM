@@ -22,9 +22,10 @@
                         <li>About me: {{$user->presentation}}</li>
                         <li>Department: {{App\Department::find($user->department_id)->name}}</li>
                         <li>Phone Number: {{$user->phone}}</li>
-                        <li>E-mail address: {{$user->email}}</li>
-                        <li>Personal URL: {{$user->profile_url}}</li>
+                        <li>E-mail address: <a href="mailto:{{$user->email}}">{{$user->email}}</a></li>
+                        <li>Personal URL: <a href="{{$user->profile_url}}">{{$user->profile_url}}</a></li>
                         <li>Total Requests: {{$user->print_counts}}</li>
+                        <li>Request evaluations: {{$user->print_evals}}</li>
                         <li>Member for: {{$user->memberFor()}}</li>
                         <li>Average Satisfaction Grade:
                             @for($i=0; $i < $user->averageRating(); $i++)
