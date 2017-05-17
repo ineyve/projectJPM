@@ -71,20 +71,20 @@
                                         <td><a href="{{route('requests.details', $request)}}">{{$request->created_at}}</a></td>
                                         <td><a href="{{route('requests.details', $request)}}">{{$request->statusToStr()}}</a></td>
                                     @endif
-                                        @if($request->status == 2)
-                                            @if(is_null($request->satisfaction_grade))
-                                                @php($request->satisfaction_grade = 0)
-                                            @endif
-                                            <td><div id="star{{++$i}}" class="c-rating"></div></td>
-                                        @elseif($request->status == 1)
-                                            <td><form action="{{route('requests.destroy',$request)}}" method="post" class="inline">
-                                                    {{method_field('DELETE')}}
-                                                    {{ csrf_field() }}
-                                                    <button type="submit" class="btn btn-xs btn-danger">Delete</button>
-                                            </form></td>
-                                        @else
-                                            <td></td>
+                                    <td>
+                                    @if($request->status == 2)
+                                        @if(is_null($request->satisfaction_grade))
+                                            @php($request->satisfaction_grade = 0)
                                         @endif
+                                        <div id="star{{++$i}}" class="c-rating"></div>
+                                    @elseif($request->status == 0)
+                                        <form action="{{route('requests.destroy',$request)}}" method="post" class="inline">
+                                                {{method_field('DELETE')}}
+                                                {{ csrf_field() }}
+                                                <button type="submit" onclick="return confirm('Are you sure you want to cancel this request?')" class="btn btn-xs btn-danger">Cancel</button>
+                                        </form>
+                                    @endif
+                                    </td>
                                 </tr>
                                 <script src="/js/rating.js"></script>
                                 <script>

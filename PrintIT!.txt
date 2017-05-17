@@ -1,10 +1,5 @@
-editar prefil
-upload foto
-Cancelar impressao
 Admin remover comentarios
 contactos na home page
-sort e filter
 rever edit e add (request e user)
 delete user tem de primeiro fazer delete de todos os comments nos seus requests, em seguida dos seus requests
 delete request tem de fazer delete de todos os seus comments
-password reset
