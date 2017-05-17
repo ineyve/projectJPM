@@ -36,6 +36,7 @@ class UserController extends Controller
             $order = $req->order;
 
         }
+
         $users->appends($req->input())->links();
         return view('users.index', compact('users', 'auth'));
     }

@@ -23,14 +23,79 @@
                                 </div>
                             </form>
                         </div>
-                    <table class="table table-striped table-hover sortable" id="myTable">
+                    <table class="table table-striped table-hover" id="myTable">
                     <thead>
                         <tr>
-                            <th class=" sorttable_sorted">Request Number<span id="sorttable_sortfwdind">&nbsp;▾</span></th>
-                            <th>Owner ID</th>
-                            <th>Owner Name</th>
-                            <th>Open Date</th>
-                            <th>Status</th>
+                            <th class="sorttable_sorted">
+                                <form>
+                                    <input type="hidden" name="field" value="requests.id"/> <!-- table column name -->
+                                    @if($sort['field']=='requests.id') <!-- table column name -->
+                                        @if($sort['order']=='ASC')
+                                            <button type="submit" name="order" value="DESC" class="btn-link">Request Number ▾</button>
+                                        @elseif($sort['order']=='DESC')
+                                            <button type="submit" name="order" value="ASC" class="btn-link">Request Number ▴</button>
+                                        @endif
+                                    @else
+                                        <button type="submit" name="order" value="ASC" class="btn-link">Request Number</button>
+                                    @endif
+                                </form>
+                            </th>
+                            <th>
+                                <form>
+                                    <input type="hidden" name="field" value="users.id"/> <!-- table column name -->
+                                    @if($sort['field']=='users.id') <!-- table column name -->
+                                        @if($sort['order']=='ASC')
+                                            <button type="submit" name="order" value="DESC" class="btn-link">Owner ID ▾</button>
+                                        @elseif($sort['order']=='DESC')
+                                            <button type="submit" name="order" value="ASC" class="btn-link">Owner ID ▴</button>
+                                        @endif
+                                    @else
+                                        <button type="submit" name="order" value="ASC" class="btn-link">Owner ID</button>
+                                    @endif
+                                </form>
+                            </th>
+                            <th>
+                                <form>
+                                    <input type="hidden" name="field" value="users.name"/> <!-- table column name -->
+                                    @if($sort['field']=='users.name') <!-- table column name -->
+                                        @if($sort['order']=='ASC')
+                                            <button type="submit" name="order" value="DESC" class="btn-link">Owner Name ▾</button>
+                                        @elseif($sort['order']=='DESC')
+                                            <button type="submit" name="order" value="ASC" class="btn-link">Owner Name ▴</button>
+                                        @endif
+                                    @else
+                                        <button type="submit" name="order" value="ASC" class="btn-link">Owner Name</button>
+                                    @endif
+                                </form>
+                            </th>
+                            <th>
+                                <form>
+                                    <input type="hidden" name="field" value="due_date"/> <!-- table column name -->
+                                    @if($sort['field']=='due_date') <!-- table column name -->
+                                        @if($sort['order']=='ASC')
+                                            <button type="submit" name="order" value="DESC" class="btn-link">Open Date ▾</button>
+                                        @elseif($sort['order']=='DESC')
+                                            <button type="submit" name="order" value="ASC" class="btn-link">Open Date ▴</button>
+                                        @endif
+                                    @else
+                                        <button type="submit" name="order" value="ASC" class="btn-link">Open Date</button>
+                                    @endif
+                                </form>
+                            </th>
+                            <th>
+                                <form>
+                                    <input type="hidden" name="field" value="requests.status"/> <!-- table column name -->
+                                    @if($sort['field']=='requests.status') <!-- table column name -->
+                                        @if($sort['order']=='ASC')
+                                            <button type="submit" name="order" value="DESC" class="btn-link">Status ▾</button>
+                                        @elseif($sort['order']=='DESC')
+                                            <button type="submit" name="order" value="ASC" class="btn-link">Status ▴</button>
+                                        @endif
+                                    @else
+                                        <button type="submit" name="order" value="ASC" class="btn-link">Status</button>
+                                    @endif
+                                </form>
+                            </th>
                             <th class="sorttable_nosort"></th>
                         </tr>
                     </thead>

@@ -20,23 +20,34 @@ class RequestController extends Controller
 
     public function index(\Illuminate\Http\Request $req)
     {
-        if ($req->has('search')) {
+        if ($req->has('order') && $req->has('field')) {
+            //If user sorted:
+            $sort['order'] = $req->order;
+            $sort['field'] = $req->field;
+        }
+        else
+        {   //If user didn't sort, default to:
+            $sort['order'] = 'ASC';
+            $sort['field'] = 'requests.id';
+        }
+
+        if ($req->has('search')) { //With or without search
             $srch = $req->search;
             $requests = Request::leftJoin('users', 'users.id', '=', 'requests.owner_id')
                 ->where('name','like','%'.$srch.'%')->orWhere('requests.id','=',$srch)
                 ->orWhere('owner_id','=',$srch)->orWhereDate('due_date','=',$srch)
+                ->orderBy($sort['field'], $sort['order']) //order/sort
                 ->select('requests.id')->addSelect('owner_id')
                 ->addSelect('name')->addSelect('due_date')->addSelect('status')->paginate(20);
         } else {
-            $requests = Request::paginate(20);
+            $requests = Request::leftJoin('users', 'users.id', '=', 'requests.owner_id')
+                ->orderBy($sort['field'], $sort['order']) //order/sort
+                ->select('requests.id')->addSelect('owner_id')
+                ->addSelect('name')->addSelect('due_date')->addSelect('status')->paginate(20);
         }
 
-        if ($req->has('order')) {
-            $order = $req->order;
-
-        }
         $requests->appends($req->input())->links();
-        return view('print_requests.index', compact('requests'));
+        return view('print_requests.index', compact('requests','sort'));
     }
 
     public function create()
