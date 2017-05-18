@@ -3,3 +3,5 @@ contactos na home page
 rever edit e add (request e user)
 delete user tem de primeiro fazer delete de todos os comments nos seus requests, em seguida dos seus requests
 delete request tem de fazer delete de todos os seus comments
+rever permissoes de rotas
+acrescentar details para status 0

@@ -46,8 +46,7 @@ class RequestController extends Controller
 
     public function create()
     {
-        $request = new Request();
-        return view('print_requests.add', compact('request'));
+        return view('print_requests.add');
     }
 
     public function store(StoreRequestPostRequest $req)
@@ -60,29 +59,33 @@ class RequestController extends Controller
         $parts = explode('/', $path);
         $request->file = $parts[2];
         $request->save();
-        return redirect()->route('requests.index')->with('success', 'Request added sucessfuly!');
+        return redirect()->route('dashboard')->with('success', 'Request added sucessfuly!');
     }
 
     public function edit(Request $request)
     {
-        return view('print_requests.edit', compact('request'));
+        if($request->owner_id == Auth::user()->id)
+            return view('print_requests.edit', compact('request'));
+        abort(403);
     }
 
     public function details(Request $request)
     {
         $admin = 0;
-        $user = Auth::user()->id;
-        $comments = Comment::where('request_id', '=', $request->id)->orderBy('created_at')->get();
         if (Auth::user()->admin)
             $admin = 1;
+        $user = Auth::user()->id;
         if ($request->owner_id == $user || $admin) {
+            $comments = Comment::where('request_id', '=', $request->id)->orderBy('created_at')->get();
             return view('print_requests.details', compact('request', 'admin', 'comments', 'user'));
-        } else
-            abort(403);
+        }
+        abort(403);
     }
 
     public function complete(Request $request)
     {
+        if($request->status != 0)
+            abort(403);
         $request->status = 2;
         $request->closed_date = Carbon::now();
         $request->closed_user_id = Auth::user()->id;
@@ -95,6 +98,8 @@ class RequestController extends Controller
 
     public function rating(Request $request, $rating)
     {
+        if($request->owner_id != Auth::user())
+            abort(403);
         if(is_null($request->satisfaction_grade)) {
             $user = Auth::user();
             $user->print_evals++;
@@ -120,6 +125,8 @@ class RequestController extends Controller
 
     public function destroy(Request $request)
     {
+        if($request->status != 0 || $request->owner_id != Auth::user()->id)
+            abort(403);
         Storage::delete($request->file);
         $request->delete();
         return redirect()->route('dashboard')->with('success', 'request deleted successfully');
@@ -127,6 +134,8 @@ class RequestController extends Controller
 
     public function download(Request $request)
     {
+        if($request->owner_id != Auth::user())
+            abort(403);
         return Response::download('../storage/app/print-jobs/'.$request->owner_id.'/'.$request->file);
     }
 }

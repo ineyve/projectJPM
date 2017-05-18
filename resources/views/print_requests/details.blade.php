@@ -182,55 +182,53 @@
                             </div>
                         </form>
                     @endif
-                    @if($user == $request->owner_id || $admin)
-                        @php($count=0)
-                        @foreach($comments as $comment)
-                            @if($comment->parent_id == '' && !$comment->blocked)
-                                @php(++$count)
-                                <div class="comment">
-                                    <a href="{{ route('users.profile', $comment->user_id) }}"><img class="comment-picture" src="/profile.jpg"></a>
-                                    <p class="first"><a href="{{route('users.profile', $comment->user_id)}}">{{$comment->user->name}}</a> &nbsp&nbsp&nbsp&nbsp{{$comment->created_at}}</p>
-                                    <p>{{$comment->comment}}</p>
-                                    <a class="btn btn-xs btn-primary" href='javascript:showReply()' id="buttonReply">Reply</a>
-                                    <form action="{{route('requests.reply', ['request' => $request, 'comment' => $comment])}}" method="post" class="form-group" id="reply-form" style="display:none;">
-                                        {{ csrf_field() }}
-                                        <div class="form-group" id="reply" style="margin-left: 10px; margin-right: 10px;">
-                                            <label for="inputReply">Reply</label>
-                                            <textarea class="form-control" name="reply" id="inputReply"></textarea>
+                    @php($count=0)
+                    @foreach($comments as $comment)
+                        @if($comment->parent_id == '' && !$comment->blocked)
+                            @php(++$count)
+                            <div class="comment">
+                                <a href="{{ route('users.profile', $comment->user_id) }}"><img class="comment-picture" src="/profile.jpg"></a>
+                                <p class="first"><a href="{{route('users.profile', $comment->user_id)}}">{{$comment->user->name}}</a> &nbsp&nbsp&nbsp&nbsp{{$comment->created_at}}</p>
+                                <p>{{$comment->comment}}</p>
+                                <a class="btn btn-xs btn-primary" href='javascript:showReply()' id="buttonReply">Reply</a>
+                                <form action="{{route('requests.reply', ['request' => $request, 'comment' => $comment])}}" method="post" class="form-group" id="reply-form" style="display:none;">
+                                    {{ csrf_field() }}
+                                    <div class="form-group" id="reply" style="margin-left: 10px; margin-right: 10px;">
+                                        <label for="inputReply">Reply</label>
+                                        <textarea class="form-control" name="reply" id="inputReply"></textarea>
+                                    </div>
+                                    <div class="form-group" id="submitReply">
+                                        <button type="submit" class="btn btn-xs btn-primary side-offset">Reply</button>
+                                        <a class="btn btn-xs btn-default" href='javascript:hideReply()' id="cancelReply">Cancel</a>
+                                    </div>
+                                </form>
+                            @foreach($comments as $reply)
+                                @if($reply->parent_id == $comment->id)
+                                        <div class="reply">
+                                            <a href="{{ route('users.profile', $reply->user_id) }}"><img class="comment-picture" src="/profile.jpg"></a>
+                                            <p class="first"><a href="{{route('users.profile', $reply->user_id)}}">{{$reply->user->name}}</a> &nbsp&nbsp&nbsp&nbsp{{$reply->created_at}}</p>
+                                            <p>{{$reply->comment}}</p>
                                         </div>
-                                        <div class="form-group" id="submitReply">
-                                            <button type="submit" class="btn btn-xs btn-primary side-offset">Reply</button>
-                                            <a class="btn btn-xs btn-default" href='javascript:hideReply()' id="cancelReply">Cancel</a>
-                                        </div>
-                                    </form>
-                                @foreach($comments as $reply)
-                                    @if($reply->parent_id == $comment->id)
-                                            <div class="reply">
-                                                <a href="{{ route('users.profile', $reply->user_id) }}"><img class="comment-picture" src="/profile.jpg"></a>
-                                                <p class="first"><a href="{{route('users.profile', $reply->user_id)}}">{{$reply->user->name}}</a> &nbsp&nbsp&nbsp&nbsp{{$reply->created_at}}</p>
-                                                <p>{{$reply->comment}}</p>
-                                            </div>
-                                    @endif
-                                @endforeach
-                                </div>
-                            @endif
-                        @endforeach
-                        @if($admin && $count)
-                            <br>
+                                @endif
+                            @endforeach
+                            </div>
                         @endif
-                        <a class="btn btn-primary" href='javascript:showComment()' id="buttonComment">Comment</a>
-                        <form action="{{route('requests.comment', $request)}}" method="post" class="form-group" id="comment-form" style="display:none">
-                            {{ csrf_field() }}
-                            <div class="form-group" id="comment">
-                                <label for="inputComment">Comment</label>
-                                <textarea class="form-control" name="comment" id="inputComment"></textarea>
-                            </div>
-                            <div class="form-group" id="submitComment">
-                                <button type="submit" class="btn btn-primary side-offset">Comment</button>
-                                <a class="btn btn-default" href='javascript:hideComment()' id="cancelComment">Cancel</a>
-                            </div>
-                        </form>
+                    @endforeach
+                    @if($admin && $count)
+                        <br>
                     @endif
+                    <a class="btn btn-primary" href='javascript:showComment()' id="buttonComment">Comment</a>
+                    <form action="{{route('requests.comment', $request)}}" method="post" class="form-group" id="comment-form" style="display:none">
+                        {{ csrf_field() }}
+                        <div class="form-group" id="comment">
+                            <label for="inputComment">Comment</label>
+                            <textarea class="form-control" name="comment" id="inputComment"></textarea>
+                        </div>
+                        <div class="form-group" id="submitComment">
+                            <button type="submit" class="btn btn-primary side-offset">Comment</button>
+                            <a class="btn btn-default" href='javascript:hideComment()' id="cancelComment">Cancel</a>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
