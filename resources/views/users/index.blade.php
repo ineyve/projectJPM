@@ -53,11 +53,6 @@
                                             @else
                                                 <a class="btn btn-xs btn-success" href="{{ route('users.block', ['user' => $user, 'block' => 0]) }}">Unblock</a>
                                             @endif
-                                        <form action="{{route('users.destroy',$user)}}" method="post" class="inline">
-                                            {{method_field('DELETE')}}
-                                            {{ csrf_field() }}
-                                            <button type="submit" onclick="return confirm('Are you sure you want to delete this user?')" class="btn btn-xs btn-danger">Delete</button>
-                                        </form>
                                         @endif
                                     </a></td>
                                     @endif

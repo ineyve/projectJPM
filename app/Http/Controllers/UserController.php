@@ -55,12 +55,6 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', 'user added successfully');
     }
 
-    public function destroy(User $user)
-    {
-        $user->delete();
-        return redirect()->route('users.index')->with('success', 'user deleted successfully');
-    }
-
     public function edit(User $user)
     {
         $departments= Department::All();

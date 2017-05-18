@@ -70,4 +70,3 @@ Route::post('users/editProfile', 'UserController@updateProfile')->name('users.up
 Route::put('users/editProfile', 'UserController@updatePassword')->name('users.updatePassword')->middleware('can:user');
 Route::get('users/{user}/block/{block}', 'UserController@block')->name('users.block')->middleware('can:admin');
 Route::get('users/{user}/profile', 'UserController@profile')->name('users.profile')->middleware('can:user');
-Route::delete('users/{user}', 'UserController@destroy')->name('users.destroy')->middleware('can:admin');
