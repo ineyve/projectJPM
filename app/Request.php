@@ -59,7 +59,7 @@ class Request extends Model
     }
 
     public function date(){
-        $date = new Carbon($this->created_at);
+        $date = new Carbon($this->due_date);
         return $date->toDateString();
     }
 
