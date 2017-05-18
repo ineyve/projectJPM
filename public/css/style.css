@@ -326,6 +326,6 @@ textarea {
 }
 
 .btn-link:hover {
-    color: inherit;
+    color: gray;
     text-decoration: inherit;
 }

@@ -21,21 +21,33 @@ class UserController extends Controller
     public function index(\Illuminate\Http\Request $req)
     {
         $auth = Auth::user();
-        if ($req->has('search')) {
-            $srch = $req->search;
-            $users = User::select('users.*')->leftJoin('departments', 'users.department_id', '=', 'departments.id')
-                ->where('users.name','like','%'.$srch.'%')->orWhere('users.id','=',$srch)->orWhere('users.phone','=',$srch)
-                ->orWhere('users.email','like','%'.$srch.'%')->orWhere('departments.name','like','%'.$srch.'%')->paginate(20);
-        } else {
-            $users = User::paginate(20);
+
+        if ($req->has('order') && $req->has('field')) {
+            //If user sorted:
+            $sort['order'] = $req->order;
+            $sort['field'] = $req->field;
+        }
+        else
+        {   //If user didn't sort, default to:
+            $sort['order'] = 'DESC';
+            $sort['field'] = 'users.id';
         }
 
-        if ($req->has('order')) {
-            $order = $req->order;
+        if ($req->has('search')) {
+            $sort['search'] = $req->search;
+            $users = User::select('users.*')->leftJoin('departments', 'users.department_id', '=', 'departments.id')
+                ->where('users.name','like','%'.$sort['search'].'%')->orWhere('users.id','=',$sort['search'])->orWhere('users.phone','=',$sort['search'])
+                ->orWhere('users.email','like','%'.$sort['search'].'%')->orWhere('departments.name','like','%'.$sort['search'].'%')
+                ->orderBy($sort['field'], $sort['order'])
+                ->paginate(20);
+        } else {
+            $users = User::select('users.*')->leftJoin('departments', 'users.department_id', '=', 'departments.id')
+                ->orderBy($sort['field'], $sort['order']) //order/sort
+                ->paginate(20);
         }
 
         $users->appends($req->input())->links();
-        return view('users.index', compact('users', 'auth'));
+        return view('users.index', compact('users', 'auth', 'sort'));
     }
 
     public function create()
