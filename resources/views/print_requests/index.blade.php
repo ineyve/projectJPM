@@ -87,9 +87,9 @@
                                     <input type="hidden" name="field" value="due_date"/> <!-- table column name -->
                                     @if($sort['field']=='due_date') <!-- table column name -->
                                         @if($sort['order']=='ASC')
-                                            <button type="submit" name="order" value="DESC" class="btn-link">Open Date ▾</button>
+                                            <button type="submit" name="order" value="DESC" class="btn-link">Due Date ▾</button>
                                         @elseif($sort['order']=='DESC')
-                                            <button type="submit" name="order" value="ASC" class="btn-link">Open Date ▴</button>
+                                            <button type="submit" name="order" value="ASC" class="btn-link">Due Date ▴</button>
                                         @endif
                                     @else
                                         <button type="submit" name="order" value="ASC" class="btn-link">Open Date</button>
