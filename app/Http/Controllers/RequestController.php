@@ -27,7 +27,7 @@ class RequestController extends Controller
         }
         else
         {   //If user didn't sort, default to:
-            $sort['order'] = 'ASC';
+            $sort['order'] = 'DESC';
             $sort['field'] = 'requests.id';
         }
 
