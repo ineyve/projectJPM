@@ -6,9 +6,7 @@ namespace App\Http\Controllers;
 use App\Comment;
 use App\Http\Requests\StoreRefusePostRequest;
 use App\Http\Requests\StoreRequestPostRequest;
-
 use App\Request;
-
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
