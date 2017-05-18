@@ -28,7 +28,7 @@ class RequestController extends Controller
         else
         {   //If user didn't sort, default to:
             $sort['order'] = 'DESC';
-            $sort['field'] = 'requests.id';
+            $sort['field'] = 'requests.status';
         }
 
         if ($req->has('search')) { //With or without search
