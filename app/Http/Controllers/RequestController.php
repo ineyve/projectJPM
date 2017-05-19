@@ -16,6 +16,11 @@ use Illuminate\Support\Facades\Storage;
 class RequestController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(\Illuminate\Http\Request $req)
     {
         if ($req->has('order') && $req->has('field')) {
