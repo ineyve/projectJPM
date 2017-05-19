@@ -197,9 +197,12 @@
                             @php(++$count)
                             <div class="comment">
                                 <a href="{{ route('users.profile', $comment->user_id) }}"><img class="comment-picture" src="/profile.jpg"></a>
+
                                 <p class="first"><a href="{{route('users.profile', $comment->user_id)}}">{{$comment->user->name}}</a> &nbsp&nbsp&nbsp&nbsp{{$comment->created_at}}</p>
                                 <p>{{$comment->comment}}</p>
+
                                 <a class="btn btn-xs btn-primary" href='javascript:showReply()' id="buttonReply">Reply</a>
+
                                 <form action="{{route('requests.reply', ['request' => $request, 'comment' => $comment])}}" method="post" class="form-group" id="reply-form" style="display:none;">
                                     {{ csrf_field() }}
                                     <div class="form-group" id="reply" style="margin-left: 10px; margin-right: 10px;">

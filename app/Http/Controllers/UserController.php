@@ -126,4 +126,14 @@ class UserController extends Controller
             return redirect()->route('users.index')->with('success', 'user unblocked successfully');
     }
 
+    public function admin(User $user, $admin)
+    {
+        $user->admin=$admin;
+        $user->save();
+        if($admin)
+            return redirect()->route('users.index')->with('success', 'Administrator profile assigned successfully');
+        else
+            return redirect()->route('users.index')->with('success', 'Removal of Administrator profile successfully');
+    }
+
 }

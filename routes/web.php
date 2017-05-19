@@ -71,3 +71,4 @@ Route::post('users/create', 'UserController@store')->name('users.store')->middle
 Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit')->middleware('can:admin');
 Route::post('users/{user}/edit', 'UserController@update')->name('users.update')->middleware('can:admin');
 Route::get('users/{user}/block/{block}', 'UserController@block')->name('users.block')->middleware('can:admin');
+Route::get('users/{user}/admin/{admin}', 'UserController@admin')->name('users.admin')->middleware('can:admin');

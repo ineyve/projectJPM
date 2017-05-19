@@ -19,11 +19,18 @@
                         @else
                             <img class="profile-picture" src="/storage/profiles/{{$user->profile_photo}}">
                         @endif
-                        <li>About me: {{$user->presentation}}</li>
-                        <li>Department: {{App\Department::find($user->department_id)->name}}</li>
-                        <li>Phone Number: {{$user->phone}}</li>
                         <li>E-mail address: <a href="mailto:{{$user->email}}">{{$user->email}}</a></li>
+                        @if(!is_null($user->phone))
+                        <li>Phone Number: {{$user->phone}}</li>
+                        @endif
+                        <li>Department: {{App\Department::find($user->department_id)->name}}</li>
+                        @if(!is_null($user->profile_url))
                         <li>Personal URL: <a href="{{$user->profile_url}}">{{$user->profile_url}}</a></li>
+                        @endif
+                        @if(!is_null($user->presentation))
+                        <li>About me: {{$user->presentation}}</li>
+                        @endif
+                        @can('selfOrAdmin')
                         <li>Total Requests: {{$user->print_counts}}</li>
                         <li>Request evaluations: {{$user->print_evals}}</li>
                         <li>Member for: {{$user->memberFor()}}</li>
@@ -34,7 +41,15 @@
                         </li>
                         <li>Admin: {{$user->adminToStr()}}</li>
                         <li>Blocked: {{$user->blockedToStr()}}</li>
+                        @endcan
                         <br><br>
+                        @can('admin')
+                            <td>
+                            @if(!$user->blocked)
+                                            <a class="btn btn-xs btn-warning" href="{{ route('users.block', ['user' => $user, 'block' => 1]) }}" >Block</a>
+                            @endif
+                        @endcan
+                        <br><br> 
                     </div>
                 </div>
             </div>
