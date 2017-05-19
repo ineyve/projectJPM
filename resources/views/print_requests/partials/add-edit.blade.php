@@ -94,8 +94,22 @@
         <option disabled selected> -- select an option -- </option>
         <option value="0">Draft</option>
         <option value="1">Normal</option>
-        <option value="1">Photographic</option>
+        <option value="2">Photographic</option>
         
+    </select>
+</div>
+
+<div class="form-group">
+    <label for="inputFrontBack">Front and Back</label>
+    <select name="front_back" id="inputFrontBack" class="form-control"
+    @if(Route::currentRouteName()=='requests.create')
+        value="{{old('front_back')}}"
+        @else(Route::currentRouteName()=='requests.edit')
+        value="{{$request->front_back}}"
+        @endif">
+        <option disabled selected> -- select an option -- </option>
+        <option value="0">Single Page</option>
+        <option value="1">Front and Back</option>        
     </select>
 </div>
 

@@ -1,10 +1,6 @@
 @extends('master')
 
-<script src="/js/sorttable.js"></script>
-<script src="/js/filter.js"></script>
-
 @section('content')
-
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -45,14 +41,86 @@
                         <a class="btn btn-primary" href="{{route('requests.create')}}">Add Request</a>
                     </div>
                     @if (count($requests))
-                        <input type="text" id="myInput" onkeyup="filter()" placeholder="Search any column...">
-                        <table class="table table-striped sortable table-hover" id="myTable">
+                        <form>
+                            <div class="col-xs-6">
+                                {{ $requests->links() }}
+                            </div>
+                            <div class="col-xs-6">
+                                <button type="submit" class="btn btn-success" style="float:right;">Search</button>
+                                <input type="text" name="search" id="myInput" placeholder="Search any column..."/>
+                                <input type="hidden" name="field" value="{{$sort['field']}}"/>
+                                <input type="hidden" name="order" value="{{$sort['order']}}"/>
+                            </div>
+                        </form>
+                        <table class="table table-striped table-hover" id="myTable">
                             <thead>
                             <tr>
-                                <th>Request Number</th>
-                                <th>Description</th>
-                                <th>Open Date</th>
-                                <th>Status<span id="sorttable_sortfwdind">&nbsp;▾</span></th>
+                                <th>
+                                    <form>
+                                        @if(isset($sort['search']))
+                                            <input type="hidden" name="search" value="{{$sort['search']}}"/>
+                                        @endif
+                                        <input type="hidden" name="field" value="requests.id"/> <!-- table column name -->
+                                        @if($sort['field']=='requests.id') <!-- table column name -->
+                                        @if($sort['order']=='ASC')
+                                            <button type="submit" name="order" value="DESC" class="btn-link">Request Number ▾</button>
+                                        @elseif($sort['order']=='DESC')
+                                            <button type="submit" name="order" value="ASC" class="btn-link">Request Number ▴</button>
+                                        @endif
+                                        @else
+                                            <button type="submit" name="order" value="ASC" class="btn-link">Request Number</button>
+                                        @endif
+                                    </form>
+                                </th>
+                                <th>
+                                    @if(isset($sort['search']))
+                                        <input type="hidden" name="search" value="{{$sort['search']}}"/>
+                                    @endif
+                                    <input type="hidden" name="field" value="requests.description"/> <!-- table column name -->
+                                    @if($sort['field']=='requests.description') <!-- table column name -->
+                                    @if($sort['order']=='ASC')
+                                        <button type="submit" name="order" value="DESC" class="btn-link">Description ▾</button>
+                                    @elseif($sort['order']=='DESC')
+                                        <button type="submit" name="order" value="ASC" class="btn-link">Description ▴</button>
+                                    @endif
+                                    @else
+                                        <button type="submit" name="order" value="ASC" class="btn-link">Description</button>
+                                    @endif
+                                </th>
+                                <th>
+                                    <form>
+                                        @if(isset($sort['search']))
+                                            <input type="hidden" name="search" value="{{$sort['search']}}"/>
+                                        @endif
+                                        <input type="hidden" name="field" value="due_date"/> <!-- table column name -->
+                                        @if($sort['field']=='due_date') <!-- table column name -->
+                                        @if($sort['order']=='ASC')
+                                            <button type="submit" name="order" value="DESC" class="btn-link">Due Date ▾</button>
+                                        @elseif($sort['order']=='DESC')
+                                            <button type="submit" name="order" value="ASC" class="btn-link">Due Date ▴</button>
+                                        @endif
+                                        @else
+                                            <button type="submit" name="order" value="ASC" class="btn-link">Due Date</button>
+                                        @endif
+                                    </form>
+                                </th>
+                                <th>
+                                    <form>
+                                        @if(isset($sort['search']))
+                                            <input type="hidden" name="search" value="{{$sort['search']}}"/>
+                                        @endif
+                                        <input type="hidden" name="field" value="requests.status"/> <!-- table column name -->
+                                        @if($sort['field']=='requests.status') <!-- table column name -->
+                                        @if($sort['order']=='ASC')
+                                            <button type="submit" name="order" value="DESC" class="btn-link">Status ▾</button>
+                                        @elseif($sort['order']=='DESC')
+                                            <button type="submit" name="order" value="ASC" class="btn-link">Status ▴</button>
+                                        @endif
+                                        @else
+                                            <button type="submit" name="order" value="ASC" class="btn-link">Status</button>
+                                        @endif
+                                    </form>
+                                </th>
                                 <th class="sorttable_nosort"></th>
                             </tr>
                             </thead>
@@ -89,7 +157,11 @@
                                 <script src="/js/rating.js"></script>
                                 <script>
                                     var el = document.querySelector('#star{{$i}}');
-                                    var currentRating={{$request->satisfaction_grade}}
+                                    @if(isset($request->satisfaction_grade))
+                                        var currentRating={{$request->satisfaction_grade}};
+                                    @else
+                                        var currentRating=0;
+                                    @endif
                                     var maxRating= 5;
                                     var callback = function(rating) {
                                         switch(rating) {
