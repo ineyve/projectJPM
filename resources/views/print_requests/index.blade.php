@@ -1,8 +1,5 @@
 @extends('master')
 
-<script src="/js/sorttable.js"></script>
-<script src="/js/filter.js"></script>
-
 @section('content')
 <div class="container">
     <div class="row">
@@ -86,11 +83,11 @@
                                     @endif
                                     <input type="hidden" name="field" value="due_date"/> <!-- table column name -->
                                     @if($sort['field']=='due_date') <!-- table column name -->
-                                        @if($sort['order']=='ASC')
-                                            <button type="submit" name="order" value="DESC" class="btn-link">Due Date ▾</button>
-                                        @elseif($sort['order']=='DESC')
-                                            <button type="submit" name="order" value="ASC" class="btn-link">Due Date ▴</button>
-                                        @endif
+                                    @if($sort['order']=='ASC')
+                                        <button type="submit" name="order" value="DESC" class="btn-link">Due Date ▾</button>
+                                    @elseif($sort['order']=='DESC')
+                                        <button type="submit" name="order" value="ASC" class="btn-link">Due Date ▴</button>
+                                    @endif
                                     @else
                                         <button type="submit" name="order" value="ASC" class="btn-link">Due Date</button>
                                     @endif

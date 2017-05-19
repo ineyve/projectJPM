@@ -1,8 +1,5 @@
 @extends('master')
 
-<script src="/js/sorttable.js"></script>
-<script src="/js/filter.js"></script>
-
 @section('content')
 <div class="container">
     <div class="row">

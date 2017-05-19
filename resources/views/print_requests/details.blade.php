@@ -132,7 +132,11 @@
                             <script src="/js/rating.js"></script>
                             <script>
                                 var el = document.querySelector('#star');
-                                var currentRating={{$request->satisfaction_grade}}
+                                @if(isset($request->satisfaction_grade))
+                                    var currentRating={{$request->satisfaction_grade}};
+                                @else
+                                    var currentRating=0;
+                                @endif
                                 var maxRating= 5;
                                 var callback = function(rating) {
                                     switch(rating) {

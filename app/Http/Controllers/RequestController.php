@@ -40,6 +40,7 @@ class RequestController extends Controller
                 $searchStatus = 2;
             else
                 $searchStatus = -1;
+
             $requests = Request::select('requests.*')->leftJoin('users', 'users.id', '=', 'requests.owner_id')
                 ->where('name','like','%'.$sort['search'].'%')->orWhere('requests.id','=',$sort['search'])
                 ->orWhere('owner_id','=',$sort['search'])->orWhereDate('due_date','=',$sort['search'])
