@@ -203,7 +203,7 @@
                                     </div>
                                 </form>
                             @foreach($comments as $reply)
-                                @if($reply->parent_id == $comment->id)
+                                @if($reply->parent_id == $comment->id && !$reply->blocked)
                                         <div class="reply">
                                             <a href="{{ route('users.profile', $reply->user_id) }}"><img class="comment-picture" src="/profile.jpg"></a>
                                             <p class="first"><a href="{{route('users.profile', $reply->user_id)}}">{{$reply->user->name}}</a> &nbsp&nbsp&nbsp&nbsp{{$reply->created_at}}</p>

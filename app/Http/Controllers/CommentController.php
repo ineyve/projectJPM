@@ -17,10 +17,15 @@ use Illuminate\Support\Facades\Auth;
 class CommentController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function create(StoreCommentPostRequest $req, Request $request)
     {
         $comment = new Comment();
-        $comment->comment = $req->comment;
+        $comment->fill($req->all());
         $comment->blocked = 0;
         $comment->request_id = $request->id;
         $comment->user_id = Auth::user()->id;

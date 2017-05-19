@@ -39,34 +39,35 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 */
 
 // Dashboard
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard')->middleware('can:user');
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
 // Requests
+Route::get('requests/create', 'RequestController@create')->name('requests.create');
+Route::post('requests/create', 'RequestController@store')->name('requests.store');
+Route::get('requests/{request}/details', 'RequestController@details' )->name('requests.details')->middleware('can:selfOrAdmin');
+Route::get('requests/{request}/rating/{rating}', 'RequestController@rating' )->name('requests.rating')->middleware('can:self');
+
+Route::get('requests/{request}/edit', 'RequestController@edit')->name('requests.edit')->middleware('can:self');
+Route::post('requests/{request}/edit', 'RequestController@update')->name('requests.update')->middleware('can:self');
+Route::delete('requests/{request}', 'RequestController@destroy')->name('requests.destroy')->middleware('can:self');
+Route::get('requests/{request}/download', 'RequestController@download')->name('requests.download')->middleware('can:selfOrAdmin');
 Route::get('requests', 'RequestController@index' )->name('requests.index')->middleware('can:admin');
-Route::get('requests/{request}/details', 'RequestController@details' )->name('requests.details')->middleware('can:user');
-Route::get('requests/{request}/rating/{rating}', 'RequestController@rating' )->name('requests.rating')->middleware('can:user');
-Route::get('requests/create', 'RequestController@create')->name('requests.create')->middleware('can:user');
-Route::post('requests/create', 'RequestController@store')->name('requests.store')->middleware('can:user');
-Route::get('requests/{request}/edit', 'RequestController@edit')->name('requests.edit')->middleware('can:user');
-Route::post('requests/{request}/edit', 'RequestController@update')->name('requests.update')->middleware('can:user');
-Route::delete('requests/{request}', 'RequestController@destroy')->name('requests.destroy')->middleware('can:user');
 Route::get('requests/{request}/complete', 'RequestController@complete')->name('requests.complete')->middleware('can:admin');
 Route::post('requests/{request}/refuse', 'RequestController@refuse')->name('requests.refuse')->middleware('can:admin');
-Route::get('requests/{request}/download', 'RequestController@download')->name('requests.download')->middleware('can:user');
 
 //Comment
-Route::post('requests/{request}/details/comment', 'CommentController@create')->name('requests.comment')->middleware('can:user');
-Route::post('requests/{request}/details/comment/{comment}/reply', 'CommentController@reply')->name('requests.reply')->middleware('can:user');
+Route::post('requests/{request}/details/comment', 'CommentController@create')->name('requests.comment')->middleware('can:selfOrAdmin');
+Route::post('requests/{request}/details/comment/{comment}/reply', 'CommentController@reply')->name('requests.reply')->middleware('can:selfOrAdmin');
 
 
 // Users
-Route::get('users', 'UserController@index' )->name('users.index')->middleware('can:user');
+Route::get('users', 'UserController@index' )->name('users.index');
+Route::get('users/editProfile', 'UserController@editProfile')->name('users.editProfile');
+Route::post('users/editProfile', 'UserController@updateProfile')->name('users.updateProfile');
+Route::put('users/editProfile', 'UserController@updatePassword')->name('users.updatePassword');
+Route::get('users/{user}/profile', 'UserController@profile')->name('users.profile');
 Route::get('users/create', 'UserController@create')->name('users.create')->middleware('can:admin');
 Route::post('users/create', 'UserController@store')->name('users.store')->middleware('can:admin');
 Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit')->middleware('can:admin');
 Route::post('users/{user}/edit', 'UserController@update')->name('users.update')->middleware('can:admin');
-Route::get('users/editProfile', 'UserController@editProfile')->name('users.editProfile')->middleware('can:user');
-Route::post('users/editProfile', 'UserController@updateProfile')->name('users.updateProfile')->middleware('can:user');
-Route::put('users/editProfile', 'UserController@updatePassword')->name('users.updatePassword')->middleware('can:user');
 Route::get('users/{user}/block/{block}', 'UserController@block')->name('users.block')->middleware('can:admin');
-Route::get('users/{user}/profile', 'UserController@profile')->name('users.profile')->middleware('can:user');

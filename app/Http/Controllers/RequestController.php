@@ -16,6 +16,11 @@ use Illuminate\Support\Facades\Storage;
 class RequestController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(\Illuminate\Http\Request $req)
     {
         if ($req->has('order') && $req->has('field')) {
@@ -134,7 +139,7 @@ class RequestController extends Controller
 
     public function download(Request $request)
     {
-        if($request->owner_id != Auth::user())
+        if($request->owner_id != Auth::user()->id && !Auth::user()->admin)
             abort(403);
         return Response::download('../storage/app/print-jobs/'.$request->owner_id.'/'.$request->file);
     }
