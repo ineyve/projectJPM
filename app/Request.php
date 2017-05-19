@@ -58,6 +58,13 @@ class Request extends Model
         }
     }
 
+    public function frontBackToStr(){
+        if($this->front_back == 0){
+            return 'Single Page';
+        }else 
+            return 'Front and Back'; 
+    }
+
     public function date(){
         $date = new Carbon($this->due_date);
         return $date->toDateString();

@@ -31,6 +31,7 @@ class StoreRequestPostRequest extends FormRequest
             'stapled'=>'required',
             'paper_size'=>'required',
             'paper_type'=>'required',
+            'front_back'=>'required',
             'file'=>'required',
         ];
     }

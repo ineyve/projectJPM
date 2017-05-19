@@ -69,6 +69,11 @@
                                 <td>Paper Type</td>
                                 <td>{{$request->typeToStr()}}</td>
                             </tr>
+
+                            <tr>
+                                <td>Front Back</td>
+                                <td>{{$request->frontBackToStr()}}</td>
+                            </tr>
                             
                             <tr>
                                 <td>File</td>
