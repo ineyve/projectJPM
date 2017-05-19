@@ -92,7 +92,7 @@
                                             <button type="submit" name="order" value="ASC" class="btn-link">Due Date ▴</button>
                                         @endif
                                     @else
-                                        <button type="submit" name="order" value="ASC" class="btn-link">Open Date</button>
+                                        <button type="submit" name="order" value="ASC" class="btn-link">Due Date</button>
                                     @endif
                                 </form>
                             </th>

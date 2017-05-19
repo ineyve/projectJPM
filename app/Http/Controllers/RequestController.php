@@ -25,15 +25,25 @@ class RequestController extends Controller
         }
         else
         {   //If user didn't sort, default to:
-            $sort['order'] = 'DESC';
+            $sort['order'] = 'ASC';
             $sort['field'] = 'requests.status';
         }
 
         if ($req->has('search')) { //With or without search
             $sort['search'] = $req->search;
+            $sort['search'] = strtolower($sort['search']);
+            if(strpos( 'pending', $sort['search'])!==false)
+                $searchStatus = 0;
+            elseif(strpos( 'rejected', $sort['search'])!==false)
+                $searchStatus = 1;
+            elseif(strpos( 'complete', $sort['search'])!==false)
+                $searchStatus = 2;
+            else
+                $searchStatus = -1;
             $requests = Request::select('requests.*')->leftJoin('users', 'users.id', '=', 'requests.owner_id')
                 ->where('name','like','%'.$sort['search'].'%')->orWhere('requests.id','=',$sort['search'])
                 ->orWhere('owner_id','=',$sort['search'])->orWhereDate('due_date','=',$sort['search'])
+                ->orWhere('requests.status','=',$searchStatus)
                 ->orderBy($sort['field'], $sort['order'])->paginate(20);
         } else {
             $requests = Request::select('requests.*')->leftJoin('users', 'users.id', '=', 'requests.owner_id')
