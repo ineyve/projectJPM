@@ -47,15 +47,14 @@
                     </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
-                        @if (!Auth::guest())
                         <input type="text" list="users" id="navSearch" oninput='onInput()' placeholder="Search Profiles">
                         <datalist id="users">
                             @foreach($users as $user)
                                 <option value="{{$user->name}}" href="{{ route('users.profile', $user) }}">
                             @endforeach
                         </datalist>
-                        @endif
                         <li><a href="{{ url('/') }}">Home</a></li>
+                        <li> <a href="{{ route('users.index') }}">Users</a></li>
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                             <li><a href="{{ route('login') }}">Login</a></li>
@@ -64,7 +63,7 @@
                             @if(Auth::user()->admin == 1)
                                 <li> <a href="{{ route('requests.index') }}">Requests</a></li>
                             @endif
-                            <li> <a href="{{ route('users.index') }}">Users</a></li>
+
                             <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
                             <li><a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();

@@ -32,11 +32,11 @@
                                             @endif
                                                 <input type="hidden" name="field" value="users.id"/> <!-- table column name -->
                                             @if($sort['field']=='users.id') <!-- table column name -->
-                                            @if($sort['order']=='ASC')
-                                                <button type="submit" name="order" value="DESC" class="btn-link">ID ▾</button>
-                                            @elseif($sort['order']=='DESC')
-                                                <button type="submit" name="order" value="ASC" class="btn-link">ID ▴</button>
-                                            @endif
+                                                @if($sort['order']=='ASC')
+                                                    <button type="submit" name="order" value="DESC" class="btn-link">ID ▾</button>
+                                                @elseif($sort['order']=='DESC')
+                                                    <button type="submit" name="order" value="ASC" class="btn-link">ID ▴</button>
+                                                @endif
                                             @else
                                                 <button type="submit" name="order" value="ASC" class="btn-link">ID</button>
                                             @endif
@@ -49,11 +49,11 @@
                                             @endif
                                             <input type="hidden" name="field" value="users.name"/> <!-- table column name -->
                                             @if($sort['field']=='users.name') <!-- table column name -->
-                                            @if($sort['order']=='ASC')
-                                                <button type="submit" name="order" value="DESC" class="btn-link">Name ▾</button>
-                                            @elseif($sort['order']=='DESC')
-                                                <button type="submit" name="order" value="ASC" class="btn-link">Name ▴</button>
-                                            @endif
+                                                @if($sort['order']=='ASC')
+                                                    <button type="submit" name="order" value="DESC" class="btn-link">Name ▾</button>
+                                                @elseif($sort['order']=='DESC')
+                                                    <button type="submit" name="order" value="ASC" class="btn-link">Name ▴</button>
+                                                @endif
                                             @else
                                                 <button type="submit" name="order" value="ASC" class="btn-link">Name</button>
                                             @endif
@@ -66,11 +66,11 @@
                                             @endif
                                             <input type="hidden" name="field" value="users.email"/> <!-- table column name -->
                                             @if($sort['field']=='users.email') <!-- table column name -->
-                                            @if($sort['order']=='ASC')
-                                                <button type="submit" name="order" value="DESC" class="btn-link">Email ▾</button>
-                                            @elseif($sort['order']=='DESC')
-                                                <button type="submit" name="order" value="ASC" class="btn-link">Email ▴</button>
-                                            @endif
+                                                @if($sort['order']=='ASC')
+                                                    <button type="submit" name="order" value="DESC" class="btn-link">Email ▾</button>
+                                                @elseif($sort['order']=='DESC')
+                                                    <button type="submit" name="order" value="ASC" class="btn-link">Email ▴</button>
+                                                @endif
                                             @else
                                                 <button type="submit" name="order" value="ASC" class="btn-link">Email</button>
                                             @endif
@@ -83,11 +83,11 @@
                                             @endif
                                             <input type="hidden" name="field" value="departments.name"/> <!-- table column name -->
                                             @if($sort['field']=='departments.name') <!-- table column name -->
-                                            @if($sort['order']=='ASC')
-                                                <button type="submit" name="order" value="DESC" class="btn-link">Department ▾</button>
-                                            @elseif($sort['order']=='DESC')
-                                                <button type="submit" name="order" value="ASC" class="btn-link">Department ▴</button>
-                                            @endif
+                                                @if($sort['order']=='ASC')
+                                                    <button type="submit" name="order" value="DESC" class="btn-link">Department ▾</button>
+                                                @elseif($sort['order']=='DESC')
+                                                    <button type="submit" name="order" value="ASC" class="btn-link">Department ▴</button>
+                                                @endif
                                             @else
                                                 <button type="submit" name="order" value="ASC" class="btn-link">Department</button>
                                             @endif
@@ -100,19 +100,19 @@
                                             @endif
                                             <input type="hidden" name="field" value="users.phone"/> <!-- table column name -->
                                             @if($sort['field']=='users.phone') <!-- table column name -->
-                                            @if($sort['order']=='ASC')
-                                                <button type="submit" name="order" value="DESC" class="btn-link">Phone ▾</button>
-                                            @elseif($sort['order']=='DESC')
-                                                <button type="submit" name="order" value="ASC" class="btn-link">Phone ▴</button>
-                                            @endif
+                                                @if($sort['order']=='ASC')
+                                                    <button type="submit" name="order" value="DESC" class="btn-link">Phone ▾</button>
+                                                @elseif($sort['order']=='DESC')
+                                                    <button type="submit" name="order" value="ASC" class="btn-link">Phone ▴</button>
+                                                @endif
                                             @else
                                                 <button type="submit" name="order" value="ASC" class="btn-link">Phone</button>
                                             @endif
                                         </form>
                                     </th>
-                                    @if($auth->admin)
+                                    @can('admin')
                                         <th class="sorttable_nosort">Actions</th>
-                                    @endif
+                                    @endcan
                                 </tr>
                             </thead>
                             <tbody>
@@ -123,18 +123,18 @@
                                     <td><a href="{{route('users.profile', $user)}}">{{$user->email}}</a></td>
                                     <td><a href="{{route('users.profile', $user)}}">{{$user->department->name}}</a></td>
                                     <td><a href="{{route('users.profile', $user)}}">{{$user->phone}}</a></td>
-                                    @if($auth->admin)
+                                    @can('admin')
                                     <td><a href="{{route('users.profile', $user)}}">
                                         <a class="btn btn-xs btn-primary" href="{{ route('users.edit', $user) }}">Edit</a>
-                                        @if($user != $auth)
+                                        @cannot('self', $user)
                                             @if(!$user->blocked)
                                                 <a class="btn btn-xs btn-warning" href="{{ route('users.block', ['user' => $user, 'block' => 1]) }}">Block</a>
                                             @else
                                                 <a class="btn btn-xs btn-success" href="{{ route('users.block', ['user' => $user, 'block' => 0]) }}">Unblock</a>
                                             @endif
-                                        @endif
+                                        @endcannot
                                     </a></td>
-                                    @endif
+                                    @endcan
                                 </tr>
                             @endforeach
                         </table>
@@ -142,7 +142,7 @@
                     @else
                         <h3>No users found</h3>
                     @endif
-                </div>
+                </form>
             </div>
         </div>
     </div>

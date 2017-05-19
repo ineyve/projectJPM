@@ -13,15 +13,13 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     public function index(\Illuminate\Http\Request $req)
     {
         $auth = Auth::user();
-
+        if(is_null($auth)){
+            $auth=new User();
+        }
         if ($req->has('order') && $req->has('field')) {
             //If user sorted:
             $sort['order'] = $req->order;
