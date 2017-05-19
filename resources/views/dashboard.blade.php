@@ -46,8 +46,10 @@
                                 {{ $requests->links() }}
                             </div>
                             <div class="col-xs-6">
-                                <button type="submit" class="btn btn-success" style="float:right;">Search</button>
-                                <input type="text" name="search" id="myInput" placeholder="Search any column..."/>
+                                    <div class = "fit-element">
+                                        <button type="submit" class="btn btn-default btn-search"><span class="glyphicon glyphicon-search search-icon"></span></button>
+                                        <input type="text" name="search" id="myInput" placeholder="Search any column..."/>
+                                    </div>
                                 <input type="hidden" name="field" value="{{$sort['field']}}"/>
                                 <input type="hidden" name="order" value="{{$sort['order']}}"/>
                             </div>

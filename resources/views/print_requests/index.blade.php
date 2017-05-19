@@ -12,10 +12,12 @@
                             <form>
                                 <div class="col-xs-6">
                                     {{ $requests->links() }}
-                                    <button type="submit" class="btn btn-success" style="float:right;">Search</button>
                                 </div>
                                 <div class="col-xs-6">
-                                    <input type="text" name="search" id="myInput" placeholder="Search any column..."/>
+                                    <div class = "fit-element">
+                                        <button type="submit" class="btn btn-default btn-search"><span class="glyphicon glyphicon-search search-icon"></span></button>
+                                        <input type="text" name="search" id="myInput" placeholder="Search any column..."/>
+                                    </div>
                                     <input type="hidden" name="field" value="{{$sort['field']}}"/>
                                     <input type="hidden" name="order" value="{{$sort['order']}}"/>
                                     <a class="btn btn-primary side-offset" href="{{ route('requests.create') }}" style="float: right;">Add request</a>

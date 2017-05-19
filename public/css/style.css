@@ -198,17 +198,41 @@ table.sortable thead{
 
 /* Search */
 #myInput {
-    background-image: url('../search.png');
-    background-size: 30px 30px;
-    background-position: 4px 1px;
-    background-repeat: no-repeat;
-    width: 70%;
+    width: 90%;
     font-size: 16px;
-    padding-left: 40px;
     border: 1px solid #ddd;
     margin-bottom: 12px;
     background-color: rgba(255, 255, 255, 0.4);
     height: 35px;
+    padding: 0px;
+    display:block;
+}
+
+.btn-search {
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 0;
+    border: 1px solid #ddd;
+    padding: 0;
+    overflow: hidden;
+    text-align: center;
+    height: 35px;
+    width: 10%;
+    display: block;
+    float: left;
+}
+
+.fit-element {
+    display:inline-block;
+    width:100%;
+    box-sizing:border-box;          /* Make sure that 50% includes the padding */
+    -moz-box-sizing:border-box;     /* For Firefox                             */
+    -webkit-box-sizing:border-box;  /* For old mobile Safari                   */
+}
+
+.search-icon {
+    padding-top: 3px;
+    display: inline-block;
+    font-size: 25px;
 }
 
 #navSearch {
