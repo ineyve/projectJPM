@@ -6,28 +6,27 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">Users List</div>
-                <form class="panel-body">
+                <div class="panel-body">
                     @if (count($users))
-                        <form>
+
                             <div class="col-xs-6">
-                                <div class = "fit-element">
+                                {{ $users->links() }}
+                            </div>
+                            <div class="col-xs-6">
+                                <form>
                                     <button type="submit" class="btn btn-default btn-search"><span class="glyphicon glyphicon-search search-icon"></span></button>
                                     <input type="text" name="search" id="myInput" placeholder="Search any column..."/>
-                                </div>
-                                <input type="hidden" name="field" value="{{$sort['field']}}"/>
-                                <input type="hidden" name="order" value="{{$sort['order']}}"/>
+                                </form>
                                 @if($auth->admin)
-                                    <a class="btn btn-primary side-offset" href="{{ route('users.create') }}" style="float: right;">Add user</a>
+                                        <a class="btn btn-primary" href="{{ route('users.create') }}" style="float: right;">Add user</a>
                                 @endif
+                                {{--<input type="hidden" name="field" value="{{$sort['field']}}"/>
+                                <input type="hidden" name="order" value="{{$sort['order']}}"/>--}}
                             </div>
-                        </form>
-                        <div>
-                            {{ $users->links() }}
-                        </div>
                         <table class="table table-striped table-hover" id="myTable">
                             <thead>
                                 <tr>
-                                    <th class=" sorttable_sorted">
+                                    <th>
                                         <form>
                                             @if(isset($sort['search']))
                                                 <input type="hidden" name="search" value="{{$sort['search']}}"/>
@@ -113,7 +112,7 @@
                                         </form>
                                     </th>
                                     @can('admin')
-                                        <th class="sorttable_nosort">Actions</th>
+                                        <th>Actions</th>
                                     @endcan
                                 </tr>
                             </thead>
@@ -139,8 +138,6 @@
                                         @else
                                             <a class="btn btn-xs btn-danger" href="{{ route('users.admin', ['user' => $user, 'admin' => 0]) }}">Admin x</a>
                                         @endif
-
-                                    
                                     </a></td>
                                     @endcan
                                 </tr>
@@ -150,7 +147,7 @@
                     @else
                         <h3>No users found</h3>
                     @endif
-                </form>
+                </div>
             </div>
         </div>
     </div>

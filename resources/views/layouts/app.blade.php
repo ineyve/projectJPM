@@ -90,7 +90,7 @@
             var opts = document.getElementById('users').childNodes;
             for (var i = 0; i < opts.length; i++) {
                 if (opts[i].value === val) {
-                    link=opts[i].outerHTML.split('href="')[1].split('">');;
+                    link=opts[i].outerHTML.split('href="')[1].split('">');
                     window.location = link[0];
                     break;
                 }

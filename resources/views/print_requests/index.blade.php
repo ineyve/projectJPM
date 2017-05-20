@@ -9,25 +9,23 @@
                 <div class="panel-body">
                     @if(count($requests))
                         <div class="row">
-                            <form>
                                 <div class="col-xs-6">
                                     {{ $requests->links() }}
                                 </div>
                                 <div class="col-xs-6">
-                                    <div class = "fit-element">
+                                    <form>
                                         <button type="submit" class="btn btn-default btn-search"><span class="glyphicon glyphicon-search search-icon"></span></button>
                                         <input type="text" name="search" id="myInput" placeholder="Search any column..."/>
-                                    </div>
-                                    <input type="hidden" name="field" value="{{$sort['field']}}"/>
-                                    <input type="hidden" name="order" value="{{$sort['order']}}"/>
-                                    <a class="btn btn-primary side-offset" href="{{ route('requests.create') }}" style="float: right;">Add request</a>
+                                    </form>
+                                    <a class="btn btn-primary" href="{{ route('requests.create') }}" style="float: right;">Add request</a>
                                 </div>
-                            </form>
+                            {{--<input type="hidden" name="field" value="{{$sort['field']}}"/>
+                            <input type="hidden" name="order" value="{{$sort['order']}}"/>--}}
                         </div>
                     <table class="table table-striped table-hover" id="myTable">
                     <thead>
                         <tr>
-                            <th class="sorttable_sorted">
+                            <th>
                                 <form>
                                     @if(isset($sort['search']))
                                         <input type="hidden" name="search" value="{{$sort['search']}}"/>
@@ -112,7 +110,7 @@
                                     @endif
                                 </form>
                             </th>
-                            <th class="sorttable_nosort"></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
