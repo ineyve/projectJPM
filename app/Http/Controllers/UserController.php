@@ -50,9 +50,8 @@ class UserController extends Controller
 
     public function create()
     {
-        $user = new User;
-        $user->admin = 0;
-        return view('users.add', compact('user'));
+
+        return view('users.add');
     }
 
     public function store(CreateUserPostRequest $request)

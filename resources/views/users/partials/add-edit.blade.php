@@ -44,3 +44,16 @@
             @endforeach
         </select>
 </div>
+<div class="form-group">
+    <label for="inputProfile_url">Profile Url</label>
+    <input type="link" class="form-control" name="profile_url" value="{{old('profile_url')}}"/>
+</div>
+
+<div class="form-group">
+    <label for="inputProfile_photo">Profile Photo</label>
+    <input type="file" class="form-control" name="profile_photo" accept="image/*" value="{{old('profile_photo')}}"/>
+</div>
+<div class="form-group">
+    <label for="inputPresentation">About Me</label>
+    <textarea class="form-control" name="presentation" value= "{{old('presentation', $user->presentation)}}"/>
+</div>
