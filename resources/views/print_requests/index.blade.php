@@ -121,11 +121,6 @@
                             <td><a href="{{route('requests.details', $request)}}">{{$request->user->name}}</a></td>
                             <td><a href="{{route('requests.details', $request)}}">{{$request->date()}}</a></td>
                             <td><a href="{{route('requests.details', $request)}}">{{$request->statusToStr()}}</a></td>
-                            <td>
-                                @if(!$request->status)
-                                    <a class="btn btn-xs btn-success" href="{{route('requests.complete', $request)}}">Complete</a>
-                                @endif
-                            </td>
                         </tr>
                     @endforeach
                     </table>

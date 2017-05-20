@@ -195,7 +195,6 @@
                                 <a class="btn btn-default" href='javascript:hideComplete()' id="cancelComplete">Cancel</a>
                             </div>
                         </form>
-
     
                         <a class="btn btn-danger side-offset" href='javascript:showRefuse()' id="buttonRefuse">Refuse</a>
                         <form action="{{route('requests.refuse', $request)}}" method="post" class="form-group" id="refuse-form" style="display:none">
