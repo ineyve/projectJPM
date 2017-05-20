@@ -60,7 +60,7 @@ class RegisterController extends Controller
             'password' => 'required|string|min:8|confirmed',
             'department_id' => 'exists:departments,id',
             //'profile_url' => 'regex:/^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$/',
-            'presentation' => 'regex:/^[a-zA-Z ]+$/'
+            'presentation' => 'regex:/^[a-zA-Z0-9 ]+$/'
 
         ]);
     }
@@ -79,13 +79,13 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
             'department_id' => $data['department_id'],
             'phone' => $data['phone'],
-            'profile_photo'=> $data['profile_photo'],
             'profile_url'=> $data['profile_url'],
             'presentation' => $data['presentation'],
             'admin' => 0,
             'blocked' => 0,
             'print_evals' => 0,
             'print_counts' => 0,
+            'verified' => 0,
         ]);
     }
 
@@ -109,6 +109,12 @@ class RegisterController extends Controller
         try
         {
             $user = $this->create($request->all());
+            $user->presentation = $request->presentation;
+            $user->profile_url = $request->profile_url;
+            $path = $request->file('profile_photo')->store('public/profiles');
+            $parts = explode('/', $path);
+            $user->profile_photo = $parts[2];
+            $user->save();
             // After creating the user send an email with the random token generated in the create method above
             $email = new EmailVerification($user);
             Mail::to($user->email)->send($email);
