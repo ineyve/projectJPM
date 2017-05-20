@@ -28,7 +28,9 @@ class CreateUserPostRequest extends FormRequest
                 'email' => 'required|email|unique:users',
                 'phone' => 'required|numeric|size:9',
                 'password' => 'required|min:8|confirmed',
-                'department_id' => 'required|exists:departments'
+                'department_id' => 'required|exists:departments',
+                'profile_url' => 'regex:/^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$/',
+                'presentation' => 'regex:/^[a-zA-Z ]+$/'
         ];
     }
 }

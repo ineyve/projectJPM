@@ -50,18 +50,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('department') ? ' has-error' : '' }}">
-                            <label for="department_id" class="col-md-4 control-label">Department</label>
-                            <div class="col-md-6">
-                                <select name="department_id" id="inputDepartment" class="form-control">
-                                    <option disabled selected> -- select an option -- </option>
-                                    @foreach($departments as $department)
-                                        <option value="{{$department->id}}">{{$department->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Password</label>
 
@@ -83,6 +71,57 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
+
+                        <div class="form-group{{ $errors->has('department') ? ' has-error' : '' }}">
+                            <label for="department_id" class="col-md-4 control-label">Department</label>
+                            <div class="col-md-6">
+                                <select name="department_id" id="inputDepartment" class="form-control">
+                                    <option disabled selected> -- select an option -- </option>
+                                    @foreach($departments as $department)
+                                        <option value="{{$department->id}}">{{$department->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('profile_photo') ? ' has-error' : '' }}">
+                            <label for="phone" class="col-md-4 control-label">Profile Photo</label>
+                            <div class="col-md-6">
+                                <input id="profile_photo" type="file" class="form-control" name="profile_photo" accept="image/*" value="{{old('profile_photo')}}"/>
+
+                                @if ($errors->has('profile_photo'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('profile_photo') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>     
+
+                        <div class="form-group{{ $errors->has('profile_url') ? ' has-error' : '' }}">
+                            <label for="profile_url" class="col-md-4 control-label">Profile Url</label>
+                            <div class="col-md-6">
+                                <input id="profile_url" type="link" class="form-control" name="profile_url" value="{{old('profile_url')}}"/>
+
+                                @if ($errors->has('profile_url'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('profile_url') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>    
+
+                        <div class="form-group{{ $errors->has('presentation') ? ' has-error' : '' }}">
+                            <label for="presentation" class="col-md-4 control-label">About Me</label>
+                            <div class="col-md-6">
+                                <input id="presentation" type="text" class="form-control" name="presentation" value="{{old('presentation')}}"/>
+
+                                @if ($errors->has('profile_url'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('presentation') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>        
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">

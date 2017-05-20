@@ -54,10 +54,14 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|regex:/^[a-zA-Z ]+$/',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'phone' => 'required|numeric',
+            'password' => 'required|string|min:8|confirmed',
             'department_id' => 'exists:departments,id',
+            //'profile_url' => 'regex:/^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$/',
+            'presentation' => 'regex:/^[a-zA-Z ]+$/'
+
         ]);
     }
 
@@ -74,6 +78,10 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'department_id' => $data['department_id'],
+            'phone' => $data['phone'],
+            'profile_photo'=> $data['profile_photo'],
+            'profile_url'=> $data['profile_url'],
+            'presentation' => $data['presentation'],
             'admin' => 0,
             'blocked' => 0,
             'print_evals' => 0,
