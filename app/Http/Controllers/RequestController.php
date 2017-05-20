@@ -83,9 +83,7 @@ class RequestController extends Controller
 
     public function edit(Request $request)
     {
-        if($request->owner_id == Auth::user()->id)
-            return view('print_requests.edit', compact('request'));
-        abort(403);
+        return view('print_requests.edit', compact('request'));
     }
 
     public function update(UpdateRequestPostRequest $req, Request $request)
@@ -112,17 +110,12 @@ class RequestController extends Controller
             $admin = 1;
         $user = Auth::user()->id;
         $printers= Printer::All();
-        if ($request->owner_id == $user || $admin) {
-            $comments = Comment::where('request_id', '=', $request->id)->orderBy('created_at')->get();
-            return view('print_requests.details', compact('request', 'admin', 'comments', 'user', 'printers'));
-        }
-        abort(403);
+        $comments = Comment::where('request_id', '=', $request->id)->orderBy('created_at')->get();
+        return view('print_requests.details', compact('request', 'admin', 'comments', 'user', 'printers'));
     }
 
     public function complete(StoreCompletePostRequest $req, Request $request)
     {
-        if($request->status != 0)
-            abort(403);
         $request->status = 2;
         $request->closed_date = Carbon::now();
         $request->closed_user_id = Auth::user()->id;
@@ -136,8 +129,6 @@ class RequestController extends Controller
 
     public function rating(Request $request, $rating)
     {
-        if($request->owner_id != Auth::user()->id)
-            abort(403);
         if(is_null($request->satisfaction_grade)) {
             $user = Auth::user();
             $user->print_evals++;
@@ -163,8 +154,6 @@ class RequestController extends Controller
 
     public function destroy(Request $request)
     {
-        if($request->status != 0 || $request->owner_id != Auth::user()->id)
-            abort(403);
         Storage::delete($request->file);
         $request->delete();
         return redirect()->route('dashboard')->with('success', 'request deleted successfully');
@@ -172,8 +161,6 @@ class RequestController extends Controller
 
     public function download(Request $request)
     {
-        if($request->owner_id != Auth::user()->id && !Auth::user()->admin)
-            abort(403);
         return Response::download('../storage/app/print-jobs/'.$request->owner_id.'/'.$request->file);
     }
 }

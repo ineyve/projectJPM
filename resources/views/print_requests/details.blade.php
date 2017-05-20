@@ -183,7 +183,7 @@
                         {{ csrf_field() }}
                             <div class="form-group" id="complete">
                                 <label for="inputComplete">Complete</label>
-                                <select name="complete" id="inputComplete" class="form-control">
+                                <select name="printer_id" id="inputComplete" class="form-control">
                                     <option disabled selected> -- select an option -- </option>
                                     @foreach($printers as $printer)
                                        <option value="{{$printer->id}}">{{$printer->name}}</option>
