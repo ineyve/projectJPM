@@ -270,23 +270,29 @@
 <script>function showRefuse(){
         $('#refuse-form').show();
         $('#buttonRefuse').hide();
-        $('#buttonAccept').hide();
+        $('#buttonComplete').hide();
+        $('#buttonComment').hide();
     }
 </script>
 <script>function hideRefuse(){
         $('#refuse-form').hide();
         $('#buttonRefuse').show();
-        $('#buttonAccept').show();
+        $('#buttonComplete').show();
+        $('#buttonComment').show();
     }
 </script>
 <script>function showComment(){
         $('#comment-form').show();
         $('#buttonComment').hide();
+        $('#buttonRefuse').hide();
+        $('#buttonComplete').hide();
     }
 </script>
 <script>function hideComment(){
         $('#comment-form').hide();
         $('#buttonComment').show();
+        $('#buttonRefuse').show();
+        $('#buttonComplete').show();
     }
 </script>
 <script>function showReply(){
@@ -302,10 +308,15 @@
 <script>function hideComplete(){
         $('#complete-form').hide();
         $('#buttonComplete').show();
+        $('#buttonComment').show();
+        $('#buttonRefuse').show();
     }
 </script>
 <script>function showComplete(){
         $('#complete-form').show();
         $('#buttonComplete').hide();
+        $('#buttonComment').hide();
+        $('#buttonRefuse').hide();
     }
 </script>
+
