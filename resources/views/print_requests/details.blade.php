@@ -176,8 +176,27 @@
                         </tbody>
                     </table>
                     
-                    @if($admin && $request->status == 0)
-                        <a class="btn btn-success side-offset" href="{{route('requests.complete', ['request' => $request, 'from' => 0])}}" id="buttonAccept">Complete</a>
+                    @can('admin')
+                    @if($request->status == 0)
+                        <a class="btn btn-success side-offset" href='javascript:showComplete()' id="buttonComplete">Complete</a>
+                        <form action="{{route('requests.complete', $request)}}" method="post" class="form-group" id="complete-form" style="display:none">
+                        {{ csrf_field() }}
+                            <div class="form-group" id="complete">
+                                <label for="inputComplete">Complete</label>
+                                <select name="complete" id="inputComplete" class="form-control">
+                                    <option disabled selected> -- select an option -- </option>
+                                    @foreach($printers as $printer)
+                                       <option value="{{$printer->id}}">{{$printer->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group" id="submitComplete">
+                                <button type="submit" class="btn btn-success side-offset">Complete</button>
+                                <a class="btn btn-default" href='javascript:hideComplete()' id="cancelComplete">Cancel</a>
+                            </div>
+                        </form>
+
+    
                         <a class="btn btn-danger side-offset" href='javascript:showRefuse()' id="buttonRefuse">Refuse</a>
                         <form action="{{route('requests.refuse', $request)}}" method="post" class="form-group" id="refuse-form" style="display:none">
                             {{ csrf_field() }}
@@ -191,6 +210,7 @@
                             </div>
                         </form>
                     @endif
+                    @endcan
                     @php($count=0)
                     @foreach($comments as $comment)
                         @if($comment->parent_id == '' && !$comment->blocked)
@@ -277,5 +297,15 @@
 <script>function hideReply(){
         $('#reply-form').hide();
         $('#buttonReply').show();
+    }
+</script>
+<script>function hideComplete(){
+        $('#complete-form').hide();
+        $('#buttonComplete').show();
+    }
+</script>
+<script>function showComplete(){
+        $('#complete-form').show();
+        $('#buttonComplete').hide();
     }
 </script>

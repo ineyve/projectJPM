@@ -1,14 +1,13 @@
 @extends('master')
 
 @section('content')
-
 <form action="{{route('requests.update', $request)}}" method="post" class="form-group">
     {{method_field('PUT')}}
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Edit User</div>
+                    <div class="panel-heading">Edit Request</div>
                     <div class="panel-body">
                         @include('print_requests.partials.add-edit')
                         <div class="form-group">

@@ -6,7 +6,10 @@ namespace App\Http\Controllers;
 use App\Comment;
 use App\Http\Requests\StoreRefusePostRequest;
 use App\Http\Requests\StoreRequestPostRequest;
+use App\Http\Requests\StoreCompletePostRequest;
+use App\Http\Requests\UpdateRequestPostRequest;
 use App\Request;
+use App\Printer;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
@@ -70,7 +73,7 @@ class RequestController extends Controller
         $request = new Request();
         $request->owner_id = Auth::user()->id;
         $request->status = 0;
-        $request->fill($req->all()); // o metodo fill preeenche todos os campos logo
+        $request->fill($req->all()); 
         $path = $req->file('file')->store('print-jobs/'.$request->owner_id);
         $parts = explode('/', $path);
         $request->file = $parts[2];
@@ -85,20 +88,38 @@ class RequestController extends Controller
         abort(403);
     }
 
+    public function update(UpdateRequestPostRequest $req, Request $request)
+    {
+        $request->description = $req->description;
+        $request->quantity = $req->quantity;
+        $request->stapled = $req->stapled;
+        $request->paper_size = $req->paper_size;
+        $request->paper_type = $req->paper_type;
+        $request->front_back = $req->front_back;
+        $request->colored = $req->colored;
+        $path = $req->file('file')->store('print-jobs/'.$request->owner_id);
+        $parts = explode('/', $path);
+        $request->file = $parts[2];
+        $request->save();
+
+        return redirect()->route('dashboard')->with('success', 'request updated successfully');
+    }
+
     public function details(Request $request)
     {
         $admin = 0;
         if (Auth::user()->admin)
             $admin = 1;
         $user = Auth::user()->id;
+        $printers= Printer::All();
         if ($request->owner_id == $user || $admin) {
             $comments = Comment::where('request_id', '=', $request->id)->orderBy('created_at')->get();
-            return view('print_requests.details', compact('request', 'admin', 'comments', 'user'));
+            return view('print_requests.details', compact('request', 'admin', 'comments', 'user', 'printers'));
         }
         abort(403);
     }
 
-    public function complete(Request $request)
+    public function complete(StoreCompletePostRequest $req, Request $request)
     {
         if($request->status != 0)
             abort(403);
@@ -106,6 +127,7 @@ class RequestController extends Controller
         $request->closed_date = Carbon::now();
         $request->closed_user_id = Auth::user()->id;
         $request->user->print_counts += $request->quantity;
+        $request->printer_id = $req->printer_id;
         $request->save();
         $request->user->save();
 
@@ -114,7 +136,7 @@ class RequestController extends Controller
 
     public function rating(Request $request, $rating)
     {
-        if($request->owner_id != Auth::user())
+        if($request->owner_id != Auth::user()->id)
             abort(403);
         if(is_null($request->satisfaction_grade)) {
             $user = Auth::user();

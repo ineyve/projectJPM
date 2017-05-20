@@ -19,12 +19,20 @@
                         @else
                             <img class="profile-picture" src="/storage/profiles/{{$user->profile_photo}}">
                         @endif
-                        <li>About me: {{$user->presentation}}</li>
-                        <li>Department: {{App\Department::find($user->department_id)->name}}</li>
+                        <li>E-mail address: <a href="mailto:{{$user->email}}">
+                        {{$user->email}}</a></li>
+                        @if(!is_null($user->phone))
                         <li>Phone Number: {{$user->phone}}</li>
-                        <li>E-mail address: <a href="mailto:{{$user->email}}">{{$user->email}}</a></li>
+                        @endif
+                        <li>Department: {{App\Department::find($user->department_id)->name}}</li>
+                        @if(!is_null($user->profile_url))
                         <li>Personal URL: <a href="{{$user->profile_url}}">{{$user->profile_url}}</a></li>
-                        <li>Completed Documents: {{$user->print_counts}}</li>
+                        @endif
+                        @if(!is_null($user->presentation))
+                        <li>About me: {{$user->presentation}}</li>
+                        @endif
+                        @can('selfOrAdmin')
+                        <li>Total Requests: {{$user->print_counts}}</li>
                         <li>Request evaluations: {{$user->print_evals}}</li>
                         <li>Member for: {{$user->memberFor()}}</li>
                         <li>Average Satisfaction Grade:
@@ -34,6 +42,7 @@
                         </li>
                         <li>Admin: {{$user->adminToStr()}}</li>
                         <li>Blocked: {{$user->blockedToStr()}}</li>
+                        @endcan
                         <br><br>
                     </div>
                     <div style="float: right;">
@@ -123,7 +132,7 @@
                                         @endif
                                     </form>
                                 </th>
-                                <th></th>
+                                <th class="sorttable_nosort"></th>
                             </tr>
                             </thead>
                             <tbody>
