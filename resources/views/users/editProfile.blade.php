@@ -28,6 +28,22 @@
                             <label for="inputPhone">Phone</label>
                             <input type="tel" class="form-control" name="phone" placeholder="Phone" value="{{old('phone', $user->phone)}}"/>
                         </div>
+
+                        <div class="form-group{{ $errors->has('department') ? ' has-error' : '' }}">
+                            <label for="department_id" class="col-md-4 control-label">Department</label>
+                            <select name="department_id" id="inputDepartment" class="form-control">
+                                <option disabled selected> -- select an option -- </option>
+                                @foreach($departments as $department)
+                                    <option value="{{$department->id}}">{{$department->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputProfile_url">Profile Url</label>
+                            <input type="link" class="form-control" name="profile_url" value="{{old('profile_url')}}"/>
+                        </div>
+
                         <div class="form-group">
                             <label for="inputProfile_photo">Profile Photo</label>
                             <input type="file" class="form-control" name="profile_photo" accept="image/*" value="{{old('profile_photo')}}"/>

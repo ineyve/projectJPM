@@ -83,7 +83,8 @@ class UserController extends Controller
     public function editProfile()
     {
         $user=Auth::user();
-        return view('users.editProfile', compact('user'));
+        $departments= Department::All();
+        return view('users.editProfile', compact('user', 'departments'));
     }
 
     public function updateProfile(UpdateProfilePostRequest $request)
