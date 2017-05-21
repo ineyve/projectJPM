@@ -21,32 +21,34 @@
                         @endif
                         <li>E-mail address: <a href="mailto:{{$user->email}}">{{$user->email}}</a></li>
                         @if(!is_null($user->phone))
-                        <li>Phone Number: {{$user->phone}}</li>
+                            <li>Phone Number: {{$user->phone}}</li>
                         @endif
-                        <li>Department: {{App\Department::find($user->department_id)->name}}</li>
+                        <li>Department: {{$user->department->name}}</li>
                         @if(!is_null($user->profile_url))
-                        <li>Personal URL: <a href="{{$user->profile_url}}">{{$user->profile_url}}</a></li>
+                            <li>Personal URL: <a href="{{$user->profile_url}}">{{$user->profile_url}}</a></li>
                         @endif
                         @if(!is_null($user->presentation))
-                        <li>About me: {{$user->presentation}}</li>
+                            <li>About me: {{$user->presentation}}</li>
                         @endif
                         @can('selfOrAdmin')
-                        <li>Total Requests: {{$user->print_counts}}</li>
-                        <li>Request evaluations: {{$user->print_evals}}</li>
-                        <li>Member for: {{$user->memberFor()}}</li>
-                        <li>Average Satisfaction Grade:
-                            @for($i=0; $i < $user->averageRating(); $i++)
-                                <img src="/star.png" style="width:24px;height:24px;">
-                            @endfor
-                        </li>
-                        <li>Admin: {{$user->adminToStr()}}</li>
-                        <li>Blocked: {{$user->blockedToStr()}}</li>
+                            <li>Total Requests: {{$user->print_counts}}</li>
+                            <li>Request evaluations: {{$user->print_evals}}</li>
+                            <li>Member for: {{$user->memberFor()}}</li>
+                            <li>Average Satisfaction Grade:
+                                @for($i=0; $i < $user->averageRating(); $i++)
+                                    <img src="/star.png" style="width:24px;height:24px;">
+                                @endfor
+                            </li>
+                            <li>Admin: {{$user->adminToStr()}}</li>
+                            <li>Blocked: {{$user->blockedToStr()}}</li>
                         @endcan
                         <br><br>
                         @can('admin')
                             <td>
                             @if(!$user->blocked)
-                                            <a class="btn btn-xs btn-warning" href="{{ route('users.block', ['user' => $user, 'block' => 1]) }}" >Block</a>
+                                    <a class="btn btn-xs btn-warning" href="{{ route('users.block', ['user' => $user, 'block' => 1]) }}" >Block</a>
+                            @else
+                                    <a class="btn btn-xs btn-success" href="{{ route('users.block', ['user' => $user, 'block' => 0]) }}" >Unblock</a>
                             @endif
                         @endcan
                         <br><br> 

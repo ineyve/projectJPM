@@ -27,7 +27,7 @@ class UserController extends Controller
         }
         else
         {   //If user didn't sort, default to:
-            $sort['order'] = 'DESC';
+            $sort['order'] = 'ASC';
             $sort['field'] = 'users.id';
         }
 

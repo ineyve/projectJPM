@@ -45,24 +45,18 @@
                         @endcan
                         <br><br>
                     </div>
+                    <div style="float:left;">{{ $requests->links() }}</div>
+                    <div class="col-xs-6">
+                        <form>
+                            <button type="submit" class="btn btn-default btn-search"><span class="glyphicon glyphicon-search search-icon"></span></button>
+                            <input type="text" name="search" id="myInput" placeholder="Search any column..."/>
+                        </form>
+                    </div>
                     <div style="float: right;">
                         <a class="btn btn-success side-offset" href="{{route('users.editProfile')}}">Edit Profile</a>
                         <a class="btn btn-primary" href="{{route('requests.create')}}">Add Request</a>
                     </div>
                     @if (count($requests))
-                        <form>
-                            <div class="col-xs-6">
-                                {{ $requests->links() }}
-                            </div>
-                            <div class="col-xs-6">
-                                    <div class = "fit-element">
-                                        <button type="submit" class="btn btn-default btn-search"><span class="glyphicon glyphicon-search search-icon"></span></button>
-                                        <input type="text" name="search" id="myInput" placeholder="Search any column..."/>
-                                    </div>
-                                <input type="hidden" name="field" value="{{$sort['field']}}"/>
-                                <input type="hidden" name="order" value="{{$sort['order']}}"/>
-                            </div>
-                        </form>
                         <table class="table table-striped table-hover" id="myTable">
                             <thead>
                             <tr>

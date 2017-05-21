@@ -56,7 +56,6 @@ class DashboardController extends Controller
             ->orderBy($sort['field'],  $sort['order'])
             ->paginate(20);
         } else {
-
             $requests = Request::where('owner_id', '=', $user->id)
             ->orderBy($sort['field'],  $sort['order'])
             ->paginate(20);

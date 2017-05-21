@@ -7,22 +7,22 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Users List</div>
                 <div class="panel-body">
+                    <div class="col-xs-6">
+                        {{ $users->links() }}
+                        @if(isset($sort['search']))
+                            <a href="{{ route('users.index') }}" class="btn btn-success" style="float:right;">Clear Search</a>
+                        @endif
+                    </div>
+                    <div class="col-xs-6">
+                        <form>
+                            <button type="submit" class="btn btn-default btn-search"><span class="glyphicon glyphicon-search search-icon"></span></button>
+                            <input type="text" name="search" id="myInput" placeholder="Search any column..."/>
+                        </form>
+                        @if($auth->admin)
+                            <a class="btn btn-primary" href="{{ route('users.create') }}" style="float: right;">Add user</a>
+                        @endif
+                    </div>
                     @if (count($users))
-
-                            <div class="col-xs-6">
-                                {{ $users->links() }}
-                            </div>
-                            <div class="col-xs-6">
-                                <form>
-                                    <button type="submit" class="btn btn-default btn-search"><span class="glyphicon glyphicon-search search-icon"></span></button>
-                                    <input type="text" name="search" id="myInput" placeholder="Search any column..."/>
-                                </form>
-                                @if($auth->admin)
-                                        <a class="btn btn-primary" href="{{ route('users.create') }}" style="float: right;">Add user</a>
-                                @endif
-                                {{--<input type="hidden" name="field" value="{{$sort['field']}}"/>
-                                <input type="hidden" name="order" value="{{$sort['order']}}"/>--}}
-                            </div>
                         <table class="table table-striped table-hover" id="myTable">
                             <thead>
                                 <tr>
