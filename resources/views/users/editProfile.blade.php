@@ -18,13 +18,6 @@
                                     placeholder="Name" value="{{old('name', $user->name)}}" />
                         </div>
                         <div class="form-group">
-                            <label for="inputEmail">Email</label>
-                            <input
-                                    type="email" class="form-control"
-                                    name="email" id="inputEmail"
-                                    placeholder="Email address" value="{{old('email', $user->email)}}"/>
-                        </div>
-                        <div class="form-group">
                             <label for="inputPhone">Phone</label>
                             <input type="tel" class="form-control" name="phone" placeholder="Phone" value="{{old('phone', $user->phone)}}"/>
                         </div>
@@ -32,21 +25,23 @@
                         <div class="form-group{{ $errors->has('department') ? ' has-error' : '' }}">
                             <label for="department_id" class="col-md-4 control-label">Department</label>
                             <select name="department_id" id="inputDepartment" class="form-control">
-                                <option disabled selected> -- select an option -- </option>
                                 @foreach($departments as $department)
-                                    <option value="{{$department->id}}">{{$department->name}}</option>
+                                    @if($user->department_id == $department->id)
+                                        <option selected="selected" value="{{$department->id}}">{{$department->name}}</option>
+                                    @else
+                                        <option value="{{$department->id}}">{{$department->name}}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
-
                         <div class="form-group">
                             <label for="inputProfile_url">Profile Url</label>
-                            <input type="link" class="form-control" name="profile_url" value="{{old('profile_url')}}"/>
+                            <input type="text" class="form-control" name="profile_url" value="{{old('profile_url', $user->profile_url)}}"/>
                         </div>
 
                         <div class="form-group">
                             <label for="inputProfile_photo">Profile Photo</label>
-                            <input type="file" class="form-control" name="profile_photo" accept="image/*" value="{{old('profile_photo')}}"/>
+                            <input style="padding:0;" type="file" class="form-control" name="profile_photo" accept="image/*" value="{{old('profile_photo')}}"/>
                         </div>
                         <div class="form-group">
                             <label for="inputPresentation">About Me</label>

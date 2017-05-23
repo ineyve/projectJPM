@@ -62,9 +62,9 @@ Route::post('requests/{request}/details/comment/{comment}/reply', 'CommentContro
 // Users
 Route::get('users', 'UserController@index' )->name('users.index');
 Route::get('users/{user}/profile', 'UserController@profile')->name('users.profile');
-Route::get('users/editProfile', 'UserController@editProfile')->name('users.editProfile')->middleware('can:auth');
-Route::post('users/editProfile', 'UserController@updateProfile')->name('users.updateProfile')->middleware('can:auth');
-Route::put('users/editProfile', 'UserController@updatePassword')->name('users.updatePassword')->middleware('can:auth');
+Route::get('users/editProfile', 'UserController@editProfile')->name('users.editProfile')->middleware('can:self');
+Route::post('users/editProfile', 'UserController@updateProfile')->name('users.updateProfile')->middleware('can:self');
+Route::put('users/editProfile', 'UserController@updatePassword')->name('users.updatePassword')->middleware('can:self');
 Route::get('users/create', 'UserController@create')->name('users.create')->middleware('can:admin');
 Route::post('users/create', 'UserController@store')->name('users.store')->middleware('can:admin');
 Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit')->middleware('can:admin');

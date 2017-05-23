@@ -90,12 +90,14 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $user->name = $request->name;
-        $user->email = $request->email;
         $user->phone = $request->phone;
+        $user->profile_url = $request->profile_url;
         $user->presentation = $request->presentation;
-        $path = $request->file('profile_photo')->store('public/profiles');
-        $parts = explode('/', $path);
-        $user->profile_photo = $parts[2];
+        if($request->hasFile('profile_photo')) {
+            $path = $request->file('profile_photo')->store('public/profiles');
+            $parts = explode('/', $path);
+            $user->profile_photo = $parts[2];
+        }
         $user->save();
         return redirect()->route('dashboard')->with('success', 'profile updated successfully');
     }

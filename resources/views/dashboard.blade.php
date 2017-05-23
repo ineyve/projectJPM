@@ -26,7 +26,11 @@
                         @endif
                         <li>Department: {{App\Department::find($user->department_id)->name}}</li>
                         @if(!is_null($user->profile_url))
-                        <li>Personal URL: <a href="{{$user->profile_url}}">{{$user->profile_url}}</a></li>
+                            @if(strpos($user->profile_url, 'http:\\') !== false)
+                                    <li>Personal URL: <a href="{{$user->profile_url}}">{{explode('http:\\\\', $user->profile_url)[1]}}</a></li>
+                                @else
+                                    <li>Personal URL: <a href="http:\\{{$user->profile_url}}">{{$user->profile_url}}</a></li>
+                                @endif
                         @endif
                         @if(!is_null($user->presentation))
                         <li>About me: {{$user->presentation}}</li>
@@ -126,7 +130,7 @@
                                         @endif
                                     </form>
                                 </th>
-                                <th class="sorttable_nosort"></th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -149,7 +153,7 @@
                                         @if(is_null($request->satisfaction_grade))
                                             @php($request->satisfaction_grade = 0)
                                         @endif
-                                        <div id="star{{++$i}}" class="c-rating"></div>
+                                        <center><div id="star{{++$i}}" class="c-rating"></div></center>
                                     @elseif($request->status == 0)
                                         <form action="{{route('requests.destroy',$request)}}" method="post" class="inline">
                                                 {{method_field('DELETE')}}
@@ -167,7 +171,7 @@
                                     @else
                                         var currentRating=0;
                                     @endif
-                                    var maxRating= 5;
+                                    var maxRating= 3;
                                     var callback = function(rating) {
                                         switch(rating) {
                                             case 1:
