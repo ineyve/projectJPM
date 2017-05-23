@@ -239,7 +239,8 @@ table.sortable thead{
     background-size: 30px 30px;
     background-position: 4px 1px;
     background-repeat: no-repeat;
-    width: 160px;
+    width: 100%;
+    right: 0;
     font-size: 14px;
     padding-left: 40px;
     border: 1px solid #ddd;
@@ -353,5 +354,27 @@ textarea {
     text-decoration: inherit;
 }
 
-.glitched{
+/* MOBILE/VERTICAL/PORTRAIT STYLES */
+@media all and (orientation:portrait) {
+	/* styles that only apply if window is in portrait mode */
+
+    /* Master */
+    /* Navbar */
+    .navbar {
+        /* less alpha to be able to see clearly */
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+    #navSearch {
+        width:100%;
+    }
+
+    /* home page */
+    .mobile-graph{
+        float: none;
+    }
+    .mobile-graph {
+        width: 80%;
+        margin: auto;
+    }
+
 }

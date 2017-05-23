@@ -36,7 +36,7 @@
                 <br>
             </div>
             <div class="row">
-            <div class="col-xs-6">
+            <div class="col-xs-6 mobile-graph">
                 <div class="home-counter">
                 <h1 class="h-h1">Greyscale vs <h1 class="blue-h1">Color</h1></h1>
                 </div>
@@ -75,7 +75,7 @@
                     });
                 </script>
             </div>
-            <div class="col-xs-6">
+            <div class="col-xs-6 mobile-graph">
                 <div class="home-counter">
                     <h1 class="h-h1">Prints per department</h1>
                 </div>

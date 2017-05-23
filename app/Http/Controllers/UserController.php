@@ -27,7 +27,10 @@ class UserController extends Controller
         }
         else
         {   //If user didn't sort, default to:
-            $sort['order'] = 'ASC';
+            if($auth->admin) //If admin, see descending (new ones first), or else, see ascending (old ones first)
+                $sort['order'] = 'DESC';
+            else
+                $sort['order'] = 'ASC';
             $sort['field'] = 'users.id';
         }
 

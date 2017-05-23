@@ -44,20 +44,22 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
+                        <li>
+                            <input type="text" list="users" id="navSearch" oninput='onInput()' placeholder="Search Profiles">
+                            <datalist id="users">
+                                @for($i=0; $i<count($users); ++$i)
+                                    @if($i > 0 && $users[$i-1]->name == $users[$i]->name)
+                                        <option value="{{$users[$i]->name}} ({{++$num}})" href="{{ route('users.profile', $users[$i]) }}">
+                                    @else
+                                        <option value="{{$users[$i]->name}}" href="{{ route('users.profile', $users[$i]) }}">
+                                        @php($num=1)
+                                    @endif
+                                @endfor
+                            </datalist>
+                        </li>
                     </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
-                        <input type="text" list="users" id="navSearch" oninput='onInput()' placeholder="Search Profiles">
-                        <datalist id="users">
-                            @for($i=0; $i<count($users); ++$i)
-                                @if($i > 0 && $users[$i-1]->name == $users[$i]->name)
-                                    <option value="{{$users[$i]->name}} ({{++$num}})" href="{{ route('users.profile', $users[$i]) }}">
-                                @else
-                                    <option value="{{$users[$i]->name}}" href="{{ route('users.profile', $users[$i]) }}">
-                                    @php($num=1)
-                                @endif
-                            @endfor
-                        </datalist>
                         <li><a href="{{ url('/') }}">Home</a></li>
                         <li> <a href="{{ route('users.index') }}">Users</a></li>
                         <!-- Authentication Links -->
