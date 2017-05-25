@@ -42,8 +42,8 @@ Route::get('requests/create', 'RequestController@create')->name('requests.create
 Route::post('requests/create', 'RequestController@store')->name('requests.store');
 Route::get('requests/{request}/details', 'RequestController@details' )->name('requests.details')->middleware('can:selfOrAdmin');
 Route::get('requests/{request}/rating/{rating}', 'RequestController@rating' )->name('requests.rating')->middleware('can:self');
-Route::get('requests/{request}/edit', 'RequestController@edit')->name('requests.edit');
-Route::post('requests/{request}/edit', 'RequestController@update')->name('requests.update');
+Route::get('requests/{request}/edit', 'RequestController@edit')->name('requests.edit')->middleware('can:self');
+Route::post('requests/{request}/edit', 'RequestController@update')->name('requests.update')->middleware('can:self');
 Route::delete('requests/{request}', 'RequestController@destroy')->name('requests.destroy')->middleware('can:self');
 Route::get('requests/{request}/download', 'RequestController@download')->name('requests.download')->middleware('can:selfOrAdmin');
 Route::get('requests', 'RequestController@index' )->name('requests.index')->middleware('can:admin');

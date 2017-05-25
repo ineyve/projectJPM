@@ -366,6 +366,8 @@ textarea {
     }
     #navSearch {
         width:100%;
+        display: block;
+        margin-bottom: 25px;
     }
 
     /* home page */

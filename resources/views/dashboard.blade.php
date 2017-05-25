@@ -183,11 +183,6 @@
                                             case 3:
                                                 window.location="{{ route('requests.rating', [$request, 'rating' => 3])}}";
                                                 break;
-                                            case 4:
-                                                window.location="{{ route('requests.rating', [$request, 'rating' => 4])}}";
-                                                break;
-                                            default:
-                                                window.location="{{ route('requests.rating', [$request, 'rating' => 5])}}";
                                         }
                                     };
                                     var myRating = rating(el, currentRating, maxRating, callback);

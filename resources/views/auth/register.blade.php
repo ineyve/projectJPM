@@ -76,7 +76,6 @@
                             <label for="department_id" class="col-md-4 control-label">Department</label>
                             <div class="col-md-6">
                                 <select name="department_id" id="inputDepartment" class="form-control">
-                                    <option disabled selected> -- select an option -- </option>
                                     @foreach($departments as $department)
                                         <option value="{{$department->id}}">{{$department->name}}</option>
                                     @endforeach

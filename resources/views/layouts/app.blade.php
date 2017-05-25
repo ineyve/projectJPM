@@ -27,7 +27,6 @@
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
-
                     <!-- Collapsed Hamburger -->
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
                         <span class="sr-only">Toggle Navigation</span>
@@ -48,7 +47,7 @@
                     <ul class="nav navbar-nav">
                         <li>
                             <form>
-                                <input id="navSearch" name="user_id" placeholder="Search a profile..." list="users">
+                                <input id="navSearch" name="user_id" placeholder="Search a profile..." oninput='onInput()' list="users">
                                 <datalist id="users">
                                     <option value=""></option>
                                 </datalist>
@@ -95,7 +94,7 @@
             var opts = document.getElementById('users').childNodes;
             for (var i = 0; i < opts.length; i++) {
                 if (opts[i].value === val) {
-                    link=opts[i].outerHTML.split('href="')[1].split('">');
+                    link=opts[i].outerHTML.split('href="')[1].split('"');
                     window.location = link[0];
                     break;
                 }
@@ -113,7 +112,7 @@
                     console.log(users);
                     $("#users").empty();
                     for (var u in users) {
-                        $('#users').append('<option data-value="' + users[u].id + '">' + users[u].name + '</option>');
+                        $('#users').append('<option href="/users/' + users[u].id + '/profile" data-value="' + users[u].id + '">' + users[u].name + '</option>');
                         //data-value ??
                     }
                     _this.focus();

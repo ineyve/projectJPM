@@ -100,7 +100,7 @@ class RequestController extends Controller
         $request->file = $parts[2];
         $request->save();
 
-        return redirect()->route('dashboard')->with('success', 'request updated successfully');
+        return redirect()->back()->with('success', 'request updated successfully');
     }
 
     public function details(Request $request)
@@ -124,7 +124,7 @@ class RequestController extends Controller
         $request->save();
         $request->user->save();
 
-        return back()->with('success', 'Status changed sucessfuly!');
+        return back()->with('success', 'Request completed!');
     }
 
     public function rating(Request $request, $rating)

@@ -72,13 +72,8 @@
 <div class="form-group">
     <label for="inputPaperSize">Paper Size</label>
     <select name="paper_size" id="inputPaperSize" class="form-control"
-        @if(Route::currentRouteName()=='requests.create')
-            value="{{old('paper_size')}}"
-        @elseif(Route::currentRouteName()=='requests.edit')
-            value="{{$request->paper_size}}"
-        @endif">
-        <option disabled selected> -- select an option -- </option>
-        <option value="4">A4</option>
+
+    <option value="4">A4</option>
         <option value="3">A3</option>
     </select>
 </div>
@@ -102,10 +97,10 @@
 <div class="form-group">
     <label for="inputFrontBack">Front and Back</label>
     <select name="front_back" id="inputFrontBack" class="form-control"
-    @if(Route::currentRouteName()=='requests.create')
-        value="{{old('front_back')}}"
+        @if(Route::currentRouteName()=='requests.create')
+            value="{{old('front_back')}}"
         @else(Route::currentRouteName()=='requests.edit')
-        value="{{$request->front_back}}"
+            value="{{$request->front_back}}"
         @endif">
         <option disabled selected> -- select an option -- </option>
         <option value="0">Single Page</option>
@@ -121,9 +116,9 @@
         application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.ms-excel,
         application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, .csv"
         @if(Route::currentRouteName()=='requests.create')
-        value="{{old('file')}}"
+            value="{{old('file')}}"
         @else(Route::currentRouteName()=='requests.edit')
-        value="{{$request->file}}"
+            value="{{$request->file}}"
         @endif
     />
 </div>
