@@ -14,8 +14,9 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
-Route::get('/', 'HomeController@homeGraph')->name('home');
+use Illuminate\Support\Facades\Input;
+use Illuminate\Http\Response;
+use App\User;
 
 //*********Laravel Auth Routes****************
 // Authentication Routes
@@ -25,6 +26,16 @@ Route::get('register/{userid}/verify/{token}', 'Auth\RegisterController@verify')
 
 // Dashboard
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
+// Search profiles
+Route::get('search/profile', function(){
+    $input = Input::get('option');
+    $users = User::where('name','LIKE','%'.$input.'%')->take(10)->get();
+    return response()->json($users);
+});
+
+// Home
+Route::get('/', 'HomeController@homeGraph')->name('home');
 
 // Requests
 Route::get('requests/create', 'RequestController@create')->name('requests.create');

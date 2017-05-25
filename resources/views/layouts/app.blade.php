@@ -19,6 +19,8 @@
             'csrfToken' => csrf_token(),
         ]) !!};
     </script>
+
+    <script src="{{asset('js/jquery.min.js')}}"></script>
 </head>
 <body>
     <div id="app">
@@ -45,17 +47,12 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         <li>
-                            <input type="text" list="users" id="navSearch" oninput='onInput()' placeholder="Search Profiles">
-                            <datalist id="users">
-                                @for($i=0; $i<count($users); ++$i)
-                                    @if($i > 0 && $users[$i-1]->name == $users[$i]->name)
-                                        <option value="{{$users[$i]->name}} ({{++$num}})" href="{{ route('users.profile', $users[$i]) }}">
-                                    @else
-                                        <option value="{{$users[$i]->name}}" href="{{ route('users.profile', $users[$i]) }}">
-                                        @php($num=1)
-                                    @endif
-                                @endfor
-                            </datalist>
+                            <form>
+                                <input id="navSearch" name="user_id" placeholder="Search a profile..." list="users">
+                                <datalist id="users">
+                                    <option value=""></option>
+                                </datalist>
+                            </form>
                         </li>
                     </ul>
                     <!-- Right Side Of Navbar -->
@@ -90,6 +87,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+
     <script>
         function onInput() {
             var link;
@@ -103,6 +101,24 @@
                 }
             }
         }
+    </script>
+
+    <script>
+        $("#navSearch").on("keyup", function(event) {
+            console.log("entra");
+            var _this = $(this);
+            $.get("{{ url('search/profile')}}",
+                { option: $("#navSearch").val() },
+                function(users) {
+                    console.log(users);
+                    $("#users").empty();
+                    for (var u in users) {
+                        $('#users').append('<option data-value="' + users[u].id + '">' + users[u].name + '</option>');
+                        //data-value ??
+                    }
+                    _this.focus();
+            })
+        });
     </script>
 </body>
 </html>
