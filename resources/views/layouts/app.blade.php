@@ -112,7 +112,7 @@
                     console.log(users);
                     $("#users").empty();
                     for (var u in users) {
-                        $('#users').append('<option href="/users/' + users[u].id + '/profile" data-value="' + users[u].id + '">' + users[u].name + '</option>');
+                        $('#users').append('<option href="/users/' + users[u].id + '/profile" data-value="' + users[u].id + '">' + users[u].name + ' ('+ users[u].id+')' + '</option>');
                         //data-value ??
                     }
                     _this.focus();
