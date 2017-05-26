@@ -62,7 +62,7 @@ class UserController extends Controller
         $user = new User();
         $user->fill($request->all());
         $user->admin = 0; //!!!!!!!!!
-        $user->password = Hash::make($request->password);
+        $user->password = Hash::make(str_random(10));
         $user->save();
         return redirect()->route('users.index')->with('success', 'user added successfully');
     }
