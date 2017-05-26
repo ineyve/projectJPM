@@ -96,7 +96,7 @@
 
 <div class="form-group">
     <label for="inputFile">File</label>
-    <input style="padding:0;"
+    <input
         type="file" class="form-control" name="file" id="inputFile" accept="image/*, application/pdf,
         application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document,
         application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, .csv"/>
