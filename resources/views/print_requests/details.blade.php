@@ -190,7 +190,7 @@
                                 <a class="btn btn-default" href='javascript:hideComplete()' id="cancelComplete">Cancel</a>
                             </div>
                         </form>
-    
+
                         <a class="btn btn-danger side-offset" href='javascript:showRefuse()' id="buttonRefuse">Refuse</a>
                         <form action="{{route('requests.refuse', $request)}}" method="post" class="form-group" id="refuse-form" style="display:none">
                             {{ csrf_field() }}
@@ -214,6 +214,16 @@
 
                                 <p class="first"><a href="{{route('users.profile', $comment->user_id)}}">{{$comment->user->name}}</a> &nbsp&nbsp&nbsp&nbsp{{$comment->created_at}}</p>
                                 <p>{{$comment->comment}}</p>
+
+                                @can('admin') 
+
+                                @if(!$comment->blocked)
+                                    <a class="btn btn-xs btn-warning button-block" href="{{ route('comment.block', ['comment' => $comment, 'block' => 1]) }}">Block</a>
+                                    @else
+                                    <a class="btn btn-xs btn-primary button-block" href="{{ route('comment.block', ['comment' => $comment, 'block' => 0]) }}">Unblock</a>
+                                @endif
+
+                                @endcan
 
                                 <a class="btn btn-xs btn-primary" href='javascript:showReply()' id="buttonReply">Reply</a>
 

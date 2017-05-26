@@ -46,5 +46,15 @@ class CommentController extends Controller
 
         return back();
     }
+
+    public function block(Comment $comment, $block)
+    {
+        $comment->blocked=$block;
+        $comment->save();
+        if($block)
+            return redirect()->back()->with('success', 'comment blocked successfully');
+        else
+            return redirect()->back()->with('success', 'comment unblocked successfully');
+    }
     
 }

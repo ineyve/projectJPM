@@ -53,6 +53,7 @@ Route::post('requests/{request}/refuse', 'RequestController@refuse')->name('requ
 // Comments
 Route::post('requests/{request}/details/comment', 'CommentController@create')->name('requests.comment')->middleware('can:selfOrAdmin');
 Route::post('requests/{request}/details/comment/{comment}/reply', 'CommentController@reply')->name('requests.reply')->middleware('can:selfOrAdmin');
+Route::get('requests/comment/{comment}/{block}', 'CommentController@block')->name('comment.block')->middleware('can:admin');
 
 // Users
 Route::get('users', 'UserController@index' )->name('users.index');
