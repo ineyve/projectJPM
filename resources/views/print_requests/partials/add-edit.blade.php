@@ -11,7 +11,7 @@
 
 <div class="form-group">
 <label for="inputDueDate">Due Date</label>
-    <input type="date" class="form-control" name="due_date" id="inputDueDate" placeholder="Due Date"
+    <input type="date" class="form-control" name="due_date" id="inputDueDate"
         @if(Route::currentRouteName()=='requests.edit')
             value="{{$request->due_date}}"
         @endif
