@@ -5,6 +5,7 @@ namespace App;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 
 
 class Request extends Model
@@ -74,4 +75,17 @@ class Request extends Model
         return $this->belongsTo(User::class, 'owner_id', 'id');
     }
 
+    public function hasImage(){
+        if(isset($this->file)) {
+            $extension = explode('.', $this->file)[1];
+            if($extension == "png"){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function image(){
+        return base64_encode(file_get_contents('../storage/app/print-jobs/'.$this->owner_id.'/'.$this->file));
+    }
 }

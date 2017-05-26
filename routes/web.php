@@ -30,7 +30,7 @@ Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 // Search profiles
 Route::get('search/profile', function(){
     $input = Input::get('option');
-    $users = User::where('name','LIKE','%'.$input.'%')->take(10)->get();
+    $users = User::select('id','name')->where('name','LIKE','%'.$input.'%')->take(10)->get();
     return response()->json($users);
 });
 
@@ -53,7 +53,6 @@ Route::post('requests/{request}/refuse', 'RequestController@refuse')->name('requ
 //Comment
 Route::post('requests/{request}/details/comment', 'CommentController@create')->name('requests.comment')->middleware('can:selfOrAdmin');
 Route::post('requests/{request}/details/comment/{comment}/reply', 'CommentController@reply')->name('requests.reply')->middleware('can:selfOrAdmin');
-
 
 // Users
 Route::get('users', 'UserController@index' )->name('users.index');

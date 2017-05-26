@@ -97,6 +97,9 @@
                                 </form>
                             </th>
                             <th>
+                                Image
+                            </th>
+                            <th>
                                 <form>
                                     @if(isset($sort['search']))
                                         <input type="hidden" name="search" value="{{$sort['search']}}"/>
@@ -122,6 +125,13 @@
                             <td><a href="{{route('requests.details', $request)}}">{{$request->owner_id}}</a></td>
                             <td><a href="{{route('requests.details', $request)}}">{{$request->user->name}}</a></td>
                             <td><a href="{{route('requests.details', $request)}}">{{$request->date()}}</a></td>
+                            <td>
+                                @if($request->hasImage())
+                                    <a href="{{route('requests.details', $request)}}">
+                                        <img src="data:image/png;base64,{{$request->image()}}" style="width:50px;height:50px;">
+                                    </a>
+                                @endif
+                            </td>
                             <td><a href="{{route('requests.details', $request)}}">{{$request->statusToStr()}}</a></td>
                         </tr>
                     @endforeach
