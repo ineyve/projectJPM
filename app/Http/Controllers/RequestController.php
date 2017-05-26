@@ -95,12 +95,14 @@ class RequestController extends Controller
         $request->paper_type = $req->paper_type;
         $request->front_back = $req->front_back;
         $request->colored = $req->colored;
-        $path = $req->file('file')->store('print-jobs/'.$request->owner_id);
-        $parts = explode('/', $path);
-        $request->file = $parts[2];
+        if($req->hasFile('file')) {
+            $path = $req->file('file')->store('print-jobs/' . $request->owner_id);
+            $parts = explode('/', $path);
+            $request->file = $parts[2];
+        }
         $request->save();
 
-        return redirect()->back()->with('success', 'request updated successfully');
+        return redirect()->route('dashboard')->with('success', 'request updated successfully!');
     }
 
     public function details(Request $request)
@@ -148,15 +150,14 @@ class RequestController extends Controller
         $request->refused_reason = $req->refused_reason;
         $request->save();
 
-        $admin = 1;
-        return view('print_requests.details', compact('request', 'admin'));
+        return redirect()->back()->with('success', 'request rejected!');
     }
 
     public function destroy(Request $request)
     {
         Storage::delete($request->file);
         $request->delete();
-        return redirect()->route('dashboard')->with('success', 'request deleted successfully');
+        return redirect()->route('dashboard')->with('success', 'request deleted successfully!');
     }
 
     public function download(Request $request)

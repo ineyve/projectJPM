@@ -41,7 +41,7 @@ class Request extends Model
     }
 
     public function stapledToStr(){
-        if($this->stapled == 0)
+        if($this->stapled)
             return 'With Staple';
         else
             return 'No Staple';

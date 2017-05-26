@@ -32,7 +32,6 @@ class UpdateRequestPostRequest extends FormRequest
             'paper_size'=>'required',
             'paper_type'=>'required',
             'front_back'=>'required',
-            'file'=>'required',
         ];
     }
 }

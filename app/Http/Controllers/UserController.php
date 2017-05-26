@@ -53,8 +53,8 @@ class UserController extends Controller
 
     public function create()
     {
-
-        return view('users.add');
+        $departments= Department::All();
+        return view('users.add', compact('departments'));
     }
 
     public function store(CreateUserPostRequest $request)

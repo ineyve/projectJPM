@@ -137,17 +137,10 @@
                             @php($i=0)
                             @foreach ($requests as $request)
                                 <tr>
-                                    @if(is_null($request->closed_date))
-                                        <td><a href="{{route('requests.edit', $request)}}">{{$request->id}}</a></td>
-                                        <td><a href="{{route('requests.edit', $request)}}">{{$request->description}}</a></td>
-                                        <td><a href="{{route('requests.edit', $request)}}">{{$request->created_at}}</a></td>
-                                        <td><a href="{{route('requests.edit', $request)}}">{{$request->statusToStr()}}</a></td>
-                                    @else
-                                        <td><a href="{{route('requests.details', $request)}}">{{$request->id}}</a></td>
-                                        <td><a href="{{route('requests.details', $request)}}">{{$request->description}}</a></td>
-                                        <td><a href="{{route('requests.details', $request)}}">{{$request->created_at}}</a></td>
-                                        <td><a href="{{route('requests.details', $request)}}">{{$request->statusToStr()}}</a></td>
-                                    @endif
+                                    <td><a href="{{route('requests.details', $request)}}">{{$request->id}}</a></td>
+                                    <td><a href="{{route('requests.details', $request)}}">{{$request->description}}</a></td>
+                                    <td><a href="{{route('requests.details', $request)}}">{{$request->created_at}}</a></td>
+                                    <td><a href="{{route('requests.details', $request)}}">{{$request->statusToStr()}}</a></td>
                                     <td>
                                     @if($request->status == 2)
                                         @if(is_null($request->satisfaction_grade))
@@ -155,6 +148,7 @@
                                         @endif
                                         <center><div id="star{{++$i}}" class="c-rating"></div></center>
                                     @elseif($request->status == 0)
+                                        <a class="btn btn-xs btn-primary" href="{{route('requests.edit', $request)}}">Edit</a>
                                         <form action="{{route('requests.destroy',$request)}}" method="post" class="inline">
                                                 {{method_field('DELETE')}}
                                                 {{ csrf_field() }}
