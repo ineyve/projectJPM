@@ -207,7 +207,7 @@
                     @endcan
                     @php($count=0)
                     @foreach($comments as $comment)
-                        @if($comment->parent_id == '' && !$comment->blocked)
+                        @if($comment->parent_id == '' && (!$comment->blocked || $admin))
                             @php(++$count)
                             <div class="comment">
                                 <a href="{{ route('users.profile', $comment->user_id) }}"><img class="comment-picture" src="/profile.jpg"></a>
@@ -218,16 +218,15 @@
                                 @can('admin') 
 
                                 @if(!$comment->blocked)
-                                    <a class="btn btn-xs btn-warning button-block" href="{{ route('comment.block', ['comment' => $comment, 'block' => 1]) }}">Block</a>
+                                    <a class="btn btn-xs btn-danger button-block" href="{{ route('comment.block', ['comment' => $comment, 'block' => 1]) }}">Block</a>
                                     @else
-                                    <a class="btn btn-xs btn-primary button-block" href="{{ route('comment.block', ['comment' => $comment, 'block' => 0]) }}">Unblock</a>
+                                    <a class="btn btn-xs btn-success button-block" href="{{ route('comment.block', ['comment' => $comment, 'block' => 0]) }}">Unblock</a>
                                 @endif
 
                                 @endcan
 
-                                <a class="btn btn-xs btn-primary" href='javascript:showReply()' id="buttonReply">Reply</a>
-
-                                <form action="{{route('requests.reply', ['request' => $request, 'comment' => $comment])}}" method="post" class="form-group" id="reply-form" style="display:none;">
+                                <a class="btn btn-xs btn-primary button-reply" href='javascript:showReply({{$count}})' id="buttonReply{{$count}}">Reply</a>
+                                <form action="{{route('requests.reply', ['request' => $request, 'comment' => $comment])}}" method="post" class="form-group" id="reply-form{{$count}}" style="display:none;">
                                     {{ csrf_field() }}
                                     <div class="form-group" id="reply" style="margin-left: 10px; margin-right: 10px;">
                                         <label for="inputReply">Reply</label>
@@ -235,15 +234,24 @@
                                     </div>
                                     <div class="form-group" id="submitReply">
                                         <button type="submit" class="btn btn-xs btn-primary side-offset">Reply</button>
-                                        <a class="btn btn-xs btn-default" href='javascript:hideReply()' id="cancelReply">Cancel</a>
+                                        <a class="btn btn-xs btn-default" href='javascript:hideReply({{$count}})' id="cancelReply{{$count}}">Cancel</a>
                                     </div>
                                 </form>
                             @foreach($comments as $reply)
-                                @if($reply->parent_id == $comment->id && !$reply->blocked)
+                                @if($reply->parent_id == $comment->id && (!$reply->blocked || $admin))
                                         <div class="reply">
                                             <a href="{{ route('users.profile', $reply->user_id) }}"><img class="comment-picture" src="/profile.jpg"></a>
                                             <p class="first"><a href="{{route('users.profile', $reply->user_id)}}">{{$reply->user->name}}</a> &nbsp&nbsp&nbsp&nbsp{{$reply->created_at}}</p>
                                             <p>{{$reply->comment}}</p>
+                                                                            @can('admin') 
+
+                                @if(!$reply->blocked)
+                                    <a class="btn btn-xs btn-danger reply-block" href="{{ route('comment.block', ['comment' => $reply, 'block' => 1]) }}">Block</a>
+                                    @else
+                                    <a class="btn btn-xs btn-success reply-block" href="{{ route('comment.block', ['comment' => $reply, 'block' => 0]) }}">Unblock</a>
+                                @endif
+
+                                @endcan
                                         </div>
                                 @endif
                             @endforeach
@@ -299,14 +307,14 @@
         $('#buttonComplete').show();
     }
 </script>
-<script>function showReply(){
-        $('#reply-form').show();
-        $('#buttonReply').hide();
+<script>function showReply(count){
+        $('#reply-form' + count).show();
+        $('#buttonReply' + count).hide();
     }
 </script>
-<script>function hideReply(){
-        $('#reply-form').hide();
-        $('#buttonReply').show();
+<script>function hideReply(count){
+        $('#reply-form' + count).hide();
+        $('#buttonReply' + count).show();
     }
 </script>
 <script>function hideComplete(){

@@ -304,6 +304,7 @@ table.sortable thead{
 }
 
 .reply{
+    position: relative;
     margin-left: 75px;
     margin-right: 10px;
     margin-bottom: 10px;
@@ -321,7 +322,7 @@ table.sortable thead{
 }
 
 
-#buttonReply{
+.button-reply{
     position: absolute;
     right: 10px;
     top: 10px;
@@ -330,6 +331,12 @@ table.sortable thead{
 .button-block{
     position: absolute;
     right: 65px;
+    top: 10px;
+}
+
+.reply-block{
+    position: absolute;
+    right: 10px;
     top: 10px;
 }
 
