@@ -50,7 +50,7 @@ Route::get('requests', 'RequestController@index' )->name('requests.index')->midd
 Route::post('requests/{request}/complete', 'RequestController@complete')->name('requests.complete')->middleware('can:admin');
 Route::post('requests/{request}/refuse', 'RequestController@refuse')->name('requests.refuse')->middleware('can:admin');
 
-//Comment
+// Comments
 Route::post('requests/{request}/details/comment', 'CommentController@create')->name('requests.comment')->middleware('can:selfOrAdmin');
 Route::post('requests/{request}/details/comment/{comment}/reply', 'CommentController@reply')->name('requests.reply')->middleware('can:selfOrAdmin');
 
@@ -66,3 +66,6 @@ Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit')->midd
 Route::post('users/{user}/edit', 'UserController@update')->name('users.update')->middleware('can:admin');
 Route::get('users/{user}/block/{block}', 'UserController@block')->name('users.block')->middleware('can:admin');
 Route::get('users/{user}/admin/{admin}', 'UserController@admin')->name('users.admin')->middleware('can:admin');
+
+// Departments
+Route::get('departments', 'DepartmentController@index' )->name('departments.index');
