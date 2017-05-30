@@ -54,7 +54,7 @@ class Handler extends ExceptionHandler
             ], 404);
         }
 
-        if($exception instanceof MethodNotAllowedHttpException || $exception instanceof AuthorizationException || $exception instanceof NotFoundHttpException){
+        if ($exception instanceof MethodNotAllowedHttpException || $exception instanceof AuthorizationException || $exception instanceof NotFoundHttpException) {
             return redirect()->route('home');
         }
 

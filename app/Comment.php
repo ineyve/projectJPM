@@ -2,11 +2,8 @@
 
 namespace App;
 
-
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
-
-
 
 class Comment extends Model
 {
@@ -27,11 +24,13 @@ class Comment extends Model
      * @var array
      */
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function request(){
+    public function request()
+    {
         return $this->belongsTo(Request::class, 'request_id', 'id');
     }
 }

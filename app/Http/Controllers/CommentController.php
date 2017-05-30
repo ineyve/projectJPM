@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Comment;
 use App\Http\Requests\StoreCommentPostRequest;
 use App\Http\Requests\StoreRefusePostRequest;
@@ -13,10 +12,8 @@ use App\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
-
 class CommentController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -51,10 +48,10 @@ class CommentController extends Controller
     {
         $comment->blocked=$block;
         $comment->save();
-        if($block)
+        if ($block) {
             return redirect()->back()->with('success', 'comment blocked successfully');
-        else
+        } else {
             return redirect()->back()->with('success', 'comment unblocked successfully');
+        }
     }
-    
 }

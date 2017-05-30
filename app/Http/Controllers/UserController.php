@@ -13,32 +13,30 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-
     public function index(\Illuminate\Http\Request $req)
     {
         $auth = Auth::user();
-        if(is_null($auth)){
+        if (is_null($auth)) {
             $auth=new User();
         }
         if ($req->has('order') && $req->has('field')) {
             //If user sorted:
             $sort['order'] = $req->order;
             $sort['field'] = $req->field;
-        }
-        else
-        {   //If user didn't sort, default to:
-            if($auth->admin) //If admin, see descending (new ones first), or else, see ascending (old ones first)
+        } else {   //If user didn't sort, default to:
+            if ($auth->admin) { //If admin, see descending (new ones first), or else, see ascending (old ones first)
                 $sort['order'] = 'DESC';
-            else
+            } else {
                 $sort['order'] = 'ASC';
+            }
             $sort['field'] = 'users.id';
         }
 
         if ($req->has('search')) {
             $sort['search'] = $req->search;
             $users = User::select('users.*')->leftJoin('departments', 'users.department_id', '=', 'departments.id')
-                ->where('users.name','like','%'.$sort['search'].'%')->orWhere('users.id','=',$sort['search'])->orWhere('users.phone','=',$sort['search'])
-                ->orWhere('users.email','like','%'.$sort['search'].'%')->orWhere('departments.name','like','%'.$sort['search'].'%')
+                ->where('users.name', 'like', '%'.$sort['search'].'%')->orWhere('users.id', '=', $sort['search'])->orWhere('users.phone', '=', $sort['search'])
+                ->orWhere('users.email', 'like', '%'.$sort['search'].'%')->orWhere('departments.name', 'like', '%'.$sort['search'].'%')
                 ->orderBy($sort['field'], $sort['order'])
                 ->paginate(20);
         } else {
@@ -96,7 +94,7 @@ class UserController extends Controller
         $user->phone = $request->phone;
         $user->profile_url = $request->profile_url;
         $user->presentation = $request->presentation;
-        if($request->hasFile('profile_photo')) {
+        if ($request->hasFile('profile_photo')) {
             $path = $request->file('profile_photo')->store('public/profiles');
             $parts = explode('/', $path);
             $user->profile_photo = $parts[2];
@@ -108,7 +106,7 @@ class UserController extends Controller
     public function updatePassword(UpdatePasswordPostRequest $request)
     {
         $user = Auth::user();
-        if(Hash::check($request->oldPassword, $user->password)){
+        if (Hash::check($request->oldPassword, $user->password)) {
             $user->password = bcrypt($request->newPassword);
             $user->save();
             return redirect()->route('dashboard')->with('success', 'password updated successfully');
@@ -125,20 +123,21 @@ class UserController extends Controller
     {
         $user->blocked=$block;
         $user->save();
-        if($block)
+        if ($block) {
             return redirect()->route('users.index')->with('success', 'user blocked successfully');
-        else
+        } else {
             return redirect()->route('users.index')->with('success', 'user unblocked successfully');
+        }
     }
 
     public function admin(User $user, $admin)
     {
         $user->admin=$admin;
         $user->save();
-        if($admin)
+        if ($admin) {
             return redirect()->route('users.index')->with('success', 'Administrator profile assigned successfully');
-        else
+        } else {
             return redirect()->route('users.index')->with('success', 'Removal of Administrator profile successfully');
+        }
     }
-
 }

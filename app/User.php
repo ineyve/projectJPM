@@ -29,7 +29,8 @@ class User extends Authenticatable
         'password', 'remember_token'
     ];
 
-    public function department(){
+    public function department()
+    {
         return $this->belongsTo(Department::class, 'department_id', 'id');
     }
 
@@ -39,31 +40,32 @@ class User extends Authenticatable
         $this->save();
     }
 
-    public function memberFor(){
+    public function memberFor()
+    {
         $diffYears=$this->created_at->diffInYears(Carbon::now());
         $diffMonths=$this->created_at->diffInMonths(Carbon::now());
         $diffDays=$this->created_at->diffInDays(Carbon::now());
         $diff=$this->created_at->diff(Carbon::now());
 
-        if($diffYears == 0)
-            if($diffMonths == 0)
+        if ($diffYears == 0) {
+            if ($diffMonths == 0) {
                 return $diff->format('%d days');
-            else
-                if($diffDays == 0)
-                    return $diff->format('%m months');
-                else
-                    return $diff->format('%m months  and %d days');
-        else
-            if($diffMonths == 0)
-                if($diffDays == 0)
-                    return $diff->format('%y years');
-                else
-                    return $diff->format('%y years and %d days');
-            else
-                if($diffDays == 0)
-                    return $diff->format('%y years and %m months');
-                else
-                    return $diff->format('%y years, %m months and %d days');
+            } elseif ($diffDays == 0) {
+                return $diff->format('%m months');
+            } else {
+                return $diff->format('%m months  and %d days');
+            }
+        } elseif ($diffMonths == 0) {
+            if ($diffDays == 0) {
+                return $diff->format('%y years');
+            } else {
+                return $diff->format('%y years and %d days');
+            }
+        } elseif ($diffDays == 0) {
+            return $diff->format('%y years and %m months');
+        } else {
+            return $diff->format('%y years, %m months and %d days');
+        }
     }
 
     public function requests()
@@ -71,26 +73,32 @@ class User extends Authenticatable
         return $this->hasMany('App\Request', 'owner_id', 'id');
     }
 
-    public function averageRating(){
+    public function averageRating()
+    {
         $average = $this->requests()->where('satisfaction_grade', '!=', '')->sum('satisfaction_grade');
         $count = $this->requests()->where('satisfaction_grade', '!=', '')->count();
-        if($count == 0)
+        if ($count == 0) {
             return 0;
-        else
+        } else {
             return round($average/$count);
+        }
     }
 
-    public function adminToStr(){
-        if($this->admin)
+    public function adminToStr()
+    {
+        if ($this->admin) {
             return 'Yes';
-        else
+        } else {
             return 'No';
+        }
     }
 
-    public function blockedToStr(){
-        if($this->blocked)
+    public function blockedToStr()
+    {
+        if ($this->blocked) {
             return 'Yes';
-        else
+        } else {
             return 'No';
+        }
     }
 }

@@ -14,14 +14,13 @@ class HomeController extends Controller
         $dpnames = "["; //Array with departments' names
         $dpcounts = "["; //Array with amount of requests per department
         $dpcolors = "["; //Array with colors
-        foreach ($prints_per_department as $stat)
-        {
+        foreach ($prints_per_department as $stat) {
             $dpnames .='"'.$this->autoLabelSpaces($stat->depname).'", '; //Department's name
 
             $counter = $stat->cnt; //Amount of finished prints
             $dpcounts .=$counter.', ';
 
-            $dpcolors .='\'rgba('.rand(50,200).', '.rand(50,200).', '.rand(50,200).', 1)\', '; //Color of each bar
+            $dpcolors .='\'rgba('.rand(50, 200).', '.rand(50, 200).', '.rand(50, 200).', 1)\', '; //Color of each bar
         }
         $statistics['departments'] = $dpnames.']'; //Departments' names
         $statistics['departmentsCount'] = $dpcounts.']'; //Print number per department
@@ -29,15 +28,14 @@ class HomeController extends Controller
         /* END */
 
 
-        $grayScale = Request::where('colored','=','0')->where('status', 2)->sum('quantity'); //Amount of grayscale prints
-        $colored = Request::where('colored','=','1')->where('status', 2)->sum('quantity'); //Amount of colored prints
+        $grayScale = Request::where('colored', '=', '0')->where('status', 2)->sum('quantity'); //Amount of grayscale prints
+        $colored = Request::where('colored', '=', '1')->where('status', 2)->sum('quantity'); //Amount of colored prints
         $total = $colored + $grayScale;
 
-        if($total != 0) {
+        if ($total != 0) {
             $statistics['grayScale'] = round(100 * $grayScale / $total); //% of grayscale prints
             $statistics['colored'] = round(100 * $colored / $total); //% of colored prints
-        }
-        else {
+        } else {
             $statistics['grayScale'] = 50;
             $statistics['colored'] = 50;
         }
@@ -57,8 +55,7 @@ class HomeController extends Controller
     {
         $amount = round(strlen($string)/3);
         $spaces = '';
-        for($i = 0; $i < $amount; $i++)
-        {
+        for ($i = 0; $i < $amount; $i++) {
             $spaces .= ' ';
         }
         return $spaces.$string;

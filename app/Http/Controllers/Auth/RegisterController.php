@@ -12,7 +12,6 @@ use Mail;
 use Illuminate\Http\Request;
 use App\Mail\EmailVerification;
 
-
 class RegisterController extends Controller
 {
     /*
@@ -99,15 +98,13 @@ class RegisterController extends Controller
     {
         // Laravel validation
         $validator = $this->validator($request->all());
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             $this->throwValidationException($request, $validator);
         }
         // Using database transactions is useful here because stuff happening is actually a transaction
         // I don't know what I said in the last line! Weird!
         DB::beginTransaction();
-        try
-        {
+        try {
             $user = $this->create($request->all());
             $user->presentation = $request->presentation;
             $user->profile_url = $request->profile_url;
@@ -120,9 +117,7 @@ class RegisterController extends Controller
             Mail::to($user->email)->send($email);
             DB::commit();
             return redirect()->route('home')->with('success', 'user created successfully');
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             DB::rollback();
             return back();
         }
@@ -133,8 +128,9 @@ class RegisterController extends Controller
         // The verified method has been added to the user model and chained here
         // for better readability
         $user = User::where('id', $userid)->first();
-        if(hash('md5', $user->created_at) == $token)
+        if (hash('md5', $user->created_at) == $token) {
             $user->verified();
+        }
         return redirect()->route('login')->with('success', 'email verified successfully');
     }
 }

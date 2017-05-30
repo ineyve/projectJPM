@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Comment;
 use App\Http\Requests\StoreRefusePostRequest;
 use App\Http\Requests\StoreRequestPostRequest;
@@ -15,10 +14,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 
-
 class RequestController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -30,9 +27,7 @@ class RequestController extends Controller
             //If user sorted:
             $sort['order'] = $req->order;
             $sort['field'] = $req->field;
-        }
-        else
-        {   //If user didn't sort, default to:
+        } else {   //If user didn't sort, default to:
             $sort['order'] = 'ASC';
             $sort['field'] = 'requests.status';
         }
@@ -40,19 +35,20 @@ class RequestController extends Controller
         if ($req->has('search')) { //With or without search
             $sort['search'] = $req->search;
             $sort['search'] = strtolower($sort['search']);
-            if(strpos( 'pending', $sort['search'])!==false)
+            if (strpos('pending', $sort['search'])!==false) {
                 $searchStatus = 0;
-            elseif(strpos( 'rejected', $sort['search'])!==false)
+            } elseif (strpos('rejected', $sort['search'])!==false) {
                 $searchStatus = 1;
-            elseif(strpos( 'complete', $sort['search'])!==false)
+            } elseif (strpos('complete', $sort['search'])!==false) {
                 $searchStatus = 2;
-            else
+            } else {
                 $searchStatus = -1;
+            }
 
             $requests = Request::select('requests.*')->leftJoin('users', 'users.id', '=', 'requests.owner_id')
-                ->where('name','like','%'.$sort['search'].'%')->orWhere('requests.id','=',$sort['search'])
-                ->orWhere('owner_id','=',$sort['search'])->orWhereDate('due_date','=',$sort['search'])
-                ->orWhere('requests.status','=',$searchStatus)
+                ->where('name', 'like', '%'.$sort['search'].'%')->orWhere('requests.id', '=', $sort['search'])
+                ->orWhere('owner_id', '=', $sort['search'])->orWhereDate('due_date', '=', $sort['search'])
+                ->orWhere('requests.status', '=', $searchStatus)
                 ->orderBy($sort['field'], $sort['order'])->paginate(20);
         } else {
             $requests = Request::select('requests.*')->leftJoin('users', 'users.id', '=', 'requests.owner_id')
@@ -60,7 +56,7 @@ class RequestController extends Controller
         }
 
         $requests->appends($req->input())->links();
-        return view('print_requests.index', compact('requests','sort'));
+        return view('print_requests.index', compact('requests', 'sort'));
     }
 
     public function create()
@@ -73,7 +69,7 @@ class RequestController extends Controller
         $request = new Request();
         $request->owner_id = Auth::user()->id;
         $request->status = 0;
-        $request->fill($req->all()); 
+        $request->fill($req->all());
         $path = $req->file('file')->store('print-jobs/'.$request->owner_id);
         $parts = explode('/', $path);
         $request->file = $parts[2];
@@ -95,7 +91,7 @@ class RequestController extends Controller
         $request->paper_type = $req->paper_type;
         $request->front_back = $req->front_back;
         $request->colored = $req->colored;
-        if($req->hasFile('file')) {
+        if ($req->hasFile('file')) {
             $path = $req->file('file')->store('print-jobs/' . $request->owner_id);
             $parts = explode('/', $path);
             $request->file = $parts[2];
@@ -108,8 +104,9 @@ class RequestController extends Controller
     public function details(Request $request)
     {
         $admin = 0;
-        if (Auth::user()->admin)
+        if (Auth::user()->admin) {
             $admin = 1;
+        }
         $user = Auth::user()->id;
         $printers= Printer::All();
         $comments = Comment::where('request_id', '=', $request->id)->orderBy('created_at')->get();
@@ -131,7 +128,7 @@ class RequestController extends Controller
 
     public function rating(Request $request, $rating)
     {
-        if(is_null($request->satisfaction_grade)) {
+        if (is_null($request->satisfaction_grade)) {
             $user = Auth::user();
             $user->print_evals++;
             $user->save();
