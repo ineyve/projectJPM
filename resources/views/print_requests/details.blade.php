@@ -1,25 +1,25 @@
 @extends('master')
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Request {{$request->id}}</div>
-                    <div class="panel-body">
-                        <table class="table table-striped">
-                            <thead>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Request {{$request->id}}</div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <thead>
                             <tr>
                                 <th>Property</th>
                                 <th>Value</th>
                             </tr>
-                            </thead>
-                            <tbody>
+                        </thead>
+                        <tbody>
                             <tr>
                                 <td>Description</td>
                                 <td>{{$request->description}}</td>
                             </tr>
-
+                        
                             <tr>
                                 <td>Owner Name</td>
                                 <td>{{$request->user->name}}</td>
@@ -59,12 +59,12 @@
                                 <td>Stapled</td>
                                 <td>{{$request->stapledToStr()}}</td>
                             </tr>
-
+                            
                             <tr>
                                 <td>Paper Size</td>
                                 <td>A{{$request->paper_size}}</td>
                             </tr>
-
+                            
                             <tr>
                                 <td>Paper Type</td>
                                 <td>{{$request->typeToStr()}}</td>
@@ -74,13 +74,12 @@
                                 <td>Front Back</td>
                                 <td>{{$request->frontBackToStr()}}</td>
                             </tr>
-
+                            
                             <tr>
                                 <td>File</td>
-                                <td><a class="btn btn-xs btn-success" href="{{route('requests.download', $request)}}">Download</a>
-                                </td>
+                                <td><a class="btn btn-xs btn-success" href="{{route('requests.download', $request)}}">Download</a></td>
                             </tr>
-
+                            
                             <tr>
                                 <td>Status</td>
                                 <td>{{$request->statusToStr()}}</td>
@@ -123,39 +122,37 @@
                             <tr>
                                 <td>Satisfaction Grade</td>
                                 <td>
-                                    @if($request->status == 2 && $user == $request->owner_id)
-                                        @if(is_null($request->satisfaction_grade))
-                                            @php($request->satisfaction_grade = 0)
-                                        @endif
-                                        <center>
-                                            <div id="star" class="c-rating" style="width: 100px;"></div>
-                                        </center>
-                                    @else
-                                        @for($i=0; $i < $request->satisfaction_grade; $i++)
-                                            <img src="/star.png" style="width:24px;height:24px;">
-                                        @endfor
+                                @if($request->status == 2 && $user == $request->owner_id)
+                                    @if(is_null($request->satisfaction_grade))
+                                        @php($request->satisfaction_grade = 0)
                                     @endif
+                                    <center><div id="star" class="c-rating" style="width: 100px;"></div></center>
+                                @else
+                                    @for($i=0; $i < $request->satisfaction_grade; $i++)
+                                        <img src="/star.png" style="width:24px;height:24px;">
+                                    @endfor
+                                @endif
                                 </td>
                             </tr>
                             <script src="/js/rating.js"></script>
                             <script>
                                 var el = document.querySelector('#star');
-                                        @if(isset($request->satisfaction_grade))
-                                var currentRating ={{$request->satisfaction_grade}};
-                                        @else
-                                var currentRating = 0;
-                                        @endif
-                                var maxRating = 3;
-                                var callback = function (rating) {
-                                    switch (rating) {
+                                @if(isset($request->satisfaction_grade))
+                                    var currentRating={{$request->satisfaction_grade}};
+                                @else
+                                    var currentRating=0;
+                                @endif
+                                var maxRating= 3;
+                                var callback = function(rating) {
+                                    switch(rating) {
                                         case 1:
-                                            window.location = "{{ route('requests.rating', [$request, 'rating' => 1])}}";
+                                            window.location="{{ route('requests.rating', [$request, 'rating' => 1])}}";
                                             break;
                                         case 2:
-                                            window.location = "{{ route('requests.rating', [$request, 'rating' => 2])}}";
+                                            window.location="{{ route('requests.rating', [$request, 'rating' => 2])}}";
                                             break;
                                         case 3:
-                                            window.location = "{{ route('requests.rating', [$request, 'rating' => 3])}}";
+                                            window.location="{{ route('requests.rating', [$request, 'rating' => 3])}}";
                                             break;
                                     }
                                 };
@@ -171,184 +168,170 @@
                                 <td>Last Update</td>
                                 <td>{{$request->updated_at}}</td>
                             </tr>
-                            </tbody>
-                        </table>
-
-                        @can('admin')
-                            @if($request->status == 0)
-                                <a class="btn btn-success side-offset" href='javascript:showComplete()'
-                                   id="buttonComplete">Complete</a>
-                                <form action="{{route('requests.complete', $request)}}" method="post" class="form-group"
-                                      id="complete-form" style="display:none">
-                                    {{ csrf_field() }}
-                                    <div class="form-group" id="complete">
-                                        <label for="inputComplete">Complete</label>
-                                        <select name="printer_id" id="inputComplete" class="form-control">
-                                            <option disabled selected> -- select an option --</option>
-                                            @foreach($printers as $printer)
-                                                <option value="{{$printer->id}}">{{$printer->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group" id="submitComplete">
-                                        <button type="submit" class="btn btn-success side-offset">Complete</button>
-                                        <a class="btn btn-default" href='javascript:hideComplete()' id="cancelComplete">Cancel</a>
-                                    </div>
-                                </form>
-
-                                <a class="btn btn-danger side-offset" href='javascript:showRefuse()' id="buttonRefuse">Refuse</a>
-                                <form action="{{route('requests.refuse', $request)}}" method="post" class="form-group"
-                                      id="refuse-form" style="display:none">
-                                    {{ csrf_field() }}
-                                    <div class="form-group" id="refuse">
-                                        <label for="inputReason">Refuse Reason</label>
-                                        <textarea class="form-control" name="refused_reason"
-                                                  id="inputReason"></textarea>
-                                    </div>
-                                    <div class="form-group" id="submitRefuse">
-                                        <button type="submit" class="btn btn-danger side-offset">Refuse</button>
-                                        <a class="btn btn-default" href='javascript:hideRefuse()' id="cancelRefuse">Cancel</a>
-                                    </div>
-                                </form>
-                            @endif
-                        @endcan
-                        @php($count=0)
-                        @foreach($comments as $comment)
-                            @if($comment->parent_id == '' && (!$comment->blocked || $admin))
-                                @php(++$count)
-                                <div class="comment">
-                                    <a href="{{ route('users.profile', $comment->user_id) }}"><img
-                                                class="comment-picture" src="/profile.jpg"></a>
-
-                                    <p class="first"><a
-                                                href="{{route('users.profile', $comment->user_id)}}">{{$comment->user->name}}</a>
-                                        &nbsp&nbsp&nbsp&nbsp{{$comment->created_at}}</p>
-                                    <p>{{$comment->comment}}</p>
-
-                                    @can('admin')
-
-                                        @if(!$comment->blocked)
-                                            <a class="btn btn-xs btn-danger button-block"
-                                               href="{{ route('comment.block', ['comment' => $comment, 'block' => 1]) }}">Block</a>
-                                        @else
-                                            <a class="btn btn-xs btn-success button-block"
-                                               href="{{ route('comment.block', ['comment' => $comment, 'block' => 0]) }}">Unblock</a>
-                                        @endif
-
-                                    @endcan
-
-                                    <a class="btn btn-xs btn-primary button-reply"
-                                       href='javascript:showReply({{$count}})' id="buttonReply{{$count}}">Reply</a>
-                                    <form action="{{route('requests.reply', ['request' => $request, 'comment' => $comment])}}"
-                                          method="post" class="form-group" id="reply-form{{$count}}"
-                                          style="display:none;">
-                                        {{ csrf_field() }}
-                                        <div class="form-group" id="reply"
-                                             style="margin-left: 10px; margin-right: 10px;">
-                                            <label for="inputReply">Reply</label>
-                                            <textarea class="form-control" name="reply" id="inputReply"></textarea>
-                                        </div>
-                                        <div class="form-group" id="submitReply">
-                                            <button type="submit" class="btn btn-xs btn-primary side-offset">Reply
-                                            </button>
-                                            <a class="btn btn-xs btn-default" href='javascript:hideReply({{$count}})'
-                                               id="cancelReply{{$count}}">Cancel</a>
-                                        </div>
-                                    </form>
-                                    @foreach($comments as $reply)
-                                        @if($reply->parent_id == $comment->id && (!$reply->blocked || $admin))
-                                            <div class="reply">
-                                                <a href="{{ route('users.profile', $reply->user_id) }}"><img
-                                                            class="comment-picture" src="/profile.jpg"></a>
-                                                <p class="first"><a
-                                                            href="{{route('users.profile', $reply->user_id)}}">{{$reply->user->name}}</a>
-                                                    &nbsp&nbsp&nbsp&nbsp{{$reply->created_at}}</p>
-                                                <p>{{$reply->comment}}</p>
-                                                @can('admin')
-
-                                                    @if(!$reply->blocked)
-                                                        <a class="btn btn-xs btn-danger reply-block"
-                                                           href="{{ route('comment.block', ['comment' => $reply, 'block' => 1]) }}">Block</a>
-                                                    @else
-                                                        <a class="btn btn-xs btn-success reply-block"
-                                                           href="{{ route('comment.block', ['comment' => $reply, 'block' => 0]) }}">Unblock</a>
-                                                    @endif
-
-                                                @endcan
-                                            </div>
-                                        @endif
+                        </tbody>
+                    </table>
+                    
+                    @can('admin')
+                    @if($request->status == 0)
+                        <a class="btn btn-success side-offset" href='javascript:showComplete()' id="buttonComplete">Complete</a>
+                        <form action="{{route('requests.complete', $request)}}" method="post" class="form-group" id="complete-form" style="display:none">
+                        {{ csrf_field() }}
+                            <div class="form-group" id="complete">
+                                <label for="inputComplete">Complete</label>
+                                <select name="printer_id" id="inputComplete" class="form-control">
+                                    <option disabled selected> -- select an option -- </option>
+                                    @foreach($printers as $printer)
+                                       <option value="{{$printer->id}}">{{$printer->name}}</option>
                                     @endforeach
-                                </div>
-                            @endif
-                        @endforeach
-                        @if($admin && $count)
-                            <br>
-                        @endif
-                        <a class="btn btn-primary" href='javascript:showComment()' id="buttonComment">Comment</a>
-                        <form action="{{route('requests.comment', $request)}}" method="post" class="form-group"
-                              id="comment-form" style="display:none">
-                            {{ csrf_field() }}
-                            <div class="form-group" id="comment">
-                                <label for="inputComment">Comment</label>
-                                <textarea class="form-control" name="comment" id="inputComment"></textarea>
+                                </select>
                             </div>
-                            <div class="form-group" id="submitComment">
-                                <button type="submit" class="btn btn-primary side-offset">Comment</button>
-                                <a class="btn btn-default" href='javascript:hideComment()' id="cancelComment">Cancel</a>
+                            <div class="form-group" id="submitComplete">
+                                <button type="submit" class="btn btn-success side-offset">Complete</button>
+                                <a class="btn btn-default" href='javascript:hideComplete()' id="cancelComplete">Cancel</a>
                             </div>
                         </form>
-                    </div>
+
+                        <a class="btn btn-danger side-offset" href='javascript:showRefuse()' id="buttonRefuse">Refuse</a>
+                        <form action="{{route('requests.refuse', $request)}}" method="post" class="form-group" id="refuse-form" style="display:none">
+                            {{ csrf_field() }}
+                            <div class="form-group" id="refuse">
+                                <label for="inputReason">Refuse Reason</label>
+                                <textarea class="form-control" name="refused_reason" id="inputReason"></textarea>
+                            </div>
+                            <div class="form-group" id="submitRefuse">
+                                <button type="submit" class="btn btn-danger side-offset">Refuse</button>
+                                <a class="btn btn-default" href='javascript:hideRefuse()' id="cancelRefuse">Cancel</a>
+                            </div>
+                        </form>
+                    @endif
+                    @endcan
+                    @php($count=0)
+                    @foreach($comments as $comment)
+                        @if($comment->parent_id == '' && (!$comment->blocked || $admin))
+                            @php(++$count)
+                            <div class="comment"
+                                @if($comment->blocked)
+                                    id="comment-blocked"
+                                @endif
+                            >
+                                <a href="{{ route('users.profile', $comment->user_id) }}"><img class="comment-picture" src="/profile.jpg"></a>
+                                <p class="first"><a href="{{route('users.profile', $comment->user_id)}}">{{$comment->user->name}}</a> &nbsp&nbsp&nbsp&nbsp{{$comment->created_at}}</p>
+                                <p>{{$comment->comment}}</p>
+
+                                @can('admin') 
+
+                                @if(!$comment->blocked)
+                                    <a class="btn btn-xs btn-danger button-block" href="{{ route('comment.block', ['comment' => $comment, 'block' => 1]) }}">Block</a>
+                                    @else
+                                    <a class="btn btn-xs btn-success button-block" href="{{ route('comment.block', ['comment' => $comment, 'block' => 0]) }}">Unblock</a>
+                                @endif
+
+                                @endcan
+
+                                <a class="btn btn-xs btn-primary button-reply" href='javascript:showReply({{$count}})' id="buttonReply{{$count}}">Reply</a>
+                                <form action="{{route('requests.reply', ['request' => $request, 'comment' => $comment])}}" method="post" class="form-group" id="reply-form{{$count}}" style="display:none;">
+                                    {{ csrf_field() }}
+                                    <div class="form-group" id="reply" style="margin-left: 10px; margin-right: 10px;">
+                                        <label for="inputReply">Reply</label>
+                                        <textarea class="form-control" name="reply" id="inputReply"></textarea>
+                                    </div>
+                                    <div class="form-group" id="submitReply">
+                                        <button type="submit" class="btn btn-xs btn-primary side-offset">Reply</button>
+                                        <a class="btn btn-xs btn-default" href='javascript:hideReply({{$count}})' id="cancelReply{{$count}}">Cancel</a>
+                                    </div>
+                                </form>
+                            @foreach($comments as $reply)
+                                @if($reply->parent_id == $comment->id && (!$reply->blocked || $admin))
+                                        <div class="reply"
+                                            @if($reply->blocked)
+                                                id="comment-blocked"
+                                            @endif
+                                        >
+                                            <a href="{{ route('users.profile', $reply->user_id) }}"><img class="comment-picture" src="/profile.jpg"></a>
+                                            <p class="first"><a href="{{route('users.profile', $reply->user_id)}}">{{$reply->user->name}}</a> &nbsp&nbsp&nbsp&nbsp{{$reply->created_at}}</p>
+                                            <p>{{$reply->comment}}</p>
+                                                                            @can('admin') 
+
+                                @if(!$reply->blocked)
+                                    <a class="btn btn-xs btn-danger reply-block" href="{{ route('comment.block', ['comment' => $reply, 'block' => 1]) }}">Block</a>
+                                    @else
+                                    <a class="btn btn-xs btn-success reply-block" href="{{ route('comment.block', ['comment' => $reply, 'block' => 0]) }}">Unblock</a>
+                                @endif
+
+                                @endcan
+                                        </div>
+                                @endif
+                            @endforeach
+                            </div>
+                        @endif
+                    @endforeach
+                    @if($admin && $count)
+                        <br>
+                    @endif
+                    <a class="btn btn-primary" href='javascript:showComment()' id="buttonComment">Comment</a>
+                    <form action="{{route('requests.comment', $request)}}" method="post" class="form-group" id="comment-form" style="display:none">
+                        {{ csrf_field() }}
+                        <div class="form-group" id="comment">
+                            <label for="inputComment">Comment</label>
+                            <textarea class="form-control" name="comment" id="inputComment"></textarea>
+                        </div>
+                        <div class="form-group" id="submitComment">
+                            <button type="submit" class="btn btn-primary side-offset">Comment</button>
+                            <a class="btn btn-default" href='javascript:hideComment()' id="cancelComment">Cancel</a>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 @endsection
-<script>function showRefuse() {
+<script>function showRefuse(){
         $('#refuse-form').show();
         $('#buttonRefuse').hide();
         $('#buttonComplete').hide();
         $('#buttonComment').hide();
     }
 </script>
-<script>function hideRefuse() {
+<script>function hideRefuse(){
         $('#refuse-form').hide();
         $('#buttonRefuse').show();
         $('#buttonComplete').show();
         $('#buttonComment').show();
     }
 </script>
-<script>function showComment() {
+<script>function showComment(){
         $('#comment-form').show();
         $('#buttonComment').hide();
         $('#buttonRefuse').hide();
         $('#buttonComplete').hide();
     }
 </script>
-<script>function hideComment() {
+<script>function hideComment(){
         $('#comment-form').hide();
         $('#buttonComment').show();
         $('#buttonRefuse').show();
         $('#buttonComplete').show();
     }
 </script>
-<script>function showReply(count) {
+<script>function showReply(count){
         $('#reply-form' + count).show();
         $('#buttonReply' + count).hide();
     }
 </script>
-<script>function hideReply(count) {
+<script>function hideReply(count){
         $('#reply-form' + count).hide();
         $('#buttonReply' + count).show();
     }
 </script>
-<script>function hideComplete() {
+<script>function hideComplete(){
         $('#complete-form').hide();
         $('#buttonComplete').show();
         $('#buttonComment').show();
         $('#buttonRefuse').show();
     }
 </script>
-<script>function showComplete() {
+<script>function showComplete(){
         $('#complete-form').show();
         $('#buttonComplete').hide();
         $('#buttonComment').hide();
