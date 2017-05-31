@@ -31,15 +31,9 @@
 <body>
 @include('layouts.app')
 <div class="container">
-    @if(session('sucess'))
-        @include('shared.sucess')
+    @if(session('success'))
+        @include('shared.success')
     @endif
-
-    @isset($errors)
-        @if(count($errors) > 0)
-            @include('shared.errors')
-        @endif
-    @endisset
     @yield('content')
 </div>
 
@@ -47,7 +41,7 @@
         integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
         crossorigin="anonymous"></script>
 <br>
-<footer class="footer">
+<footer>
     Aplicações Para a Internet 2016/17&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;José
         Carreira - 2130162&nbsp;&nbsp;&nbsp;&nbsp;Marcelo Carvalho - 2150718&nbsp;&nbsp;&nbsp;&nbsp;Pedro Ferreira -
         2151163

@@ -40,6 +40,7 @@
                         <li><a href="{{ route('login') }}">Login</a></li>
                         <li><a href="{{ route('register') }}">Register</a></li>
                     @else
+                        <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
                         @if(Auth::user()->admin == 1)
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="">Administration
@@ -51,8 +52,6 @@
                                 </ul>
                             </li>
                         @endif
-
-                        <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
                         <li><a href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
