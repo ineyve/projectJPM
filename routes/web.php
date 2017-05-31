@@ -51,12 +51,14 @@ Route::post('requests/{request}/complete', 'RequestController@complete')->name('
 Route::post('requests/{request}/refuse', 'RequestController@refuse')->name('requests.refuse')->middleware('can:admin');
 
 // Comments
+Route::get('comments', 'CommentController@index' )->name('comments.index')->middleware('can:admin');
 Route::post('requests/{request}/details/comment', 'CommentController@create')->name('requests.comment')->middleware('can:selfOrAdmin');
 Route::post('requests/{request}/details/comment/{comment}/reply', 'CommentController@reply')->name('requests.reply')->middleware('can:selfOrAdmin');
 Route::get('requests/comment/{comment}/{block}', 'CommentController@block')->name('comment.block')->middleware('can:admin');
 
 // Users
 Route::get('users', 'UserController@index' )->name('users.index');
+Route::get('users/blocked', 'UserController@blocked' )->name('users.blocked')->middleware('can:admin');
 Route::get('users/{user}/profile', 'UserController@profile')->name('users.profile');
 Route::get('users/editProfile', 'UserController@editProfile')->name('users.editProfile')->middleware('can:self');
 Route::post('users/editProfile', 'UserController@updateProfile')->name('users.updateProfile')->middleware('can:self');

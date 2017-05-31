@@ -41,7 +41,15 @@
                         <li><a href="{{ route('register') }}">Register</a></li>
                     @else
                         @if(Auth::user()->admin == 1)
-                            <li><a href="{{ route('requests.index') }}">Requests</a></li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="">Administration
+                                    <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ route('requests.index') }}">Requests</a></li>
+                                    <li><a href="{{ route('users.blocked') }}">Blocked Users</a></li>
+                                    <li><a href="{{ route('comments.index') }}">Blocked Comments</a></li>
+                                </ul>
+                            </li>
                         @endif
 
                         <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
@@ -90,7 +98,6 @@
                 $("#users").empty();
                 for (var u in users) {
                     $('#users').append('<option href="/users/' + users[u].id + '/profile" data-value="' + users[u].id + '">' + users[u].name + ' (' + users[u].id + ')' + '</option>');
-                    //data-value ??
                 }
                 _this.focus();
             })

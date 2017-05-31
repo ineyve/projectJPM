@@ -49,6 +49,11 @@ class UserController extends Controller
         return view('users.index', compact('users', 'auth', 'sort'));
     }
 
+    public function blocked(){
+        $users = User::where('blocked', '=', '1')->paginate(20);
+        return view('users.blocked', compact('users'));
+    }
+
     public function create()
     {
         $departments= Department::All();

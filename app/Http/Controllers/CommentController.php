@@ -19,6 +19,11 @@ class CommentController extends Controller
         $this->middleware('auth');
     }
 
+    public function index(){
+        $comments=Comment::where('blocked', '=', '1')->paginate(20);
+        return view('comments.index', compact('comments'));
+    }
+
     public function create(StoreCommentPostRequest $req, Request $request)
     {
         $comment = new Comment();
