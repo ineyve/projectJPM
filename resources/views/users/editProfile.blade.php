@@ -89,7 +89,7 @@
         </div>
     </div>
     @if(count($errors))
-        @if($errors->has('oldPassword') || $errors->has('newPassword'))
+        @if($errors->has('oldPassword') || $errors->has('newPassword') || $errors->has('newPasswordConfirmation'))
             <script type='text/javascript'> window.onload = showPassword(); </script>
         @endif
     @endif

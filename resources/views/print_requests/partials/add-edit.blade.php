@@ -1,30 +1,40 @@
 {{csrf_field()}}
 
-<div class="form-group">
-    <label for="inputDescription">Description</label>
+<div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
+    <label for="inputDescription" class="control-label">Description</label>
     <input type="text" class="form-control" name="description" id="inputDescription" placeholder="Description"
            @if(Route::currentRouteName()=='requests.edit')
-           value="{{$request->description}}"
-            @endif
-    />
+                value="{{$request->description}}"
+           @endif
+    >
+    @if ($errors->has('description'))
+        <span class="help-block">
+            <strong>{{ $errors->first('description') }}</strong>
+        </span>
+    @endif
 </div>
 
 <div class="form-group">
     <label for="inputDueDate">Due Date</label>
     <input type="date" class="form-control" name="due_date" id="inputDueDate"
            @if(Route::currentRouteName()=='requests.edit')
-           value="{{$request->due_date}}"
-            @endif
-    />
+                value="{{$request->due_date}}"
+           @endif
+    >
 </div>
 
-<div class="form-group">
-    <label for="inputQuantity">Quantity</label>
+<div class="form-group{{ $errors->has('quantity') ? ' has-error' : '' }}">
+    <label for="inputQuantity" class="control-label">Quantity</label>
     <input type="number" class="form-control" name="Quantity" id="inputQuantity" placeholder="Quantity" min="1"
            @if(Route::currentRouteName()=='requests.edit')
-           value="{{$request->quantity}}"
-            @endif
-    />
+                value="{{$request->quantity}}"
+           @endif
+    >
+    @if ($errors->has('quantity'))
+        <span class="help-block">
+            <strong>{{ $errors->first('quantity') }}</strong>
+        </span>
+    @endif
 </div>
 
 <div class="form-group">
@@ -100,10 +110,15 @@
     </select>
 </div>
 
-<div class="form-group">
-    <label for="inputFile">File</label>
+<div class="form-group{{ $errors->has('file') ? ' has-error' : '' }}">
+    <label for="inputFile" class="control-label">File</label>
     <input
             type="file" class="form-control" name="file" id="inputFile" accept="image/*, application/pdf,
         application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document,
-        application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, .csv"/>
+        application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, .csv">
+    @if ($errors->has('file'))
+        <span class="help-block">
+                        <strong>{{ $errors->first('file') }}</strong>
+                    </span>
+    @endif
 </div>

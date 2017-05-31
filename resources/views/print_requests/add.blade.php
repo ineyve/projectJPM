@@ -14,7 +14,7 @@
 
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary side-offset" name="ok">Add</button>
-                                <a type="submit" class="btn btn-default" href="{{route('requests.index')}}">Cancel</a>
+                                <a class="btn btn-default" href="{{route('requests.index')}}">Cancel</a>
                             </div>
                         </div>
                     </div>
