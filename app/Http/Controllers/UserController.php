@@ -124,9 +124,9 @@ class UserController extends Controller
         $user->blocked=$block;
         $user->save();
         if ($block) {
-            return redirect()->route('users.index')->with('success', 'user blocked successfully');
+            return redirect()->back()->with('success', 'user blocked successfully');
         } else {
-            return redirect()->route('users.index')->with('success', 'user unblocked successfully');
+            return redirect()->back()->with('success', 'user unblocked successfully');
         }
     }
 

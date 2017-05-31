@@ -45,16 +45,17 @@
                             @endcan
                             <br><br>
                             @can('admin')
-                                <td>
+                                <td><a class="btn btn-xs
                                     @if(!$user->blocked)
-                                        <a class="btn btn-xs btn-warning"
-                                           href="{{ route('users.block', ['user' => $user, 'block' => 1]) }}">Block</a>
+                                        btn-warning"
+                                           href="{{ route('users.block', ['user' => $user, 'block' => 1]) }}">Block
                                     @else
-                                        <a class="btn btn-xs btn-success"
-                                           href="{{ route('users.block', ['user' => $user, 'block' => 0]) }}">Unblock</a>
+                                        btn-success"
+                                           href="{{ route('users.block', ['user' => $user, 'block' => 0]) }}">Unblock
                                     @endif
-                                    @endcan
-                                    <br><br>
+                                    </a></td>
+                            @endcan
+                            <br><br>
                         </div>
                     </div>
                 </div>

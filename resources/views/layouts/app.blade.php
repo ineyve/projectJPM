@@ -49,7 +49,8 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <!-- Right Side Of Navbar -->
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav"></ul>
+                <ul class="nav navbar-nav navbar-right">
                     <li>
                         <form>
                             <input id="navSearch" name="user_id" placeholder="Search a profile..." oninput='onInput()'
@@ -59,8 +60,6 @@
                             </datalist>
                         </form>
                     </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
                     <li><a href="{{ url('/') }}">Home</a></li>
                     <li><a href="{{ route('users.index') }}">Users</a></li>
                     <li><a href="{{ route('departments.index') }}">Departments</a></li>
