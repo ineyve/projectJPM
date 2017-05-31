@@ -10,11 +10,11 @@ class HomeController extends Controller
     public function homeGraph()
     {
         /* CODE TO GENERATE BAR GRAPH'S DATA */
-        $prints_per_department = $this->getPrintsPerDepartment();
+        $printsPerDepartment = $this->getPrintsPerDepartment();
         $dpnames = "["; //Array with departments' names
         $dpcounts = "["; //Array with amount of requests per department
         $dpcolors = "["; //Array with colors
-        foreach ($prints_per_department as $stat) {
+        foreach ($printsPerDepartment as $stat) {
             $dpnames .='"'.$this->autoLabelSpaces($stat->depname).'", '; //Department's name
 
             $counter = $stat->cnt; //Amount of finished prints

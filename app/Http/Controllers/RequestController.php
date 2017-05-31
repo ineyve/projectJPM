@@ -91,6 +91,7 @@ class RequestController extends Controller
         $request->paper_type = $req->paper_type;
         $request->front_back = $req->front_back;
         $request->colored = $req->colored;
+        $request->due_date = $req->due_date;
         if ($req->hasFile('file')) {
             $path = $req->file('file')->store('print-jobs/' . $request->owner_id);
             $parts = explode('/', $path);
