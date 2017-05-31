@@ -34,7 +34,6 @@
                     </li>
                     <li><a href="{{ url('/') }}">Home</a></li>
                     <li><a href="{{ route('users.index') }}">Users</a></li>
-                    <li><a href="{{ route('departments.index') }}">Departments</a></li>
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li><a href="{{ route('login') }}">Login</a></li>
@@ -48,6 +47,7 @@
                                     <li><a href="{{ route('requests.index') }}">Requests</a></li>
                                     <li><a href="{{ route('users.blocked') }}">Blocked Users</a></li>
                                     <li><a href="{{ route('comments.index') }}">Blocked Comments</a></li>
+                                    <li><a href="{{ route('departments.index') }}">Departments</a></li>
                                 </ul>
                             </li>
                         @endif

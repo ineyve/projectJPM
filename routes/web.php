@@ -72,3 +72,7 @@ Route::get('users/{user}/admin/{admin}', 'UserController@admin')->name('users.ad
 
 // Departments
 Route::get('departments', 'DepartmentController@index' )->name('departments.index');
+Route::get('departments/create', 'DepartmentController@create')->name('departments.create');
+Route::post('departments/create', 'DepartmentController@store')->name('departments.store');
+Route::get('departments/{department}/edit', 'DepartmentController@edit')->name('department.edit');
+Route::post('departments/{department}/edit', 'DepartmentController@update')->name('department.update');
