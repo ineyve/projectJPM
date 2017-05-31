@@ -1,34 +1,56 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="{{ config('app.locale') }}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-@section('master')
-    @push('first_header')
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <!-- Set website title -->
+    <title> {{ config('app.name') }} </title>
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- Scripts -->
+    <script>
+        window.Laravel = {!! json_encode([
+            'csrfToken' => csrf_token(),
+        ]) !!};
+    </script>
+
+    <script src="{{asset('js/jquery.min.js')}}"></script>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
           integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css">
+
     @stack('master_header')
-    @endpush
+</head>
+<body>
+@include('layouts.app')
+<div class="container">
+    @if(session('sucess'))
+        @include('shared.sucess')
+    @endif
 
-    <div class="container">
-        @if(session('sucess'))
-            @include('shared.sucess')
+    @isset($errors)
+        @if(count($errors) > 0)
+            @include('shared.errors')
         @endif
+    @endisset
+    @yield('content')
+</div>
 
-        @isset($errors)
-            @if(count($errors) > 0)
-                @include('shared.errors')
-            @endif
-        @endisset
-        @yield('content')
-    </div>
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
-            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-            crossorigin="anonymous"></script>
-
-    <footer class="footer">
-        <div class="container">Aplicações Para a Internet 2016/17&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;José
-            Carreira - 2130162&nbsp;&nbsp;&nbsp;&nbsp;Marcelo Carvalho - 2150718&nbsp;&nbsp;&nbsp;&nbsp;Pedro Ferreira -
-            2151163
-        </div>
-    </footer>
-@endsection
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous"></script>
+<br>
+<footer class="footer">
+    Aplicações Para a Internet 2016/17&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;José
+        Carreira - 2130162&nbsp;&nbsp;&nbsp;&nbsp;Marcelo Carvalho - 2150718&nbsp;&nbsp;&nbsp;&nbsp;Pedro Ferreira -
+        2151163
+</footer>
+</body>
+</html>
