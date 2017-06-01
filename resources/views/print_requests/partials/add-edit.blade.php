@@ -1,30 +1,15 @@
 {{csrf_field()}}
 
-<div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-    <label for="inputDescription" class="control-label">Description</label>
-    <input type="text" class="form-control" name="description" id="inputDescription" placeholder="Description" required autofocus
-           @if(Route::currentRouteName()=='requests.edit')
-                value="{{$request->description}}"
-           @endif
-    >
-    @if ($errors->has('description'))
-        <span class="help-block">
-            <strong>{{ $errors->first('description') }}</strong>
-        </span>
-    @endif
-</div>
-
 <div class="form-group">
     <label for="inputDueDate">Due Date</label>
-    <input type="date" class="form-control" name="due_date" id="inputDueDate"
+    <input type="date" data-date-inline-picker="true" class="form-control" name="due_date" id="inputDueDate"
            @if(old('due_date') != null)
                 value="{{old('due_date')}}"
            @elseif(Route::currentRouteName()=='requests.edit')
                 value="{{$request->due_date}}"
            @endif
-    >
+    autofocus>
 </div>
-
 <div class="form-group{{ $errors->has('quantity') ? ' has-error' : '' }}">
     <label for="inputQuantity" class="control-label">Quantity</label>
     <input type="number" class="form-control" name="quantity" id="inputQuantity" placeholder="Quantity" min="1"
@@ -40,7 +25,6 @@
         </span>
     @endif
 </div>
-
 <div class="form-group">
     <label for="inputColored">Colored</label>
     <select name="colored" id="inputColored" class="form-control">
@@ -53,7 +37,6 @@
         </option>
     </select>
 </div>
-
 <div class="form-group">
     <label for="inputStapled">Stapled</label>
     <select name="stapled" id="inputStapled" class="form-control">
@@ -66,8 +49,6 @@
         </option>
     </select>
 </div>
-
-
 <div class="form-group">
     <label for="inputPaperSize">Paper Size</label>
     <select name="paper_size" id="inputPaperSize" class="form-control">
@@ -80,7 +61,6 @@
         </option>
     </select>
 </div>
-
 <div class="form-group">
     <label for="inputPaperType">Paper Type</label>
     <select name="paper_type" id="inputPaperType" class="form-control">
@@ -100,7 +80,6 @@
 
     </select>
 </div>
-
 <div class="form-group">
     <label for="inputFrontBack">Front and Back</label>
     <select name="front_back" id="inputFrontBack" class="form-control">
@@ -113,7 +92,6 @@
         </option>
     </select>
 </div>
-
 <div class="form-group{{ $errors->has('file') ? ' has-error' : '' }}">
     <label for="inputFile" class="control-label">File</label>
     <input
@@ -127,6 +105,21 @@
     @if ($errors->has('file'))
         <span class="help-block">
             <strong>{{ $errors->first('file') }}</strong>
+        </span>
+    @endif
+</div>
+<div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
+    <label for="inputDescription" class="control-label">Description</label>
+    <textarea type="text" class="form-control" name="description" id="inputDescription" placeholder="Description" required
+              @if(old('description') != null)
+              value="{{old('description')}}"
+              @elseif(Route::currentRouteName()=='requests.edit')
+              value="{{$request->description}}"
+            @endif
+    ></textarea>
+    @if ($errors->has('description'))
+        <span class="help-block">
+            <strong>{{ $errors->first('description') }}</strong>
         </span>
     @endif
 </div>
