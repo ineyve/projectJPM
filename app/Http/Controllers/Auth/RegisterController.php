@@ -108,9 +108,11 @@ class RegisterController extends Controller
             $user = $this->create($request->all());
             $user->presentation = $request->presentation;
             $user->profile_url = $request->profile_url;
-            $path = $request->file('profile_photo')->store('public/profiles');
-            $parts = explode('/', $path);
-            $user->profile_photo = $parts[2];
+            if($request->hasFile('profile_photo')){
+                $path = $request->file('profile_photo')->store('public/profiles');
+                $parts = explode('/', $path);
+                $user->profile_photo = $parts[2];
+            }
             $user->save();
             // After creating the user send an email with the random token generated in the create method above
             $email = new EmailVerification($user);

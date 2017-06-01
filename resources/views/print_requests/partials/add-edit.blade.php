@@ -42,9 +42,9 @@
     <select name="colored" id="inputColored" class="form-control">
         <option value="1">Colored</option>
         <option value="0"
-                @if(isset($request) && $request->colored == 0)
-                selected="selected"
-                @endif
+            @if(isset($request) && $request->colored == 0)
+            selected="selected"
+            @endif
         >Black and White
         </option>
     </select>

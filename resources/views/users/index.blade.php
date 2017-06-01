@@ -18,12 +18,8 @@
                             <form>
                                 <button type="submit" class="btn btn-default btn-search"><span
                                             class="glyphicon glyphicon-search search-icon"></span></button>
-                                <input type="text" name="search" id="myInput" placeholder="Search any column..."/>
+                                <input type="text" name="search" class="myInput v2" placeholder="Search any column..."/>
                             </form>
-                            @if($auth->admin)
-                                <a class="btn btn-primary" href="{{ route('users.create') }}" style="float: right;">Add
-                                    user</a>
-                            @endif
                         </div>
                         @if (count($users))
                             <table class="table table-striped table-hover" id="myTable">

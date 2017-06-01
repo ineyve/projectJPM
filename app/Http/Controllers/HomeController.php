@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Department;
 use App\Request;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
-    public function homeGraph()
+    public function homeGraph(\Illuminate\Http\Request $req)
     {
         /* CODE TO GENERATE BAR GRAPH'S DATA */
         $printsPerDepartment = $this->getPrintsPerDepartment();
@@ -43,7 +44,10 @@ class HomeController extends Controller
         $statistics['printsToday']= Request::whereDate('closed_date', '=', date('Y-m-d'))->where('status', 2)->sum('quantity'); //Prints today
         $statistics['printsMonthlyAverage']= Request::whereMonth('closed_date', '=', date('m'))->where('status', 2)->sum('quantity') / date('d'); //Prints today
 
-        return view('welcome', compact('statistics'));
+        $departments=Department::All();
+        if($req->has('department'))
+            $selected=$req->department;
+        return view('welcome', compact('statistics', 'departments', 'selected'));
     }
 
     public function getPrintsPerDepartment()

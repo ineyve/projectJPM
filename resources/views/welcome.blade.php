@@ -6,6 +6,20 @@
     @endpush
     <div class="home-box">
         <div class="home-counter">
+            <form>
+                <div class="form-group">
+                    <select name="department" id="inputDepartmentHome" class="form-control" onchange="this.form.submit()">
+                        <option value="0">All Departments</option>
+                        @foreach($departments as $department)
+                            <option value="{{$department->id}}"
+                                @if(isset($selected) && $selected == $department->id)
+                                selected="selected"
+                                @endif
+                            >{{$department->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </form>
             @if($statistics['printsTotalCount'] == 1)
                 1<h1 class="h-h1"> document printed so far.</h1>
             @else

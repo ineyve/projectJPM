@@ -58,7 +58,7 @@
                             <form>
                                 <button type="submit" class="btn btn-default btn-search"><span
                                             class="glyphicon glyphicon-search search-icon"></span></button>
-                                <input type="text" name="search" id="myInput" placeholder="Search any column..."/>
+                                <input type="text" name="search" class="myInput v2" placeholder="Search any column..."/>
                             </form>
                         </div>
                         <div style="float: right;">

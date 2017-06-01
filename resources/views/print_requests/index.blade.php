@@ -19,7 +19,7 @@
                                 <form>
                                     <button type="submit" class="btn btn-default btn-search"><span
                                                 class="glyphicon glyphicon-search search-icon"></span></button>
-                                    <input type="text" name="search" id="myInput" placeholder="Search any column..."/>
+                                    <input type="text" name="search" class="myInput" placeholder="Search any column..."/>
                                 </form>
                                 <a class="btn btn-primary" href="{{ route('requests.create') }}" style="float: right;">Add
                                     request</a>

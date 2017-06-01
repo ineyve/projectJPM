@@ -60,16 +60,6 @@ class UserController extends Controller
         return view('users.add', compact('departments'));
     }
 
-    public function store(CreateUserPostRequest $request)
-    {
-        $user = new User();
-        $user->fill($request->all());
-        $user->admin = 0; //!!!!!!!!!
-        $user->password = Hash::make(str_random(10));
-        $user->save();
-        return redirect()->route('users.index')->with('success', 'user added successfully');
-    }
-
     public function edit(User $user)
     {
         $departments= Department::All();
