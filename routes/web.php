@@ -70,6 +70,10 @@ Route::post('users/{user}/edit', 'UserController@update')->name('users.update')-
 Route::get('users/{user}/block/{block}', 'UserController@block')->name('users.block')->middleware('can:admin');
 Route::get('users/{user}/admin/{admin}', 'UserController@admin')->name('users.admin')->middleware('can:admin');
 
+// Image Crop
+Route::get('image/{user}/config', 'ImageController@index')->name('image.config');
+Route::post('image/{user}/crop', 'ImageController@crop')->name('image.crop');
+
 // Departments
 Route::get('departments', 'DepartmentController@index' )->name('departments.index')->middleware('can:admin');;
 Route::get('departments/create', 'DepartmentController@create')->name('departments.create')->middleware('can:admin');;

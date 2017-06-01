@@ -69,8 +69,6 @@ class UserController extends Controller
     {
         $user->fill($request->except('password'));
         $user->save();
-        dd($request);
-        dd($user);
         return redirect()->route('users.index')->with('success', 'user updated successfully');
     }
 

@@ -14,22 +14,6 @@
     }
 </script>
 @endpush
-
-@push('page_name') - Edit Profile @endpush
-@push('master_header')
-<script>
-    function showPassword() {
-        $('#password-form').show();
-        $('#profile-form').hide();
-    }
-</script>
-<script>
-    function hidePassword() {
-        $('#password-form').hide();
-        $('#profile-form').show();
-    }
-</script>
-@endpush
 @section('content')
     <div class="container">
         <div class="row">
@@ -95,6 +79,9 @@
                                         </span>
                                     @endif
                                 </div>
+                                @if(!(is_null($user->profile_photo)))
+                                    <a href="{{ route('image.config', $user) }}" class="btn btn-success">Crop</a>
+                                @endif
                                 <div class="form-group{{ $errors->has('profile_photo') ? ' has-error' : '' }}">
                                     <label for="inputProfile_photo" class="control-label">Profile Photo</label>
                                     <input style="padding:0;" type="file" class="form-control" name="profile_photo"
@@ -147,7 +134,8 @@
                                     @endif
                                 </div>
                                 <div class="form-group{{ $errors->has('newPasswordConfirmation') ? ' has-error' : '' }}">
-                                    <label for="inputPasswordConfirmation" class="control-label">New Password Confirmation</label>
+                                    <label for="inputPasswordConfirmation" class="control-label">New Password
+                                        Confirmation</label>
                                     <input type="password" class="form-control" name="newPasswordConfirmation"
                                            id="inputPasswordConfirmation" placeholder="Password Confirmation" required>
                                     @if ($errors->has('newPasswordConfirmation'))
