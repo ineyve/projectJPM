@@ -119,21 +119,23 @@
                                     <td>{{$request->refused_reason}}</td>
                                 </tr>
                             @endif
-                            <tr>
-                                <td>Satisfaction Grade</td>
-                                <td>
-                                @if($request->status == 2 && $user == $request->owner_id)
-                                    @if(is_null($request->satisfaction_grade))
-                                        @php($request->satisfaction_grade = 0)
+                            @if(!is_null($request->satisfaction_grade) || ($user == $request->owner_id && $request->status == 2))
+                                <tr>
+                                    <td>Satisfaction Grade</td>
+                                    <td>
+                                    @if($request->status == 2 && $user == $request->owner_id)
+                                        @if(is_null($request->satisfaction_grade))
+                                            @php($request->satisfaction_grade = 0)
+                                        @endif
+                                        <center><div id="star" class="c-rating" style="width: 100px;"></div></center>
+                                    @else
+                                        @for($i=0; $i < $request->satisfaction_grade; $i++)
+                                            <img src="/star.png" style="width:24px;height:24px;">
+                                        @endfor
                                     @endif
-                                    <center><div id="star" class="c-rating" style="width: 100px;"></div></center>
-                                @else
-                                    @for($i=0; $i < $request->satisfaction_grade; $i++)
-                                        <img src="/star.png" style="width:24px;height:24px;">
-                                    @endfor
-                                @endif
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
+                            @endif
                             <script src="/js/rating.js"></script>
                             <script>
                                 var el = document.querySelector('#star');

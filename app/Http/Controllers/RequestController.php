@@ -153,7 +153,7 @@ class RequestController extends Controller
 
     public function destroy(Request $request)
     {
-        Storage::delete($request->file);
+        Storage::delete('print-jobs/' . $request->owner_id . '/' . $request->file);
         $request->delete();
         return redirect()->route('dashboard')->with('success', 'request deleted successfully!');
     }

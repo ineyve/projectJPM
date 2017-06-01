@@ -2,7 +2,7 @@
 
 <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
     <label for="inputDescription" class="control-label">Description</label>
-    <input type="text" class="form-control" name="description" id="inputDescription" placeholder="Description"
+    <input type="text" class="form-control" name="description" id="inputDescription" placeholder="Description" required autofocus
            @if(Route::currentRouteName()=='requests.edit')
                 value="{{$request->description}}"
            @endif
@@ -17,7 +17,9 @@
 <div class="form-group">
     <label for="inputDueDate">Due Date</label>
     <input type="date" class="form-control" name="due_date" id="inputDueDate"
-           @if(Route::currentRouteName()=='requests.edit')
+           @if(old('due_date') != null)
+                value="{{old('due_date')}}"
+           @elseif(Route::currentRouteName()=='requests.edit')
                 value="{{$request->due_date}}"
            @endif
     >
@@ -25,8 +27,10 @@
 
 <div class="form-group{{ $errors->has('quantity') ? ' has-error' : '' }}">
     <label for="inputQuantity" class="control-label">Quantity</label>
-    <input type="number" class="form-control" name="Quantity" id="inputQuantity" placeholder="Quantity" min="1"
-           @if(Route::currentRouteName()=='requests.edit')
+    <input type="number" class="form-control" name="quantity" id="inputQuantity" placeholder="Quantity" min="1"
+           @if(old('quantity') != null)
+                value="{{old('quantity')}}"
+           @elseif(Route::currentRouteName()=='requests.edit')
                 value="{{$request->quantity}}"
            @endif
     >
@@ -42,7 +46,7 @@
     <select name="colored" id="inputColored" class="form-control">
         <option value="1">Colored</option>
         <option value="0"
-            @if(isset($request) && $request->colored == 0)
+            @if(isset($request) && $request->colored == 0 || old('colored') == 0)
             selected="selected"
             @endif
         >Black and White
@@ -55,7 +59,7 @@
     <select name="stapled" id="inputStapled" class="form-control">
         <option value="1">With Staple</option>
         <option value="0"
-                @if(isset($request) && $request->stapled == 0)
+                @if(isset($request) && $request->stapled == 0 || old('stapled') == 0)
                 selected="selected"
                 @endif
         >No Staple
@@ -69,7 +73,7 @@
     <select name="paper_size" id="inputPaperSize" class="form-control">
         <option value="4">A4</option>
         <option value="3"
-                @if(isset($request) && $request->paper_size == 3)
+                @if(isset($request) && $request->paper_size == 3 || old('paper_size') == 3)
                 selected="selected"
                 @endif
         >A3
@@ -82,13 +86,13 @@
     <select name="paper_type" id="inputPaperType" class="form-control">
         <option value="0">Draft</option>
         <option value="1"
-                @if(isset($request) && $request->paper_type == 1)
+                @if(isset($request) && $request->paper_type == 1 || old('paper_type') == 1)
                 selected="selected"
                 @endif
         >Normal
         </option>
         <option value="2"
-                @if(isset($request) && $request->paper_type == 2)
+                @if(isset($request) && $request->paper_type == 2 || old('paper_type') == 2)
                 selected="selected"
                 @endif
         >Photographic
@@ -102,7 +106,7 @@
     <select name="front_back" id="inputFrontBack" class="form-control">
         <option value="0">Single Page</option>
         <option value="1"
-                @if(isset($request) && $request->front_back == 1)
+                @if(isset($request) && $request->front_back == 1 || old('front_back') == 1)
                 selected="selected"
                 @endif
         >Front and Back
@@ -115,10 +119,14 @@
     <input
             type="file" class="form-control" name="file" id="inputFile" accept="image/*, application/pdf,
         application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document,
-        application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, .csv">
+        application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, .csv"
+            @if(Route::currentRouteName()=='requests.create')
+            required
+            @endif
+    >
     @if ($errors->has('file'))
         <span class="help-block">
-                        <strong>{{ $errors->first('file') }}</strong>
-                    </span>
+            <strong>{{ $errors->first('file') }}</strong>
+        </span>
     @endif
 </div>

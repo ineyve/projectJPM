@@ -44,7 +44,7 @@
                                 <label for="phone" class="col-md-4 control-label">Phone</label>
                                 <div class="col-md-6">
                                     <input id="phone" type="tel" class="form-control" name="phone"
-                                           value="{{ old('phone') }}">
+                                           value="{{ old('phone') }}" required>
 
                                     @if ($errors->has('phone'))
                                         <span class="help-block">
@@ -92,7 +92,7 @@
                                 <label for="phone" class="col-md-4 control-label">Profile Photo</label>
                                 <div class="col-md-6">
                                     <input style="padding:0;" id="profile_photo" type="file" class="form-control"
-                                           name="profile_photo" accept="image/*" value="{{old('profile_photo')}}"/>
+                                           name="profile_photo" accept="image/*"/>
 
                                     @if ($errors->has('profile_photo'))
                                         <span class="help-block">

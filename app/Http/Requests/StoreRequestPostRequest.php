@@ -47,7 +47,6 @@ class StoreRequestPostRequest extends FormRequest
                 'required',
                 Rule::in(['0', '1']),
             ],
-            'file'=>'required'
         ];
     }
 }

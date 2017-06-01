@@ -27,7 +27,7 @@ class CreateUserPostRequest extends FormRequest
                 'name' => 'required|regex:/^[a-zA-Z ]+$/',
                 'email' => 'required|email|unique:users',
                 'phone' => 'required|numeric',
-                'profile_url' => 'regex:/([\w\/:]+[\.]+[\w]+)([\w]*[\.\/]+[\w\/]+)*/',
+                'profile_url' => 'nullable|regex:/([\w\/:]+[\.]+[\w]+)([\w]*[\.\/]+[\w\/]+)*/',
                 'presentation' => 'nullable|regex:/^[a-zA-Z ]+$/',
                 'profile_photo' => 'nullable|image'
         ];
