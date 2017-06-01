@@ -30,32 +30,28 @@
     });
 </script>
 <link rel="stylesheet" href="/jcrop/css/jquery.Jcrop.css" type="text/css"/>
-<style type="text/css">
-    #target {
-        background-color: #ccc;
-        width: 500px;
-        height: 330px;
-        font-size: 24px;
-        display: block;
-    }
-</style>
+
 @endpush
 @section('content')
     <div class="container">
-        <div class="row">
-            <!-- This is the image we're attaching Jcrop to -->
-            <img src="/storage/profiles/{{$user->profile_photo}}" id="cropbox" style="width:100%;height:100%">
-
-            <!-- This is the form that our event handler fills -->
-            <form action="{{route('image.crop', $user)}}" method="post" onsubmit="return checkCoords();"
-                  enctype="multipart/form-data">
-                {{csrf_field()}}
-                <input type="hidden" id="x" name="x"/>
-                <input type="hidden" id="y" name="y"/>
-                <input type="hidden" id="w" name="w"/>
-                <input type="hidden" id="h" name="h"/>
-                <input type="submit" value="Crop Image" class="btn btn btn-success"/>
-            </form>
+        <div class="panel panel-default">
+            <div class="panel-heading">Crop Photo</div>
+            <div class="row">
+                <!-- This is the image we're attaching Jcrop to -->
+                <br>
+                <center><img src="/storage/profiles/{{$user->profile_photo}}" id="cropbox" alt="Image failed to load"></center>
+                <!-- This is the form that our event handler fills -->
+                <form action="{{route('image.crop', $user)}}" method="post" onsubmit="return checkCoords();"
+                      enctype="multipart/form-data">
+                    {{csrf_field()}}
+                    <input type="hidden" id="x" name="x"/>
+                    <input type="hidden" id="y" name="y"/>
+                    <input type="hidden" id="w" name="w"/>
+                    <input type="hidden" id="h" name="h"/>
+                    <input type="submit" value="Crop Image" class="btn btn btn-success" id="btn-crop"/>
+                </form>
+                <br><br>
+            </div>
         </div>
     </div>
     @if(count($errors))

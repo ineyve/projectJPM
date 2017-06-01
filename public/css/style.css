@@ -399,6 +399,15 @@ textarea {
     text-decoration: inherit;
 }
 
+#cropbox{
+    width:60%;
+    height:60%;
+}
+
+#btn-crop{
+    margin-left: 40px;
+}
+
 /* MOBILE/VERTICAL/PORTRAIT STYLES */
 @media all and (orientation: portrait) {
     /* styles that only apply if window is in portrait mode */
@@ -424,5 +433,4 @@ textarea {
         width: 80%;
         margin: auto;
     }
-
 }

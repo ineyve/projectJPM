@@ -84,7 +84,7 @@
                                 @endif
                                 <div class="form-group{{ $errors->has('profile_photo') ? ' has-error' : '' }}">
                                     <label for="inputProfile_photo" class="control-label">Profile Photo</label>
-                                    <input style="padding:0;" type="file" class="form-control" name="profile_photo"
+                                    <input type="file" class="form-control" name="profile_photo"
                                            accept="image/*" value="{{old('profile_photo')}}">
                                     @if ($errors->has('profile_photo'))
                                         <span class="help-block">
