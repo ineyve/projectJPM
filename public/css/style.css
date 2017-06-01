@@ -271,8 +271,8 @@ table.sortable thead {
 
 /* Profile */
 .profile {
-    padding-left: 80px;
-    padding-right: 80px;
+    padding-left: 40px;
+    padding-right: 40px;
 }
 
 #profile-user {
@@ -293,6 +293,12 @@ table.sortable thead {
     background: lightgray;
     margin-top: 8px;
     margin-left: 10px;
+}
+
+#btn-block{
+    position: relative;
+    bottom: 40px;
+    left: 100px;
 }
 
 .comment-picture {
