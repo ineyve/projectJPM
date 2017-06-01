@@ -1,5 +1,5 @@
 @extends('master')
-
+@push('page_name') - Comments @endpush
 @section('content')
     <div class="container">
         <div class="row">

@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Set website title -->
-    <title> {{ config('app.name') }} </title>
+    <title> {{ config('app.name') }} @stack('page_name') </title>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 

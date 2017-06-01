@@ -1,5 +1,5 @@
 @extends('master')
-
+@push('page_name') - Requests @endpush
 @section('content')
 
     <form action="{{route('requests.store')}}" method="post" class="form-group" enctype="multipart/form-data">

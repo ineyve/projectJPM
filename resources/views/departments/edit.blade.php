@@ -1,5 +1,5 @@
 @extends('master')
-
+@push('page_name') - Departments @endpush
 @section('content')
     <form action="{{route('departments.update', $department)}}" method="post" class="form-group">
         {{method_field('PUT')}}

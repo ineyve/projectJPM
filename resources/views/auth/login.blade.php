@@ -1,5 +1,5 @@
 @extends('master')
-
+@push('page_name') - Login @endpush
 @section('content')
     <div class="container">
         <div class="row">

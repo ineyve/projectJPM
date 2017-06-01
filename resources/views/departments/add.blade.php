@@ -1,5 +1,5 @@
 @extends('master')
-
+@push('page_name') - Departments @endpush
 @section('content')
 
     <form action="{{route('departments.store')}}" method="post" class="form-group" enctype="multipart/form-data">
