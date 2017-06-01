@@ -1,5 +1,19 @@
 @extends('master')
-
+@push('page_name') - Edit Profile @endpush
+@push('master_header')
+<script>
+    function showPassword() {
+        $('#password-form').show();
+        $('#profile-form').hide();
+    }
+</script>
+<script>
+    function hidePassword() {
+        $('#password-form').hide();
+        $('#profile-form').show();
+    }
+</script>
+@endpush
 @section('content')
     <div class="container">
         <div class="row">
@@ -93,14 +107,4 @@
             <script type='text/javascript'> window.onload = showPassword(); </script>
         @endif
     @endif
-    <script>function showPassword() {
-            $('#password-form').show();
-            $('#profile-form').hide();
-        }
-    </script>
-    <script>function hidePassword() {
-            $('#password-form').hide();
-            $('#profile-form').show();
-        }
-    </script>
 @endsection
