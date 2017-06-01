@@ -2,13 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Comment;
-//use App\Http\Departments\StoreRefusePostRequest;
-//use App\Http\Departments\StoreRequestPostRequest;
-//use App\Http\Departments\StoreCompletePostRequest;
-//use App\Http\Departments\UpdateRequestPostRequest;
+use Carbon\Carbon;
+use App\Http\Requests\StoreDepartmentPostRequest;
 use App\Department;
-use Illuminate\Support\Facades\Auth;
 
 class DepartmentController extends Controller
 {
@@ -33,6 +29,7 @@ class DepartmentController extends Controller
 
             $departments = Department::where('name', 'like', '%'.$sort['search'].'%')->orWhere('id', '=', $sort['search'])
                 ->orWhereDate('created_at', '=', $sort['search'])
+                ->orWhereDate('updated_at', '=', $sort['search'])
                 ->orderBy($sort['field'], $sort['order'])->paginate(20);
         } else {
             $departments = Department::orderBy($sort['field'], $sort['order'])->paginate(20);
@@ -44,44 +41,30 @@ class DepartmentController extends Controller
 
     public function create()
     {
-        return view('print_requests.add');
+        return view('departments.add');
     }
 
-    public function store(StoreRequestPostRequest $req)
+    public function store(StoreDepartmentPostRequest $req)
     {
-        $request = new Request();
-        $request->owner_id = Auth::user()->id;
-        $request->status = 0;
-        $request->fill($req->all());
-        $path = $req->file('file')->store('print-jobs/'.$request->owner_id);
-        $parts = explode('/', $path);
-        $request->file = $parts[2];
-        $request->save();
-        return redirect()->route('dashboard')->with('success', 'Request added sucessfuly!');
+        $department = new Department();
+        $department->created_at = Carbon::now();
+        $department->updated_at = $department->created_at;
+        $department->fill($req->all());
+        $department->save();
+        return redirect()->route('departments.index')->with('success', 'Department added sucessfuly!');
     }
 
-    public function edit(Request $request)
+    public function edit(Department $department)
     {
-        return view('print_requests.edit', compact('request'));
+        return view('departments.edit', compact('department'));
     }
 
-    public function update(UpdateRequestPostRequest $req, Request $request)
+    public function update(StoreDepartmentPostRequest $req, Department $department)
     {
-        $request->description = $req->description;
-        $request->quantity = $req->quantity;
-        $request->stapled = $req->stapled;
-        $request->paper_size = $req->paper_size;
-        $request->paper_type = $req->paper_type;
-        $request->front_back = $req->front_back;
-        $request->colored = $req->colored;
-        $request->due_date = $req->due_date;
-        if ($req->hasFile('file')) {
-            $path = $req->file('file')->store('print-jobs/' . $request->owner_id);
-            $parts = explode('/', $path);
-            $request->file = $parts[2];
-        }
-        $request->save();
+        $department->description = $req->name;
+        $department->updated_at = Carbon::now();
+        $department->save();
 
-        return redirect()->route('dashboard')->with('success', 'request updated successfully!');
+        return redirect()->route('departments.index')->with('success', 'Department updated successfully!');
     }
 }

@@ -79,6 +79,54 @@
                                             @endif
                                         </form>
                                     </th>
+                                    <th>
+                                        <form>
+                                            @if(isset($sort['search']))
+                                                <input type="hidden" name="search" value="{{$sort['search']}}"/>
+                                            @endif
+                                            <input type="hidden" name="field" value="departments.created_at"/>
+                                            <!-- table column name -->
+                                            @if($sort['field']=='departments.created_at') <!-- table column name -->
+                                            @if($sort['order']=='ASC')
+                                                <button type="submit" name="order" value="DESC" class="btn-link">Created
+                                                    Date ▾
+                                                </button>
+                                            @elseif($sort['order']=='DESC')
+                                                <button type="submit" name="order" value="ASC" class="btn-link">Created
+                                                    Date ▴
+                                                </button>
+                                            @endif
+                                            @else
+                                                <button type="submit" name="order" value="ASC" class="btn-link">Created
+                                                    Date
+                                                </button>
+                                            @endif
+                                        </form>
+                                    </th>
+                                    <th>
+                                        <form>
+                                            @if(isset($sort['search']))
+                                                <input type="hidden" name="search" value="{{$sort['search']}}"/>
+                                            @endif
+                                            <input type="hidden" name="field" value="departments.updated_at"/>
+                                            <!-- table column name -->
+                                            @if($sort['field']=='departments.updated_at') <!-- table column name -->
+                                            @if($sort['order']=='ASC')
+                                                <button type="submit" name="order" value="DESC" class="btn-link">Updated
+                                                    Date ▾
+                                                </button>
+                                            @elseif($sort['order']=='DESC')
+                                                <button type="submit" name="order" value="ASC" class="btn-link">Updated
+                                                    Date ▴
+                                                </button>
+                                            @endif
+                                            @else
+                                                <button type="submit" name="order" value="ASC" class="btn-link">Updated
+                                                    Date
+                                                </button>
+                                            @endif
+                                        </form>
+                                    </th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -89,6 +137,12 @@
                                         </td>
                                         <td>
                                             {{$department->name}}
+                                        </td>
+                                        <td>
+                                            {{$department->created_at}}
+                                        </td>
+                                        <td>
+                                            {{$department->updated_at}}
                                         </td>
                                         <td>
                                             <a class="btn btn-xs btn-primary"
