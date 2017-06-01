@@ -96,25 +96,19 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-        // Laravel validation
         $validator = $this->validator($request->all());
         if ($validator->fails()) {
             $this->throwValidationException($request, $validator);
         }
-        // Using database transactions is useful here because stuff happening is actually a transaction
-        // I don't know what I said in the last line! Weird!
         DB::beginTransaction();
         try {
             $user = $this->create($request->all());
-            $user->presentation = $request->presentation;
-            $user->profile_url = $request->profile_url;
             if($request->hasFile('profile_photo')){
                 $path = $request->file('profile_photo')->store('public/profiles');
                 $parts = explode('/', $path);
                 $user->profile_photo = $parts[2];
             }
             $user->save();
-            // After creating the user send an email with the random token generated in the create method above
             $email = new EmailVerification($user);
             Mail::to($user->email)->send($email);
             DB::commit();
@@ -127,8 +121,6 @@ class RegisterController extends Controller
 
     public function verify($userid, $token)
     {
-        // The verified method has been added to the user model and chained here
-        // for better readability
         $user = User::where('id', $userid)->first();
         if (hash('md5', $user->created_at) == $token) {
             $user->verified();

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateUserPostRequest;
 use App\Http\Requests\UpdateUserPostRequest;
 use App\Http\Requests\UpdateProfilePostRequest;
 use App\Http\Requests\UpdatePasswordPostRequest;
@@ -85,10 +84,7 @@ class UserController extends Controller
     public function updateProfile(UpdateProfilePostRequest $request)
     {
         $user = Auth::user();
-        $user->name = $request->name;
-        $user->phone = $request->phone;
-        $user->profile_url = $request->profile_url;
-        $user->presentation = $request->presentation;
+        $user->fill($request->all());
         if ($request->hasFile('profile_photo')) {
             $path = $request->file('profile_photo')->store('public/profiles');
             $parts = explode('/', $path);
