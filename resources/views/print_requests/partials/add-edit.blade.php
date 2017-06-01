@@ -119,7 +119,7 @@
     <input
             type="file" class="form-control" name="file" id="inputFile" accept="image/*, application/pdf,
         application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document,
-        application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, .csv"
+        application/excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, .csv"
             @if(Route::currentRouteName()=='requests.create')
             required
             @endif

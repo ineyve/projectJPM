@@ -169,7 +169,7 @@
                                         <td>
                                             @if($request->hasImage())
                                                 <a href="{{route('requests.details', $request)}}">
-                                                    <img src="data:image/png;base64,{{$request->image()}}"
+                                                    <img src="data:image/{{$request->fileExtension()}};base64,{{$request->image()}}"
                                                          style="width:50px;height:50px;">
                                                 </a>
                                             @endif

@@ -27,11 +27,27 @@ class UpdateRequestPostRequest extends FormRequest
         return [
             'description'=>'required|regex:/^[a-zA-Z ]+$/',
             'quantity'=>'required|alpha_num',
-            'colored'=>'required',
-            'stapled'=>'required',
-            'paper_size'=>'required',
-            'paper_type'=>'required',
-            'front_back'=>'required',
+            'colored' => [
+                'required',
+                Rule::in(['0', '1']),
+            ],
+            'stapled' => [
+                'required',
+                Rule::in(['0', '1']),
+            ],
+            'paper_size' => [
+                'required',
+                Rule::in(['3', '4']),
+            ],
+            'paper_type' => [
+                'required',
+                Rule::in(['0', '1', '2']),
+            ],
+            'front_back' => [
+                'required',
+                Rule::in(['0', '1']),
+            ],
+            'file' => 'mimetypes:image,application/msword,application/excel,application/pdf,application/vnd.oasis.opendocument.text'
         ];
     }
 }

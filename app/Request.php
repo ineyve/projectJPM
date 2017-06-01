@@ -85,12 +85,22 @@ class Request extends Model
     public function hasImage()
     {
         if (isset($this->file)) {
-            $extension = explode('.', $this->file)[1];
-            if ($extension == "png") {
-                return true;
+            switch($this->fileExtension())
+            {
+                case "png":
+                case "jpg":
+                case "jpeg":
+                case "gif":
+                case "bmp":
+                    return true;
             }
         }
         return false;
+    }
+
+    public function fileExtension()
+    {
+        return $extension = explode('.', $this->file)[1];
     }
 
     public function image()

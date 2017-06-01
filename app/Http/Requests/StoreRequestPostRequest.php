@@ -47,6 +47,7 @@ class StoreRequestPostRequest extends FormRequest
                 'required',
                 Rule::in(['0', '1']),
             ],
+            'file' => 'mimetypes:image/*,application/msword,application/excel,application/excel,application/pdf,application/vnd.oasis.opendocument.text'
         ];
     }
 }
