@@ -76,3 +76,10 @@ Route::get('departments/create', 'DepartmentController@create')->name('departmen
 Route::post('departments/create', 'DepartmentController@store')->name('departments.store');
 Route::get('departments/{department}/edit', 'DepartmentController@edit')->name('department.edit');
 Route::post('departments/{department}/edit', 'DepartmentController@update')->name('department.update');
+
+// Printers
+Route::get('printers', 'PrinterController@index' )->name('printers.index');
+Route::get('printers/create', 'PrinterController@create')->name('printers.create');
+Route::post('printers/create', 'PrinterController@store')->name('printers.store');
+Route::get('printers/{printer}/edit', 'PrinterController@edit')->name('printer.edit');
+Route::post('printers/{printer}/edit', 'PrinterController@update')->name('printer.update');
