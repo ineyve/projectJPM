@@ -71,15 +71,15 @@ Route::get('users/{user}/block/{block}', 'UserController@block')->name('users.bl
 Route::get('users/{user}/admin/{admin}', 'UserController@admin')->name('users.admin')->middleware('can:admin');
 
 // Departments
-Route::get('departments', 'DepartmentController@index' )->name('departments.index');
-Route::get('departments/create', 'DepartmentController@create')->name('departments.create');
-Route::post('departments/create', 'DepartmentController@store')->name('departments.store');
-Route::get('departments/{department}/edit', 'DepartmentController@edit')->name('department.edit');
-Route::post('departments/{department}/edit', 'DepartmentController@update')->name('department.update');
+Route::get('departments', 'DepartmentController@index' )->name('departments.index')->middleware('can:admin');;
+Route::get('departments/create', 'DepartmentController@create')->name('departments.create')->middleware('can:admin');;
+Route::post('departments/create', 'DepartmentController@store')->name('departments.store')->middleware('can:admin');;
+Route::get('departments/{department}/edit', 'DepartmentController@edit')->name('departments.edit')->middleware('can:admin');;
+Route::post('departments/{department}/edit', 'DepartmentController@update')->name('departments.update')->middleware('can:admin');;
 
 // Printers
 Route::get('printers', 'PrinterController@index' )->name('printers.index');
 Route::get('printers/create', 'PrinterController@create')->name('printers.create');
 Route::post('printers/create', 'PrinterController@store')->name('printers.store');
-Route::get('printers/{printer}/edit', 'PrinterController@edit')->name('printer.edit');
-Route::post('printers/{printer}/edit', 'PrinterController@update')->name('printer.update');
+Route::get('printers/{printer}/edit', 'PrinterController@edit')->name('printers.edit');
+Route::post('printers/{printer}/edit', 'PrinterController@update')->name('printers.update');

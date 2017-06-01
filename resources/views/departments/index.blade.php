@@ -146,7 +146,7 @@
                                         </td>
                                         <td>
                                             <a class="btn btn-xs btn-primary"
-                                               href="{{route('department.edit', $department)}}">Edit</a>
+                                               href="{{route('departments.edit', $department)}}">Edit</a>
                                         </td>
                                     </tr>
                                 @endforeach
