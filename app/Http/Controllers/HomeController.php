@@ -10,28 +10,55 @@ class HomeController extends Controller
 {
     public function homeGraph(\Illuminate\Http\Request $req)
     {
-        /* CODE TO GENERATE BAR GRAPH'S DATA */
-        $printsPerDepartment = $this->getPrintsPerDepartment();
-        $dpnames = "["; //Array with departments' names
-        $dpcounts = "["; //Array with amount of requests per department
-        $dpcolors = "["; //Array with colors
-        foreach ($printsPerDepartment as $stat) {
-            $dpnames .='"'.$this->autoLabelSpaces($stat->depname).'", '; //Department's name
+        if($req->has('department') && $req->department!=0)
+        {
+            $selected=$req->department;
 
-            $counter = $stat->cnt; //Amount of finished prints
-            $dpcounts .=$counter.', ';
+            /* TEXT STATISTICS */
+            $grayScale = Request::where('colored', '=', '0')->where('status', 2)->where('id', $selected)->sum('quantity'); //Amount of grayscale prints
+            $colored = Request::where('colored', '=', '1')->where('status', 2)->where('id', $selected)->sum('quantity'); //Amount of colored prints
+            $total = $colored + $grayScale;
+            /* END */
 
-            $dpcolors .='\'rgba('.rand(50, 200).', '.rand(50, 200).', '.rand(50, 200).', 1)\', '; //Color of each bar
+            /* PIE CHART */
+            $statistics['printsTotalCount'] = $total; //Amount of completed prints from all time
+            $statistics['printsToday']= Request::whereDate('closed_date', '=', date('Y-m-d'))->where('status', 2)->where('id', $selected)->sum('quantity'); //Prints today
+            $statistics['printsMonthlyAverage']= Request::whereMonth('closed_date', '=', date('m'))->where('status', 2)->where('id', $selected)->sum('quantity') / date('d'); //Prints today
+            /* END */
         }
-        $statistics['departments'] = $dpnames.']'; //Departments' names
-        $statistics['departmentsCount'] = $dpcounts.']'; //Print number per department
-        $statistics['departmentsColor'] = $dpcolors.']'; //Bar colors
-        /* END */
+        else
+        {
+            $selected = 0;
+            /* CODE TO GENERATE BAR GRAPH'S DATA */
+            $printsPerDepartment = $this->getPrintsPerDepartment();
+            $dpnames = "["; //Array with departments' names
+            $dpcounts = "["; //Array with amount of requests per department
+            $dpcolors = "["; //Array with colors
+            foreach ($printsPerDepartment as $stat) {
+                $dpnames .='"'.$this->autoLabelSpaces($stat->depname).'", '; //Department's name
 
+                $counter = $stat->cnt; //Amount of finished prints
+                $dpcounts .=$counter.', ';
 
-        $grayScale = Request::where('colored', '=', '0')->where('status', 2)->sum('quantity'); //Amount of grayscale prints
-        $colored = Request::where('colored', '=', '1')->where('status', 2)->sum('quantity'); //Amount of colored prints
-        $total = $colored + $grayScale;
+                $dpcolors .='\'rgba('.rand(50, 200).', '.rand(50, 200).', '.rand(50, 200).', 1)\', '; //Color of each bar
+            }
+            $statistics['departments'] = $dpnames.']'; //Departments' names
+            $statistics['departmentsCount'] = $dpcounts.']'; //Print number per department
+            $statistics['departmentsColor'] = $dpcolors.']'; //Bar colors
+            /* END */
+
+            /* TEXT STATISTICS */
+            $grayScale = Request::where('colored', '=', '0')->where('status', 2)->sum('quantity'); //Amount of grayscale prints
+            $colored = Request::where('colored', '=', '1')->where('status', 2)->sum('quantity'); //Amount of colored prints
+            $total = $colored + $grayScale;
+            /* END */
+
+            /* PIE CHART */
+            $statistics['printsTotalCount'] = $total; //Amount of completed prints from all time
+            $statistics['printsToday']= Request::whereDate('closed_date', '=', date('Y-m-d'))->where('status', 2)->sum('quantity'); //Prints today
+            $statistics['printsMonthlyAverage']= Request::whereMonth('closed_date', '=', date('m'))->where('status', 2)->sum('quantity') / date('d'); //Prints today
+            /* END */
+        }
 
         if ($total != 0) {
             $statistics['grayScale'] = round(100 * $grayScale / $total); //% of grayscale prints
@@ -40,13 +67,8 @@ class HomeController extends Controller
             $statistics['grayScale'] = 50;
             $statistics['colored'] = 50;
         }
-        $statistics['printsTotalCount'] = $total; //Amount of completed prints from all time
-        $statistics['printsToday']= Request::whereDate('closed_date', '=', date('Y-m-d'))->where('status', 2)->sum('quantity'); //Prints today
-        $statistics['printsMonthlyAverage']= Request::whereMonth('closed_date', '=', date('m'))->where('status', 2)->sum('quantity') / date('d'); //Prints today
 
         $departments=Department::All();
-        if($req->has('department'))
-            $selected=$req->department;
         return view('welcome', compact('statistics', 'departments', 'selected'));
     }
 

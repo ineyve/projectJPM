@@ -8,13 +8,14 @@
         <div class="home-counter">
             <form>
                 <div class="form-group">
-                    <select name="department" id="inputDepartmentHome" class="form-control" onchange="this.form.submit()">
+                    <select name="department" id="inputDepartmentHome" class="form-control"
+                            onchange="this.form.submit()">
                         <option value="0">All Departments</option>
                         @foreach($departments as $department)
                             <option value="{{$department->id}}"
-                                @if(isset($selected) && $selected == $department->id)
-                                selected="selected"
-                                @endif
+                                    @if(isset($selected) && $selected == $department->id)
+                                    selected="selected"
+                                    @endif
                             >{{$department->name}}</option>
                         @endforeach
                     </select>
@@ -41,7 +42,7 @@
             <br>
         </div>
         <div class="row">
-            <div class="col-xs-6 mobile-graph">
+            <div class="col-xs-6 mobile-graph" @if(isset($selected) && $selected != 0) style="align:center" @endif>
                 <div class="home-counter">
                     <h1 class="h-h1">Greyscale vs</h1>
                     <h1 class="blue-h1">Color</h1>
@@ -83,49 +84,51 @@
                     });
                 </script>
             </div>
-            <div class="col-xs-6 mobile-graph">
-                <div class="home-counter">
-                    <h1 class="h-h1">Prints per department</h1>
-                </div>
-                <div class="barchart">
-                    <canvas id="barChart"></canvas>
-                </div>
-                <script>
-                    var ctx = document.getElementById("barChart");
-                    var barChart = new Chart(ctx, {
-                        type: 'horizontalBar',
-                        data: {
-                            labels: {!! $statistics['departments'] !!},
-                            datasets: [{
-                                label: '# prints',
-                                data: {!! $statistics['departmentsCount'] !!},
-                                backgroundColor: {!! $statistics['departmentsColor'] !!},
-                                borderColor: {!! $statistics['departmentsColor'] !!},
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            defaultFontFamily: Chart.defaults.global.defaultFontFamily = "'Sansation_Bold'",
-                            scales: {
-                                xAxes: [{
-                                    ticks: {
-                                        beginAtZero: true,
-                                        fontSize: 18
-                                    }
-                                }],
-                                yAxes: [{
-                                    ticks: {
-                                        fontSize: 18
-                                    }
+            @if(isset($selected) && $selected == 0)
+                <div class="col-xs-6 mobile-graph">
+                    <div class="home-counter">
+                        <h1 class="h-h1">Prints per department</h1>
+                    </div>
+                    <div class="barchart">
+                        <canvas id="barChart"></canvas>
+                    </div>
+                    <script>
+                        var ctx = document.getElementById("barChart");
+                        var barChart = new Chart(ctx, {
+                            type: 'horizontalBar',
+                            data: {
+                                labels: {!! $statistics['departments'] !!},
+                                datasets: [{
+                                    label: '# prints',
+                                    data: {!! $statistics['departmentsCount'] !!},
+                                    backgroundColor: {!! $statistics['departmentsColor'] !!},
+                                    borderColor: {!! $statistics['departmentsColor'] !!},
+                                    borderWidth: 1
                                 }]
                             },
-                            legend: {
-                                display: false
+                            options: {
+                                defaultFontFamily: Chart.defaults.global.defaultFontFamily = "'Sansation_Bold'",
+                                scales: {
+                                    xAxes: [{
+                                        ticks: {
+                                            beginAtZero: true,
+                                            fontSize: 18
+                                        }
+                                    }],
+                                    yAxes: [{
+                                        ticks: {
+                                            fontSize: 18
+                                        }
+                                    }]
+                                },
+                                legend: {
+                                    display: false
+                                }
                             }
-                        }
-                    });
-                </script>
-            </div>
+                        });
+                    </script>
+                </div>
+            @endif
         </div>
     </div>
     <br>
