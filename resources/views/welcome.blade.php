@@ -42,12 +42,12 @@
             <br>
         </div>
         <div class="row">
-            <div class="col-xs-6 mobile-graph" @if(isset($selected) && $selected != 0) style="align:center" @endif>
+            <div @if(isset($selected) && $selected == 0) class="col-xs-6 mobile-graph" @endif>
                 <div class="home-counter">
                     <h1 class="h-h1">Greyscale vs</h1>
                     <h1 class="blue-h1">Color</h1>
                 </div>
-                <div class="piechart">
+                <div class="piechart @if(isset($selected) && $selected != 0) smallerChart @endif">
                     <canvas id="colorChart"></canvas>
                 </div>
                 <script>

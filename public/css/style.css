@@ -109,6 +109,10 @@ td > a:hover, td > a:visited, td > a:link, td > a:active {
     margin: 0 auto;
 }
 
+.smallerChart {
+    width: 30%;
+}
+
 .barchart {
     width: 80%;
     margin: 0 auto;
