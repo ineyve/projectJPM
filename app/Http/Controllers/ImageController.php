@@ -22,13 +22,9 @@ class ImageController extends Controller
         list($width, $height) = getimagesize($path);
         $ratioW = $width/$req->liveW;
         $ratioH = $height/$req->liveH;
-        echo abs($req->w*$ratioW);
-        echo abs($req->h*$ratioH);
-        echo abs($req->x*$ratioW);
-        echo abs($req->y*$ratioH);
-        dd($ratioW);
-        Image::make($path)->crop(abs($req->w*$ratioW), abs($req->h*$ratioH),
-            abs($req->x*$ratioW), abs($req->y*$ratioH))->resize(abs($req->w*720/$req->h),720)->save($path);
+        
+        Image::make($path)->crop((int)($req->w*$ratioW), (int)($req->h*$ratioH),
+            (int)($req->x*$ratioW), (int)($req->y*$ratioH))->resize((int)($req->w*720/$req->h),720)->save($path);
         return redirect()->route('dashboard');
     }
 }
