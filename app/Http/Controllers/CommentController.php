@@ -3,13 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
-use App\Http\Requests\StoreCommentPostRequest;
-use App\Http\Requests\StoreRefusePostRequest;
-use App\Http\Requests\StoreRequestPostRequest;
-
 use App\Request;
-
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
@@ -24,7 +18,7 @@ class CommentController extends Controller
         return view('comments.index', compact('comments'));
     }
 
-    public function create(StoreCommentPostRequest $req, Request $request)
+    public function create(\Illuminate\Http\Request $req, Request $request)
     {
         $comment = new Comment();
         $comment->fill($req->all());
@@ -36,7 +30,7 @@ class CommentController extends Controller
         return back();
     }
 
-    public function reply(StoreCommentPostRequest $req, Request $request, Comment $comment)
+    public function reply(\Illuminate\Http\Request $req, Request $request, Comment $comment)
     {
         $reply = new Comment();
         $reply->comment = $req->reply;

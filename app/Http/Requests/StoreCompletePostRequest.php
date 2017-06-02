@@ -24,7 +24,7 @@ class StoreCompletePostRequest extends FormRequest
     public function rules()
     {
         return [
-            'printer_id'=>'required'
+            'printer_id'=>'required|exists:printers.id'
         ];
     }
 }

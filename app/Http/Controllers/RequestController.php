@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
-use App\Http\Requests\StoreRefusePostRequest;
 use App\Http\Requests\StoreRequestPostRequest;
 use App\Http\Requests\StoreCompletePostRequest;
 use App\Http\Requests\UpdateRequestPostRequest;
@@ -133,7 +132,7 @@ class RequestController extends Controller
         return redirect()->route('dashboard')->with('success', 'Rating changed sucessfuly!');
     }
 
-    public function refuse(StoreRefusePostRequest $req, Request $request)
+    public function refuse(\Illuminate\Http\Request $req, Request $request)
     {
         $request->status = 1;
         $request->closed_date = Carbon::now();

@@ -50,11 +50,10 @@
         <div class="panel panel-default">
             <div class="panel-heading">Crop Photo</div>
             <div class="row">
-                <div class="col-xs-3"></div>
-                <div class="col-xs-6" style="text-align:center;">
+                <div div class="col-md-8 col-md-offset-2" style="text-align:center;">
                     <!-- This is the image we're attaching Jcrop to -->
                     <br>
-                    <img src="/storage/profiles/{{$user->profile_photo}}" id="cropbox" alt="Image failed to load">
+                    <img src="{{asset("storage/profiles/".$user->profile_photo)}}" id="cropbox" alt="Image failed to load">
                     <!-- This is the form that our event handler fills -->
                     <form action="{{route('image.crop', $user)}}" method="post" onsubmit="return checkCoords();"
                           enctype="multipart/form-data">

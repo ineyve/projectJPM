@@ -6,6 +6,9 @@ form {
 
 th, td, h3 {
     text-align: center;
+}
+
+td{
     vertical-align: center;
 }
 
@@ -397,6 +400,11 @@ textarea {
 #btn-crop{
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+.alert-success{
+    background-color: rgba(150, 255, 150, 0.3);
+
 }
 
 /* MOBILE/VERTICAL/PORTRAIT STYLES */

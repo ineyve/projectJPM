@@ -28,7 +28,6 @@ class UpdateProfilePostRequest extends FormRequest
             'name' => 'required|regex:/^[a-zA-Z ]+$/',
             'phone' => 'required|numeric',
             'profile_url' => 'nullable|regex:#[-a-zA-Z0-9@:%_\+.~\#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~\#?&//=]*)?#si',
-            'presentation'=>'nullable|regex:/^[a-zA-Z0-9 ?!.\-\"\',_]+$/',
             'profile_photo' => 'nullable|image'
         ];
     }
