@@ -19,7 +19,12 @@ class ImageController extends Controller
     public function crop(\Illuminate\Http\Request $req, User $user)
     {
         $path = public_path('/storage/profiles/'.$user->profile_photo);
-        Image::make($path)->crop($req->w, $req->h, $req->x, $req->y)->save($path);
+        dd($req);
+        list($width, $height) = getimagesize($path);
+        $ratioW = $width/$req->liveW;
+        $retioH = $height/$req->liveH;
+
+        Image::make($path)->crop($req->w*$ratioW, $req->h*$retioH, $req->x*$ratioW, $req->y*$retioH)->resize(abs($req->w*720/$req->h),720)->save($path);
         return redirect()->route('dashboard');
     }
 }

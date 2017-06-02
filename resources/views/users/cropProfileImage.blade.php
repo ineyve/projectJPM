@@ -15,10 +15,15 @@
             });
 
             function updateCoords(c) {
+                var img = document.getElementById('cropbox');
+                console.log(img);
                 $('#x').val(c.x);
                 $('#y').val(c.y);
                 $('#w').val(c.w);
                 $('#h').val(c.h);
+                $('#liveW').val(img.clientWidth);
+                $('#liveH').val(img.clientHeight);
+                console.log(img.clientWidth+"|"+img.clientHeight);
             }
 
             function checkCoords() {
@@ -27,6 +32,7 @@
                 return false;
             }
         });
+
     });
 </script>
 <link rel="stylesheet" href="/jcrop/css/jquery.Jcrop.css" type="text/css"/>
@@ -50,6 +56,8 @@
                         <input type="hidden" id="y" name="y"/>
                         <input type="hidden" id="w" name="w"/>
                         <input type="hidden" id="h" name="h"/>
+                        <input type="hidden" id="liveW" name="liveW"/>
+                        <input type="hidden" id="liveH" name="liveH"/>
                         <input type="submit" value="Crop Image" class="btn btn btn-success" id="btn-crop">
                     </form>
                 </div>
