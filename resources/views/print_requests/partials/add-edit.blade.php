@@ -112,9 +112,9 @@
     <label for="inputDescription" class="control-label">Description</label>
     <textarea type="text" class="form-control" name="description" id="inputDescription" placeholder="Description" required>
         @if(old('description') != null)
-            {{old('description')}}
+{{old('description')}}
         @elseif(Route::currentRouteName()=='requests.edit')
-            {{$request->description}}
+{{$request->description}}
         @endif
     </textarea>
     @if ($errors->has('description'))

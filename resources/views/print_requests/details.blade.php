@@ -1,5 +1,14 @@
 @extends('master')
 @push('page_name') - Requests @endpush
+@push('master_header')
+<script>function showRefuse(){
+        $('#refuse-form').show();
+        $('#buttonRefuse').hide();
+        $('#buttonComplete').hide();
+        $('#buttonComment').hide();
+    }
+</script>
+@endpush
 @section('content')
 <div class="container">
     <div class="row">
@@ -198,7 +207,7 @@
                             {{ csrf_field() }}
                             <div class="form-group" id="refuse">
                                 <label for="inputReason">Refuse Reason</label>
-                                <textarea class="form-control" name="refused_reason" id="inputReason"></textarea>
+                                <textarea class="form-control" name="refused_reason" id="inputReason" required></textarea>
                             </div>
                             <div class="form-group" id="submitRefuse">
                                 <button type="submit" class="btn btn-danger side-offset">Refuse</button>
@@ -216,7 +225,13 @@
                                     id="comment-blocked"
                                 @endif
                             >
-                                <a href="{{ route('users.profile', $comment->user_id) }}"><img class="comment-picture" src="/profile.jpg"></a>
+                                <a href="{{ route('users.profile', $comment->user_id) }}">
+                                    @if(is_null($comment->user->profile_photo))
+                                        <img class="comment-picture" src="/profile.jpg">
+                                    @else
+                                        <img class="comment-picture" src="/storage/profiles/{{$comment->user->profile_photo}}">
+                                    @endif
+                                </a>
                                 <p class="first"><a href="{{route('users.profile', $comment->user_id)}}">{{$comment->user->name}}</a> &nbsp&nbsp&nbsp&nbsp{{$comment->created_at}}</p>
                                 <p>{{$comment->comment}}</p>
 
@@ -249,7 +264,13 @@
                                                 id="comment-blocked"
                                             @endif
                                         >
-                                            <a href="{{ route('users.profile', $reply->user_id) }}"><img class="comment-picture" src="/profile.jpg"></a>
+                                            <a href="{{ route('users.profile', $reply->user_id) }}">
+                                                @if(is_null($reply->user->profile_photo))
+                                                    <img class="comment-picture" src="/profile.jpg">
+                                                @else
+                                                    <img class="comment-picture" src="/storage/profiles/{{$reply->user->profile_photo}}">
+                                                @endif
+                                            </a>
                                             <p class="first"><a href="{{route('users.profile', $reply->user_id)}}">{{$reply->user->name}}</a> &nbsp&nbsp&nbsp&nbsp{{$reply->created_at}}</p>
                                             <p>{{$reply->comment}}</p>
                                                                             @can('admin') 

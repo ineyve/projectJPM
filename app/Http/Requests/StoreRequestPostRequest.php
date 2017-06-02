@@ -25,7 +25,7 @@ class StoreRequestPostRequest extends FormRequest
     public function rules()
     {
         return [
-            'description'=>'required|regex:/^[a-zA-Z ]+$/',
+            'description'=>'required',
             'quantity'=>'required|alpha_num',
             'colored' => [
                 'required',
