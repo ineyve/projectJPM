@@ -14,6 +14,13 @@
 
             });
 
+            $('#x').val(-1);
+            $('#y').val(-1);
+            $('#w').val(-1);
+            $('#h').val(-1);
+            $('#liveW').val(-1);
+            $('#liveW').val(-1);
+
             function updateCoords(c) {
                 var elements = document.getElementsByClassName('jcrop-holder')
                 var holder = elements[0];
