@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use Intervention\Image\Facades\Image;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class ImageController extends Controller
 {
@@ -18,11 +18,17 @@ class ImageController extends Controller
     }
     public function crop(\Illuminate\Http\Request $req, User $user)
     {
+        foreach($req->all() as $value)
+        {
+            if($value < 0)
+                return redirect()->back();
+        }
+
         $path = public_path('/storage/profiles/'.$user->profile_photo);
         list($width, $height) = getimagesize($path);
         $ratioW = $width/$req->liveW;
         $ratioH = $height/$req->liveH;
-        
+
         Image::make($path)->crop((int)($req->w*$ratioW), (int)($req->h*$ratioH),
             (int)($req->x*$ratioW), (int)($req->y*$ratioH))->resize((int)($req->w*720/$req->h),720)->save($path);
         return redirect()->route('dashboard');
