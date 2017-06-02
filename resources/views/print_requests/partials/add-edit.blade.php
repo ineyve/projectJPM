@@ -110,13 +110,13 @@
 </div>
 <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
     <label for="inputDescription" class="control-label">Description</label>
-    <textarea type="text" class="form-control" name="description" id="inputDescription" placeholder="Description" required
-              @if(old('description') != null)
-              value="{{old('description')}}"
-              @elseif(Route::currentRouteName()=='requests.edit')
-              value="{{$request->description}}"
-            @endif
-    ></textarea>
+    <textarea type="text" class="form-control" name="description" id="inputDescription" placeholder="Description" required>
+        @if(old('description') != null)
+            {{old('description')}}
+        @elseif(Route::currentRouteName()=='requests.edit')
+            {{$request->description}}
+        @endif
+    </textarea>
     @if ($errors->has('description'))
         <span class="help-block">
             <strong>{{ $errors->first('description') }}</strong>
