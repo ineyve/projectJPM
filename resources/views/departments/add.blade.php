@@ -11,9 +11,6 @@
                         <div class="panel-body">
 
                             @include('departments.partials.add-edit')
-                            teste
-                            {{var_dump($department)}}
-                            <<<
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary side-offset" name="ok">Add</button>
                                 <a class="btn btn-default" href="{{route('departments.index')}}">Cancel</a>

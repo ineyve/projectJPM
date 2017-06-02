@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use Illuminate\Support\Facades\Input;
 use Intervention\Image\Facades\Image;
 
 class ImageController extends Controller
@@ -19,8 +18,7 @@ class ImageController extends Controller
     }
     public function crop(\Illuminate\Http\Request $req, User $user)
     {
-        $file_name = $user->profile_photo;
-        $path = public_path('/storage/profiles/'.$file_name);
+        $path = public_path('/storage/profiles/'.$user->profile_photo);
         Image::make($path)->crop($req->w, $req->h, $req->x, $req->y)->save($path);
         return redirect()->route('dashboard');
     }

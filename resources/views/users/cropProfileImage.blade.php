@@ -37,20 +37,22 @@
         <div class="panel panel-default">
             <div class="panel-heading">Crop Photo</div>
             <div class="row">
-                <!-- This is the image we're attaching Jcrop to -->
-                <br>
-                <center><img src="/storage/profiles/{{$user->profile_photo}}" id="cropbox" alt="Image failed to load"></center>
-                <!-- This is the form that our event handler fills -->
-                <form action="{{route('image.crop', $user)}}" method="post" onsubmit="return checkCoords();"
-                      enctype="multipart/form-data">
-                    {{csrf_field()}}
-                    <input type="hidden" id="x" name="x"/>
-                    <input type="hidden" id="y" name="y"/>
-                    <input type="hidden" id="w" name="w"/>
-                    <input type="hidden" id="h" name="h"/>
-                    <input type="submit" value="Crop Image" class="btn btn btn-success" id="btn-crop"/>
-                </form>
-                <br><br>
+                <div class="col-xs-3"></div>
+                <div class="col-xs-6" style="text-align:center;">
+                    <!-- This is the image we're attaching Jcrop to -->
+                    <br>
+                    <img src="/storage/profiles/{{$user->profile_photo}}" id="cropbox" alt="Image failed to load">
+                    <!-- This is the form that our event handler fills -->
+                    <form action="{{route('image.crop', $user)}}" method="post" onsubmit="return checkCoords();"
+                          enctype="multipart/form-data">
+                        {{csrf_field()}}
+                        <input type="hidden" id="x" name="x"/>
+                        <input type="hidden" id="y" name="y"/>
+                        <input type="hidden" id="w" name="w"/>
+                        <input type="hidden" id="h" name="h"/>
+                        <input type="submit" value="Crop Image" class="btn btn btn-success" id="btn-crop">
+                    </form>
+                </div>
             </div>
         </div>
     </div>

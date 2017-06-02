@@ -2,7 +2,7 @@
 @push('page_name') - Departments @endpush
 @section('content')
     <form action="{{route('departments.update', $department)}}" method="post" class="form-group">
-        {{method_field('PUT')}}
+        {{method_field('POST')}}
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
