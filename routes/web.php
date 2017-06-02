@@ -75,7 +75,7 @@ Route::get('departments', 'DepartmentController@index' )->name('departments.inde
 Route::get('departments/create', 'DepartmentController@create')->name('departments.create')->middleware('can:admin');;
 Route::post('departments/create', 'DepartmentController@store')->name('departments.store')->middleware('can:admin');;
 Route::get('departments/{department}/edit', 'DepartmentController@edit')->name('departments.edit')->middleware('can:admin');;
-Route::put('departments/{department}/edit', 'DepartmentController@update')->name('departments.update')->middleware('can:admin');
+Route::post('departments/{department}/edit', 'DepartmentController@update')->name('departments.update')->middleware('can:admin');
 
 // Printers
 Route::get('printers', 'PrinterController@index' )->name('printers.index');
