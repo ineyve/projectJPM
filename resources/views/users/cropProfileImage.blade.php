@@ -15,15 +15,15 @@
             });
 
             function updateCoords(c) {
-                var img = document.getElementById('cropbox');
-                console.log(img);
+                var elements = document.getElementsByClassName('jcrop-holder')
+                var holder = elements[0];
                 $('#x').val(c.x);
                 $('#y').val(c.y);
                 $('#w').val(c.w);
                 $('#h').val(c.h);
-                $('#liveW').val(img.clientWidth);
-                $('#liveH').val(img.clientHeight);
-                console.log(img.clientWidth+"|"+img.clientHeight);
+                $('#liveW').val(holder.clientWidth);
+                $('#liveH').val(holder.clientHeight);
+                console.log(holder.clientWidth+"|"+holder.clientHeight);
             }
 
             function checkCoords() {
