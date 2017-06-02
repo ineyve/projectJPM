@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use Intervention\Image\Facades\Image;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class ImageController extends Controller
 {

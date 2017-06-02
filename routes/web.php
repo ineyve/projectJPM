@@ -63,10 +63,6 @@ Route::get('users/{user}/profile', 'UserController@profile')->name('users.profil
 Route::get('users/editProfile', 'UserController@editProfile')->name('users.editProfile')->middleware('can:self');
 Route::post('users/editProfile', 'UserController@updateProfile')->name('users.updateProfile')->middleware('can:self');
 Route::put('users/editProfile', 'UserController@updatePassword')->name('users.updatePassword')->middleware('can:self');
-Route::get('users/create', 'UserController@create')->name('users.create')->middleware('can:admin');
-Route::post('users/create', 'UserController@store')->name('users.store')->middleware('can:admin');
-Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit')->middleware('can:admin');
-Route::put('users/{user}/edit', 'UserController@update')->name('users.update')->middleware('can:admin');
 Route::get('users/{user}/block/{block}', 'UserController@block')->name('users.block')->middleware('can:admin');
 Route::get('users/{user}/admin/{admin}', 'UserController@admin')->name('users.admin')->middleware('can:admin');
 
@@ -79,7 +75,7 @@ Route::get('departments', 'DepartmentController@index' )->name('departments.inde
 Route::get('departments/create', 'DepartmentController@create')->name('departments.create')->middleware('can:admin');;
 Route::post('departments/create', 'DepartmentController@store')->name('departments.store')->middleware('can:admin');;
 Route::get('departments/{department}/edit', 'DepartmentController@edit')->name('departments.edit')->middleware('can:admin');;
-Route::put('departments/{department}/edit', 'DepartmentController@update')->name('departments.update')->middleware('can:admin');;
+Route::put('departments/{department}/edit', 'DepartmentController@update')->name('departments.update')->middleware('can:admin');
 
 // Printers
 Route::get('printers', 'PrinterController@index' )->name('printers.index');
