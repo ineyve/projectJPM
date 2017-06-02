@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateRequestPostRequest extends FormRequest
 {
@@ -47,7 +48,7 @@ class UpdateRequestPostRequest extends FormRequest
                 'required',
                 Rule::in(['0', '1']),
             ],
-            'file' => 'mimetypes:image,application/msword,application/excel,application/pdf,application/vnd.oasis.opendocument.text'
+            'file' => 'mimetypes:image/*,application/msword,application/excel,application/excel,application/pdf,application/vnd.oasis.opendocument.text'
         ];
     }
 }

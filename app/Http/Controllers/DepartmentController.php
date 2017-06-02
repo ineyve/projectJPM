@@ -61,7 +61,7 @@ class DepartmentController extends Controller
 
     public function update(StoreDepartmentPostRequest $req, Department $department)
     {
-        $department->description = $req->name;
+        $department->name = $req->name;
         $department->updated_at = Carbon::now();
         $department->save();
 
