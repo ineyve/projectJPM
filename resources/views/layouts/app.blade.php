@@ -50,6 +50,7 @@
                                     <li><a href="{{ route('users.blocked') }}">Blocked Users</a></li>
                                     <li><a href="{{ route('comments.index') }}">Blocked Comments</a></li>
                                     <li><a href="{{ route('departments.index') }}">Departments</a></li>
+                                    <li><a href="{{ route('printers.index') }}">Printers</a></li>
                                 </ul>
                             </li>
                         @endif
