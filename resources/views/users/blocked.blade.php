@@ -154,10 +154,9 @@
                                         <td><a href="{{route('users.profile', $user)}}">{{$user->department->name}}</a>
                                         </td>
                                         <td><a href="{{route('users.profile', $user)}}">{{$user->phone}}</a></td>
-                                        <td><a href="{{route('users.profile', $user)}}">
-                                        <a class="btn btn-xs btn-success"
-                                           href="{{ route('users.block', ['user' => $user, 'block' => 0]) }}">Unblock</a>
-                                            </a></td>
+                                        <td><a class="btn btn-xs btn-success"
+                                               href="{{ route('users.block', ['user' => $user, 'block' => 0]) }}">Unblock</a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </table>

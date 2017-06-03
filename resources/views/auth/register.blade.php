@@ -7,7 +7,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Register</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}"
+                        <form class="form-horizontal" method="POST" action="{{ route('register') }}"
                               enctype="multipart/form-data">
                             {{ csrf_field() }}
 
@@ -78,7 +78,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('department') ? ' has-error' : '' }}">
-                                <label for="department_id" class="col-md-4 control-label">Department</label>
+                                <label for="inputDepartment" class="col-md-4 control-label">Department</label>
                                 <div class="col-md-6">
                                     <select name="department_id" id="inputDepartment" class="form-control">
                                         @foreach($departments as $department)
@@ -89,7 +89,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('profile_photo') ? ' has-error' : '' }}">
-                                <label for="phone" class="col-md-4 control-label">Profile Photo</label>
+                                <label for="profile_photo" class="col-md-4 control-label">Profile Photo</label>
                                 <div class="col-md-6">
                                     <input style="padding:0;" id="profile_photo" type="file" class="form-control"
                                            name="profile_photo" accept="image/*"/>
@@ -105,7 +105,7 @@
                             <div class="form-group{{ $errors->has('profile_url') ? ' has-error' : '' }}">
                                 <label for="profile_url" class="col-md-4 control-label">Profile Url</label>
                                 <div class="col-md-6">
-                                    <input id="profile_url" type="link" class="form-control" name="profile_url"
+                                    <input id="profile_url" type="text" class="form-control" name="profile_url"
                                            value="{{old('profile_url')}}"/>
 
                                     @if ($errors->has('profile_url'))

@@ -79,7 +79,9 @@ class RequestController extends Controller
 
     public function edit(Request $request)
     {
-        return view('print_requests.edit', compact('request'));
+        if($request->status == 0)
+            return view('print_requests.edit', compact('request'));
+        abort(404);
     }
 
     public function update(UpdateRequestPostRequest $req, Request $request)

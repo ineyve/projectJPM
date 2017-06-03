@@ -139,7 +139,7 @@
                                         <center><div id="star" class="c-rating" style="width: 100px;"></div></center>
                                     @else
                                         @for($i=0; $i < $request->satisfaction_grade; $i++)
-                                            <img src="/star.png" style="width:24px;height:24px;">
+                                            <img src="/star.png" style="width:24px;height:24px;" alt="Image failed to load">
                                         @endfor
                                     @endif
                                     </td>
@@ -227,9 +227,9 @@
                             >
                                 <a href="{{ route('users.profile', $comment->user_id) }}">
                                     @if(is_null($comment->user->profile_photo))
-                                        <img class="comment-picture" src="/profile.jpg">
+                                        <img class="comment-picture" src="/profile.jpg" alt="Image failed to load">
                                     @else
-                                        <img class="comment-picture" src="/storage/profiles/{{$comment->user->profile_photo}}">
+                                        <img class="comment-picture" src="/storage/profiles/{{$comment->user->profile_photo}}" alt="Image failed to load">
                                     @endif
                                 </a>
                                 <p class="first"><a href="{{route('users.profile', $comment->user_id)}}">{{$comment->user->name}}</a> &nbsp&nbsp&nbsp&nbsp{{$comment->created_at}}</p>
@@ -266,9 +266,9 @@
                                         >
                                             <a href="{{ route('users.profile', $reply->user_id) }}">
                                                 @if(is_null($reply->user->profile_photo))
-                                                    <img class="comment-picture" src="/profile.jpg">
+                                                    <img class="comment-picture" src="/profile.jpg" alt="Image failed to load">
                                                 @else
-                                                    <img class="comment-picture" src="/storage/profiles/{{$reply->user->profile_photo}}">
+                                                    <img class="comment-picture" src="/storage/profiles/{{$reply->user->profile_photo}}" alt="Image failed to load">
                                                 @endif
                                             </a>
                                             <p class="first"><a href="{{route('users.profile', $reply->user_id)}}">{{$reply->user->name}}</a> &nbsp&nbsp&nbsp&nbsp{{$reply->created_at}}</p>

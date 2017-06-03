@@ -150,9 +150,7 @@
                                                 @if(is_null($request->satisfaction_grade))
                                                     @php($request->satisfaction_grade = 0)
                                                 @endif
-                                                <center>
-                                                    <div id="star{{++$i}}" class="c-rating"></div>
-                                                </center>
+                                                <div style="margin: auto;" id="star{{++$i}}" class="c-rating"></div>
                                             @elseif($request->status == 0)
                                                 <a class="btn btn-xs btn-primary"
                                                    href="{{route('requests.edit', $request)}}">Edit</a>

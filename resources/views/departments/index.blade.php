@@ -8,14 +8,14 @@
                     <div class="panel-heading">Departments List</div>
                     <div class="panel-body">
                         <div class="row">
-                            <div class="col-xs-6">
+                            <div class="col-xs-4">
                                 {{ $departments->links() }}
                                 @if(isset($sort['search']))
                                     <a href="{{ route('departments.index') }}" class="btn btn-success"
                                        style="float:right;">Clear Search</a>
                                 @endif
                             </div>
-                            <div class="col-xs-6">
+                            <div class="col-xs-8">
                                 <form>
                                     <button type="submit" class="btn btn-default btn-search"><span
                                                 class="glyphicon glyphicon-search search-icon"></span></button>
@@ -127,6 +127,7 @@
                                             @endif
                                         </form>
                                     </th>
+                                <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>

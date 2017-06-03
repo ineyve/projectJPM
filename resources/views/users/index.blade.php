@@ -153,27 +153,26 @@
                                         </td>
                                         <td><a href="{{route('users.profile', $user)}}">{{$user->phone}}</a></td>
                                         @can('admin')
-                                            <td><a href="{{route('users.profile', $user)}}">
-
-                                                    @if($auth->id != $user->id)
-                                                        @if(!$user->blocked)
-                                                            <a class="btn btn-xs btn-warning"
-                                                               href="{{ route('users.block', ['user' => $user, 'block' => 1]) }}">Block</a>
-                                                        @else
-                                                            <a class="btn btn-xs btn-primary"
-                                                               href="{{ route('users.block', ['user' => $user, 'block' => 0]) }}">Unblock</a>
-                                                        @endif
-                                                        @if(!$user->admin)
-                                                            <a class="btn btn-xs btn-success"
-                                                               href="{{ route('users.admin', ['user' => $user, 'admin' => 1]) }}">Admin
-                                                                ✓</a>
-                                                        @else
-                                                            <a class="btn btn-xs btn-danger"
-                                                               href="{{ route('users.admin', ['user' => $user, 'admin' => 0]) }}">Admin
-                                                                x</a>
-                                                        @endif
+                                            <td>
+                                                @if($auth->id != $user->id)
+                                                    @if(!$user->blocked)
+                                                        <a class="btn btn-xs btn-warning"
+                                                           href="{{ route('users.block', ['user' => $user, 'block' => 1]) }}">Block</a>
+                                                    @else
+                                                        <a class="btn btn-xs btn-primary"
+                                                           href="{{ route('users.block', ['user' => $user, 'block' => 0]) }}">Unblock</a>
                                                     @endif
-                                                </a></td>
+                                                    @if(!$user->admin)
+                                                        <a class="btn btn-xs btn-success"
+                                                           href="{{ route('users.admin', ['user' => $user, 'admin' => 1]) }}">Admin
+                                                            ✓</a>
+                                                    @else
+                                                        <a class="btn btn-xs btn-danger"
+                                                           href="{{ route('users.admin', ['user' => $user, 'admin' => 0]) }}">Admin
+                                                            x</a>
+                                                    @endif
+                                                @endif
+                                            </td>
                                         @endcan
                                     </tr>
                                 @endforeach

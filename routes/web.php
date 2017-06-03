@@ -50,7 +50,7 @@ Route::get('requests', 'RequestController@index' )->name('requests.index')->midd
 Route::post('requests/{request}/complete', 'RequestController@complete')->name('requests.complete')->middleware('can:admin');
 Route::post('requests/{request}/refuse', 'RequestController@refuse')->name('requests.refuse')->middleware('can:admin');
 
-// Comments Middleware SelfOrAdmin
+// Comments Middleware Auth
 Route::get('comments', 'CommentController@index' )->name('comments.index')->middleware('can:admin');
 Route::post('requests/{request}/details/comment', 'CommentController@create')->name('requests.comment');
 Route::post('requests/{request}/details/comment/{comment}/reply', 'CommentController@reply')->name('requests.reply');

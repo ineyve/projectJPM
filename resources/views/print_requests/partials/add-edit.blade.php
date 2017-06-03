@@ -127,7 +127,7 @@
 </div>
 <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
     <label for="inputDescription" class="control-label">Description</label>
-    <textarea type="text" class="form-control" name="description" id="inputDescription" placeholder="Description"
+    <textarea class="form-control" name="description" id="inputDescription" placeholder="Description"
               required>
 @if(old('description') != null)
             {{old('description')}}
