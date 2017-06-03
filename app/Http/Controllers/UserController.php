@@ -50,7 +50,8 @@ class UserController extends Controller
     }
 
     //ID NAME EMAIL DEPARTMENT PHONE
-    public function blocked(\Illuminate\Http\Request $req){
+    public function blocked(\Illuminate\Http\Request $req)
+    {
         if ($req->has('order') && $req->has('field')) {
             //If user sorted:
             $sort['order'] = $req->order;
@@ -64,13 +65,15 @@ class UserController extends Controller
             $sort['search'] = $req->search;
             $users = User::select('users.*')->leftJoin('departments', 'departments.id', '=', 'users.department_id')->
             where('users.blocked', '=', '1')
-                ->where(function ($query) use ($sort) {
-                    $query->where('users.id', '=', $sort['search'])
-                        ->orWhere('users.name', 'like', '%'.$sort['search'].'%')
-                        ->orWhere('users.email', 'like', '%'.$sort['search'].'%')
-                        ->orWhere('departments.name', 'like', '%'.$sort['search'].'%')
-                        ->orWhere('users.phone', 'like', '%'.$sort['search'].'%');
-                })->orderBy($sort['field'], $sort['order'])->paginate(20);
+                ->where(
+                    function ($query) use ($sort) {
+                        $query->where('users.id', '=', $sort['search'])
+                            ->orWhere('users.name', 'like', '%'.$sort['search'].'%')
+                            ->orWhere('users.email', 'like', '%'.$sort['search'].'%')
+                            ->orWhere('departments.name', 'like', '%'.$sort['search'].'%')
+                            ->orWhere('users.phone', 'like', '%'.$sort['search'].'%');
+                    }
+                )->orderBy($sort['field'], $sort['order'])->paginate(20);
         } else {
             $users=User::select('users.*')->leftJoin('departments', 'departments.id', '=', 'users.department_id')
                 ->where('users.blocked', '=', '1')->orderBy($sort['field'], $sort['order'])->paginate(20);

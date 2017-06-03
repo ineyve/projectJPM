@@ -15,10 +15,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer('master', function ($view) {
-            $users = User::All();
-            $view->with('users', $users);
-        });
+        view()->composer(
+            'master', function ($view) {
+                $users = User::All();
+                $view->with('users', $users);
+            }
+        );
     }
 
     /**

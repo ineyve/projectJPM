@@ -10,8 +10,7 @@ class HomeController extends Controller
 {
     public function homeGraph(\Illuminate\Http\Request $req)
     {
-        if($req->has('department') && $req->department!=0)
-        {
+        if ($req->has('department') && $req->department!=0) {
             $selected=$req->department;
 
             /* TEXT STATISTICS */
@@ -25,9 +24,7 @@ class HomeController extends Controller
             $statistics['printsToday']= Request::whereDate('closed_date', '=', date('Y-m-d'))->where('status', 2)->where('id', $selected)->sum('quantity'); //Prints today
             $statistics['printsMonthlyAverage']= Request::whereMonth('closed_date', '=', date('m'))->where('status', 2)->where('id', $selected)->sum('quantity') / date('d'); //Prints today
             /* END */
-        }
-        else
-        {
+        } else {
             $selected = 0;
             /* CODE TO GENERATE BAR GRAPH'S DATA */
             $printsPerDepartment = $this->getPrintsPerDepartment();

@@ -79,8 +79,9 @@ class RequestController extends Controller
 
     public function edit(Request $request)
     {
-        if($request->status == 0)
+        if ($request->status == 0) {
             return view('print_requests.edit', compact('request'));
+        }
         abort(404);
     }
 
