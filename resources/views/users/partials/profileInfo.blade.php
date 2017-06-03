@@ -3,26 +3,28 @@
 @else
     <img class="profile-picture" src="/storage/profiles/{{$user->profile_photo}}" alt="Image failed to load">
 @endif
-<p>E-mail address: <a href="mailto:{{$user->email}}">{{$user->email}}</a></p>
+<ul>
+<li>E-mail address: <a href="mailto:{{$user->email}}">{{$user->email}}</a></li>
 @if(!is_null($user->phone))
-    <p>Phone Number: {{$user->phone}}</p>
+    <li>Phone Number: {{$user->phone}}</li>
 @endif
-<p>Department: {{$user->department->name}}</p>
+<li>Department: {{$user->department->name}}</li>
 @if(!is_null($user->profile_url))
-    <p>Personal URL: <a href="{{$user->profile_url}}">{{$user->profile_url}}</a></p>
+    <li>Personal URL: <a href="{{$user->profile_url}}">{{$user->profile_url}}</a></li>
 @endif
 @if(!is_null($user->presentation))
-    <p>About me: {{$user->presentation}}</p>
+    <li>About me: {{$user->presentation}}</li>
 @endif
 @if(Auth::User()->admin || $user->id == Auth::User()->id)
-    <p>Completed Quantity: {{$user->print_counts}}</p>
-    <p>Request evaluations: {{$user->print_evals}}</p>
-    <p>Member for: {{$user->memberFor()}}</p>
-    <p>Average Satisfaction Grade:
+    <li>Completed Quantity: {{$user->print_counts}}</li>
+    <li>Request evaluations: {{$user->print_evals}}</li>
+    <li>Member for: {{$user->memberFor()}}</li>
+    <li>Average Satisfaction Grade:
         @for($i=0; $i < $user->averageRating(); $i++)
             <img src="/star.png" style="width:24px;height:24px;" alt="Image failed to load">
         @endfor
-    </p>
-    <p>Admin: {{$user->adminToStr()}}</p>
-    <p>Blocked: {{$user->blockedToStr()}}</p>
+    </li>
+    <li>Admin: {{$user->adminToStr()}}</li>
+    <li>Blocked: {{$user->blockedToStr()}}</li>
 @endif
+</ul>

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
@@ -18,9 +19,15 @@ class Department extends Model
         'name'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
+    public function dateCreated()
+    {
+        $date = new Carbon($this->created_at);
+        return $date->toDateString();
+    }
+
+    public function dateupdated()
+    {
+        $date = new Carbon($this->updated_at);
+        return $date->toDateString();
+    }
 }

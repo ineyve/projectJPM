@@ -140,10 +140,10 @@
                                             {{$department->name}}
                                         </td>
                                         <td>
-                                            {{$department->created_at}}
+                                            {{$department->dateCreated()}}
                                         </td>
                                         <td>
-                                            {{$department->updated_at}}
+                                            {{$department->dateUpdated()}}
                                         </td>
                                         <td>
                                             <a class="btn btn-xs btn-primary"

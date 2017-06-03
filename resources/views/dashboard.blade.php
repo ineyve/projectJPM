@@ -140,7 +140,7 @@
                                             <a href="{{route('requests.details', $request)}}">{{$request->description}}</a>
                                         </td>
                                         <td>
-                                            <a href="{{route('requests.details', $request)}}">{{$request->created_at}}</a>
+                                            <a href="{{route('requests.details', $request)}}">{{$request->date()}}</a>
                                         </td>
                                         <td>
                                             <a href="{{route('requests.details', $request)}}">{{$request->statusToStr()}}</a>
