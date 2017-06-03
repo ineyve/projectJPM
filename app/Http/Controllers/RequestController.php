@@ -70,7 +70,6 @@ class RequestController extends Controller
         $request->owner_id = Auth::user()->id;
         $request->status = 0;
         $request->fill($req->all());
-        $request->due_date = $myTime = strtotime($req->due_date . " 8:00");
         $path = $req->file('file')->store('print-jobs/'.$request->owner_id);
         $parts = explode('/', $path);
         $request->file = $parts[2];
