@@ -26,6 +26,7 @@ class UpdateRequestPostRequest extends FormRequest
     {
         return [
             'description'=>'required|regex:/^[a-zA-Z ]+$/',
+            'due_date' => 'nullable|date|after:tomorrow',
             'quantity'=>'required|alpha_num',
             'colored' => [
                 'required',

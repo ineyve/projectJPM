@@ -6,9 +6,14 @@
         $.getScript("//code.jquery.com/jquery-1.10.2.js", function () {
             $.getScript("//code.jquery.com/ui/1.11.2/jquery-ui.js", function () {
                 $(function () {
-                    $("#inputDueDate").datepicker({
+                    $("#inputDueDatePicker").datepicker({
                         changeMonth: true,
-                        changeYear: true
+                        changeYear: true,
+                        dateFormat: 'yy-mm-dd',
+                        onSelect: function(datetext){
+                            datetext = datetext + " 08:00:00";
+                            $('#inputDueDate').val(datetext);
+                        }
                     });
                 });
             });
@@ -33,7 +38,8 @@
 </div>
 <div class="form-group">
     <label for="inputDueDate">Due Date</label>
-    <input data-date-inline-picker="true" class="form-control" name="due_date" id="inputDueDate"
+    <input type="hidden" id="inputDueDate" name="due_date"/>
+    <input data-date-inline-picker="true" class="form-control" id="inputDueDatePicker"
            @if(old('due_date') != null)
            value="{{old('due_date')}}"
            @elseif(Route::currentRouteName()=='requests.edit')
