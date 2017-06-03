@@ -88,17 +88,14 @@
                                             <!-- table column name -->
                                             @if($sort['field']=='users.name') <!-- table column name -->
                                             @if($sort['order']=='ASC')
-                                                <button type="submit" name="order" value="DESC" class="btn-link">Owner
-                                                    Name ▾
+                                                <button type="submit" name="order" value="DESC" class="btn-link">Owner ▾
                                                 </button>
                                             @elseif($sort['order']=='DESC')
-                                                <button type="submit" name="order" value="ASC" class="btn-link">Owner
-                                                    Name ▴
+                                                <button type="submit" name="order" value="ASC" class="btn-link">Owner ▴
                                                 </button>
                                             @endif
                                             @else
                                                 <button type="submit" name="order" value="ASC" class="btn-link">Owner
-                                                    Name
                                                 </button>
                                             @endif
                                         </form>

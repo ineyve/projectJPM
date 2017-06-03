@@ -48,8 +48,34 @@ class UserController extends Controller
         return view('users.index', compact('users', 'auth', 'sort'));
     }
 
-    public function blocked(){
-        $users = User::where('blocked', '=', '1')->paginate(20);
+    //ID NAME EMAIL DEPARTMENT PHONE
+    public function blocked(\Illuminate\Http\Request $req){
+        if ($req->has('order') && $req->has('field')) {
+            //If user sorted:
+            $sort['order'] = $req->order;
+            $sort['field'] = $req->field;
+        } else {   //If user didn't sort, default to:
+            $sort['order'] = 'DESC';
+            $sort['field'] = 'users.updated_at';
+        }
+
+        if ($req->has('search')) { //With or without search
+            $sort['search'] = $req->search;
+            $users = User::select('users.*')->leftJoin('departments', 'departments.id', '=', 'users.department_id')->
+            where('users.blocked', '=', '1')
+                ->where(function ($query) use ($sort) {
+                    $query->where('users.id', '=', $sort['search'])
+                        ->orWhere('users.name', 'like', '%'.$sort['search'].'%')
+                        ->orWhere('users.email', 'like', '%'.$sort['search'].'%')
+                        ->orWhere('departments.name', 'like', '%'.$sort['search'].'%')
+                        ->orWhere('users.phone', 'like', '%'.$sort['search'].'%');
+                })->orderBy($sort['field'], $sort['order'])->paginate(20);
+        } else {
+            $users=User::select('users.*')->leftJoin('departments', 'departments.id', '=', 'users.department_id')
+                ->where('users.blocked', '=', '1')->orderBy($sort['field'], $sort['order'])->paginate(20);
+        }
+
+        $users->appends($req->input())->links();
         return view('users.blocked', compact('users'));
     }
 
