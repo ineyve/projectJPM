@@ -10,7 +10,7 @@ class CommentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:selfOrAdmin,request');
+        $this->middleware('auth');
     }
 
     public function index(\Illuminate\Http\Request $req){

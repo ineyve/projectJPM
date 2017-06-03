@@ -123,10 +123,9 @@
                                         <td><a href="{{route('requests.details', $comment->request_id)}}">{{$comment->request_id}}</a></td>
                                         <td><a href="{{route('requests.details', $comment->request_id)}}">{{$comment->user->name}}</a></td>
                                         <td><a href="{{route('requests.details', $comment->request_id)}}">{{$comment->comment}}</a></td>
-                                        <td><a href="{{route('requests.details', $comment->request_id)}}">
-                                                <a class="btn btn-xs btn-success"
+                                        <td><a class="btn btn-xs btn-success"
                                                    href="{{ route('comment.block', ['comment' => $comment, 'block' => 0]) }}">Unblock</a>
-                                            </a></td>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </table>
