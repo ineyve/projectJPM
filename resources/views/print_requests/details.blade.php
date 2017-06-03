@@ -136,7 +136,7 @@
                                         @if(is_null($request->satisfaction_grade))
                                             @php($request->satisfaction_grade = 0)
                                         @endif
-                                        <center><div id="star" class="c-rating" style="width: 100px;"></div></center>
+                                        <center><div id="star" class="c-rating"></div></center>
                                     @else
                                         @for($i=0; $i < $request->satisfaction_grade; $i++)
                                             <img src="/star.png" style="width:24px;height:24px;" alt="Image failed to load">
