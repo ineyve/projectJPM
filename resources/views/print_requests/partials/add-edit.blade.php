@@ -38,7 +38,7 @@
     @endif
 </div>
 <div class="form-group{{ $errors->has('due_date') ? ' has-error' : '' }}">
-    <label for="inputDueDate">Due Date</label>
+    <label for="inputDueDatePicker">Due Date</label>
     <input type="hidden" id="inputDueDate" name="due_date"/>
     <input data-date-inline-picker="true" class="form-control" id="inputDueDatePicker"
            @if(old('due_date') != null)
