@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateRequestPostRequest;
 use App\Request;
 use App\Printer;
 use Carbon\Carbon;
+use Gate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;

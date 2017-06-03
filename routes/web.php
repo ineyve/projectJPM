@@ -40,7 +40,7 @@ Route::get('/', 'HomeController@homeGraph')->name('home');
 // Requests
 Route::get('requests/create', 'RequestController@create')->name('requests.create');
 Route::post('requests/create', 'RequestController@store')->name('requests.store');
-Route::get('requests/{request}/details', 'RequestController@details' )->name('requests.details')->middleware('can:selfOrAdmin');
+Route::get('requests/{request}/details', 'RequestController@details' )->name('requests.details')->middleware('can:view,request'); //Policy
 Route::get('requests/{request}/rating/{rating}', 'RequestController@rating' )->name('requests.rating')->middleware('can:self');
 Route::get('requests/{request}/edit', 'RequestController@edit')->name('requests.edit');
 Route::put('requests/{request}/edit', 'RequestController@update')->name('requests.update');
