@@ -76,7 +76,7 @@ class UserController extends Controller
         }
 
         $users->appends($req->input())->links();
-        return view('users.blocked', compact('users'));
+        return view('users.blocked', compact('users', 'sort'));
     }
 
     public function create()
