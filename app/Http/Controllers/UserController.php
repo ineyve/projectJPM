@@ -9,6 +9,7 @@ use App\User;
 use App\Department;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -110,6 +111,7 @@ class UserController extends Controller
         $user = Auth::user();
         $user->fill($request->all());
         if ($request->hasFile('profile_photo')) {
+            Storage::delete('public/profiles/' . $user->profile_photo);
             $path = $request->file('profile_photo')->store('public/profiles');
             $parts = explode('/', $path);
             $user->profile_photo = $parts[2];

@@ -86,6 +86,7 @@ class RequestController extends Controller
     {
         $request->fill($req->all());
         if ($req->hasFile('file')) {
+            Storage::delete('print-jobs/' . $request->owner_id . '/' . $request->file);
             $path = $req->file('file')->store('print-jobs/' . $request->owner_id);
             $parts = explode('/', $path);
             $request->file = $parts[2];
