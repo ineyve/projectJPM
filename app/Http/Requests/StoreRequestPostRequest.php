@@ -28,7 +28,6 @@ class StoreRequestPostRequest extends FormRequest
             'due_date' => 'nullable|date|after:tomorrow',
             'description'=>'required',
             'quantity'=>'required|alpha_num',
-            'due_date' => 'nullable|date|after:tomorrow',
             'colored' => [
                 'required',
                 Rule::in(['0', '1']),

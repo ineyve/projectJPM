@@ -2,7 +2,7 @@
 
 @section('content')
     @push('master_header')
-    <script src="/js/Chart.js"></script>
+    <script src="{{asset('/js/Chart.js')}}"></script>
     @endpush
     <div class="container">
         <div class="home-box">
