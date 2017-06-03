@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use App\Request;
-use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -30,12 +28,6 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('admin', function ($user) {
             return $user->admin;
-        }) ;
-        Gate::define('self', function ($user) {
-            return $user == Auth::user();
-        }) ;
-        Gate::define('selfOrAdmin', function ($user) {
-            return $user == Auth::user() || $user->admin;
         }) ;
     }
 }

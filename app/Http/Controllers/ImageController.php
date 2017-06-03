@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Intervention\Image\ImageManagerStatic as Image;
 
 class ImageController extends Controller
@@ -12,12 +13,14 @@ class ImageController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(User $user)
+    public function index()
     {
+        $user = Auth::User();
         return view('users.cropProfileImage', compact('user'));
     }
-    public function crop(\Illuminate\Http\Request $req, User $user)
+    public function crop(\Illuminate\Http\Request $req)
     {
+        $user = Auth::User();
         foreach($req->all() as $value)
         {
             if($value < 0)

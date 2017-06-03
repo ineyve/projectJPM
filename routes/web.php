@@ -40,42 +40,42 @@ Route::get('/', 'HomeController@homeGraph')->name('home');
 // Requests
 Route::get('requests/create', 'RequestController@create')->name('requests.create');
 Route::post('requests/create', 'RequestController@store')->name('requests.store');
-Route::get('requests/{request}/details', 'RequestController@details' )->name('requests.details')->middleware('can:view,request'); //Policy
-Route::get('requests/{request}/rating/{rating}', 'RequestController@rating' )->name('requests.rating')->middleware('can:self');
+Route::get('requests/{request}/details', 'RequestController@details' )->name('requests.details')->middleware('can:selfOrAdmin,request');
+Route::get('requests/{request}/rating/{rating}', 'RequestController@rating' )->name('requests.rating')->middleware('can:self,request');
 Route::get('requests/{request}/edit', 'RequestController@edit')->name('requests.edit');
 Route::put('requests/{request}/edit', 'RequestController@update')->name('requests.update');
-Route::delete('requests/{request}', 'RequestController@destroy')->name('requests.destroy')->middleware('can:self');
-Route::get('requests/{request}/download', 'RequestController@download')->name('requests.download')->middleware('can:selfOrAdmin');
+Route::delete('requests/{request}', 'RequestController@destroy')->name('requests.destroy')->middleware('can:self,request');
+Route::get('requests/{request}/download', 'RequestController@download')->name('requests.download')->middleware('can:selfOrAdmin,request');
 Route::get('requests', 'RequestController@index' )->name('requests.index')->middleware('can:admin');
 Route::post('requests/{request}/complete', 'RequestController@complete')->name('requests.complete')->middleware('can:admin');
 Route::post('requests/{request}/refuse', 'RequestController@refuse')->name('requests.refuse')->middleware('can:admin');
 
 // Comments
 Route::get('comments', 'CommentController@index' )->name('comments.index')->middleware('can:admin');
-Route::post('requests/{request}/details/comment', 'CommentController@create')->name('requests.comment')->middleware('can:selfOrAdmin');
-Route::post('requests/{request}/details/comment/{comment}/reply', 'CommentController@reply')->name('requests.reply')->middleware('can:selfOrAdmin');
+Route::post('requests/{request}/details/comment', 'CommentController@create')->name('requests.comment')->middleware('can:selfOrAdmin,request');
+Route::post('requests/{request}/details/comment/{comment}/reply', 'CommentController@reply')->name('requests.reply')->middleware('can:selfOrAdmin,request');
 Route::get('requests/comment/{comment}/{block}', 'CommentController@block')->name('comment.block')->middleware('can:admin');
 
 // Users
 Route::get('users', 'UserController@index' )->name('users.index');
 Route::get('users/blocked', 'UserController@blocked' )->name('users.blocked')->middleware('can:admin');
 Route::get('users/{user}/profile', 'UserController@profile')->name('users.profile');
-Route::get('users/editProfile', 'UserController@editProfile')->name('users.editProfile')->middleware('can:self');
-Route::post('users/editProfile', 'UserController@updateProfile')->name('users.updateProfile')->middleware('can:self');
-Route::put('users/editProfile', 'UserController@updatePassword')->name('users.updatePassword')->middleware('can:self');
+Route::get('users/editProfile', 'UserController@editProfile')->name('users.editProfile');
+Route::post('users/editProfile', 'UserController@updateProfile')->name('users.updateProfile');
+Route::put('users/editProfile', 'UserController@updatePassword')->name('users.updatePassword');
 Route::get('users/{user}/block/{block}', 'UserController@block')->name('users.block')->middleware('can:admin');
 Route::get('users/{user}/admin/{admin}', 'UserController@admin')->name('users.admin')->middleware('can:admin');
 
 // Image Crop
-Route::get('image/{user}/config', 'ImageController@index')->name('image.config');
-Route::post('image/{user}/crop', 'ImageController@crop')->name('image.crop');
+Route::get('image/config', 'ImageController@index')->name('image.config');
+Route::post('image/crop', 'ImageController@crop')->name('image.crop');
 
 // Departments
-Route::get('departments', 'DepartmentController@index' )->name('departments.index')->middleware('can:admin');;
-Route::get('departments/create', 'DepartmentController@create')->name('departments.create')->middleware('can:admin');;
-Route::post('departments/create', 'DepartmentController@store')->name('departments.store')->middleware('can:admin');;
-Route::get('departments/{department}/edit', 'DepartmentController@edit')->name('departments.edit')->middleware('can:admin');;
-Route::post('departments/{department}/edit', 'DepartmentController@update')->name('departments.update')->middleware('can:admin');
+Route::get('departments', 'DepartmentController@index' )->name('departments.index');
+Route::get('departments/create', 'DepartmentController@create')->name('departments.create');
+Route::post('departments/create', 'DepartmentController@store')->name('departments.store');
+Route::get('departments/{department}/edit', 'DepartmentController@edit')->name('departments.edit');
+Route::post('departments/{department}/edit', 'DepartmentController@update')->name('departments.update');
 
 // Printers
 Route::get('printers', 'PrinterController@index' )->name('printers.index');

@@ -8,10 +8,6 @@ th, td, h3 {
     text-align: center;
 }
 
-td{
-    vertical-align: center;
-}
-
 /* Button Offsets */
 .offset {
     margin-bottom: 10px;

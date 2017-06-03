@@ -14,7 +14,7 @@
 @if(!is_null($user->presentation))
     <li>About me: {{$user->presentation}}</li>
 @endif
-@can('selfOrAdmin')
+@if(Auth::User()->admin || $user->id == Auth::User()->id)
     <li>Completed Quantity: {{$user->print_counts}}</li>
     <li>Request evaluations: {{$user->print_evals}}</li>
     <li>Member for: {{$user->memberFor()}}</li>
@@ -25,4 +25,4 @@
     </li>
     <li>Admin: {{$user->adminToStr()}}</li>
     <li>Blocked: {{$user->blockedToStr()}}</li>
-@endcan
+@endif

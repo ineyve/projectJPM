@@ -17,9 +17,14 @@ class RequestPolicy
      * @param  \App\Request  $request
      * @return mixed
      */
-    public function view(User $user, Request $request)
+    public function selfOrAdmin(User $user, Request $request)
     {
-        return ($user->admin==1||$user->id==$request->owner_id);
+        return ($user->admin||$user->id==$request->owner_id);
+    }
+
+    public function self(User $user, Request $request)
+    {
+        return ($user->id==$request->owner_id);
     }
 
     /**
