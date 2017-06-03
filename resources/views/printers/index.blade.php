@@ -140,10 +140,10 @@
                                             {{$printer->name}}
                                         </td>
                                         <td>
-                                            {{$printer->created_at}}
+                                            {{$printer->dateCreated()}}
                                         </td>
                                         <td>
-                                            {{$printer->updated_at}}
+                                            {{$printer->dateUpdated()}}
                                         </td>
                                         <td>
                                             <a class="btn btn-xs btn-primary"

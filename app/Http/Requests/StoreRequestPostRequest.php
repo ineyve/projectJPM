@@ -25,6 +25,7 @@ class StoreRequestPostRequest extends FormRequest
     public function rules()
     {
         return [
+            'due_date' => 'nullable|date|after:tomorrow',
             'description'=>'required',
             'quantity'=>'required|alpha_num',
             'due_date' => 'nullable|date|after:tomorrow',
