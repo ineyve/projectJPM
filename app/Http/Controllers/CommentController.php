@@ -13,9 +13,30 @@ class CommentController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(){
-        $comments=Comment::where('blocked', '=', '1')->paginate(20);
-        return view('comments.index', compact('comments'));
+    public function index(\Illuminate\Http\Request $req){
+        if ($req->has('order') && $req->has('field')) {
+            //If user sorted:
+            $sort['order'] = $req->order;
+            $sort['field'] = $req->field;
+        } else {   //If user didn't sort, default to:
+            $sort['order'] = 'DESC';
+            $sort['field'] = 'comments.updated_at';
+        }
+
+        if ($req->has('search')) { //With or without search
+            $sort['search'] = $req->search;
+
+            $comments = Request::select('comments.*')->leftJoin('users', 'users.id', '=', 'comments.user_id')->where('blocked', '=', '1')
+                ->orWhere('comment', 'like', '%'.$sort['search'].'%')->orWhere('users.name', '=', $sort['search'])
+                ->orWhere('comments.request_id', '=', $sort['search'])->orWhereDate('comments.updated_at', '=', $sort['search'])
+                ->orderBy($sort['field'], $sort['order'])->paginate(20);
+        } else {
+            $comments=Comment::where('blocked', '=', '1')
+                ->orderBy($sort['field'], $sort['order'])->paginate(20);
+        }
+
+        $comments->appends($req->input())->links();
+        return view('comments.index', compact('comments','sort'));
     }
 
     public function create(\Illuminate\Http\Request $req, Request $request)

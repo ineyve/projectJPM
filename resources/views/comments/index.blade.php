@@ -12,10 +12,90 @@
                             <table class="table table-striped table-hover" id="myTable">
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Request</th>
-                                    <th>Owner</th>
-                                    <th>Comment</th>
+                                    <th>
+                                        <form>
+                                            @if(isset($sort['search']))
+                                                <input type="hidden" name="search" value="{{$sort['search']}}"/>
+                                            @endif
+                                            <input type="hidden" name="field" value="comments.id"/>
+                                            <!-- table column name -->
+                                            @if($sort['field']=='comments.id') <!-- table column name -->
+                                            @if($sort['order']=='ASC')
+                                                <button type="submit" name="order" value="DESC" class="btn-link">ID ▾
+                                                </button>
+                                            @elseif($sort['order']=='DESC')
+                                                <button type="submit" name="order" value="ASC" class="btn-link">ID ▴
+                                                </button>
+                                            @endif
+                                            @else
+                                                <button type="submit" name="order" value="ASC" class="btn-link">ID
+                                                </button>
+                                            @endif
+                                        </form>
+                                    </th>
+                                    <th>
+                                        <form>
+                                            @if(isset($sort['search']))
+                                                <input type="hidden" name="search" value="{{$sort['search']}}"/>
+                                            @endif
+                                            <input type="hidden" name="field" value="comments.request_id"/>
+                                            <!-- table column name -->
+                                            @if($sort['field']=='comments.request_id') <!-- table column name -->
+                                            @if($sort['order']=='ASC')
+                                                <button type="submit" name="order" value="DESC" class="btn-link">Request ▾
+                                                </button>
+                                            @elseif($sort['order']=='DESC')
+                                                <button type="submit" name="order" value="ASC" class="btn-link">Request ▴
+                                                </button>
+                                            @endif
+                                            @else
+                                                <button type="submit" name="order" value="ASC" class="btn-link">Request
+                                                </button>
+                                            @endif
+                                        </form>
+                                    </th>
+                                    <th>
+                                        <form>
+                                            @if(isset($sort['search']))
+                                                <input type="hidden" name="search" value="{{$sort['search']}}"/>
+                                            @endif
+                                            <input type="hidden" name="field" value="users.name"/>
+                                            <!-- table column name -->
+                                            @if($sort['field']=='users.name') <!-- table column name -->
+                                            @if($sort['order']=='ASC')
+                                                <button type="submit" name="order" value="DESC" class="btn-link">Owner ▾
+                                                </button>
+                                            @elseif($sort['order']=='DESC')
+                                                <button type="submit" name="order" value="ASC" class="btn-link">Owner ▴
+                                                </button>
+                                            @endif
+                                            @else
+                                                <button type="submit" name="order" value="ASC" class="btn-link">Owner
+                                                </button>
+                                            @endif
+                                        </form>
+                                    </th>
+                                    <th>
+                                        <form>
+                                            @if(isset($sort['search']))
+                                                <input type="hidden" name="search" value="{{$sort['search']}}"/>
+                                            @endif
+                                            <input type="hidden" name="field" value="comments.comment"/>
+                                            <!-- table column name -->
+                                            @if($sort['field']=='comments.comment') <!-- table column name -->
+                                            @if($sort['order']=='ASC')
+                                                <button type="submit" name="order" value="DESC" class="btn-link">Comment ▾
+                                                </button>
+                                            @elseif($sort['order']=='DESC')
+                                                <button type="submit" name="order" value="ASC" class="btn-link">Comment ▴
+                                                </button>
+                                            @endif
+                                            @else
+                                                <button type="submit" name="order" value="ASC" class="btn-link">Comment
+                                                </button>
+                                            @endif
+                                        </form>
+                                    </th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
