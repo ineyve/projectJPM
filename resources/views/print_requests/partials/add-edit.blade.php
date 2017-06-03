@@ -15,11 +15,10 @@
         });
     });
 </script>
-
 @endpush
 <div class="form-group">
     <label for="inputDueDate">Due Date</label>
-    <input type="date" data-date-inline-picker="true" class="form-control" name="due_date" id="inputDueDate"
+    <input data-date-inline-picker="true" class="form-control" name="due_date" id="inputDueDate"
            @if(old('due_date') != null)
            value="{{old('due_date')}}"
            @elseif(Route::currentRouteName()=='requests.edit')
