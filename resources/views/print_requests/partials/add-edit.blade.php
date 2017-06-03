@@ -1,5 +1,22 @@
 {{csrf_field()}}
+@push('master_header')
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+<script type="text/javascript">
+    $(window).load(function () {
+        $.getScript("//code.jquery.com/jquery-1.10.2.js", function () {
+            $.getScript("//code.jquery.com/ui/1.11.2/jquery-ui.js", function () {
+                $(function () {
+                    $("#inputDueDate").datepicker({
+                        changeMonth: true,
+                        changeYear: true
+                    });
+                });
+            });
+        });
+    });
+</script>
 
+@endpush
 <div class="form-group">
     <label for="inputDueDate">Due Date</label>
     <input type="date" data-date-inline-picker="true" class="form-control" name="due_date" id="inputDueDate"
