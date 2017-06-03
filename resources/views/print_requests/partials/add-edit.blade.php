@@ -4,20 +4,20 @@
     <label for="inputDueDate">Due Date</label>
     <input type="date" data-date-inline-picker="true" class="form-control" name="due_date" id="inputDueDate"
            @if(old('due_date') != null)
-                value="{{old('due_date')}}"
+           value="{{old('due_date')}}"
            @elseif(Route::currentRouteName()=='requests.edit')
-                value="{{$request->due_date}}"
+           value="{{$request->due_date}}"
            @endif
-    autofocus>
+           autofocus>
 </div>
 <div class="form-group{{ $errors->has('quantity') ? ' has-error' : '' }}">
     <label for="inputQuantity" class="control-label">Quantity</label>
     <input type="number" class="form-control" name="quantity" id="inputQuantity" placeholder="Quantity" min="1"
            @if(old('quantity') != null)
-                value="{{old('quantity')}}"
+           value="{{old('quantity')}}"
            @elseif(Route::currentRouteName()=='requests.edit')
-                value="{{$request->quantity}}"
-           @endif
+           value="{{$request->quantity}}"
+            @endif
     >
     @if ($errors->has('quantity'))
         <span class="help-block">
@@ -30,9 +30,9 @@
     <select name="colored" id="inputColored" class="form-control">
         <option value="1">Colored</option>
         <option value="0"
-            @if(isset($request) && $request->colored == 0 || old('colored') == 0)
-            selected="selected"
-            @endif
+                @if(isset($request) && $request->colored == 0 || old('colored') == 0)
+                selected="selected"
+                @endif
         >Black and White
         </option>
     </select>
@@ -110,13 +110,14 @@
 </div>
 <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
     <label for="inputDescription" class="control-label">Description</label>
-    <textarea type="text" class="form-control" name="description" id="inputDescription" placeholder="Description" required>
-        @if(old('description') != null)
-{{old('description')}}
+    <textarea type="text" class="form-control" name="description" id="inputDescription" placeholder="Description"
+              required>
+@if(old('description') != null)
+            {{old('description')}}
         @elseif(Route::currentRouteName()=='requests.edit')
-{{$request->description}}
+            {{$request->description}}
         @endif
-    </textarea>
+</textarea>
     @if ($errors->has('description'))
         <span class="help-block">
             <strong>{{ $errors->first('description') }}</strong>
