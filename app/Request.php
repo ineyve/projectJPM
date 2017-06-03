@@ -23,11 +23,14 @@ class Request extends Model
     public function statusToStr()
     {
         switch ($this->status) {
-            case 0: return 'Pending';
+        case 0: 
+            return 'Pending';
                 break;
-            case 1: return 'Rejected';
+        case 1: 
+            return 'Rejected';
                 break;
-            case 2: return 'Complete';
+        case 2: 
+            return 'Complete';
                 break;
         }
     }
@@ -53,11 +56,14 @@ class Request extends Model
     public function typeToStr()
     {
         switch ($this->paper_type) {
-            case 0: return 'Draft';
+        case 0: 
+            return 'Draft';
                 break;
-            case 1: return 'Normal';
+        case 1: 
+            return 'Normal';
                 break;
-            case 2: return 'Photographic';
+        case 2: 
+            return 'Photographic';
                 break;
         }
     }
@@ -85,14 +91,13 @@ class Request extends Model
     public function hasImage()
     {
         if (isset($this->file)) {
-            switch($this->fileExtension())
-            {
-                case "png":
-                case "jpg":
-                case "jpeg":
-                case "gif":
-                case "bmp":
-                    return true;
+            switch ($this->fileExtension()) {
+            case "png":
+            case "jpg":
+            case "jpeg":
+            case "gif":
+            case "bmp":
+                return true;
             }
         }
         return false;

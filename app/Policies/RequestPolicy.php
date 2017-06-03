@@ -13,8 +13,8 @@ class RequestPolicy
     /**
      * Determine whether the user can view the request.
      *
-     * @param  \App\User  $user
-     * @param  \App\Request  $request
+     * @param  \App\User    $user
+     * @param  \App\Request $request
      * @return mixed
      */
     public function selfOrAdmin(User $user, Request $request)
@@ -30,7 +30,7 @@ class RequestPolicy
     /**
      * Determine whether the user can create requests.
      *
-     * @param  \App\User  $user
+     * @param  \App\User $user
      * @return mixed
      */
     public function create(User $user)
@@ -42,8 +42,8 @@ class RequestPolicy
     /**
      * Determine whether the user can update the request.
      *
-     * @param  \App\User  $user
-     * @param  \App\Request  $request
+     * @param  \App\User    $user
+     * @param  \App\Request $request
      * @return mixed
      */
     public function update(User $user, Request $request)
@@ -54,8 +54,8 @@ class RequestPolicy
     /**
      * Determine whether the user can delete the request.
      *
-     * @param  \App\User  $user
-     * @param  \App\Request  $request
+     * @param  \App\User    $user
+     * @param  \App\Request $request
      * @return mixed
      */
     public function delete(User $user, Request $request)

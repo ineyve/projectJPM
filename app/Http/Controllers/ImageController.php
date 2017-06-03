@@ -21,10 +21,10 @@ class ImageController extends Controller
     public function crop(\Illuminate\Http\Request $req)
     {
         $user = Auth::User();
-        foreach($req->all() as $value)
-        {
-            if($value < 0)
+        foreach ($req->all() as $value) {
+            if ($value < 0) {
                 return redirect()->back();
+            }
         }
 
         $path = public_path('/storage/profiles/'.$user->profile_photo);
@@ -32,8 +32,10 @@ class ImageController extends Controller
         $ratioW = $width/$req->liveW;
         $ratioH = $height/$req->liveH;
 
-        Image::make($path)->crop((int)($req->w*$ratioW), (int)($req->h*$ratioH),
-            (int)($req->x*$ratioW), (int)($req->y*$ratioH))->resize((int)($req->w*720/$req->h),720)->save($path);
+        Image::make($path)->crop(
+            (int)($req->w*$ratioW), (int)($req->h*$ratioH),
+            (int)($req->x*$ratioW), (int)($req->y*$ratioH)
+        )->resize((int)($req->w*720/$req->h), 720)->save($path);
         return redirect()->route('dashboard');
     }
 }

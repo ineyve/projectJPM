@@ -47,12 +47,13 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        return Validator::make(
+            $data, [
             'name' => 'required|string|max:255|regex:/^[A-zÀ-ÿ ]+$/',
             'email' => 'required|string|email|max:255|unique:users',
             'phone' => 'required|numeric',
@@ -61,18 +62,20 @@ class RegisterController extends Controller
             //'profile_url' => 'regex:/^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$/',
             'presentation' => 'regex:/^[a-zA-Z0-9 ]+$/'
 
-        ]);
+            ]
+        );
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return User
      */
     protected function create(array $data)
     {
-        return User::create([
+        return User::create(
+            [
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
@@ -85,7 +88,8 @@ class RegisterController extends Controller
             'print_evals' => 0,
             'print_counts' => 0,
             'verified' => 0,
-        ]);
+            ]
+        );
     }
 
     public function showRegistrationForm()
@@ -103,7 +107,7 @@ class RegisterController extends Controller
         DB::beginTransaction();
         try {
             $user = $this->create($request->all());
-            if($request->hasFile('profile_photo')){
+            if ($request->hasFile('profile_photo')) {
                 $path = $request->file('profile_photo')->store('public/profiles');
                 $parts = explode('/', $path);
                 $user->profile_photo = $parts[2];

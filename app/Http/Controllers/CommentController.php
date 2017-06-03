@@ -13,7 +13,8 @@ class CommentController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(\Illuminate\Http\Request $req){
+    public function index(\Illuminate\Http\Request $req)
+    {
         if ($req->has('order') && $req->has('field')) {
             //If user sorted:
             $sort['order'] = $req->order;
@@ -27,19 +28,21 @@ class CommentController extends Controller
             $sort['search'] = $req->search;
             $comments = Comment::select('comments.*')->leftJoin('users', 'users.id', '=', 'comments.user_id')->
             where('comments.blocked', '=', '1')
-                ->where(function ($query) use ($sort) {
-                    $query->where('comments.comment', 'like', '%'.$sort['search'].'%')
-                        ->orWhere('users.name', 'like', '%'.$sort['search'].'%')
-                        ->orWhere('comments.request_id', '=', $sort['search'])
-                        ->orWhereDate('comments.updated_at', '=', $sort['search']);
-                })->orderBy($sort['field'], $sort['order'])->paginate(20);
+                ->where(
+                    function ($query) use ($sort) {
+                        $query->where('comments.comment', 'like', '%'.$sort['search'].'%')
+                            ->orWhere('users.name', 'like', '%'.$sort['search'].'%')
+                            ->orWhere('comments.request_id', '=', $sort['search'])
+                            ->orWhereDate('comments.updated_at', '=', $sort['search']);
+                    }
+                )->orderBy($sort['field'], $sort['order'])->paginate(20);
         } else {
             $comments=Comment::select('comments.*')->leftJoin('users', 'users.id', '=', 'comments.user_id')
                 ->where('comments.blocked', '=', '1')->orderBy($sort['field'], $sort['order'])->paginate(20);
         }
 
         $comments->appends($req->input())->links();
-        return view('comments.index', compact('comments','sort'));
+        return view('comments.index', compact('comments', 'sort'));
     }
 
     public function create(\Illuminate\Http\Request $req, Request $request)
