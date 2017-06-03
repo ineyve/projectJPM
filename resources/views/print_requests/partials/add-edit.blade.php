@@ -144,11 +144,16 @@
 </div>
 <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
     <label for="inputDescription" class="control-label">Description</label>
-    <textarea class="form-control" name="description" id="inputDescription" placeholder="Description"
-              required>@if(old('description') != null){{old('description')}}@elseif(Route::currentRouteName()=='requests.edit'){{$request->description}}@endif</textarea>
-    @if ($errors->has('description'))
-        <span class="help-block">
-            <strong>{{ $errors->first('description') }}</strong>
-        </span>
+    @if(old('description') != null)
+        @php($temp=old('description'))
+    @elseif(Route::currentRouteName()=='requests.edit')
+        @php($temp=$request->description)
     @endif
+<textarea class="form-control" name="description" id="inputDescription" placeholder="Description"
+          required>{{$temp}}</textarea>
+@if ($errors->has('description'))
+    <span class="help-block">
+        <strong>{{ $errors->first('description') }}</strong>
+    </span>
+@endif
 </div>
