@@ -25,7 +25,7 @@ class UpdateUserPostRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'regex:/^[a-zA-Z ]+$/',
+            'name' => 'required|regex:/^[A-zÀ-ÿ ]+$/',
             'email' => 'email|unique:users,email'
         ];
     }
