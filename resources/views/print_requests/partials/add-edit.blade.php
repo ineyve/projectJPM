@@ -6,7 +6,8 @@
         $.getScript("//code.jquery.com/jquery-1.10.2.js", function () {
             $.getScript("//code.jquery.com/ui/1.11.2/jquery-ui.js", function () {
                 $(function () {
-                    $("#inputDueDatePicker").datepicker({
+                    var dp = $("#inputDueDatePicker");
+                    dp.datepicker({
                         changeMonth: true,
                         changeYear: true,
                         dateFormat: 'yy-mm-dd',
@@ -36,16 +37,21 @@
         </span>
     @endif
 </div>
-<div class="form-group">
+<div class="form-group{{ $errors->has('due_date') ? ' has-error' : '' }}">
     <label for="inputDueDate">Due Date</label>
     <input type="hidden" id="inputDueDate" name="due_date"/>
     <input data-date-inline-picker="true" class="form-control" id="inputDueDatePicker"
            @if(old('due_date') != null)
-           value="{{old('due_date')}}"
+           value="{{explode(" ",old('due_date'))[0]}}"
            @elseif(Route::currentRouteName()=='requests.edit')
            value="{{$request->due_date}}"
            @endif
            >
+    @if ($errors->has('due_date'))
+        <span class="help-block">
+            <strong>{{ $errors->first('due_date') }}</strong>
+        </span>
+    @endif
 </div>
 <div class="form-group">
     <label for="inputColored">Colored</label>
