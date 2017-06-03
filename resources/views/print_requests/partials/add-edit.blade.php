@@ -142,6 +142,8 @@
         @php($temp=old('description'))
     @elseif(Route::currentRouteName()=='requests.edit')
         @php($temp=$request->description)
+    @else
+        @php($temp="")
     @endif
 <textarea class="form-control" name="description" id="inputDescription" placeholder="Description"
           required>{{$temp}}</textarea>
