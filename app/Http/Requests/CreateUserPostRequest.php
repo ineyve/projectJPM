@@ -24,7 +24,7 @@ class CreateUserPostRequest extends FormRequest
     public function rules()
     {
         return [
-                'name' => 'required|regex:/^[a-zA-Z ]+$/',
+                'name' => 'required|regex:/^[A-zÀ-ÿ ]+$/',
                 'email' => 'required|email|unique:users',
                 'phone' => 'required|numeric',
                 'profile_url' => 'nullable|regex:/([\w\/:]+[\.]+[\w]+)([\w]*[\.\/]+[\w\/]+)*/',
