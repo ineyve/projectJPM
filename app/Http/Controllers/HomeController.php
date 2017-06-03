@@ -14,8 +14,12 @@ class HomeController extends Controller
             $selected=$req->department;
 
             /* TEXT STATISTICS */
-            $grayScale = Request::where('colored', '=', '0')->where('status', 2)->where('id', $selected)->sum('quantity'); //Amount of grayscale prints
-            $colored = Request::where('colored', '=', '1')->where('status', 2)->where('id', $selected)->sum('quantity'); //Amount of colored prints
+            $grayScale = Request::leftJoin('users', 'users.id', '=', 'requests.owner_id')
+                ->where('colored', '=', '0')->where('status', 2)->where('users.department_id', $selected)
+                ->sum('quantity'); //Amount of grayscale prints
+            $colored = Request::leftJoin('users', 'users.id', '=', 'requests.owner_id')
+                ->where('colored', '=', '1')->where('status', 2)->where('users.department_id', $selected)
+                ->sum('quantity'); //Amount of colored prints
             $total = $colored + $grayScale;
             /* END */
 
