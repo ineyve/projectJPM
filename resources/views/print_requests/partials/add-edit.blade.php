@@ -16,6 +16,21 @@
     });
 </script>
 @endpush
+<div class="form-group{{ $errors->has('quantity') ? ' has-error' : '' }}">
+    <label for="inputQuantity" class="control-label">Quantity</label>
+    <input type="number" class="form-control" name="quantity" id="inputQuantity" placeholder="Quantity" min="1"
+           @if(old('quantity') != null)
+           value="{{old('quantity')}}"
+           @elseif(Route::currentRouteName()=='requests.edit')
+           value="{{$request->quantity}}"
+           @endif
+           autofocus>
+    @if ($errors->has('quantity'))
+        <span class="help-block">
+            <strong>{{ $errors->first('quantity') }}</strong>
+        </span>
+    @endif
+</div>
 <div class="form-group">
     <label for="inputDueDate">Due Date</label>
     <input data-date-inline-picker="true" class="form-control" name="due_date" id="inputDueDate"
@@ -24,22 +39,7 @@
            @elseif(Route::currentRouteName()=='requests.edit')
            value="{{$request->due_date}}"
            @endif
-           autofocus>
-</div>
-<div class="form-group{{ $errors->has('quantity') ? ' has-error' : '' }}">
-    <label for="inputQuantity" class="control-label">Quantity</label>
-    <input type="number" class="form-control" name="quantity" id="inputQuantity" placeholder="Quantity" min="1"
-           @if(old('quantity') != null)
-           value="{{old('quantity')}}"
-           @elseif(Route::currentRouteName()=='requests.edit')
-           value="{{$request->quantity}}"
-            @endif
-    >
-    @if ($errors->has('quantity'))
-        <span class="help-block">
-            <strong>{{ $errors->first('quantity') }}</strong>
-        </span>
-    @endif
+           >
 </div>
 <div class="form-group">
     <label for="inputColored">Colored</label>
