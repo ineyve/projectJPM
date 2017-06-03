@@ -7,7 +7,24 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Blocked Comments</div>
                     <div class="panel-body">
-                        {{ $comments->links() }}
+                        <div class="row">
+                            <div class="col-xs-6">
+                                {{ $comments->links() }}
+                                @if(isset($sort['search']))
+                                    <a href="{{ route('comments.index') }}" class="btn btn-success"
+                                       style="float:right;">Clear Search</a>
+                                @endif
+                            </div>
+                            <div class="col-xs-6">
+                                <form>
+                                    <button type="submit" class="btn btn-default btn-search"><span
+                                                class="glyphicon glyphicon-search search-icon"></span></button>
+                                    <input type="text" name="search" class="myInput" placeholder="Search any column..."/>
+                                </form>
+                            </div>
+                            {{--<input type="hidden" name="field" value="{{$sort['field']}}"/>
+                            <input type="hidden" name="order" value="{{$sort['order']}}"/>--}}
+                        </div>
                         @if (count($comments))
                             <table class="table table-striped table-hover" id="myTable">
                                 <thead>

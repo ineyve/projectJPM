@@ -26,8 +26,8 @@ class CommentController extends Controller
         if ($req->has('search')) { //With or without search
             $sort['search'] = $req->search;
 
-            $comments = Request::select('comments.*')->leftJoin('users', 'users.id', '=', 'comments.user_id')->where('blocked', '=', '1')
-                ->orWhere('comment', 'like', '%'.$sort['search'].'%')->orWhere('users.name', '=', $sort['search'])
+            $comments = Comment::select('comments.*')->leftJoin('users', 'users.id', '=', 'comments.user_id')->where('comments.blocked', '=', '1')
+                ->orWhere('comment', 'like', '%'.$sort['search'].'%')->orWhere('name', '=', $sort['search'])
                 ->orWhere('comments.request_id', '=', $sort['search'])->orWhereDate('comments.updated_at', '=', $sort['search'])
                 ->orderBy($sort['field'], $sort['order'])->paginate(20);
         } else {
