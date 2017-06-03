@@ -7,13 +7,14 @@
             $.getScript("//code.jquery.com/ui/1.11.2/jquery-ui.js", function () {
                 $(function () {
                     var dp = $("#inputDueDatePicker");
+                    var hiddendp = $('#inputDueDate');
                     dp.datepicker({
                         changeMonth: true,
                         changeYear: true,
                         dateFormat: 'yy-mm-dd',
-                        onSelect: function(datetext){
+                        onSelect: function (datetext) {
                             datetext = datetext + " 08:00:00";
-                            $('#inputDueDate').val(datetext);
+                            hiddendp.val(datetext);
                         }
                     });
                 });
@@ -39,14 +40,19 @@
 </div>
 <div class="form-group{{ $errors->has('due_date') ? ' has-error' : '' }}">
     <label for="inputDueDatePicker">Due Date</label>
-    <input type="hidden" id="inputDueDate" name="due_date"/>
+    <input type="hidden" id="inputDueDate" name="due_date"
+           @if(old('due_date') != null)
+           value="{{old('due_date')}}"
+           @elseif(Route::currentRouteName()=='requests.edit')
+           value="{{explode(" ",$request->due_date)[0]}}"
+            @endif/>
     <input data-date-inline-picker="true" class="form-control" id="inputDueDatePicker"
            @if(old('due_date') != null)
            value="{{explode(" ",old('due_date'))[0]}}"
            @elseif(Route::currentRouteName()=='requests.edit')
-           value="{{$request->due_date}}"
-           @endif
-           >
+           value="{{explode(" ",$request->due_date)[0]}}"
+            @endif
+    >
     @if ($errors->has('due_date'))
         <span class="help-block">
             <strong>{{ $errors->first('due_date') }}</strong>
@@ -139,13 +145,7 @@
 <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
     <label for="inputDescription" class="control-label">Description</label>
     <textarea class="form-control" name="description" id="inputDescription" placeholder="Description"
-              required>
-@if(old('description') != null)
-            {{old('description')}}
-        @elseif(Route::currentRouteName()=='requests.edit')
-            {{$request->description}}
-        @endif
-</textarea>
+              required>@if(old('description') != null){{old('description')}}@elseif(Route::currentRouteName()=='requests.edit'){{$request->description}}@endif</textarea>
     @if ($errors->has('description'))
         <span class="help-block">
             <strong>{{ $errors->first('description') }}</strong>
