@@ -30,11 +30,21 @@
 
                                 <div class="col-md-6">
                                     <input id="password" type="password" class="form-control" name="password" required>
-
                                     @if ($errors->has('password'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
+                                            <strong>{{ $errors->first('password') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('message') ? ' has-error' : '' }}">
+
+                                <div class="col-md-6 col-md-offset-4">
+                                    @if ($errors->has('message'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('message') }}</strong>
+                                        </span>
                                     @endif
                                 </div>
                             </div>
