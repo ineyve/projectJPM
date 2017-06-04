@@ -36,7 +36,10 @@ Route::get('search/profile', function(){
 
 // Home No Middleware
 Route::get('/', 'HomeController@homeGraph')->name('home');
-Route::get('/unavailable', 'HomeController@unavailable')->name('unavailable');
+
+Route::get('/unavailable', function(){
+    return view('unavailable');
+})->name('unavailable');
 
 // Requests Middleware Auth
 Route::get('requests/create', 'RequestController@create')->name('requests.create');

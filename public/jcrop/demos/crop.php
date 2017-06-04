@@ -3,6 +3,7 @@
 /**
  * Jcrop image cropping plugin for jQuery
  * Example cropping script
+ *
  * @copyright 2008-2009 Kelly Hallman
  * More info: http://deepliquid.com/content/Jcrop_Implementation_Theory.html
  */
@@ -15,8 +16,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $img_r = imagecreatefromjpeg($src);
     $dst_r = ImageCreateTrueColor($targ_w, $targ_h);
 
-    imagecopyresampled($dst_r, $img_r, 0, 0, $_POST['x'], $_POST['y'],
-    $targ_w, $targ_h, $_POST['w'], $_POST['h']);
+    imagecopyresampled(
+        $dst_r, $img_r, 0, 0, $_POST['x'], $_POST['y'],
+        $targ_w, $targ_h, $_POST['w'], $_POST['h']
+    );
 
     header('Content-type: image/jpeg');
     imagejpeg($dst_r, null, $jpeg_quality);
@@ -93,30 +96,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <h1>Server-based Cropping Behavior</h1>
 </div>
 
-		<!-- This is the image we're attaching Jcrop to -->
-		<img src="demo_files/pool.jpg" id="cropbox" />
+        <!-- This is the image we're attaching Jcrop to -->
+        <img src="demo_files/pool.jpg" id="cropbox" />
 
-		<!-- This is the form that our event handler fills -->
-		<form action="crop.php" method="post" onsubmit="return checkCoords();">
-			<input type="hidden" id="x" name="x" />
-			<input type="hidden" id="y" name="y" />
-			<input type="hidden" id="w" name="w" />
-			<input type="hidden" id="h" name="h" />
-			<input type="submit" value="Crop Image" class="btn btn-large btn-inverse" />
-		</form>
+        <!-- This is the form that our event handler fills -->
+        <form action="crop.php" method="post" onsubmit="return checkCoords();">
+            <input type="hidden" id="x" name="x" />
+            <input type="hidden" id="y" name="y" />
+            <input type="hidden" id="w" name="w" />
+            <input type="hidden" id="h" name="h" />
+            <input type="submit" value="Crop Image" class="btn btn-large btn-inverse" />
+        </form>
 
-		<p>
-			<b>An example server-side crop script.</b> Hidden form values
-			are set when a selection is made. If you press the <i>Crop Image</i>
-			button, the form will be submitted and a 150x150 thumbnail will be
-			dumped to the browser. Try it!
-		</p>
+        <p>
+            <b>An example server-side crop script.</b> Hidden form values
+            are set when a selection is made. If you press the <i>Crop Image</i>
+            button, the form will be submitted and a 150x150 thumbnail will be
+            dumped to the browser. Try it!
+        </p>
 
 
-	</div>
-	</div>
-	</div>
-	</div>
-	</body>
+    </div>
+    </div>
+    </div>
+    </div>
+    </body>
 
 </html>

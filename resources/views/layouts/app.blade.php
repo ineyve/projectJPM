@@ -13,7 +13,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand">
-                    <img src="/logo.png" alt="Print It" style="width:20px;height:20px;">
+                    <img src="{{asset('/logo.png')}}" alt="Print It" style="width:20px;height:20px;">
                 </a>
                 <a class="navbar-brand">{{ config('app.name') }}</a>
             </div>

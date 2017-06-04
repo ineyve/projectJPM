@@ -9,7 +9,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <!-- Set website title -->
-        <title> {{ config('app.name') }} @stack('page_name') </title>
+        <title> {{ config('app.name') }} - Error </title>
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
@@ -23,9 +23,6 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
               integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <link rel="stylesheet" href="{{asset('/css/style.css')}}">
-
-        <script src="{{asset('/js/jquery.min.js')}}"></script>
-        @stack('master_header')
     </head>
     <body>
         <div id="app">
@@ -43,7 +40,7 @@
 
                         <!-- Branding Image -->
                         <a class="navbar-brand">
-                            <img src="/logo.png" alt="Print It" style="width:20px;height:20px;">
+                            <img src="{{asset('/logo.png')}}" alt="Print It" style="width:20px;height:20px;">
                         </a>
                         <a class="navbar-brand">{{ config('app.name') }}</a>
                     </div>

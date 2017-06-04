@@ -23,13 +23,13 @@ class Request extends Model
     public function statusToStr()
     {
         switch ($this->status) {
-        case 0: 
+        case 0:
             return 'Pending';
                 break;
-        case 1: 
+        case 1:
             return 'Rejected';
                 break;
-        case 2: 
+        case 2:
             return 'Complete';
                 break;
         }
@@ -56,13 +56,13 @@ class Request extends Model
     public function typeToStr()
     {
         switch ($this->paper_type) {
-        case 0: 
+        case 0:
             return 'Draft';
                 break;
-        case 1: 
+        case 1:
             return 'Normal';
                 break;
-        case 2: 
+        case 2:
             return 'Photographic';
                 break;
         }

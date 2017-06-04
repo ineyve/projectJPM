@@ -59,10 +59,11 @@ class Handler extends ExceptionHandler
         }
 
         if ($exception instanceof MethodNotAllowedHttpException || $exception instanceof AuthorizationException
-            || $exception instanceof NotFoundHttpException || $exception instanceof ModelNotFoundException) {
+            || $exception instanceof NotFoundHttpException || $exception instanceof ModelNotFoundException
+        ) {
             return redirect()->route('home');
         }
-        if ($exception instanceof QueryException){
+        if ($exception instanceof QueryException) {
             return redirect()->route('unavailable');
         }
 

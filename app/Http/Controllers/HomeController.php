@@ -79,7 +79,6 @@ class HomeController extends Controller
             DB::connection()->getPdo();
         } catch (\Exception $e) {
             return view('unavailable');
-
         }
         return redirect()->route('home');
     }
