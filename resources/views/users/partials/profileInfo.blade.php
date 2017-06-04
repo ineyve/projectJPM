@@ -1,7 +1,7 @@
 @if(is_null($user->profile_photo))
     <img class="profile-picture" src="/profile.jpg" alt="Image failed to load">
 @else
-    <img class="profile-picture" src="/storage/profiles/{{$user->profile_photo}}" alt="Image failed to load">
+    <img class="profile-picture" src="/storage/profiles/{{$user->profile_photo}}?{{$user->updated_at}}" alt="Image failed to load">
 @endif
 <ul>
 <li>E-mail address: <a href="mailto:{{$user->email}}">{{$user->email}}</a></li>

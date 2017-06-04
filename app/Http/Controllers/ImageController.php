@@ -36,6 +36,7 @@ class ImageController extends Controller
             (int)($req->w*$ratioW), (int)($req->h*$ratioH),
             (int)($req->x*$ratioW), (int)($req->y*$ratioH)
         )->resize((int)($req->w*720/$req->h), 720)->save($path);
+        $user->save();
         return redirect()->route('dashboard');
     }
 }

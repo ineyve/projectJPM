@@ -47,8 +47,6 @@ class DepartmentController extends Controller
     public function store(StoreDepartmentPostRequest $req)
     {
         $department = new Department();
-        $department->created_at = Carbon::now();
-        $department->updated_at = $department->created_at;
         $department->fill($req->all());
         $department->save();
         return redirect()->route('departments.index')->with('success', 'Department added sucessfuly!');
@@ -62,7 +60,6 @@ class DepartmentController extends Controller
     public function update(StoreDepartmentPostRequest $req, Department $department)
     {
         $department->name = $req->name;
-        $department->updated_at = Carbon::now();
         $department->save();
 
         return redirect()->route('departments.index')->with('success', 'Department updated successfully!');

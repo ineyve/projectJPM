@@ -47,8 +47,6 @@ class PrinterController extends Controller
     public function store(StorePrinterPostRequest $req)
     {
         $printer = new Printer();
-        $printer->created_at = Carbon::now();
-        $printer->updated_at = $printer->created_at;
         $printer->fill($req->all());
         $printer->save();
         return redirect()->route('printers.index')->with('success', 'Printers added sucessfuly!');
@@ -62,7 +60,6 @@ class PrinterController extends Controller
     public function update(StorePrinterPostRequest $req, Printer $printer)
     {
         $printer->name = $req->name;
-        $printer->updated_at = Carbon::now();
         $printer->save();
 
         return redirect()->route('printers.index')->with('success', 'Printers updated successfully!');
