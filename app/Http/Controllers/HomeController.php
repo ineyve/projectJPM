@@ -73,6 +73,11 @@ class HomeController extends Controller
         return view('welcome', compact('statistics', 'departments', 'selected'));
     }
 
+    public function unavailable()
+    {
+        return view('unavailable');
+    }
+
     public function getPrintsPerDepartment()
     {
         return DB::select(DB::raw("SELECT d.name AS depname, u.department_id AS dep_id, sum(quantity) AS cnt FROM (SELECT * FROM requests WHERE status = 2) r JOIN users u ON r.owner_id = u.id JOIN departments d ON d.id = u.department_id GROUP BY u.department_id"));

@@ -3,9 +3,13 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -52,6 +56,14 @@ class Handler extends ExceptionHandler
                 'message' => $exception->getMessage()
                 ], 404
             );
+        }
+
+        if ($exception instanceof MethodNotAllowedHttpException || $exception instanceof AuthorizationException
+            || $exception instanceof NotFoundHttpException || $exception instanceof ModelNotFoundException) {
+            return redirect()->route('home');
+        }
+        if ($exception instanceof QueryException){
+            return redirect()->route('unavailable');
         }
 
         return parent::render($request, $exception);

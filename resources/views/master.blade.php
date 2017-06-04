@@ -30,7 +30,9 @@
 
 </head>
 <body>
-@include('layouts.app')
+@if(Route::currentRouteName()!='unavailable')
+    @include('layouts.app')
+@endif
 @if(session('success'))
     @include('shared.success')
 @endif
