@@ -59,9 +59,7 @@ class RegisterController extends Controller
             'phone' => 'required|numeric',
             'password' => 'required|string|min:8|confirmed',
             'department_id' => 'exists:departments,id',
-            //'profile_url' => 'regex:/^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$/',
-            'presentation' => 'regex:/^[a-zA-Z0-9 ]+$/'
-
+            'profile_url' => 'nullable|regex:/([\w\/:]+[\.]+[\w]+)([\w]*[\.\/]+[\w\/]+)*/',
             ]
         );
     }

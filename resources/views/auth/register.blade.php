@@ -116,17 +116,11 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('presentation') ? ' has-error' : '' }}">
+                            <div class="form-group">
                                 <label for="presentation" class="col-md-4 control-label">About Me</label>
                                 <div class="col-md-6">
                                     <input id="presentation" type="text" class="form-control" name="presentation"
                                            value="{{old('presentation')}}"/>
-
-                                    @if ($errors->has('presntation'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('presentation') }}</strong>
-                                    </span>
-                                    @endif
                                 </div>
                             </div>
 
