@@ -16,11 +16,13 @@
                                 @endif
                             </div>
                             <div class="col-xs-6">
+                                @if(count($requests) || isset($sort['search']))
                                 <form>
                                     <button type="submit" class="btn btn-default btn-search"><span
                                                 class="glyphicon glyphicon-search search-icon"></span></button>
                                     <input type="text" name="search" class="myInput" placeholder="Search any column..."/>
                                 </form>
+                                @endif
                                 <a class="btn btn-primary" href="{{ route('requests.create') }}" style="float: right;">Add
                                     request</a>
                             </div>

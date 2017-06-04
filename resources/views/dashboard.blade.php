@@ -19,13 +19,15 @@
                         </div>
                         <br>
                         <div style="float:left;">{{ $requests->links() }}</div>
-                        <div class="col-xs-6">
-                            <form>
-                                <button type="submit" class="btn btn-default btn-search"><span
-                                            class="glyphicon glyphicon-search search-icon"></span></button>
-                                <input type="text" name="search" class="myInput v2" placeholder="Search any column..."/>
-                            </form>
-                        </div>
+                        @if (count($requests) || isset($sort['search']))
+                            <div class="col-xs-6">
+                                <form>
+                                    <button type="submit" class="btn btn-default btn-search"><span
+                                                class="glyphicon glyphicon-search search-icon"></span></button>
+                                    <input type="text" name="search" class="myInput v2" placeholder="Search any column..."/>
+                                </form>
+                            </div>
+                        @endif
                         <div style="float: right;">
                             <a class="btn btn-success side-offset" href="{{route('users.editProfile')}}">Edit
                                 Profile</a>
@@ -194,7 +196,7 @@
                                 </tbody>
                             </table>
                         @else
-                            <h3>You have no active requests</h3>
+                            <br><br><h3>You have no active requests</h3>
                         @endif
                     </div>
                 </div>

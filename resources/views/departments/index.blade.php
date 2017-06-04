@@ -15,15 +15,17 @@
                                        style="float:right;">Clear Search</a>
                                 @endif
                             </div>
-                            <div class="col-xs-8">
-                                <form>
-                                    <button type="submit" class="btn btn-default btn-search"><span
-                                                class="glyphicon glyphicon-search search-icon"></span></button>
-                                    <input type="text" name="search" class="myInput" placeholder="Search any column..."/>
-                                </form>
-                                <a class="btn btn-primary" href="{{ route('departments.create') }}" style="float: right;">Add
-                                    department</a>
-                            </div>
+                            @if(count($departments) || isset($sort['search']))
+                                <div class="col-xs-8">
+                                    <form>
+                                        <button type="submit" class="btn btn-default btn-search"><span
+                                                    class="glyphicon glyphicon-search search-icon"></span></button>
+                                        <input type="text" name="search" class="myInput" placeholder="Search any column..."/>
+                                    </form>
+                                    <a class="btn btn-primary" href="{{ route('departments.create') }}" style="float: right;">Add
+                                        department</a>
+                                </div>
+                            @endif
                             {{--<input type="hidden" name="field" value="{{$sort['field']}}"/>
                             <input type="hidden" name="order" value="{{$sort['order']}}"/>--}}
                         </div>

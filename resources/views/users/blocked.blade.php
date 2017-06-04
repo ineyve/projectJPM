@@ -15,15 +15,15 @@
                                        style="float:right;">Clear Search</a>
                                 @endif
                             </div>
-                            <div class="col-xs-6">
-                                <form>
-                                    <button type="submit" class="btn btn-default btn-search"><span
-                                                class="glyphicon glyphicon-search search-icon"></span></button>
-                                    <input type="text" name="search" class="myInput" placeholder="Search any column..."/>
-                                </form>
-                            </div>
-                            {{--<input type="hidden" name="field" value="{{$sort['field']}}"/>
-                            <input type="hidden" name="order" value="{{$sort['order']}}"/>--}}
+                            @if(count($users) || isset($sort['search']))
+                                <div class="col-xs-6">
+                                    <form>
+                                        <button type="submit" class="btn btn-default btn-search"><span
+                                                    class="glyphicon glyphicon-search search-icon"></span></button>
+                                        <input type="text" name="search" class="myInput v2" placeholder="Search any column..."/>
+                                    </form>
+                                </div>
+                            @endif
                         </div>
                         @if (count($users))
                             <table class="table table-striped table-hover" id="myTable">
@@ -162,7 +162,7 @@
                             </table>
                             {{ $users->links() }}
                         @else
-                            <h3>No users found</h3>
+                            <h3>No blocked users found</h3>
                         @endif
                     </div>
                 </div>

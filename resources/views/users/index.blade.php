@@ -14,13 +14,15 @@
                                     Search</a>
                             @endif
                         </div>
-                        <div class="col-xs-6">
-                            <form>
-                                <button type="submit" class="btn btn-default btn-search"><span
-                                            class="glyphicon glyphicon-search search-icon"></span></button>
-                                <input type="text" name="search" class="myInput v2" placeholder="Search any column..."/>
-                            </form>
-                        </div>
+                        @if(count($users) || isset($sort['search']))
+                            <div class="col-xs-6">
+                                <form>
+                                    <button type="submit" class="btn btn-default btn-search"><span
+                                                class="glyphicon glyphicon-search search-icon"></span></button>
+                                    <input type="text" name="search" class="myInput v2" placeholder="Search any column..."/>
+                                </form>
+                            </div>
+                        @endif
                         @if (count($users))
                             <table class="table table-striped table-hover" id="myTable">
                                 <thead>
