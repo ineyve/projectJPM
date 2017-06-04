@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Department;
 use App\Request;
+use Exception;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -77,7 +78,7 @@ class HomeController extends Controller
     {
         try {
             DB::connection()->getPdo();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return view('unavailable');
         }
         return redirect()->route('home');
