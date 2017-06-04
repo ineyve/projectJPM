@@ -75,7 +75,13 @@ class HomeController extends Controller
 
     public function unavailable()
     {
-        return view('unavailable');
+        try {
+            DB::connection()->getPdo();
+        } catch (\Exception $e) {
+            return view('unavailable');
+
+        }
+        return redirect()->route('home');
     }
 
     public function getPrintsPerDepartment()
